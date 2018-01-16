@@ -1,0 +1,26 @@
+# /etc/conf.d/folmd: config file for /etc/init.d/folmd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/folm/folm.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/folmd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/folmd.pid"
+
+# Where to write folmd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/folmd"
+
+# User and group to own folmd process
+#BITCOIND_USER="folm"
+#BITCOIND_GROUP="folm"
+
+# Path to folmd executable
+#BITCOIND_BIN="/usr/bin/folmd"
+
+# Nice value to run folmd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""

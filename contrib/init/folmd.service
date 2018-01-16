@@ -1,0 +1,26 @@
+[Unit]
+Description=Folm's distributed currency daemon
+After=network.target
+
+[Service]
+User=folm
+Group=folm
+
+Type=forking
+PIDFile=/var/lib/folmd/folmd.pid
+
+ExecStart=/usr/bin/folmd -daemon -pid=/var/lib/folmd/folmd.pid \
+          -conf=/etc/folm/folm.conf -datadir=/var/lib/folmd
+
+ExecStop=-/usr/bin/folm-cli -conf=/etc/folm/folm.conf \
+         -datadir=/var/lib/folmd stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
