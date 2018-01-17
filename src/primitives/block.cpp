@@ -16,7 +16,7 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    return Nist5(BEGIN(nVersion), END(nNonce));
+    return Phi1612(BEGIN(nVersion), END(nNonce));
 }
 
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const

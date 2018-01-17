@@ -145,6 +145,10 @@ HEADERS += src/activemasternode.h \
            src/crypto/sph_jh.h \
            src/crypto/sph_keccak.h \
            src/crypto/sph_skein.h \
+           src/crypto/sph_cubehash.h \
+           src/crypto/sph_fugue.h \
+           src/crypto/sph_gost.h \
+           src/crypto/sph_echo.h \
            src/crypto/sph_types.h \
            src/json/json_spirit.h \
            src/json/json_spirit_error_position.h \

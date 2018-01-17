@@ -265,6 +265,10 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/ripemd160.cpp \
   crypto/aes_helper.c \
   crypto/blake.c \
+  crypto/cubehash.c \
+  crypto/echo.c \
+  crypto/fugue.c \
+  crypto/gost.c \
   crypto/groestl.c \
   crypto/jh.c \
   crypto/keccak.c \
@@ -279,6 +283,10 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha1.h \
   crypto/ripemd160.h \
   crypto/sph_blake.h \
+  crypto/sph_cubehash.h \
+  crypto/sph_echo.h \
+  crypto/sph_fugue.h \
+  crypto/sph_gost.h \
   crypto/sph_groestl.h \
   crypto/sph_jh.h \
   crypto/sph_keccak.h \
