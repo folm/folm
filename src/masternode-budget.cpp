@@ -784,7 +784,6 @@ std::string CBudgetManager::GetRequiredPaymentsString(int nBlockHeight)
 
     return ret;
 }
-
 CAmount CBudgetManager::GetTotalBudget(int nHeight)
 {
     if (chainActive.Tip() == NULL) return 0;
@@ -797,51 +796,14 @@ CAmount CBudgetManager::GetTotalBudget(int nHeight)
     //get block value and calculate from that
     CAmount nSubsidy = 0;
 
-    if (nHeight <= 432000 && nHeight > Params().LAST_POW_BLOCK()) {
-        nSubsidy = 25 * COIN;
-    } else if (nHeight <= 518400 && nHeight > 432000) {
-        nSubsidy = 21.875 * COIN;
-    } else if (nHeight <= 604800 && nHeight > 518400) {
-        nSubsidy = 18.750 * COIN;
-    } else if (nHeight <= 691200 && nHeight > 604800) {
-        nSubsidy = 15.625 * COIN;
-
-    // POS Year 2
-    } else if (nHeight <= 777600 && nHeight > 691200) {
-        nSubsidy = 12.50 * COIN;
-    } else if (nHeight <= 864000 && nHeight > 777600) {
-        nSubsidy = 10.938 * COIN;
-    } else if (nHeight <= 950400 && nHeight > 864000) {
-        nSubsidy = 9.375 * COIN;
-    } else if (nHeight <= 1036800 && nHeight > 950400) {
-        nSubsidy = 7.812 * COIN;
-
-    // POS Year 3
-    } else if (nHeight <= 1123200 && nHeight > 1036800) {
-        nSubsidy = 6.250 * COIN;
-    } else if (nHeight <= 1209600 && nHeight > 1123200) {
-        nSubsidy = 5.469 * COIN;
-    } else if (nHeight <= 1296000 && nHeight > 1209600) {
-        nSubsidy = 4.688 * COIN;
-    } else if (nHeight <= 1382400 && nHeight > 1296000) {
-        nSubsidy = 3.906 * COIN;
-    // POS Year 4
-    } else if (nHeight <= 1468800 && nHeight > 1382400) {
-        nSubsidy = 3.125 * COIN;
-    } else if (nHeight <= 1555200 && nHeight > 1468800) {
-        nSubsidy = 2.734 * COIN;
-    } else if (nHeight <= 1641600 && nHeight > 1555200) {
-        nSubsidy = 2.344 * COIN;
-    } else if (nHeight <= 1728000 && nHeight > 1641600) {
-        nSubsidy = 1.953 * COIN;
-    } else if (nHeight > 1728000) {
-        nSubsidy = 1.625 * COIN;
+    if ( nHeight > Params().LAST_POW_BLOCK()) {
+        nSubsidy = 2 * COIN;
     } else {
         nSubsidy = 0 * COIN;
     }
 
     // Amount of blocks in a months period of time (using 1.5 minutes per)
-    return ((nSubsidy / 100) * 10) * 960 * 30;
+    return ((nSubsidy / 100) * 10) * 720 * 30;
 }
 
 void CBudgetManager::NewBlock()
