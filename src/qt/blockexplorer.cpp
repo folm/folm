@@ -547,7 +547,7 @@ void BlockExplorer::setBlock(CBlockIndex* pBlock)
 
 void BlockExplorer::setContent(const std::string& Content)
 {
-    QString CSS = "body {font-size:12px; background-color: #C8E5E2; color:#444;}\n a, span { font-family: monospace; }\n span.addr {color:#13BE5D; font-weight: bold;}\n table tr td {padding: 3px; border: none; background-color: #A1CDC8;}\n td.d0 {font-weight: bold; color:#f8f8f8;}\n h2, h3 { white-space:nowrap; color:#1B7884;}\n a { text-decoration:none; }\n a.nav {color:green;}\n";
+    QString CSS = "body {font-size:12px; background-color: #7c43bd; color:#444;}\n a, span { font-family: monospace; }\n span.addr {color:#000000; font-weight: bold;}\n table tr td {padding: 3px; border: none; background-color: #4a148c; color:#ffffff;}\n table tr td a{color: #b750e2}\n td.d0 {font-weight: bold; color:#ffffff;}\n h2, h3 { white-space:nowrap; color:#000000;}\n a { text-decoration:none; }\n a.nav {color:#333333;}\n";
     QString FullContent = "<html><head><style type=\"text/css\">" + CSS + "</style></head>" + "<body>" + Content.c_str() + "</body></html>";
     // printf(FullContent.toUtf8());
     ui->content->setText(FullContent);
