@@ -54,6 +54,8 @@
         <file alias="staking_inactive">res/icons/staking_inactive.png</file>
         <file alias="back">res/icons/back.png</file>
         <file alias="forward">res/icons/forward.png</file>
+        <file alias="receiving_addresses_white">res/icons/receive_white.png</file>
+        <file alias="send_white">res/icons/send_white.png</file>
     </qresource>
     <qresource prefix="/css">
         <file alias="default">res/css/default.css</file>
