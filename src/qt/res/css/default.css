@@ -73,13 +73,12 @@ background-color:#F8F6F6;
 
 QProgressBar {
 color:#d2d2d2;
-border:2px solid grey;
-border-radius:5px;
+border:2px solid #7c43bd;
 background-color:transparent;
 }
 
 QProgressBar::chunk {
-background-color:#000000;
+background-color:#4a148c;
 width: 20px;
 }
 
