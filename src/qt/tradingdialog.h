@@ -2,8 +2,8 @@
 // Created by folm on 12/26/17.
 //
 
-#ifndef FOLM_TRADINGDIALOG_H
-#define FOLM_TRADINGDIALOG_H
+#ifndef FLM_TRADINGDIALOG_H
+#define FLM_TRADINGDIALOG_H
 
 #include <QWidget>
 #include <QObject>
@@ -59,13 +59,13 @@ private slots:
     void on_SaveKeys_clicked();
     void on_GenDepositBTN_clicked();
     void showMarketHistoryWhenReplyFinished();
-    void showBalanceOfFOLMOnTradingTab();
+    void showBalanceOfFLMOnTradingTab();
     void showBalanceOfBTCOnTradingTab();
     void showOrderBookOnTradingTab();
     void showMarketHistoryOnTradingTab();
     void showBalanceOfBTCOnSendTab();
-    void showBalanceOfFOLMOnSendTab();
-    void showBalanceOfFOLMOnBalanceTab();
+    void showBalanceOfFLMOnSendTab();
+    void showBalanceOfFLMOnBalanceTab();
     void showBalanceOfBTCOnBalanceTab();
     void showOpenOrders();
     void showAccountHistory();
@@ -77,14 +77,14 @@ private slots:
     void on_BuyBidcomboBox_currentIndexChanged(const QString &arg1);
     void on_UnitsInput_textChanged(const QString &arg1);
     void on_BuyBidPriceEdit_textChanged(const QString &arg1);
-    void on_BuyFOLM_clicked();
+    void on_BuyFLM_clicked();
 
     void CalculateSellCostLabel();
     void on_Sell_Max_Amount_clicked();
     void on_SellBidcomboBox_currentIndexChanged(const QString &arg1);
-    void on_UnitsInputFOLM_textChanged(const QString &arg1);
+    void on_UnitsInputFLM_textChanged(const QString &arg1);
     void on_SellBidPriceEdit_textChanged(const QString &arg1);
-    void on_SellFOLMBTN_clicked();
+    void on_SellFLMBTN_clicked();
 
     void CalculateCSReceiveLabel();
     void on_CSUnitsInput_textChanged(const QString &arg1);
@@ -105,8 +105,8 @@ private slots:
     QString CryptopiaTimeStampToReadable(QString DateTime);
     QString CryptopiaIntegerTimeStampToReadable(int DateTime);
     QString CancelOrder(QString Orderid);
-    QString BuyFOLM(QString OrderType, double Quantity, double Rate);
-    QString SellFOLM(QString OrderType, double Quantity, double Rate);
+    QString BuyFLM(QString OrderType, double Quantity, double Rate);
+    QString SellFLM(QString OrderType, double Quantity, double Rate);
     QString Withdraw(double Amount, QString Address, QString Coin);
     void GetMarketHistory();
     QString GetMarketSummary();
@@ -116,8 +116,8 @@ private slots:
     QString GetBalance(QString Currency);
     QString GetDepositAddress();
     unsigned char* HMAC_SHA256_SIGNER(QString UrlToSign,QString Secretkey);
-    QString sendRequest(QString url, QString method = "GET", QString body = QString("{\"market\":\"FOLM/BTC\"}"));// "{\"gender\":\"male\"}");
-    void sendRequest1(QString url, std::function<void (void)> funcForCallAfterReceiveResponse, QString method = "GET", QString body = QString("{\"market\":\"FOLM/BTC\"}"));// "{\"gender\":\"male\"}");
+    QString sendRequest(QString url, QString method = "GET", QString body = QString("{\"market\":\"FLM/BTC\"}"));// "{\"gender\":\"male\"}");
+    void sendRequest1(QString url, std::function<void (void)> funcForCallAfterReceiveResponse, QString method = "GET", QString body = QString("{\"market\":\"FLM/BTC\"}"));// "{\"gender\":\"male\"}");
     //QString sendRequest(QString url);
     string encryptDecrypt(string toEncrypt, string password);
     char * base64(const unsigned char *input, int length);
@@ -143,4 +143,4 @@ private:
 
 };
 
-#endif //FOLM_TRADINGDIALOG_H
+#endif //FLM_TRADINGDIALOG_H

@@ -47,7 +47,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 35
 
 #define QAPP_ORG_NAME "FOLM"
-#define QAPP_ORG_DOMAIN "folmcore.io"
+#define QAPP_ORG_DOMAIN "folm.io"
 #define QAPP_APP_NAME_DEFAULT "FOLM-Qt"
 #define QAPP_APP_NAME_TESTNET "FOLM-Qt-testnet"
 
