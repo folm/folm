@@ -1599,14 +1599,14 @@ CAmount GetProofOfWorkReward(int64_t nFees, int nHeight) {
     CAmount nSubsidy = 0;
     CAmount nSlowSubsidy = 30 * COIN;
 
-    if (nHeight == 0) {
+    if (nHeight < 1) {
+        nSubsidy = 0 * COIN;
+    } else if (nHeight == 1) {
         nSubsidy = 1136956.00 * COIN;
-    } else if (nHeight < Params().RAMP_TO_BLOCK() / 2) {
-        nSlowSubsidy /= Params().RAMP_TO_BLOCK();
-        nSlowSubsidy *= nHeight;
     } else if (nHeight < Params().RAMP_TO_BLOCK()) {
         nSlowSubsidy /= Params().RAMP_TO_BLOCK();
         nSlowSubsidy *= nHeight;
+        nSubsidy = nSlowSubsidy;
     } else if (nHeight <= 262800 && nHeight >= Params().RAMP_TO_BLOCK()) {
         nSubsidy = 30 * COIN;
     } else if (nHeight <= 525600 && nHeight > 262800) {
