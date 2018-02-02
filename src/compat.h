@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
+// Copyright (c) 2009-2010 Satoshi Nakamoto                     -*- c++ -*-
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -72,13 +72,13 @@ typedef u_int SOCKET;
 #define MAX_PATH 1024
 #endif
 
-// As Folm does not have the MSG_NOSIGNAL flag for send(2) syscall, it is defined as 0
+// As Solaris does not have the MSG_NOSIGNAL flag for send(2) syscall, it is defined as 0
 #if !defined(HAVE_MSG_NOSIGNAL) && !defined(MSG_NOSIGNAL)
 #define MSG_NOSIGNAL 0
 #endif
 
 #ifndef WIN32
-// PRIO_MAX is not defined on Folm
+// PRIO_MAX is not defined on Solaris
 #ifndef PRIO_MAX
 #define PRIO_MAX 20
 #endif

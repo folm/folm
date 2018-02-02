@@ -1,28 +1,17 @@
 <!DOCTYPE RCC><RCC version="1.0">
     <qresource prefix="/translations">
-        <file alias="bg">locale/folm_bg.qm</file>
         <file alias="ca">locale/folm_ca.qm</file>
-        <file alias="cs">locale/folm_cs.qm</file>
         <file alias="da">locale/folm_da.qm</file>
         <file alias="de">locale/folm_de.qm</file>
         <file alias="en">locale/folm_en.qm</file>
         <file alias="en_US">locale/folm_en_US.qm</file>
         <file alias="es">locale/folm_es.qm</file>
-        <file alias="fi">locale/folm_fi.qm</file>
         <file alias="fr_FR">locale/folm_fr_FR.qm</file>
         <file alias="it">locale/folm_it.qm</file>
         <file alias="ja">locale/folm_ja.qm</file>
-        <file alias="ko_KR">locale/folm_ko_KR.qm</file>
-        <file alias="nl">locale/folm_nl.qm</file>
-        <file alias="pl">locale/folm_pl.qm</file>
         <file alias="pt">locale/folm_pt.qm</file>
-        <file alias="pt_BR">locale/folm_pt_BR.qm</file>
         <file alias="ro_RO">locale/folm_ro_RO.qm</file>
         <file alias="ru">locale/folm_ru.qm</file>
-        <file alias="sk">locale/folm_sk.qm</file>
-        <file alias="sv">locale/folm_sv.qm</file>
-        <file alias="uk">locale/folm_uk.qm</file>
-        <file alias="zh_CN">locale/folm_zh_CN.qm</file>
         <file alias="zh_TW">locale/folm_zh_TW.qm</file>
     </qresource>
 </RCC>

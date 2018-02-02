@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
+// Copyright (c) 2011-2013 The Bitcoin developers           -*- c++ -*-
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,7 +6,8 @@
 #define BITCOIN_QT_WALLETVIEW_H
 
 #include "amount.h"
-#include "masternodelist.h"
+#include "masternodemanager.h"
+#include "tradingdialog.h"
 
 #include <QStackedWidget>
 
@@ -61,10 +62,11 @@ private:
 
     OverviewPage* overviewPage;
     QWidget* transactionsPage;
+    tradingDialog* tradingPage;
     ReceiveCoinsDialog* receiveCoinsPage;
     SendCoinsDialog* sendCoinsPage;
     BlockExplorer* explorerWindow;
-    MasternodeList* masternodeListPage;
+    MasternodeManager* masternodeManagerPage;
 
     TransactionView* transactionView;
 
@@ -76,6 +78,8 @@ public slots:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
+    /** Switch to trading page */
+    void gotoTradingPage();
     /** Switch to masternode page */
     void gotoMasternodePage();
     /** Switch to explorer page */
@@ -91,9 +95,6 @@ public slots:
     void gotoVerifyMessageTab(QString addr = "");
     /** Show MultiSend Dialog */
     void gotoMultiSendDialog();
-
-     /** Show a multisig tab **/
-    void gotoMultisigDialog(int index);
 
     /** Show BIP 38 tool - default to Encryption tab */
     void gotoBip38Tool();
@@ -125,7 +126,7 @@ public slots:
     /** Show progress dialog e.g. for rescan */
     void showProgress(const QString& title, int nProgress);
 
-    /** Update selected FLM amount from transactionview */
+    /** Update selected PIV amount from transactionview */
     void trxAmount(QString amount);
 
 signals:

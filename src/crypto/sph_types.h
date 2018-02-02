@@ -363,15 +363,6 @@
  *     <code>skein384</code> (64)
  *   - Skein-512 (nominally specified as Skein-512-512): short name:
  *     <code>skein512</code> (64)
- *      * - Cubehash family: file <code>sph_cubehash.h</code>
- *   - Cubehash-224 (nominally specified as Cubehash-512-224): short name:
- *     <code>cubehash224</code> (64)
- *   - Cubehash-256 (nominally specified as Cubehash-512-256): short name:
- *     <code>cubehash256</code> (64)
- *   - Cubehash-384 (nominally specified as Cubehash-512-384): short name:
- *     <code>cubehash384</code> (64)
- *   - Cubehash-512 (nominally specified as Cubehash-512-512): short name:
- *     <code>cubehash512</code> (64)
  *
  * For the second-round SHA-3 candidates, the functions are as specified
  * for round 2, i.e. with the "tweaks" that some candidates added

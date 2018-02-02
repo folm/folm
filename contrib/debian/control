@@ -22,9 +22,9 @@ Build-Depends: debhelper,
  libqrencode-dev,
  libprotobuf-dev, protobuf-compiler
 Standards-Version: 3.9.2
-Homepage: http://www.folm.org
-Vcs-Git: git://github.com/bullwark-crypto/Folm.git
-Vcs-Browser: http://github.com/bullwark-crypto/Folm
+Homepage: http://www.folmcore.io
+Vcs-Git: git://github.com/folm/folm.git
+Vcs-Browser: http://github.com/folm/folm
 
 Package: folmd
 Architecture: any

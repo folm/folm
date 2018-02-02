@@ -1,8 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -69,6 +68,23 @@ bool CWalletDB::EraseTx(uint256 hash)
     return Erase(std::make_pair(std::string("tx"), hash));
 }
 
+bool CWalletDB::WriteAdrenalineNodeConfig(std::string sAlias, const CAdrenalineNodeConfig& nodeConfig)
+{
+    nWalletDBUpdated++;
+    return Write(std::make_pair(std::string("adrenaline"), sAlias), nodeConfig, true);
+}
+
+bool CWalletDB::ReadAdrenalineNodeConfig(std::string sAlias, CAdrenalineNodeConfig& nodeConfig)
+{
+    return Read(std::make_pair(std::string("adrenaline"), sAlias), nodeConfig);
+}
+
+bool CWalletDB::EraseAdrenalineNodeConfig(std::string sAlias)
+{
+    nWalletDBUpdated++;
+    return Erase(std::make_pair(std::string("adrenaline"), sAlias));
+}
+
 bool CWalletDB::WriteKey(const CPubKey& vchPubKey, const CPrivKey& vchPrivKey, const CKeyMetadata& keyMeta)
 {
     nWalletDBUpdated++;
@@ -128,18 +144,6 @@ bool CWalletDB::EraseWatchOnly(const CScript& dest)
 {
     nWalletDBUpdated++;
     return Erase(std::make_pair(std::string("watchs"), dest));
-}
-
-bool CWalletDB::WriteMultiSig(const CScript& dest)
-{
-    nWalletDBUpdated++;
-    return Write(std::make_pair(std::string("multisig"), dest), '1');
-}
-
-bool CWalletDB::EraseMultiSig(const CScript& dest)
-{
-    nWalletDBUpdated++;
-    return Erase(std::make_pair(std::string("multisig"), dest));
 }
 
 bool CWalletDB::WriteBestBlock(const CBlockLocator& locator)
@@ -486,17 +490,6 @@ bool ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue, CW
             // Watch-only addresses have no birthday information for now,
             // so set the wallet birthday to the beginning of time.
             pwallet->nTimeFirstKey = 1;
-	} else if (strType == "multisig") {
-		CScript script;
-		ssKey >> script;
-		char fYes;
-		ssValue >> fYes;
-		if (fYes == '1')
-			pwallet->LoadMultiSig(script);
-		
-		// MultiSig addresses have no birthday information for now,
-		// so set the wallet birthday to the beginning of time.
-		pwallet->nTimeFirstKey = 1;
         } else if (strType == "key" || strType == "wkey") {
             CPubKey vchPubKey;
             ssKey >> vchPubKey;

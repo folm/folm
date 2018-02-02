@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -18,10 +17,10 @@
 #include <QPushButton>
 
 AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel* model) : QDialog(parent),
-                                                                                           ui(new Ui::AskPassphraseDialog),
-                                                                                           mode(mode),
-                                                                                           model(model),
-                                                                                           fCapsLock(false)
+                                                                       ui(new Ui::AskPassphraseDialog),
+                                                                       mode(mode),
+                                                                       model(model),
+                                                                       fCapsLock(false)
 {
     ui->setupUi(this);
 
@@ -88,7 +87,13 @@ AskPassphraseDialog::~AskPassphraseDialog()
     ui->passEdit3->setText(QString(" ").repeated(ui->passEdit3->text().size()));
     delete ui;
 }
-
+/*
+void AskPassphraseDialog::setModel(WalletModel* model)
+{
+    this->model = model;
+    ui->anonymizationCheckBox->setChecked(model->isAnonymizeOnlyUnlocked());
+}
+*/
 void AskPassphraseDialog::accept()
 {
     SecureString oldpass, newpass1, newpass2;
@@ -118,7 +123,7 @@ void AskPassphraseDialog::accept()
                 if (model->setWalletEncrypted(true, newpass1)) {
                     QMessageBox::warning(this, tr("Wallet encrypted"),
                         "<qt>" +
-                            tr("Folm will close now to finish the encryption process. "
+                            tr("FOLM will close now to finish the encryption process. "
                                "Remember that encrypting your wallet cannot fully protect "
                                "your FLMs from being stolen by malware infecting your computer.") +
                             "<br><br><b>" +
