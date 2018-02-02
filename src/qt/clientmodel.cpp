@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,8 +14,6 @@
 #include "checkpoints.h"
 #include "clientversion.h"
 #include "main.h"
-#include "masternode-sync.h"
-#include "masternodeman.h"
 #include "net.h"
 #include "ui_interface.h"
 #include "util.h"
@@ -69,11 +66,6 @@ int ClientModel::getNumConnections(unsigned int flags) const
     return nNum;
 }
 
-QString ClientModel::getMasternodeCountString() const
-{
-    return tr("Total: %1 (OBF compatible: %2 / Enabled: %3)").arg(QString::number((int)mnodeman.size())).arg(QString::number((int)mnodeman.CountEnabled(ActiveProtocol()))).arg(QString::number((int)mnodeman.CountEnabled()));
-}
-
 int ClientModel::getNumBlocks() const
 {
     LOCK(cs_main);
@@ -119,22 +111,16 @@ void ClientModel::updateTimer()
     TRY_LOCK(cs_main, lockMain);
     if (!lockMain)
         return;
+
     // Some quantities (such as number of blocks) change so fast that we don't want to be notified for each change.
     // Periodically check and update with a timer.
     int newNumBlocks = getNumBlocks();
 
-    static int prevAttempt = -1;
-    static int prevAssets = -1;
-
     // check for changed number of blocks we have, number of blocks peers claim to have, reindexing state and importing state
-    if (cachedNumBlocks != newNumBlocks ||
-        cachedReindexing != fReindex || cachedImporting != fImporting ||
-        masternodeSync.RequestedMasternodeAttempt != prevAttempt || masternodeSync.RequestedMasternodeAssets != prevAssets) {
+    if (cachedNumBlocks != newNumBlocks || cachedReindexing != fReindex || cachedImporting != fImporting) {
         cachedNumBlocks = newNumBlocks;
         cachedReindexing = fReindex;
         cachedImporting = fImporting;
-        prevAttempt = masternodeSync.RequestedMasternodeAttempt;
-        prevAssets = masternodeSync.RequestedMasternodeAssets;
 
         emit numBlocksChanged(newNumBlocks);
     }
@@ -144,12 +130,14 @@ void ClientModel::updateTimer()
 
 void ClientModel::updateMnTimer()
 {
+#if 0
     // Get required lock upfront. This avoids the GUI from getting stuck on
     // periodical polls if the core is holding the locks for a longer time -
     // for example, during a wallet rescan.
     TRY_LOCK(cs_main, lockMain);
     if (!lockMain)
         return;
+
     QString newMasternodeCountString = getMasternodeCountString();
 
     if (cachedMasternodeCountString != newMasternodeCountString) {
@@ -157,6 +145,7 @@ void ClientModel::updateMnTimer()
 
         emit strMasternodesChanged(cachedMasternodeCountString);
     }
+#endif
 }
 
 void ClientModel::updateNumConnections(int numConnections)

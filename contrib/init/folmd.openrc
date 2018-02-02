@@ -16,8 +16,8 @@ BITCOIND_USER=${BITCOIND_USER:-folm}
 BITCOIND_GROUP=${BITCOIND_GROUP:-folm}
 BITCOIND_BIN=${BITCOIND_BIN:-/usr/bin/folmd}
 
-name="Folm Core Daemon"
-description="Folm crypto-currency p2p network daemon"
+name="FOLM Core Daemon"
+description="FOLM crypto-currency p2p network daemon"
 
 command="/usr/bin/folmd"
 command_args="-pid=\"${BITCOIND_PIDFILE}\" \

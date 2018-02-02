@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -31,7 +30,7 @@
 #endif
 
 #include "init.h"
-#include "masternodelist.h"
+#include "masternodemanager.h"
 #include "ui_interface.h"
 #include "util.h"
 
@@ -80,6 +79,7 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
                                                                             appMenuBar(0),
                                                                             overviewAction(0),
                                                                             historyAction(0),
+                                                                         //   tradingAction(0),
                                                                             masternodeAction(0),
                                                                             quitAction(0),
                                                                             sendCoinsAction(0),
@@ -88,9 +88,6 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
                                                                             signMessageAction(0),
                                                                             verifyMessageAction(0),
                                                                             bip38ToolAction(0),
-									    multisigCreateAction(0),
-									    multisigSpendAction(0),
-									    multisigSignAction(0),
                                                                             aboutAction(0),
                                                                             receiveCoinsAction(0),
                                                                             optionsAction(0),
@@ -116,7 +113,7 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
 
     GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
 
-    QString windowTitle = tr("Folm Core") + " - ";
+    QString windowTitle = tr("FOLM Core") + " - ";
 #ifdef ENABLE_WALLET
     /* if compiled with wallet support, -disablewallet can still disable the wallet */
     enableWallet = !GetBoolArg("-disablewallet", false);
@@ -295,7 +292,7 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a Folm address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a FOLM address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
 #ifdef Q_OS_MAC
@@ -325,7 +322,18 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
 #else
     historyAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_4));
 #endif
-    tabGroup->addAction(historyAction);
+   /* tabGroup->addAction(historyAction);
+
+    tradingAction = new QAction(QIcon(":/icons/receiving_addresses"), tr("&Trading"), this);
+    tradingAction->setStatusTip(tr("Trading on Cryptopia"));
+    tradingAction->setToolTip(tradingAction->statusTip());
+    tradingAction->setCheckable(true);
+#ifdef Q_OS_MAC
+    tradingAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_5));
+#else
+    tradingAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
+#endif
+    tabGroup->addAction(tradingAction);*/
 
 #ifdef ENABLE_WALLET
 
@@ -355,14 +363,16 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     connect(receiveCoinsAction, SIGNAL(triggered()), this, SLOT(gotoReceiveCoinsPage()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(historyAction, SIGNAL(triggered()), this, SLOT(gotoHistoryPage()));
+    //connect(tradingAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    //connect(tradingAction, SIGNAL(triggered()), this, SLOT(gotoTradingPage()));
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
     quitAction->setStatusTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
-    aboutAction = new QAction(networkStyle->getAppIcon(), tr("&About Folm Core"), this);
-    aboutAction->setStatusTip(tr("Show information about Folm Core"));
+    aboutAction = new QAction(networkStyle->getAppIcon(), tr("&About FOLM Core"), this);
+    aboutAction->setStatusTip(tr("Show information about FOLM Core"));
     aboutAction->setMenuRole(QAction::AboutRole);
 #if QT_VERSION < 0x050000
     aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
@@ -372,7 +382,7 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     aboutQtAction->setStatusTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
-    optionsAction->setStatusTip(tr("Modify configuration options for Folm"));
+    optionsAction->setStatusTip(tr("Modify configuration options for FOLM"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
     toggleHideAction = new QAction(networkStyle->getAppIcon(), tr("&Show / Hide"), this);
     toggleHideAction->setStatusTip(tr("Show or hide the main Window"));
@@ -388,9 +398,9 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     unlockWalletAction->setToolTip(tr("Unlock wallet"));
     lockWalletAction = new QAction(tr("&Lock Wallet"), this);
     signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your Folm addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your FOLM addresses to prove you own them"));
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Folm addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified FOLM addresses"));
     bip38ToolAction = new QAction(QIcon(":/icons/key"), tr("&BIP38 tool"), this);
     bip38ToolAction->setToolTip(tr("Encrypt and decrypt private keys using a passphrase"));
     multiSendAction = new QAction(QIcon(":/icons/edit"), tr("&MultiSend"), this);
@@ -419,21 +429,14 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
     usedReceivingAddressesAction = new QAction(QIcon(":/icons/address-book"), tr("&Receiving addresses..."), this);
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
-    multisigCreateAction = new QAction(QIcon(":/icons/address-book"), tr("&Multisignature creation..."), this);
-    multisigCreateAction->setStatusTip(tr("Create a new multisignature address and add it to this wallet"));
-    multisigSpendAction = new QAction(QIcon(":/icons/send"), tr("&Multisignature spending..."), this);
-    multisigSpendAction->setStatusTip(tr("Spend from a multisignature address"));
-    multisigSignAction = new QAction(QIcon(":/icons/editpaste"), tr("&Multisignature signing..."), this);
-    multisigSignAction->setStatusTip(tr("Sign with a multisignature address"));
-
     openAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_FileIcon), tr("Open &URI..."), this);
-    openAction->setStatusTip(tr("Open a Folm: URI or payment request"));
+    openAction->setStatusTip(tr("Open a FOLM: URI or payment request"));
     openBlockExplorerAction = new QAction(QIcon(":/icons/explorer"), tr("&Blockchain explorer"), this);
     openBlockExplorerAction->setStatusTip(tr("Block explorer window"));
 
     showHelpMessageAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Command-line options"), this);
     showHelpMessageAction->setMenuRole(QAction::NoRole);
-    showHelpMessageAction->setStatusTip(tr("Show the Folm Core help message to get a list with possible Folm command-line options"));
+    showHelpMessageAction->setStatusTip(tr("Show the FOLM Core help message to get a list with possible FOLM command-line options"));
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
@@ -455,9 +458,6 @@ void BitcoinGUI::createActions(const NetworkStyle* networkStyle)
         connect(usedReceivingAddressesAction, SIGNAL(triggered()), walletFrame, SLOT(usedReceivingAddresses()));
         connect(openAction, SIGNAL(triggered()), this, SLOT(openClicked()));
         connect(multiSendAction, SIGNAL(triggered()), this, SLOT(gotoMultiSendDialog()));
-	connect(multisigCreateAction, SIGNAL(triggered()), this, SLOT(gotoMultisigCreate()));
-	connect(multisigSpendAction, SIGNAL(triggered()), this, SLOT(gotoMultisigSpend()));
-	connect(multisigSignAction, SIGNAL(triggered()), this, SLOT(gotoMultisigSign()));
     }
 #endif // ENABLE_WALLET
 }
@@ -483,10 +483,6 @@ void BitcoinGUI::createMenuBar()
         file->addAction(usedSendingAddressesAction);
         file->addAction(usedReceivingAddressesAction);
         file->addSeparator();
-	file->addAction(multisigCreateAction);
-	file->addAction(multisigSpendAction);
-	file->addAction(multisigSignAction);
-	file->addSeparator();
     }
     file->addAction(quitAction);
 
@@ -532,6 +528,7 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(sendCoinsAction);
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
+        //toolbar->addAction(tradingAction);
         QSettings settings;
         if (settings.value("fShowMasternodesTab").toBool()) {
             toolbar->addAction(masternodeAction);
@@ -622,6 +619,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     sendCoinsAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
     historyAction->setEnabled(enabled);
+  //  tradingAction->setEnabled(enabled);
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
         masternodeAction->setEnabled(enabled);
@@ -631,9 +629,6 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     changePassphraseAction->setEnabled(enabled);
     signMessageAction->setEnabled(enabled);
     verifyMessageAction->setEnabled(enabled);
-    multisigCreateAction->setEnabled(enabled);
-    multisigSpendAction->setEnabled(enabled);
-    multisigSignAction->setEnabled(enabled);
     bip38ToolAction->setEnabled(enabled);
     usedSendingAddressesAction->setEnabled(enabled);
     usedReceivingAddressesAction->setEnabled(enabled);
@@ -644,7 +639,7 @@ void BitcoinGUI::createTrayIcon(const NetworkStyle* networkStyle)
 {
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
-    QString toolTip = tr("Folm Core client") + " " + networkStyle->getTitleAddText();
+    QString toolTip = tr("FOLM Core client") + " " + networkStyle->getTitleAddText();
     trayIcon->setToolTip(toolTip);
     trayIcon->setIcon(networkStyle->getAppIcon());
     trayIcon->show();
@@ -757,6 +752,12 @@ void BitcoinGUI::gotoHistoryPage()
     if (walletFrame) walletFrame->gotoHistoryPage();
 }
 
+void BitcoinGUI::gotoTradingPage()
+{
+   /* tradingAction->setChecked(true);
+    if (walletFrame) walletFrame->gotoTradingPage();*/
+}
+
 void BitcoinGUI::gotoMasternodePage()
 {
     QSettings settings;
@@ -786,21 +787,6 @@ void BitcoinGUI::gotoSignMessageTab(QString addr)
 void BitcoinGUI::gotoVerifyMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
-}
-
-void BitcoinGUI::gotoMultisigCreate()
-{
-    if(walletFrame) walletFrame->gotoMultisigDialog(0);
-}
-
-void BitcoinGUI::gotoMultisigSpend()
-{
-    if(walletFrame) walletFrame->gotoMultisigDialog(1);
-}
-
-void BitcoinGUI::gotoMultisigSign()
-{
-    if(walletFrame) walletFrame->gotoMultisigDialog(2);
 }
 
 void BitcoinGUI::gotoBip38Tool()
@@ -849,7 +835,7 @@ void BitcoinGUI::setNumConnections(int count)
     }
     QIcon connectionItem = QIcon(icon).pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
     labelConnectionsIcon->setIcon(connectionItem);
-    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Folm network", "", count));
+    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to FOLM network", "", count));
 }
 
 void BitcoinGUI::setNumBlocks(int count)
@@ -887,42 +873,11 @@ void BitcoinGUI::setNumBlocks(int count)
     tooltip = tr("Processed %n blocks of transaction history.", "", count);
 
     // Set icon state: spinning if catching up, tick otherwise
-    //    if(secs < 25*60) // 90*60 for bitcoin but we are 4x times faster
-    if (masternodeSync.IsBlockchainSynced()) {
-        QString strSyncStatus;
-        tooltip = tr("Up to date") + QString(".<br>") + tooltip;
-
-        if (masternodeSync.IsSynced()) {
-            progressBarLabel->setVisible(false);
-            progressBar->setVisible(false);
-            labelBlocksIcon->setPixmap(QIcon(":/icons/synced").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
-        } else {
-            int nAttempt;
-            int progress = 0;
-
-            labelBlocksIcon->setPixmap(QIcon(QString(
-                                                 ":/movies/spinner-%1")
-                                                 .arg(spinnerFrame, 3, 10, QChar('0')))
-                                           .pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
-            spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES;
-
+    if (secs < 25*60) { // 90*60 for bitcoin but we are 4x times faster
 #ifdef ENABLE_WALLET
-            if (walletFrame)
-                walletFrame->showOutOfSyncWarning(false);
+        if (walletFrame)
+            walletFrame->showOutOfSyncWarning(false);
 #endif // ENABLE_WALLET
-
-            nAttempt = masternodeSync.RequestedMasternodeAttempt < MASTERNODE_SYNC_THRESHOLD ?
-                           masternodeSync.RequestedMasternodeAttempt + 1 :
-                           MASTERNODE_SYNC_THRESHOLD;
-            progress = nAttempt + (masternodeSync.RequestedMasternodeAssets - 1) * MASTERNODE_SYNC_THRESHOLD;
-            progressBar->setMaximum(4 * MASTERNODE_SYNC_THRESHOLD);
-            progressBar->setFormat(tr("Synchronizing additional data: %p%"));
-            progressBar->setValue(progress);
-        }
-
-        strSyncStatus = QString(masternodeSync.GetSyncStatus().c_str());
-        progressBarLabel->setText(strSyncStatus);
-        tooltip = strSyncStatus + QString("<br>") + tooltip;
     } else {
         // Represent time from last generated block in human readable text
         QString timeBehindText;
@@ -943,7 +898,7 @@ void BitcoinGUI::setNumBlocks(int count)
         }
 
         progressBarLabel->setVisible(true);
-	progressBar->setFormat(tr("%1 behind. Scanning block %2").arg(timeBehindText).arg(count));
+        progressBar->setFormat(tr("%1 behind").arg(timeBehindText));
         progressBar->setMaximum(1000000000);
         progressBar->setValue(clientModel->getVerificationProgress() * 1000000000.0 + 0.5);
         progressBar->setVisible(true);
@@ -979,7 +934,7 @@ void BitcoinGUI::setNumBlocks(int count)
 
 void BitcoinGUI::message(const QString& title, const QString& message, unsigned int style, bool* ret)
 {
-    QString strTitle = tr("Folm Core"); // default title
+    QString strTitle = tr("FOLM Core"); // default title
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;
@@ -1004,7 +959,7 @@ void BitcoinGUI::message(const QString& title, const QString& message, unsigned 
             break;
         }
     }
-    // Append title to "Folm - "
+    // Append title to "FOLM - "
     if (!msgType.isEmpty())
         strTitle += " - " + msgType;
 

@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -37,7 +36,6 @@ WalletModel::WalletModel(CWallet* wallet, OptionsModel* optionsModel, QObject* p
                                                                                          cachedNumBlocks(0)
 {
     fHaveWatchOnly = wallet->HaveWatchOnly();
-    fHaveMultiSig = wallet->HaveMultiSig();
     fForceCheckBalanceChanged = false;
 
     addressTableModel = new AddressTableModel(wallet, this);
@@ -129,12 +127,12 @@ void WalletModel::pollBalanceChanged()
     if (!lockWallet)
         return;
 
-    if (fForceCheckBalanceChanged || chainActive.Height() != cachedNumBlocks || nObfuscationRounds != cachedObfuscationRounds || cachedTxLocks != nCompleteTXLocks) {
+    if (fForceCheckBalanceChanged || chainActive.Height() != cachedNumBlocks || nDarksendRounds != cachedObfuscationRounds || cachedTxLocks != nCompleteTXLocks) {
         fForceCheckBalanceChanged = false;
 
         // Balance and number of transactions might have changed
         cachedNumBlocks = chainActive.Height();
-        cachedObfuscationRounds = nObfuscationRounds;
+        cachedObfuscationRounds = nDarksendRounds;
 
         checkBalanceChanged();
         if (transactionTableModel) {
@@ -193,12 +191,6 @@ void WalletModel::updateWatchOnlyFlag(bool fHaveWatchonly)
 {
     fHaveWatchOnly = fHaveWatchonly;
     emit notifyWatchonlyChanged(fHaveWatchonly);
-}
-
-void WalletModel::updateMultiSigFlag(bool fHaveMultiSig)
-{
-    this->fHaveMultiSig = fHaveMultiSig;
-    emit notifyMultiSigChanged(fHaveMultiSig);
 }
 
 bool WalletModel::validateAddress(const QString& address)
@@ -278,8 +270,8 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         CReserveKey* keyChange = transaction.getPossibleKeyChange();
 
 
-        if (recipients[0].useSwiftTX && total > GetSporkValue(SPORK_5_MAX_VALUE) * COIN) {
-            emit message(tr("Send Coins"), tr("SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 FLM.").arg(GetSporkValue(SPORK_5_MAX_VALUE)),
+        if (recipients[0].useSwiftTX && total > GetSporkValue(SPORK_2_MAX_VALUE) * COIN) {
+            emit message(tr("Send Coins"), tr("SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 FLM.").arg(GetSporkValue(SPORK_2_MAX_VALUE)),
                 CClientUIInterface::MSG_ERROR);
             return TransactionCreationFailed;
         }
@@ -287,8 +279,8 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, strFailReason, coinControl, recipients[0].inputType, recipients[0].useSwiftTX);
         transaction.setTransactionFee(nFeeRequired);
 
-        if (recipients[0].useSwiftTX && newTx->GetValueOut() > GetSporkValue(SPORK_5_MAX_VALUE) * COIN) {
-            emit message(tr("Send Coins"), tr("SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 FLM.").arg(GetSporkValue(SPORK_5_MAX_VALUE)),
+        if (recipients[0].useSwiftTX && newTx->GetValueOut() > GetSporkValue(SPORK_2_MAX_VALUE) * COIN) {
+            emit message(tr("Send Coins"), tr("SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 FLM.").arg(GetSporkValue(SPORK_2_MAX_VALUE)),
                 CClientUIInterface::MSG_ERROR);
             return TransactionCreationFailed;
         }
@@ -408,7 +400,6 @@ WalletModel::EncryptionStatus WalletModel::getEncryptionStatus() const
     } else {
         return Unlocked;
     }
-
 }
 
 bool WalletModel::setWalletEncrypted(bool encrypted, const SecureString& passphrase)
@@ -508,12 +499,6 @@ static void NotifyWatchonlyChanged(WalletModel* walletmodel, bool fHaveWatchonly
         Q_ARG(bool, fHaveWatchonly));
 }
 
-static void NotifyMultiSigChanged(WalletModel* walletmodel, bool fHaveMultiSig)
-{
-    QMetaObject::invokeMethod(walletmodel, "updateMultiSigFlag", Qt::QueuedConnection,
-                              Q_ARG(bool, fHaveMultiSig));
-}
-
 void WalletModel::subscribeToCoreSignals()
 {
     // Connect signals to wallet
@@ -522,7 +507,6 @@ void WalletModel::subscribeToCoreSignals()
     wallet->NotifyTransactionChanged.connect(boost::bind(NotifyTransactionChanged, this, _1, _2, _3));
     wallet->ShowProgress.connect(boost::bind(ShowProgress, this, _1, _2));
     wallet->NotifyWatchonlyChanged.connect(boost::bind(NotifyWatchonlyChanged, this, _1));
-    wallet->NotifyMultiSigChanged.connect(boost::bind(NotifyMultiSigChanged, this, _1));
 }
 
 void WalletModel::unsubscribeFromCoreSignals()
@@ -533,7 +517,6 @@ void WalletModel::unsubscribeFromCoreSignals()
     wallet->NotifyTransactionChanged.disconnect(boost::bind(NotifyTransactionChanged, this, _1, _2, _3));
     wallet->ShowProgress.disconnect(boost::bind(ShowProgress, this, _1, _2));
     wallet->NotifyWatchonlyChanged.disconnect(boost::bind(NotifyWatchonlyChanged, this, _1));
-    wallet->NotifyMultiSigChanged.disconnect(boost::bind(NotifyMultiSigChanged, this, _1));
 }
 
 // WalletModel::UnlockContext implementation
@@ -566,11 +549,7 @@ WalletModel::UnlockContext::UnlockContext(WalletModel* wallet, bool valid, bool 
 
 WalletModel::UnlockContext::~UnlockContext()
 {
-/*
-    if (valid && relock) {
-        wallet->setWalletLocked(true);
-    }
-*/
+
 }
 
 void WalletModel::UnlockContext::CopyFrom(const UnlockContext& rhs)

@@ -1,7 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FLM developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -42,11 +41,11 @@ QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
     case FLM:
-        return QString("folm");
+        return QString("flm");
     case mFLM:
-        return QString("mfolm");
+        return QString("mflm");
     case uFLM:
-        return QString::fromUtf8("ufolm");
+        return QString::fromUtf8("uflm");
     default:
         return QString("???");
     }
@@ -283,5 +282,5 @@ QVariant BitcoinUnits::data(const QModelIndex& index, int role) const
 
 CAmount BitcoinUnits::maxMoney()
 {
-    return Params().MaxMoneyOut(); 
+    return MAX_MONEY;
 }

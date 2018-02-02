@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/folm-crypto/folm-detached-sigs.git"
+- "url": "https://github.com/folm-project/folm-detached-sigs.git"
   "dir": "signature"
 files:
 - "folm-osx-unsigned.tar.gz"

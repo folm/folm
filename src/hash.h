@@ -1,8 +1,7 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
+// Copyright (c) 2009-2010 Satoshi Nakamoto                     -*- c++ -*-
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The LUX developers
-// Copyright (c) 2017-2018 The FOLM developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,14 +14,13 @@
 #include "uint256.h"
 #include "version.h"
 
-// Initilised PHI1612
+// Initilised PHI
 #include "crypto/sph_skein.h"
+#include "crypto/sph_jh.h"
 #include "crypto/sph_cubehash.h"
 #include "crypto/sph_fugue.h"
 #include "crypto/sph_gost.h"
 #include "crypto/sph_echo.h"
-#include "crypto/sph_jh.h"
-
 
 #include <iomanip>
 #include <openssl/sha.h>
@@ -229,6 +227,9 @@ public:
 
     CHashWriter(int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn) {}
 
+    int GetType() const { return nType; }
+    int GetVersion() const { return nVersion; }
+
     CHashWriter& write(const char* pch, size_t size)
     {
         ctx.Write((const unsigned char*)pch, size);
@@ -271,17 +272,15 @@ void BIP32Hash(const unsigned char chainCode[32], unsigned int nChild, unsigned 
 
 /* ----------- Phi1612 Hash ------------------------------------------------ */
 
-
 template<typename T1>
 inline uint256 Phi1612(const T1 pbegin, const T1 pend)
-
 {
-    sph_skein512_context        ctx_skein;
-    sph_jh512_context           ctx_jh;
-    sph_cubehash512_context     ctx_cubehash;
-    sph_fugue512_context        ctx_fugue;
-    sph_gost512_context         ctx_gost;
-    sph_echo512_context         ctx_echo;
+    sph_skein512_context     ctx_skein;
+    sph_jh512_context ctx_jh;
+    sph_cubehash512_context   ctx_cubehash;
+    sph_fugue512_context      ctx_fugue;
+    sph_gost512_context      ctx_gost;
+    sph_echo512_context ctx_echo;
     static unsigned char pblank[1];
 
 #ifndef QT_NO_DEBUG
@@ -317,6 +316,7 @@ inline uint256 Phi1612(const T1 pbegin, const T1 pend)
 
     return hash[5].trim256();
 }
+
 void scrypt_hash(const char* pass, unsigned int pLen, const char* salt, unsigned int sLen, char* output, unsigned int N, unsigned int r, unsigned int p, unsigned int dkLen);
 
 #endif // BITCOIN_HASH_H

@@ -13,6 +13,7 @@
 #include "pubkey.h"
 #include "script/script.h"
 #include "uint256.h"
+#include <iostream>
 
 using namespace std;
 
@@ -1016,6 +1017,7 @@ public:
     void Serialize(S &s, int nType, int nVersion) const {
         // Serialize nVersion
         ::Serialize(s, txTo.nVersion, nType, nVersion);
+        ::Serialize(s, txTo.nTime, nType, nVersion);
         // Serialize vin
         unsigned int nInputs = fAnyoneCanPay ? 1 : txTo.vin.size();
         ::WriteCompactSize(s, nInputs);
@@ -1100,11 +1102,13 @@ bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigne
     if (!EvalScript(stack, scriptPubKey, flags, checker, serror))
         // serror is set
         return false;
-    if (stack.empty())
+    if (stack.empty()) {
         return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
+    }
 
-    if (CastToBool(stack.back()) == false)
+    if (CastToBool(stack.back()) == false) {
         return set_error(serror, SCRIPT_ERR_EVAL_FALSE);
+    }
 
     // Additional validation for spend-to-script-hash transactions:
     if ((flags & SCRIPT_VERIFY_P2SH) && scriptPubKey.IsPayToScriptHash())

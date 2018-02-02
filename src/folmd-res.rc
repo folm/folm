@@ -16,7 +16,7 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Folm"
+            VALUE "CompanyName",        "FOLM"
             VALUE "FileDescription",    "folmd (OSS daemon/client for Folm)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "folmd"

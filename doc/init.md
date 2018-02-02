@@ -89,7 +89,7 @@ use old versions of Upstart and do not supply the start-stop-daemon uitility.
 Copy folmd.init to /etc/init.d/folmd. Test by running "service folmd start".
 
 Using this script, you can adjust the path and flags to the folmd program by
-setting the BULWARKD and FLAGS environment variables in the file
+setting the FOLMD and FLAGS environment variables in the file
 /etc/sysconfig/folmd. You can also use the DAEMONOPTS environment variable here.
 
 5. Auto-respawn

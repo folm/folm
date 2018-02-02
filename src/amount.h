@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
+// Copyright (c) 2009-2010 Satoshi Nakamoto                     -*- c++ -*-
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -15,6 +15,14 @@ typedef int64_t CAmount;
 
 static const CAmount COIN = 100000000;
 static const CAmount CENT = 1000000;
+
+/** No amount larger than this (in satoshi) is valid */
+static const CAmount MAX_MONEY = 500000000 * COIN;
+static const CAmount MIN_TX_FEE = 1000;
+static const CAmount MAX_TX_FEE = MAX_MONEY / 10; // Properly impossible to have this fee!
+static const CAmount MAX_BK_FEE = MAX_MONEY / 2; // Properly impossible to have this fee!
+
+inline bool MoneyRange(const CAmount& nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 
 /** Type-safe wrapper class to for fee rates
  * (how much to pay based on transaction size)

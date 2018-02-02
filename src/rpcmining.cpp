@@ -1,8 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -31,36 +30,6 @@
 
 using namespace json_spirit;
 using namespace std;
-
-#ifdef ENABLE_WALLET
-// Key used by getwork miners.
-// Allocated in InitRPCMining, free'd in ShutdownRPCMining
-static CReserveKey* pMiningKey = NULL;
-
-void InitRPCMining()
-{
-    if (!pwalletMain)
-        return;
-
-    // getwork/getblocktemplate mining rewards paid here:
-    pMiningKey = new CReserveKey(pwalletMain);
-}
-
-void ShutdownRPCMining()
-{
-    if (!pMiningKey)
-        return;
-
-    delete pMiningKey; pMiningKey = NULL;
-}
-#else
-void InitRPCMining()
-{
-}
-void ShutdownRPCMining()
-{
-}
-#endif
 
 /**
  * Return average network hashes per second based on the last 'lookup' blocks,
@@ -194,7 +163,7 @@ Value setgenerate(const Array& params, bool fHelp)
         unsigned int nExtraNonce = 0;
         Array blockHashes;
         while (nHeight < nHeightEnd) {
-            auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlockWithKey(reservekey, pwalletMain, false));
+            std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlockWithKey(reservekey, pwalletMain, false));
             if (!pblocktemplate.get())
                 throw JSONRPCError(RPC_INTERNAL_ERROR, "Wallet keypool empty");
             CBlock* pblock = &pblocktemplate->block;
@@ -447,10 +416,10 @@ Value getblocktemplate(const Array& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Folm is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "FOLM is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Folm is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "FOLM is downloading blocks...");
 
     static unsigned int nTransactionsUpdatedLast;
 
@@ -521,8 +490,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
             delete pblocktemplate;
             pblocktemplate = NULL;
         }
-
-	CScript scriptDummy = CScript() << OP_TRUE;
+        CScript scriptDummy = CScript() << OP_TRUE;
         pblocktemplate = CreateNewBlock(scriptDummy, pwalletMain, false);
         if (!pblocktemplate)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
@@ -530,8 +498,6 @@ Value getblocktemplate(const Array& params, bool fHelp)
         // Need to update only after we know CreateNewBlock succeeded
         pindexPrev = pindexPrevNew;
     }
-	
-	
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
 
     // Update nTime
@@ -569,38 +535,6 @@ Value getblocktemplate(const Array& params, bool fHelp)
 
         transactions.push_back(entry);
     }
-	
-	Array coinbasetxn;
-    map<uint256, int64_t> setTxIndex1;
-    int j = 0;
-    BOOST_FOREACH (CTransaction& tx, pblock->vtx) {//Incase if multi coinbase
-		if(tx.IsCoinBase()){
-			uint256 txHash = tx.GetHash();
-			setTxIndex1[txHash] = j++;
-
-			/* if (tx.IsCoinBase())
-            continue; */
-
-			Object entry;
-
-			entry.push_back(Pair("data", EncodeHexTx(tx)));
-
-			entry.push_back(Pair("hash", txHash.GetHex()));
-
-			Array deps;
-			BOOST_FOREACH (const CTxIn& in, tx.vin) {
-				if (setTxIndex.count(in.prevout.hash))
-                deps.push_back(setTxIndex[in.prevout.hash]);
-			}
-			entry.push_back(Pair("depends", deps));
-
-			int index_in_template = j - 1;
-			entry.push_back(Pair("fee", pblocktemplate->vTxFees[index_in_template]));
-			entry.push_back(Pair("sigops", pblocktemplate->vTxSigOps[index_in_template]));
-
-			coinbasetxn.push_back(entry);
-		}
-    }
 
     Object aux;
     aux.push_back(Pair("flags", HexStr(COINBASE_FLAGS.begin(), COINBASE_FLAGS.end())));
@@ -623,7 +557,6 @@ Value getblocktemplate(const Array& params, bool fHelp)
     result.push_back(Pair("transactions", transactions));
     result.push_back(Pair("coinbaseaux", aux));
     result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0].GetValueOut()));
-	result.push_back(Pair("coinbasetxn", coinbasetxn[0]));
     result.push_back(Pair("longpollid", chainActive.Tip()->GetBlockHash().GetHex() + i64tostr(nTransactionsUpdatedLast)));
     result.push_back(Pair("target", hashTarget.GetHex()));
     result.push_back(Pair("mintime", (int64_t)pindexPrev->GetMedianTimePast() + 1));

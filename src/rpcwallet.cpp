@@ -1,8 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2015-2017 The FOLM developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -82,7 +81,7 @@ Value getnewaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getnewaddress ( \"account\" )\n"
-            "\nReturns a new Folm address for receiving payments.\n"
+            "\nReturns a new FOLM address for receiving payments.\n"
             "If 'account' is specified (recommended), it is added to the address book \n"
             "so payments received with the address will be credited to 'account'.\n"
             "\nArguments:\n"
@@ -151,7 +150,7 @@ Value getaccountaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getaccountaddress \"account\"\n"
-            "\nReturns the current Folm address for receiving payments to this account.\n"
+            "\nReturns the current FOLM address for receiving payments to this account.\n"
             "\nArguments:\n"
             "1. \"account\"       (string, required) The account name for the address. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created and a new address created  if there is no account by the given name.\n"
             "\nResult:\n"
@@ -175,7 +174,7 @@ Value getrawchangeaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getrawchangeaddress\n"
-            "\nReturns a new Folm address, for receiving change.\n"
+            "\nReturns a new FOLM address, for receiving change.\n"
             "This is for use with raw transactions, NOT normal use.\n"
             "\nResult:\n"
             "\"address\"    (string) The address\n"
@@ -208,11 +207,11 @@ Value setaccount(const Array& params, bool fHelp)
             "1. \"folmaddress\"  (string, required) The folm address to be associated with an account.\n"
             "2. \"account\"         (string, required) The account to assign the address to.\n"
             "\nExamples:\n" +
-            HelpExampleCli("setaccount", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" \"tabby\"") + HelpExampleRpc("setaccount", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\", \"tabby\""));
+            HelpExampleCli("setaccount", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" \"tabby\"") + HelpExampleRpc("setaccount", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\", \"tabby\""));
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Folm address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid FOLM address");
 
 
     string strAccount;
@@ -246,11 +245,11 @@ Value getaccount(const Array& params, bool fHelp)
             "\nResult:\n"
             "\"accountname\"        (string) the account address\n"
             "\nExamples:\n" +
-            HelpExampleCli("getaccount", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\"") + HelpExampleRpc("getaccount", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\""));
+            HelpExampleCli("getaccount", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\"") + HelpExampleRpc("getaccount", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\""));
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Folm address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid FOLM address");
 
     string strAccount;
     map<CTxDestination, CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
@@ -305,7 +304,7 @@ void SendMoney(const CTxDestination& address, CAmount nValue, CWalletTx& wtxNew,
         throw JSONRPCError(RPC_WALLET_ERROR, strError);
     }
 
-    // Parse Folm address
+    // Parse FOLM address
     CScript scriptPubKey = GetScriptForDestination(address);
 
     // Create and send the transaction
@@ -339,11 +338,11 @@ Value sendtoaddress(const Array& params, bool fHelp)
             "\nResult:\n"
             "\"transactionid\"  (string) The transaction id.\n"
             "\nExamples:\n" +
-            HelpExampleCli("sendtoaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 0.1") + HelpExampleCli("sendtoaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 0.1 \"donation\" \"seans outpost\"") + HelpExampleRpc("sendtoaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\", 0.1, \"donation\", \"seans outpost\""));
+            HelpExampleCli("sendtoaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 0.1") + HelpExampleCli("sendtoaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 0.1 \"donation\" \"seans outpost\"") + HelpExampleRpc("sendtoaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\", 0.1, \"donation\", \"seans outpost\""));
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Folm address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid FOLM address");
 
     // Amount
     CAmount nAmount = AmountFromValue(params[1]);
@@ -380,11 +379,11 @@ Value sendtoaddressix(const Array& params, bool fHelp)
             "\nResult:\n"
             "\"transactionid\"  (string) The transaction id.\n"
             "\nExamples:\n" +
-            HelpExampleCli("sendtoaddressix", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 0.1") + HelpExampleCli("sendtoaddressix", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 0.1 \"donation\" \"seans outpost\"") + HelpExampleRpc("sendtoaddressix", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\", 0.1, \"donation\", \"seans outpost\""));
+            HelpExampleCli("sendtoaddressix", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 0.1") + HelpExampleCli("sendtoaddressix", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 0.1 \"donation\" \"seans outpost\"") + HelpExampleRpc("sendtoaddressix", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\", 0.1, \"donation\", \"seans outpost\""));
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Folm address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid FOLM address");
 
     // Amount
     CAmount nAmount = AmountFromValue(params[1]);
@@ -460,9 +459,9 @@ Value signmessage(const Array& params, bool fHelp)
                                         "\nExamples:\n"
                                         "\nUnlock the wallet for 30 seconds\n" +
             HelpExampleCli("walletpassphrase", "\"mypassphrase\" 30") +
-            "\nCreate the signature\n" + HelpExampleCli("signmessage", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" \"my message\"") +
-            "\nVerify the signature\n" + HelpExampleCli("verifymessage", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" \"signature\" \"my message\"") +
-            "\nAs json rpc\n" + HelpExampleRpc("signmessage", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\", \"my message\""));
+            "\nCreate the signature\n" + HelpExampleCli("signmessage", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" \"my message\"") +
+            "\nVerify the signature\n" + HelpExampleCli("verifymessage", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" \"signature\" \"my message\"") +
+            "\nAs json rpc\n" + HelpExampleRpc("signmessage", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\", \"my message\""));
 
     EnsureWalletIsUnlocked();
 
@@ -505,15 +504,15 @@ Value getreceivedbyaddress(const Array& params, bool fHelp)
             "amount   (numeric) The total amount in btc received at this address.\n"
             "\nExamples:\n"
             "\nThe amount from transactions with at least 1 confirmation\n" +
-            HelpExampleCli("getreceivedbyaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\"") +
-            "\nThe amount including unconfirmed transactions, zero confirmations\n" + HelpExampleCli("getreceivedbyaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 0") +
-            "\nThe amount with at least 6 confirmation, very safe\n" + HelpExampleCli("getreceivedbyaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 6") +
-            "\nAs a json rpc call\n" + HelpExampleRpc("getreceivedbyaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\", 6"));
+            HelpExampleCli("getreceivedbyaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\"") +
+            "\nThe amount including unconfirmed transactions, zero confirmations\n" + HelpExampleCli("getreceivedbyaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 0") +
+            "\nThe amount with at least 6 confirmation, very safe\n" + HelpExampleCli("getreceivedbyaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 6") +
+            "\nAs a json rpc call\n" + HelpExampleRpc("getreceivedbyaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\", 6"));
 
     // folm address
     CBitcoinAddress address = CBitcoinAddress(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Folm address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid FOLM address");
     CScript scriptPubKey = GetScriptForDestination(address.Get());
     if (!IsMine(*pwalletMain, scriptPubKey))
         return (double)0.0;
@@ -778,14 +777,14 @@ Value sendfrom(const Array& params, bool fHelp)
                                         "\"transactionid\"        (string) The transaction id.\n"
                                         "\nExamples:\n"
                                         "\nSend 0.01 btc from the default account to the address, must have at least 1 confirmation\n" +
-            HelpExampleCli("sendfrom", "\"\" \"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 0.01") +
-            "\nSend 0.01 from the tabby account to the given address, funds must have at least 6 confirmations\n" + HelpExampleCli("sendfrom", "\"tabby\" \"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 0.01 6 \"donation\" \"seans outpost\"") +
-            "\nAs a json rpc call\n" + HelpExampleRpc("sendfrom", "\"tabby\", \"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\", 0.01, 6, \"donation\", \"seans outpost\""));
+            HelpExampleCli("sendfrom", "\"\" \"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 0.01") +
+            "\nSend 0.01 from the tabby account to the given address, funds must have at least 6 confirmations\n" + HelpExampleCli("sendfrom", "\"tabby\" \"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 0.01 6 \"donation\" \"seans outpost\"") +
+            "\nAs a json rpc call\n" + HelpExampleRpc("sendfrom", "\"tabby\", \"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\", 0.01, 6, \"donation\", \"seans outpost\""));
 
     string strAccount = AccountFromValue(params[0]);
     CBitcoinAddress address(params[1].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Folm address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid FOLM address");
     CAmount nAmount = AmountFromValue(params[2]);
     int nMinDepth = 1;
     if (params.size() > 3)
@@ -832,9 +831,9 @@ Value sendmany(const Array& params, bool fHelp)
                                         "                                    the number of addresses.\n"
                                         "\nExamples:\n"
                                         "\nSend two amounts to two different addresses:\n" +
-            HelpExampleCli("sendmany", "\"tabby\" \"{\\\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\"") +
-            "\nSend two amounts to two different addresses setting the confirmation and comment:\n" + HelpExampleCli("sendmany", "\"tabby\" \"{\\\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\" 6 \"testing\"") +
-            "\nAs a json rpc call\n" + HelpExampleRpc("sendmany", "\"tabby\", \"{\\\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\\\":0.01,\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\":0.02}\", 6, \"testing\""));
+            HelpExampleCli("sendmany", "\"tabby\" \"{\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\":0.01,\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\":0.02}\"") +
+            "\nSend two amounts to two different addresses setting the confirmation and comment:\n" + HelpExampleCli("sendmany", "\"tabby\" \"{\\\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\\\":0.01,\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\":0.02}\" 6 \"testing\"") +
+            "\nAs a json rpc call\n" + HelpExampleRpc("sendmany", "\"tabby\", \"{\\\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\\\":0.01,\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\":0.02}\", 6, \"testing\""));
 
     string strAccount = AccountFromValue(params[0]);
     Object sendTo = params[1].get_obj();
@@ -854,7 +853,7 @@ Value sendmany(const Array& params, bool fHelp)
     BOOST_FOREACH (const Pair& s, sendTo) {
         CBitcoinAddress address(s.name_);
         if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Folm address: ") + s.name_);
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid FOLM address: ") + s.name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ") + s.name_);
@@ -895,7 +894,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() < 2 || params.size() > 3) {
         string msg = "addmultisigaddress nrequired [\"key\",...] ( \"account\" )\n"
                      "\nAdd a nrequired-to-sign multisignature address to the wallet.\n"
-                     "Each key is a Folm address or hex-encoded public key.\n"
+                     "Each key is a FOLM address or hex-encoded public key.\n"
                      "If 'account' is specified, assign address to that account.\n"
 
                      "\nArguments:\n"
@@ -912,8 +911,8 @@ Value addmultisigaddress(const Array& params, bool fHelp)
 
                      "\nExamples:\n"
                      "\nAdd a multisig address from 2 addresses\n" +
-                     HelpExampleCli("addmultisigaddress", "2 \"[\\\"Xt4qk9uKvQYAonVGSZNXqxeDmtjaEWgfrs\\\",\\\"XoSoWQkpgLpppPoyyzbUFh1fq2RBvW6UK1\\\"]\"") +
-                     "\nAs json rpc call\n" + HelpExampleRpc("addmultisigaddress", "2, \"[\\\"Xt4qk9uKvQYAonVGSZNXqxeDmtjaEWgfrs\\\",\\\"XoSoWQkpgLpppPoyyzbUFh1fq2RBvW6UK1\\\"]\"");
+                     HelpExampleCli("addmultisigaddress", "2 \"[\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\",\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\"]\"") +
+                     "\nAs json rpc call\n" + HelpExampleRpc("addmultisigaddress", "2, \"[\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\",\\\"LcnqiuG9q6WS5K6dR5tYtthMfJh9Uxopxg\\\"]\"");
         throw runtime_error(msg);
     }
 
@@ -1418,7 +1417,7 @@ Value listsinceblock(const Array& params, bool fHelp)
             "  \"lastblock\": \"lastblockhash\"     (string) The hash of the last block\n"
             "}\n"
             "\nExamples:\n" +
-            HelpExampleCli("listsinceblock", "") + HelpExampleCli("listsinceblock", "\"000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57f663ad\" 6") + HelpExampleRpc("listsinceblock", "\"000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57f663ad\", 6"));
+            HelpExampleCli("listsinceblock", "") + HelpExampleCli("listsinceblock", "\"3efa8c583a6b3f17b1f424a86c5ae65d98baff0292b760c9e64951f1823abfbd\" 6") + HelpExampleRpc("listsinceblock", "\"3efa8c583a6b3f17b1f424a86c5ae65d98baff0292b760c9e64951f1823abfbd\", 6"));
 
     CBlockIndex* pindex = NULL;
     int target_confirms = 1;
@@ -1499,7 +1498,7 @@ Value gettransaction(const Array& params, bool fHelp)
             "}\n"
 
             "\nExamples:\n" +
-            HelpExampleCli("gettransaction", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\"") + HelpExampleCli("gettransaction", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\" true") + HelpExampleRpc("gettransaction", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\""));
+            HelpExampleCli("gettransaction", "\"3efa8c583a6b3f17b1f424a86c5ae65d98baff0292b760c9e64951f1823abfbd\"") + HelpExampleCli("gettransaction", "\"3efa8c583a6b3f17b1f424a86c5ae65d98baff0292b760c9e64951f1823abfbd\" true") + HelpExampleRpc("gettransaction", "\"3efa8c583a6b3f17b1f424a86c5ae65d98baff0292b760c9e64951f1823abfbd\""));
 
     uint256 hash;
     hash.SetHex(params[0].get_str());
@@ -1641,11 +1640,11 @@ Value walletpassphrase(const Array& params, bool fHelp)
     int64_t nSleepTime = params[1].get_int64();
     LOCK(cs_nWalletUnlockTime);
     nWalletUnlockTime = GetTime() + nSleepTime;
-
-    if (nSleepTime > 0) {
-        nWalletUnlockTime = GetTime () + nSleepTime;
-        RPCRunLater ("lockwallet", boost::bind (LockWallet, pwalletMain), nSleepTime);
-    }
+    if (nSleepTime > 0) 
+        {
+            nWalletUnlockTime = GetTime () + nSleepTime;
+            RPCRunLater ("lockwallet", boost::bind (LockWallet, pwalletMain), nSleepTime);
+        };
 
     return Value::null;
 }
@@ -1701,7 +1700,7 @@ Value walletlock(const Array& params, bool fHelp)
             "\nExamples:\n"
             "\nSet the passphrase for 2 minutes to perform a transaction\n" +
             HelpExampleCli("walletpassphrase", "\"my pass phrase\" 120") +
-            "\nPerform a send (requires passphrase set)\n" + HelpExampleCli("sendtoaddress", "\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\" 1.0") +
+            "\nPerform a send (requires passphrase set)\n" + HelpExampleCli("sendtoaddress", "\"LgAskSorXfCYUweZcCTpGNtpcFotS2rqDF\" 1.0") +
             "\nClear the passphrase since we are done before 2 minutes is up\n" + HelpExampleCli("walletlock", "") +
             "\nAs json rpc call\n" + HelpExampleRpc("walletlock", ""));
 
@@ -1795,10 +1794,10 @@ Value lockunspent(const Array& params, bool fHelp)
             "\nExamples:\n"
             "\nList the unspent transactions\n" +
             HelpExampleCli("listunspent", "") +
-            "\nLock an unspent transaction\n" + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\\\",\\\"vout\\\":1}]\"") +
+            "\nLock an unspent transaction\n" + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"bd4b76f46a6aef596c135d28e2a84c21546a9da8c2c75b272a5763a2718f1cb1\\\",\\\"vout\\\":1}]\"") +
             "\nList the locked transactions\n" + HelpExampleCli("listlockunspent", "") +
-            "\nUnlock the transaction again\n" + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\\\",\\\"vout\\\":1}]\"") +
-            "\nAs a json rpc call\n" + HelpExampleRpc("lockunspent", "false, \"[{\\\"txid\\\":\\\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\\\",\\\"vout\\\":1}]\""));
+            "\nUnlock the transaction again\n" + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"bd4b76f46a6aef596c135d28e2a84c21546a9da8c2c75b272a5763a2718f1cb1\\\",\\\"vout\\\":1}]\"") +
+            "\nAs a json rpc call\n" + HelpExampleRpc("lockunspent", "false, \"[{\\\"txid\\\":\\\"bd4b76f46a6aef596c135d28e2a84c21546a9da8c2c75b272a5763a2718f1cb1\\\",\\\"vout\\\":1}]\""));
 
     if (params.size() == 1)
         RPCTypeCheck(params, list_of(bool_type));
@@ -1858,9 +1857,9 @@ Value listlockunspent(const Array& params, bool fHelp)
             "\nExamples:\n"
             "\nList the unspent transactions\n" +
             HelpExampleCli("listunspent", "") +
-            "\nLock an unspent transaction\n" + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\\\",\\\"vout\\\":1}]\"") +
+            "\nLock an unspent transaction\n" + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"bd4b76f46a6aef596c135d28e2a84c21546a9da8c2c75b272a5763a2718f1cb1\\\",\\\"vout\\\":1}]\"") +
             "\nList the locked transactions\n" + HelpExampleCli("listlockunspent", "") +
-            "\nUnlock the transaction again\n" + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\\\",\\\"vout\\\":1}]\"") +
+            "\nUnlock the transaction again\n" + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"bd4b76f46a6aef596c135d28e2a84c21546a9da8c2c75b272a5763a2718f1cb1\\\",\\\"vout\\\":1}]\"") +
             "\nAs a json rpc call\n" + HelpExampleRpc("listlockunspent", ""));
 
     vector<COutPoint> vOutpts;
@@ -1935,27 +1934,18 @@ Value reservebalance(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() > 2)
         throw runtime_error(
-            "reservebalance ( reserve amount )\n"
-            "\nShow or set the reserve amount not participating in network protection\n"
-            "If no parameters provided current setting is printed.\n"
-
-            "\nArguments:\n"
-            "1. reserve     (boolean, optional) is true or false to turn balance reserve on or off.\n"
-            "2. amount      (numeric, optional) is a real and rounded to cent.\n"
-
-            "\nResult:\n"
-            "{\n"
-            "  \"reserve\": true|false,     (boolean) Status of the reserve balance\n"
-            "  \"amount\": x.xxxx       (numeric) Amount reserved\n"
-            "\nExamples:\n" +
-            HelpExampleCli("reservebalance", "true 5000") + HelpExampleRpc("reservebalance", "true 5000"));
+            "reservebalance [<reserve> [amount]]\n"
+            "<reserve> is true or false to turn balance reserve on or off.\n"
+            "<amount> is a real and rounded to cent.\n"
+            "Set reserve amount not participating in network protection.\n"
+            "If no parameters provided current setting is printed.\n");
 
     if (params.size() > 0) {
         bool fReserve = params[0].get_bool();
         if (fReserve) {
             if (params.size() == 1)
                 throw runtime_error("must provide amount to reserve balance.\n");
-            CAmount nAmount = AmountFromValue(params[1]);
+            int64_t nAmount = AmountFromValue(params[1]);
             nAmount = (nAmount / CENT) * CENT; // round to cent
             if (nAmount < 0)
                 throw runtime_error("amount cannot be negative.\n");
@@ -1978,24 +1968,13 @@ Value setstakesplitthreshold(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "setstakesplitthreshold value\n"
-            "\nThis will set the output size of your stakes to never be below this number\n"
-
-            "\nArguments:\n"
-            "1. value   (numeric, required) Threshold value between 1 and 999999\n"
-            "\nResult:\n"
-            "{\n"
-            "  \"threshold\": n,    (numeric) Threshold value set\n"
-            "  \"saved\": true|false    (boolean) 'true' if successfully saved to the wallet file\n"
-            "}\n"
-            "\nExamples:\n" +
-            HelpExampleCli("setstakesplitthreshold", "5000") + HelpExampleRpc("setstakesplitthreshold", "5000"));
-
+            "setstakesplitthreshold <1 - 999,999>\n"
+            "This will set the output size of your stakes to never be below this number\n");
     uint64_t nStakeSplitThreshold = params[0].get_int();
     if (pwalletMain->IsLocked())
         throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Unlock wallet to use this feature");
     if (nStakeSplitThreshold > 999999)
-        throw runtime_error("Value out of range, max allowed is 999999");
+        return "out of range - setting split threshold failed";
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
     LOCK(pwalletMain->cs_wallet);
@@ -2004,12 +1983,12 @@ Value setstakesplitthreshold(const Array& params, bool fHelp)
 
         Object result;
         pwalletMain->nStakeSplitThreshold = nStakeSplitThreshold;
-        result.push_back(Pair("threshold", int(pwalletMain->nStakeSplitThreshold)));
+        result.push_back(Pair("split stake threshold set to ", int(pwalletMain->nStakeSplitThreshold)));
         if (fFileBacked) {
             walletdb.WriteStakeSplitThreshold(nStakeSplitThreshold);
-            result.push_back(Pair("saved", "true"));
+            result.push_back(Pair("saved to wallet.dat ", "true"));
         } else
-            result.push_back(Pair("saved", "false"));
+            result.push_back(Pair("saved to wallet.dat ", "false"));
 
         return result;
     }
@@ -2021,38 +2000,31 @@ Value getstakesplitthreshold(const Array& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "getstakesplitthreshold\n"
-            "Returns the threshold for stake splitting\n"
-            "\nResult:\n"
-            "n      (numeric) Threshold value\n"
-            "\nExamples:\n" +
-            HelpExampleCli("getstakesplitthreshold", "") + HelpExampleRpc("getstakesplitthreshold", ""));
+            "Returns the set splitstakethreshold\n");
 
-    return int(pwalletMain->nStakeSplitThreshold);
+    Object result;
+    result.push_back(Pair("split stake threshold set to ", int(pwalletMain->nStakeSplitThreshold)));
+    return result;
 }
 
 Value autocombinerewards(const Array& params, bool fHelp)
 {
-    bool fEnable;
-    if (params.size() >= 1)
-        fEnable = params[0].get_bool();
-
-    if (fHelp || params.size() < 1 || (fEnable && params.size() != 2) || params.size() > 2)
+    if (fHelp || params.size() < 1)
         throw runtime_error(
-            "autocombinerewards true|false ( threshold )\n"
-            "\nWallet will automatically monitor for any coins with value below the threshold amount, and combine them if they reside with the same Folm address\n"
-            "When autocombinerewards runs it will create a transaction, and therefore will be subject to transaction fees.\n"
-
-            "\nArguments:\n"
-            "1. true|false      (boolean, required) Enable auto combine (true) or disable (false)\n"
-            "2. threshold       (numeric, optional) Threshold amount (default: 0)\n"
-            "\nExamples:\n" +
-            HelpExampleCli("autocombinerewards", "true 500") + HelpExampleRpc("autocombinerewards", "true 500"));
+            "autocombinerewards <true/false> threshold\n"
+            "Wallet will automatically monitor for any coins with value below the threshold amount, and combine them if they reside with the same FOLM address\n"
+            "When autocombinerewards runs it will create a transaction, and therefore will be subject to transaction fees.\n");
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
+    bool fEnable = params[0].get_bool();
     CAmount nThreshold = 0;
 
-    if (fEnable)
+    if (fEnable) {
+        if (params.size() != 2)
+            throw runtime_error("Input Error: use format: autocombinerewards <true/false> threshold\n");
+
         nThreshold = params[1].get_int();
+    }
 
     pwalletMain->fCombineDust = fEnable;
     pwalletMain->nAutoCombineThreshold = nThreshold;
@@ -2060,7 +2032,7 @@ Value autocombinerewards(const Array& params, bool fHelp)
     if (!walletdb.WriteAutoCombineSettings(fEnable, nThreshold))
         throw runtime_error("Changed settings in wallet but failed to save to database\n");
 
-    return Value::null;
+    return "Auto Combine Rewards Threshold Set";
 }
 
 Array printMultiSend()
@@ -2247,7 +2219,7 @@ Value multisend(const Array& params, bool fHelp)
             "The MultiSend transaction is sent when the staked coins mature (100 confirmations)\n"
             "****************************************************************\n"
             "TO CREATE OR ADD TO THE MULTISEND VECTOR:\n"
-            "multisend <Folm Address> <percent>\n"
+            "multisend <FOLM Address> <percent>\n"
             "This will add a new address to the MultiSend vector\n"
             "Percent is a whole number 1 to 100.\n"
             "****************************************************************\n"

@@ -12,7 +12,7 @@
 #include "uint256.h"
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
-static const unsigned int MAX_BLOCK_SIZE = 4000000;
+static const unsigned int MAX_BLOCK_SIZE = 6000000;
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -54,8 +54,8 @@ public:
     void SetNull()
     {
         nVersion = CBlockHeader::CURRENT_VERSION;
-        hashPrevBlock.SetNull();
-        hashMerkleRoot.SetNull();
+        hashPrevBlock = 0;
+        hashMerkleRoot = 0;
         nTime = 0;
         nBits = 0;
         nNonce = 0;

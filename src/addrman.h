@@ -1,4 +1,4 @@
-// Copyright (c) 2012 Pieter Wuille
+// Copyright (c) 2012 Pieter Wuille                             -*- c++ -*-
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -452,7 +452,7 @@ public:
 
     ~CAddrMan()
     {
-        nKey = uint256();
+        nKey = uint256(0);
     }
 
     //! Return the number of (unique) addresses in all tables.
