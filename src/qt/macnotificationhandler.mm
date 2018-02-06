@@ -14,7 +14,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"io.folm.Folm-Qt";
+        return @"io.folm.folm-qt";
     } else {
         return [self __bundleIdentifier];
     }

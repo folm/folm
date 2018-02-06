@@ -19,7 +19,7 @@ zFOLM spending requires this update.
 How to Upgrade
 ==============
 
-If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/FOLM-Qt (on Mac) or folmd/folm-qt (on Linux).
+If you are running an older version, shut it down. Wait until it has completely shut down (which might take a few minutes for older versions), then run the installer (on Windows) or just copy over /Applications/folm-qt (on Mac) or folmd/folm-qt (on Linux).
 
 Compatibility
 ==============

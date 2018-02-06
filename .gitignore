@@ -76,7 +76,7 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 folm-qt
-folm-Qt.app
+folm-qt.app
 background.tiff*
 
 # Unit-tests

@@ -48,7 +48,7 @@ static const int MAX_URI_LENGTH = 255;
 
 #define QAPP_ORG_NAME "FOLM"
 #define QAPP_ORG_DOMAIN "folm.io"
-#define QAPP_APP_NAME_DEFAULT "FOLM-Qt"
-#define QAPP_APP_NAME_TESTNET "FOLM-Qt-testnet"
+#define QAPP_APP_NAME_DEFAULT "folm-qt"
+#define QAPP_APP_NAME_TESTNET "folm-qt-testnet"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H

@@ -12,8 +12,8 @@ When a "Transaction Lock" occurs the hash of the related transaction is broadcas
 * `zmqpubhashtxlock`: publishes the transaction hash when locked via SwiftX
 
 This mechanism has been integrated into Bitcore-Node-FOLM which allows for notification to be broadcast through Insight API in one of two ways:
-* WebSocket: [https://github.com/FOLM-Project/insight-api-folm#web-socket-api](https://github.com/FOLM-Project/insight-api-folm#web-socket-api) 
-* API: [https://github.com/FOLM-Project/insight-api-folm#swifttx-transactions](https://github.com/FOLM-Project/insight-api-folm#swifttx-transactions) 
+* WebSocket: [https://github.com/folminsight-api-folm#web-socket-api](https://github.com/folminsight-api-folm#web-socket-api) 
+* API: [https://github.com/folminsight-api-folm#swifttx-transactions](https://github.com/folminsight-api-folm#swifttx-transactions) 
 
 ####Command line option
 

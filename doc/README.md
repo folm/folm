@@ -3,7 +3,7 @@ FOLM Core
 
 Setup
 ---------------------
-[FOLM Core](http://folm.io) is the original FOLM client and it builds the backbone of the network. However, it downloads and stores the entire history of FOLM transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[FOLM Core](https://folm.io) is the original FOLM client and it builds the backbone of the network. However, it downloads and stores the entire history of FOLM transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -22,7 +22,7 @@ Unpack the files into a directory, and then run folm-qt.exe.
 
 ### OSX
 
-Drag FOLM-Qt to your applications folder, and then run FOLM-Qt.
+Drag folm-qt to your applications folder, and then run folm-qt.
 
 ### Need Help?
 
@@ -40,7 +40,7 @@ The following are developer notes on how to build FOLM on your native platform. 
 
 Development
 ---------------------
-The Folm repo's [root README](https://github.com/FOLM-Project/FOLM/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Folm repo's [root README](https://github.com/folmFOLM/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)

@@ -44,7 +44,7 @@ Instructions: Homebrew
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone https://github.com/FOLM-Project/FOLM.git
+        git clone https://github.com/folmfolm.git
         cd FOLM
 
 2.  Build folmd:
@@ -81,7 +81,7 @@ Creating a release build
 ------------------------
 You can ignore this section if you are building `folmd` for your own use.
 
-folmd/folm-cli binaries are not included in the folm-Qt.app bundle.
+folmd/folm-cli binaries are not included in the folm-qt.app bundle.
 
 If you are building `folmd` or `folm-qt` for others, your build machine should be set up
 as follows for maximum compatibility:
@@ -92,7 +92,7 @@ All dependencies should be compiled with these flags:
  -arch x86_64
  -isysroot $(xcode-select --print-path)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
 
-Once dependencies are compiled, see release-process.md for how the FOLM-Qt.app
+Once dependencies are compiled, see release-process.md for how the folm-qt.app
 bundle is packaged and signed to create the .dmg disk image that is distributed.
 
 Running

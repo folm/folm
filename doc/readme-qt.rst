@@ -1,4 +1,4 @@
-Folm-qt: Qt5 GUI for Folm
+folm-qt: Qt5 GUI for Folm
 ===============================
 
 Linux

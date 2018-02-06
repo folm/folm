@@ -29,10 +29,10 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>FOLM-Qt</string>
+  <string>folm-qt</string>
 
   <key>CFBundleIdentifier</key>
-  <string>io.folm.Folm-Qt</string>
+  <string>io.folm.folm-qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
