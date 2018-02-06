@@ -973,6 +973,10 @@
           <property name="text">
            <string>Start/Stop Mixing</string>
           </property>
+          <property name="icon">
+            <iconset resource="../folm.qrc">
+             <normaloff>:/icons/obfuscation</normaloff>:/icons/obfuscation</iconset>
+           </property>
          </widget>
          <widget class="Line" name="lineLastMessage">
           <property name="geometry">
