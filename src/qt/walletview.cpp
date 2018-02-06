@@ -202,10 +202,10 @@ void WalletView::gotoHistoryPage()
     setCurrentWidget(transactionsPage);
 }
 
-void WalletView::gotoTradingPage()
+/*void WalletView::gotoTradingPage()
 {
     setCurrentWidget(tradingPage);
-}
+}*/
 
 void WalletView::gotoBlockExplorerPage()
 {
