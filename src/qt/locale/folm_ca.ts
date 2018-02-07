@@ -354,12 +354,12 @@
         <translation>A&amp;juda</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
-        <source>&amp;About Folm Core</source>
-        <translation>&amp;Sobre Folm Core</translation>
+        <source>&amp;About FOLM Core</source>
+        <translation>&amp;Sobre FOLM Core</translation>
     </message>
     <message>
         <source>&amp;BIP38 tool</source>
@@ -552,12 +552,12 @@
         <translation>versió</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
-        <source>About Folm Core</source>
-        <translation>Sobre Folm Core</translation>
+        <source>About FOLM Core</source>
+        <translation>Sobre FOLM Core</translation>
     </message>
     <message>
         <source>Usage:</source>
@@ -575,12 +575,12 @@
         <translation>Benvingut</translation>
     </message>
     <message>
-        <source>Welcome to Folm Core.</source>
-        <translation>Benvingut a Folm Core.</translation>
+        <source>Welcome to FOLM Core.</source>
+        <translation>Benvingut a FOLM Core.</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1132,8 +1132,8 @@
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Version %1</source>

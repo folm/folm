@@ -1495,7 +1495,7 @@ EXTRA_LIBRARIES = crypto/libbitcoin_crypto.a libbitcoin_util.a \
 lib_LTLIBRARIES = libbitcoinconsensus.la
 #LIBBITCOIN_CONSENSUS = 
 LIBBITCOIN_CONSENSUS = libbitcoinconsensus.la
-# folm core #
+# FOLM Core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   addrman.h \

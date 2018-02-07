@@ -594,8 +594,8 @@
         <translation>Панель вкладок</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Send coins to a Folm address</source>
@@ -614,12 +614,12 @@
         <translation>Обзор мастернод</translation>
     </message>
     <message>
-        <source>&amp;About Folm Core</source>
-        <translation>&amp;О Folm Core</translation>
+        <source>&amp;About FOLM Core</source>
+        <translation>&amp;О FOLM Core</translation>
     </message>
     <message>
-        <source>Show information about Folm Core</source>
-        <translation>Показать информацию о Folm Core</translation>
+        <source>Show information about FOLM Core</source>
+        <translation>Показать информацию о FOLM Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Folm</source>
@@ -674,12 +674,12 @@
         <translation>Окно обзора блока</translation>
     </message>
     <message>
-        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
+        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
         <translation>Смотрите помощь к программе, чтобы получить документацию ко всем возможным опциям комманды Folm</translation>
     </message>
     <message>
-        <source>Folm Core client</source>
-        <translation>Клиент Folm Core</translation>
+        <source>FOLM Core client</source>
+        <translation>Клиент FOLM Core</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Folm network</source>
@@ -1176,16 +1176,16 @@ MultiSend: %1</translation>
         <translation>версия</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-бит)</translation>
     </message>
     <message>
-        <source>About Folm Core</source>
-        <translation>О Folm Core</translation>
+        <source>About FOLM Core</source>
+        <translation>О FOLM Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1231,16 +1231,16 @@ MultiSend: %1</translation>
         <translation>Добро пожаловать</translation>
     </message>
     <message>
-        <source>Welcome to Folm Core.</source>
-        <translation>Добро пожаловать в Folm Core.</translation>
+        <source>Welcome to FOLM Core.</source>
+        <translation>Добро пожаловать в FOLM Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Folm Core will store its data.</source>
-        <translation>Поскольку это первый запуск программы, вы можете выбрать, где будут храниться данные Folm Core.</translation>
+        <source>As this is the first time the program is launched, you can choose where FOLM Core will store its data.</source>
+        <translation>Поскольку это первый запуск программы, вы можете выбрать, где будут храниться данные FOLM Core.</translation>
     </message>
     <message>
-        <source>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Folm Core загрузит и сохранит копию цепочки блоков Folm. Каталог будет занимать около %1GB и со временем размер будет увеличиваться. Кроме того, в этом каталоге будет храниться кошелек.</translation>
+        <source>FOLM Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>FOLM Core загрузит и сохранит копию цепочки блоков Folm. Каталог будет занимать около %1GB и со временем размер будет увеличиваться. Кроме того, в этом каталоге будет храниться кошелек.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1251,8 +1251,8 @@ MultiSend: %1</translation>
         <translation>Использовать другой каталог данных:</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -2815,8 +2815,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Folm Core is shutting down...</source>
-        <translation>Folm Core выключается...</translation>
+        <source>FOLM Core is shutting down...</source>
+        <translation>FOLM Core выключается...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2905,8 +2905,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -2921,8 +2921,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Разработчики Dash Core</translation>
     </message>
     <message>
-        <source>The Folm Core developers</source>
-        <translation>Разработчики Folm Core</translation>
+        <source>The FOLM Core developers</source>
+        <translation>Разработчики FOLM Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -3207,12 +3207,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Copyright (C) 2014-%i Разработчики Dash Core</translation>
     </message>
     <message>
-        <source>Copyright (C) 2017-%i The Folm Core Developers</source>
-        <translation>Copyright (C) 2017-%i Разработчики Folm Core</translation>
+        <source>Copyright (C) 2017-%i The FOLM Core Developers</source>
+        <translation>Copyright (C) 2017-%i Разработчики FOLM Core</translation>
     </message>
     <message>
-        <source>Copyright (C) 2017-%i The Folm Core Developers</source>
-        <translation>Copyright (C) 2017-%i Разработчики Folm Core</translation>
+        <source>Copyright (C) 2017-%i The FOLM Core Developers</source>
+        <translation>Copyright (C) 2017-%i Разработчики FOLM Core</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

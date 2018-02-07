@@ -602,8 +602,8 @@
         <translation>Registerkartenleiste</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Send coins to a Folm address</source>
@@ -622,12 +622,12 @@
         <translation>Masternodes durchsuchen</translation>
     </message>
     <message>
-        <source>&amp;About Folm Core</source>
-        <translation>Über.Folm Core</translation>
+        <source>&amp;About FOLM Core</source>
+        <translation>Über.FOLM Core</translation>
     </message>
     <message>
-        <source>Show information about Folm Core</source>
-        <translation>Zeigt Informationen über Folm Core</translation>
+        <source>Show information about FOLM Core</source>
+        <translation>Zeigt Informationen über FOLM Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Folm</source>
@@ -678,12 +678,12 @@
         <translation>Blockchain Betrachter Fenster</translation>
     </message>
     <message>
-        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
+        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
         <translation>Zeige die Folm-Core Hilfe, um mögliche Folm Kommando-Zeilen-Optionen anzuzeigen</translation>
     </message>
     <message>
-        <source>Folm Core client</source>
-        <translation>Folm Core Client</translation>
+        <source>FOLM Core client</source>
+        <translation>FOLM Core Client</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -1159,16 +1159,16 @@ Adresse: %4</translation>
         <translation>Version</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-Bit)</translation>
     </message>
     <message>
-        <source>About Folm Core</source>
-        <translation>Über Folm Core</translation>
+        <source>About FOLM Core</source>
+        <translation>Über FOLM Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1214,16 +1214,16 @@ Adresse: %4</translation>
         <translation>Willkommen</translation>
     </message>
     <message>
-        <source>Welcome to Folm Core.</source>
-        <translation>Willkommen zu Folm Core.</translation>
+        <source>Welcome to FOLM Core.</source>
+        <translation>Willkommen zu FOLM Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Folm Core will store its data.</source>
-        <translation>Da dies das erste Mal ist, dass Sie Folm Core starten, legen Sie jetzt bitte fest, an welchem Ort die Daten gespeichert werden sollen.</translation>
+        <source>As this is the first time the program is launched, you can choose where FOLM Core will store its data.</source>
+        <translation>Da dies das erste Mal ist, dass Sie FOLM Core starten, legen Sie jetzt bitte fest, an welchem Ort die Daten gespeichert werden sollen.</translation>
     </message>
     <message>
-        <source>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Folm Core wird die Blockchain laden und lokal speichern. Dafür sind mindestens %1GB freier Speicherplatz erforderlich. Der Speicherbedarf wird mit der Zeit anwachsen. Die Wallet wird ebenfalls in diesem Verzeichnis gespeichert.</translation>
+        <source>FOLM Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>FOLM Core wird die Blockchain laden und lokal speichern. Dafür sind mindestens %1GB freier Speicherplatz erforderlich. Der Speicherbedarf wird mit der Zeit anwachsen. Die Wallet wird ebenfalls in diesem Verzeichnis gespeichert.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1234,8 +1234,8 @@ Adresse: %4</translation>
         <translation>Ein benutzerdefiniertes Datenverzeichnis verwenden:</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -2173,8 +2173,8 @@ MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translati
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Folm Core is shutting down...</source>
-        <translation>Folm Core wird beendet...</translation>
+        <source>FOLM Core is shutting down...</source>
+        <translation>FOLM Core wird beendet...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2263,8 +2263,8 @@ MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translati
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -2279,8 +2279,8 @@ MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translati
         <translation>Die Dash Core Entwickler</translation>
     </message>
     <message>
-        <source>The Folm Core developers</source>
-        <translation>Die Folm Core Entwickler</translation>
+        <source>The FOLM Core developers</source>
+        <translation>Die FOLM Core Entwickler</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2997,8 +2997,8 @@ MultiSend wird nicht aktiviert bis Sie auf Aktivieren geklickt haben.</translati
         <translation>Wallet gesperrt.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Folm Core to complete</source>
-        <translation>Wallet musste neu geschrieben werden: Bitte Folm Core neu starten</translation>
+        <source>Wallet needed to be rewritten: restart FOLM Core to complete</source>
+        <translation>Wallet musste neu geschrieben werden: Bitte FOLM Core neu starten</translation>
     </message>
     <message>
         <source>Wallet options:</source>

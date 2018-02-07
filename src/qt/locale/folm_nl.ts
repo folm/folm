@@ -598,7 +598,7 @@
         <translation>Tabblad werkbalk</translation>
     </message>
     <message>
-        <source>Folm Core</source>
+        <source>FOLM Core</source>
         <translation>Folm Kern</translation>
     </message>
     <message>
@@ -618,11 +618,11 @@
         <translation>Bekijk masternodes</translation>
     </message>
     <message>
-        <source>&amp;About Folm Core</source>
+        <source>&amp;About FOLM Core</source>
         <translation>&amp;Over Folm Kern</translation>
     </message>
     <message>
-        <source>Show information about Folm Core</source>
+        <source>Show information about FOLM Core</source>
         <translation>Toon informatie over Folm Kern</translation>
     </message>
     <message>
@@ -678,8 +678,8 @@
         <translation>Block verkenner venster</translation>
     </message>
     <message>
-        <source>Folm Core client</source>
-        <translation>Folm Core client</translation>
+        <source>FOLM Core client</source>
+        <translation>FOLM Core client</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Folm network</source>
@@ -1040,7 +1040,7 @@ MultiSend: %1</translation>
         <translation>versie</translation>
     </message>
     <message>
-        <source>Folm Core</source>
+        <source>FOLM Core</source>
         <translation>Folm Kern</translation>
     </message>
     <message>
@@ -1048,8 +1048,8 @@ MultiSend: %1</translation>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About Folm Core</source>
-        <translation>Over Folm Core</translation>
+        <source>About FOLM Core</source>
+        <translation>Over FOLM Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1079,15 +1079,15 @@ MultiSend: %1</translation>
         <translation>Welkom</translation>
     </message>
     <message>
-        <source>Welcome to Folm Core.</source>
-        <translation>Welkom bij Folm Core</translation>
+        <source>Welcome to FOLM Core.</source>
+        <translation>Welkom bij FOLM Core</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
         <translation>Gebruik de standaard datafolder </translation>
     </message>
     <message>
-        <source>Folm Core</source>
+        <source>FOLM Core</source>
         <translation>Folm Kern</translation>
     </message>
     <message>
@@ -2024,8 +2024,8 @@ MultiSend: %1</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Folm Core is shutting down...</source>
-        <translation>Folm Core is aan het afsluiten...</translation>
+        <source>FOLM Core is shutting down...</source>
+        <translation>FOLM Core is aan het afsluiten...</translation>
     </message>
     </context>
 <context>
@@ -2134,7 +2134,7 @@ MultiSend: %1</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Folm Core</source>
+        <source>FOLM Core</source>
         <translation>Folm Kern</translation>
     </message>
     <message>
@@ -2150,8 +2150,8 @@ MultiSend: %1</translation>
         <translation>De Dash Core ontwikkelaars</translation>
     </message>
     <message>
-        <source>The Folm Core developers</source>
-        <translation>De Folm Core ontwikkelaars</translation>
+        <source>The FOLM Core developers</source>
+        <translation>De FOLM Core ontwikkelaars</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2504,12 +2504,12 @@ MultiSend: %1</translation>
         <translation>Copyright (C) 2014-%i The Dash Core Ontwikkelaars</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The Folm Core Developers</source>
-        <translation>Copyright (C) 2015-%i The Folm Core Ontwikkelaars</translation>
+        <source>Copyright (C) 2015-%i The FOLM Core Developers</source>
+        <translation>Copyright (C) 2015-%i The FOLM Core Ontwikkelaars</translation>
     </message>
     <message>
-        <source>Copyright (C) 2017-%i The Folm Core Developers</source>
-        <translation>Copyright (C) 2017-%i The Folm Core Ontwikkelaars</translation>
+        <source>Copyright (C) 2017-%i The FOLM Core Developers</source>
+        <translation>Copyright (C) 2017-%i The FOLM Core Ontwikkelaars</translation>
     </message>
     <message>
         <source>Error</source>

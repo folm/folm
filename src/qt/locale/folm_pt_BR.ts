@@ -586,8 +586,8 @@
         <translation>Ferramentas de abas</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Send coins to a Folm address</source>
@@ -606,12 +606,12 @@
         <translation>Procurar masternodes</translation>
     </message>
     <message>
-        <source>&amp;About Folm Core</source>
-        <translation>&amp;Sobre o Folm Core</translation>
+        <source>&amp;About FOLM Core</source>
+        <translation>&amp;Sobre o FOLM Core</translation>
     </message>
     <message>
-        <source>Show information about Folm Core</source>
-        <translation>Mostra informação sobre o Folm Core</translation>
+        <source>Show information about FOLM Core</source>
+        <translation>Mostra informação sobre o FOLM Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Folm</source>
@@ -666,11 +666,11 @@
         <translation>Janela de exploração de blocos</translation>
     </message>
     <message>
-        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
-        <translation>Mostra a ajuda da Folm Core para receber uma lista com possíveis opções de linha de comando Folm</translation>
+        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
+        <translation>Mostra a ajuda da FOLM Core para receber uma lista com possíveis opções de linha de comando Folm</translation>
     </message>
     <message>
-        <source>Folm Core client</source>
+        <source>FOLM Core client</source>
         <translation>Cliente Core Folm</translation>
     </message>
     <message>
@@ -1141,16 +1141,16 @@ MultiSend: %1</translation>
         <translation>versão</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About Folm Core</source>
-        <translation>Sobre o Folm Core</translation>
+        <source>About FOLM Core</source>
+        <translation>Sobre o FOLM Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1184,16 +1184,16 @@ MultiSend: %1</translation>
         <translation>Bem-vindo</translation>
     </message>
     <message>
-        <source>Welcome to Folm Core.</source>
-        <translation>Bem-vindo ao Folm Core.</translation>
+        <source>Welcome to FOLM Core.</source>
+        <translation>Bem-vindo ao FOLM Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Folm Core will store its data.</source>
-        <translation>Como essa é a primeira vez que o programa é utilizado, você pode escolher onde Folm Core vai armazenar os seus dados.</translation>
+        <source>As this is the first time the program is launched, you can choose where FOLM Core will store its data.</source>
+        <translation>Como essa é a primeira vez que o programa é utilizado, você pode escolher onde FOLM Core vai armazenar os seus dados.</translation>
     </message>
     <message>
-        <source>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Folm Core vai baixar e armazenar uma cópia da blockchain Folm. Pelo menos %1GB de informação será armazenado neste diretório e irá aumentar com o tempo. A carteira também será armazenada neste diretório.</translation>
+        <source>FOLM Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>FOLM Core vai baixar e armazenar uma cópia da blockchain Folm. Pelo menos %1GB de informação será armazenado neste diretório e irá aumentar com o tempo. A carteira também será armazenada neste diretório.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1204,8 +1204,8 @@ MultiSend: %1</translation>
         <translation>Usar um diretório personalizado de dados:</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -2766,8 +2766,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Folm Core is shutting down...</source>
-        <translation>Folm Core está desligando...</translation>
+        <source>FOLM Core is shutting down...</source>
+        <translation>FOLM Core está desligando...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2908,8 +2908,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -2924,8 +2924,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Os desenvolvedores do Dash Core</translation>
     </message>
     <message>
-        <source>The Folm Core developers</source>
-        <translation>Os desenvolvedores do Folm Core</translation>
+        <source>The FOLM Core developers</source>
+        <translation>Os desenvolvedores do FOLM Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -3522,7 +3522,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Aviso: -paytxfee está definido como muito alto! Está e a taxa de transação que você irá pagar se enviar uma transação.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Folm Core will not work properly.</source>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong FOLM Core will not work properly.</source>
         <translation>Aviso: Favor verificar se o horário e data de seu computador estão corretos! Se o seu relógio estiver errado o Core Folm não vai funcionar corretamente.</translation>
     </message>
     <message>
@@ -3602,12 +3602,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Todos os direitos reservados (C) 2014-%i aos Desenvolvedores do Dash Core</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The Folm Core Developers</source>
-        <translation>Todos os direitos reservados (C) 2015-%i aos Desenvolvedores do Folm Core</translation>
+        <source>Copyright (C) 2015-%i The FOLM Core Developers</source>
+        <translation>Todos os direitos reservados (C) 2015-%i aos Desenvolvedores do FOLM Core</translation>
     </message>
     <message>
-        <source>Copyright (C) 2017-%i The Folm Core Developers</source>
-        <translation>Todos os direitos reservados (C) 2017-%i aos Desenvolvedores do Folm Core</translation>
+        <source>Copyright (C) 2017-%i The FOLM Core Developers</source>
+        <translation>Todos os direitos reservados (C) 2017-%i aos Desenvolvedores do FOLM Core</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -3658,8 +3658,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Erro no carregamento da wallet.dat: Carteira corrompida</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of Folm Core</source>
-        <translation>Erro ao carregar wallet.dat: A Carteira requer uma nova versão da Folm Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of FOLM Core</source>
+        <translation>Erro ao carregar wallet.dat: A Carteira requer uma nova versão da FOLM Core</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -4146,8 +4146,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Carteira está travada.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Folm Core to complete</source>
-        <translation>A carteira precisa ser reescrita: reinicia o Folm Core para completar</translation>
+        <source>Wallet needed to be rewritten: restart FOLM Core to complete</source>
+        <translation>A carteira precisa ser reescrita: reinicia o FOLM Core para completar</translation>
     </message>
     <message>
         <source>Wallet options:</source>

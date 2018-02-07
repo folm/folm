@@ -68,7 +68,7 @@ if BUILD_BITCOIN_UTILS
 endif
 
 .PHONY: FORCE
-# folm core #
+# FOLM Core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   addrman.h \

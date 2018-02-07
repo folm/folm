@@ -46,7 +46,7 @@ static bool AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || mapArgs.count("-?") || mapArgs.count("-help")) {
         // First part of help message is specific to this utility
-        std::string strUsage = _("Folm Core folm-tx utility version") + " " + FormatFullVersion() + "\n\n" +
+        std::string strUsage = _("FOLM Core folm-tx utility version") + " " + FormatFullVersion() + "\n\n" +
                                _("Usage:") + "\n" +
                                "  folm-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded folm transaction") + "\n" +
                                "  folm-tx [options] -create [commands]   " + _("Create hex-encoded folm transaction") + "\n" +

@@ -598,8 +598,8 @@
         <translation>Panel nástrojov Záložky</translation>
     </message>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Send coins to a Folm address</source>
@@ -618,12 +618,12 @@
         <translation>Prezrieť masternody</translation>
     </message>
     <message>
-        <source>&amp;About Folm Core</source>
-        <translation>O Folm Core</translation>
+        <source>&amp;About FOLM Core</source>
+        <translation>O FOLM Core</translation>
     </message>
     <message>
-        <source>Show information about Folm Core</source>
-        <translation>Zobraziť informácie o Folm Core</translation>
+        <source>Show information about FOLM Core</source>
+        <translation>Zobraziť informácie o FOLM Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Folm</source>
@@ -678,12 +678,12 @@
         <translation>Okno blockchain prehliadača</translation>
     </message>
     <message>
-        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
-        <translation>Zobraziť pomocnú správu programu Folm Core a získajte zoznam možností príkazového riadka Folm</translation>
+        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
+        <translation>Zobraziť pomocnú správu programu FOLM Core a získajte zoznam možností príkazového riadka Folm</translation>
     </message>
     <message>
-        <source>Folm Core client</source>
-        <translation>Folm Core klient</translation>
+        <source>FOLM Core client</source>
+        <translation>FOLM Core klient</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -908,15 +908,15 @@ MultiSend: %1</translation>
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1164,8 +1164,8 @@ MultiSend: %1</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Folm Core</source>
-        <translation>Folm Core</translation>
+        <source>FOLM Core</source>
+        <translation>FOLM Core</translation>
     </message>
     </context>
 <context>
