@@ -98,10 +98,10 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-            ( 0,   uint256("0x0000060cb4d2c33a827ca2fb27c772d65329efff2e9575fb0918cb2b50aea122") );
+            ( 0,   uint256("0x0000040d05dd9524dea703df6f7ac642ebed0918c0ac4aff89b62ee109dcbf67") );
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1517928640, // * UNIX timestamp of last checkpoint block
+    1518045578, // * UNIX timestamp of last checkpoint block
     1,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     0        // * estimated number of transactions per day after checkpoint
@@ -158,10 +158,10 @@ public:
         nMasternodeCountDrift = 20;
         nModifierUpdateBlock = 615800;
 
-        const char* pszTimestamp = "Folm - Test started Alpha v2"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Folm - Test started Alpha v3"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
-        txNew.nTime = 1517928640;
+        txNew.nTime = 1518045578;
         txNew.nLockTime = 0;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -172,14 +172,14 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1517928640; //06/02/2018
+        genesis.nTime = 1518045578; //06/02/2018
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 3777029;
-      //  MineGenesis(genesis);
+        genesis.nNonce = 260020;
+        //MineGenesis(genesis);
         hashGenesisBlock = genesis.GetHash();
 
-        assert(hashGenesisBlock == uint256("0x0000060cb4d2c33a827ca2fb27c772d65329efff2e9575fb0918cb2b50aea122"));
-        assert(genesis.hashMerkleRoot == uint256("0x979aa651c5eda4f2bc5d911aff6a7464d1232b348d9ae34899e3e995488571ba"));
+        assert(hashGenesisBlock == uint256("0x0000040d05dd9524dea703df6f7ac642ebed0918c0ac4aff89b62ee109dcbf67"));
+        assert(genesis.hashMerkleRoot == uint256("0xefeebcb991b10b372ab91be3c3afb6cf6c08b71f1364b4628fc9dd3dc57a142c"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -210,7 +210,7 @@ public:
         nPoolMaxTransactions = 3;
         strSporkKey = "04d35db018d163f596b73a3256b0c5e53eff499760ca0acb32ea5a7c5a8616bbb61d2bb4df1a0fbfc4b69b6d9da1734f4ab89406f9a94088acee9c5f771b508b60";
         strObfuscationPoolDummyAddress = "FZS69ngaE5dAgT3K6mGTu4AmrNwFB1si6r";
-        nStartMasternodePayments = 1517928640; // 6.2.18
+        nStartMasternodePayments = 1518045578; // 6.2.18
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const
