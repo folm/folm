@@ -8,7 +8,7 @@
 #include "clientversion.h"
 
 //
-// Bootup the masternode, look for a 500 Folm input and register on the network
+// Bootup the masternode, look for a 5000 Folm input and register on the network
 //
 void CActiveMasternode::ManageStatus() {
     std::string errorMessage;
@@ -415,6 +415,9 @@ vector<COutput> CActiveMasternode::SelectCoinsMasternode() {
     // Retrieve all possible outputs
     pwalletMain->AvailableCoinsMN(vCoins);
 
+    std::cout
+            << __func__ << ": selected " << vCoins.size() << " masternode coins"
+            << std::endl ;
     // Filter
     BOOST_FOREACH(const COutput& out, vCoins) {
         if(out.tx->vout[out.i].nValue == GetMNCollateral(chainActive.Tip()->nHeight)*COIN) {  //exactly 5000 FOLM
