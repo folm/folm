@@ -6,15 +6,16 @@
 #include <boost/lexical_cast.hpp>
 
 #include "db.h"
-#include "kernel.h"
+#include "stake.h"
+#include "main.h"
 #include "script/interpreter.h"
 #include "timedata.h"
 #if defined(DEBUG_DUMP_STAKING_INFO)
 #  include "DEBUG_DUMP_STAKING_INFO.hpp"
 #endif
 
-#ifndef DEBUG_DUMP_STAKING_INFO_CheckStakeKernelHash
-#  define DEBUG_DUMP_STAKING_INFO_CheckStakeKernelHash() (void)0
+#ifndef DEBUG_DUMP_STAKING_INFO_CheckHash
+#  define DEBUG_DUMP_STAKING_INFO_CheckHash() (void)0
 #endif
 #ifndef DEBUG_DUMP_MULTIFIER
 #  define DEBUG_DUMP_MULTIFIER() (void)0
@@ -33,6 +34,29 @@ static const int STAKE_TIMESTAMP_MASK = 15;
 static const int MODIFIER_INTERVAL_RATIO = 3;
 
 static const int LAST_MULTIPLIED_BLOCK = 180*1000; // 180K
+
+Stake * const stake = Stake::Pointer();
+
+StakeKernel::StakeKernel()
+{
+    //!<DuzyDoc>TODO: kernel initialization
+}
+
+Stake::Stake()
+        : nStakeMinAge(36 * 60 * 60)
+        , nReserveBalance(0)
+        , nLastCoinStakeSearchInterval(0)
+        , nLastCoinStakeSearchTime(GetAdjustedTime())
+        , setStakeSeen()
+        , mapProofOfStake()
+        , mapHashedBlocks()
+        , mapRejectedBlocks()
+{
+}
+
+Stake::~Stake()
+{
+}
 
 // Modifier interval: time to elapse before new modifier is computed
 // Set to 3-hour for production network and 20-minute for test network
@@ -100,7 +124,7 @@ static bool FindModifierBlockFromCandidates(vector<pair<int64_t, uint256> >& vSo
         if (pindex->IsProofOfStake() && pindex->hashProofOfStake == 0) {
             return error("%s: zero stake (block %s)", __func__, item.second.GetHex());
         }
-        
+
         if (pindexSelected && pindex->GetBlockTime() > nSelectionTime) break;
         if (mSelectedBlocks.count(pindex->GetBlockHash()) > 0) continue;
 
@@ -125,7 +149,7 @@ static bool FindModifierBlockFromCandidates(vector<pair<int64_t, uint256> >& vSo
 
 #   if defined(DEBUG_DUMP_STAKING_INFO) && false
     if (GetBoolArg("-printstakemodifier", false))
-        LogPrintf("%s: selected block %d %s %s\n", __func__, 
+        LogPrintf("%s: selected block %d %s %s\n", __func__,
                   pindexSelected->nHeight,
                   pindexSelected->GetBlockHash().GetHex(),
                   hashBest.ToString());
@@ -151,7 +175,7 @@ static bool FindModifierBlockFromCandidates(vector<pair<int64_t, uint256> >& vSo
 // block. This is to make it difficult for an attacker to gain control of
 // additional bits in the stake modifier, even after generating a chain of
 // blocks.
-bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeModifier, bool& fGeneratedStakeModifier)
+bool Stake::ComputeNextModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeModifier, bool& fGeneratedStakeModifier)
 {
     nStakeModifier = 0;
     fGeneratedStakeModifier = false;
@@ -304,12 +328,12 @@ bool MultiplyStakeTarget(uint256 &bnTarget, int nModifierHeight, int64_t nModifi
     if (stakeTargetMultipliers.empty()) {
         std::multimap<int, mult> mm = boost::assign::map_list_of
 #           include "multipliers.i"
-            ;
+        ;
         for (auto i = mm.begin(); i != mm.end();) {
             auto p = stakeTargetMultipliers.emplace(i->first, i->second).first;
             for (auto e = mm.upper_bound(i->first); i != e; ++i) {
-                if (i->second.first < p->second.first) continue; 
-                if (i->second.first > p->second.first) p->second = i->second; 
+                if (i->second.first < p->second.first) continue;
+                if (i->second.first > p->second.first) p->second = i->second;
                 else if (uint256(i->second.second) > uint256(p->second.second)) p->second = i->second;
             }
         }
@@ -325,7 +349,7 @@ bool MultiplyStakeTarget(uint256 &bnTarget, int nModifierHeight, int64_t nModifi
 }
 
 //instead of looping outside and reinitializing variables many times, we will give a nTimeTx and also search interval so that we can do all the hashing here
-bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, const CBlock &blockFrom, const CTransaction &txPrev, const COutPoint &prevout, unsigned int& nTimeTx, uint256& hashProofOfStake)
+bool Stake::CheckHash(const CBlockIndex* pindexPrev, unsigned int nBits, const CBlock &blockFrom, const CTransaction &txPrev, const COutPoint &prevout, unsigned int& nTimeTx, uint256& hashProofOfStake)
 {
     unsigned int nTimeBlockFrom = blockFrom.GetBlockTime();
 
@@ -364,7 +388,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, con
                   blockFrom.GetBlockTime(), txPrev.nTime, prevout.n, nTimeTx,
                   hashProofOfStake.ToString());
 #       endif
-        DEBUG_DUMP_STAKING_INFO_CheckStakeKernelHash();
+        DEBUG_DUMP_STAKING_INFO_CheckHash();
     }
 
     if (hashProofOfStake > bnTarget && nStakeModifierHeight <= LAST_MULTIPLIED_BLOCK) {
@@ -379,7 +403,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, unsigned int nBits, con
 }
 
 // Check kernel hash target and coinstake signature
-bool CheckProofOfStake(CBlockIndex* const pindexPrev, const CBlock &block, uint256& hashProofOfStake)
+bool Stake::CheckProof(CBlockIndex* const pindexPrev, const CBlock &block, uint256& hashProofOfStake)
 {
     const CTransaction &tx = block.vtx[1];
     if (!tx.IsCoinStake())
@@ -411,9 +435,9 @@ bool CheckProofOfStake(CBlockIndex* const pindexPrev, const CBlock &block, uint2
         return error("%s: failed to find block", __func__);
 
     unsigned int nTime = block.nTime;
-    if (!CheckStakeKernelHash(pindexPrev, block.nBits, prevBlock, txPrev, txin.prevout, nTime, hashProofOfStake))
+    if (!this->CheckHash(pindexPrev, block.nBits, prevBlock, txPrev, txin.prevout, nTime, hashProofOfStake))
         // may occur during initial download or if behind on block chain sync
-        return error("%s: check kernel failed on coinstake %s, hashProof=%s \n", __func__, 
+        return error("%s: check kernel failed on coinstake %s, hashProof=%s \n", __func__,
                      tx.GetHash().ToString().c_str(), hashProofOfStake.ToString().c_str());
 
     return true;
@@ -429,7 +453,7 @@ bool CheckCoinStakeTimestamp(int64_t nTimeBlock, int64_t nTimeTx)
 #endif
 
 // Get stake modifier checksum
-unsigned int GetStakeModifierChecksum(const CBlockIndex* pindex)
+unsigned int Stake::GetModifierChecksum(const CBlockIndex* pindex)
 {
     assert(pindex->pprev || pindex->GetBlockHash() == Params().HashGenesisBlock());
     // Hash previous checksum with flags, hashProofOfStake and nStakeModifier
@@ -443,26 +467,39 @@ unsigned int GetStakeModifierChecksum(const CBlockIndex* pindex)
 }
 
 // Check stake modifier hard checkpoints
-bool CheckStakeModifierCheckpoints(int nHeight, unsigned int nStakeModifierChecksum)
+bool Stake::CheckModifierCheckpoints(int nHeight, unsigned int nStakeModifierChecksum)
 {
     if (!IsTestNet()) return true; // Testnet has no checkpoints
 
     // Hard checkpoints of stake modifiers to ensure they are deterministic
     static std::map<int, unsigned int> mapStakeModifierCheckpoints = boost::assign::map_list_of(0, 0xfd11f4e7u)
-        (1,    0x6bf176c7u) (10,   0xc533c5deu) (20,   0x722262a0u) (30,   0xdd0abd8au) (90,   0x0308db9cu)
-        (409,  0xa9e2be4au) (410,  0xc23d7dd1u) (1141, 0xe81ae310u) (1144, 0x6543da9du) (1154, 0x8d110f11u)
-        (2914, 0x4fc1bc8du) (2916, 0x838297bau) (2915, 0xf5c77be4u) (2991, 0x6873f1efu) (3000, 0xffc1801fu)
-        (3001, 0x4b76d1f9u) (3035, 0x5cd70041u) (3036, 0xc689f15au) (3040, 0x19e1fa9eu) (3046, 0xa53146c5u)
-        (3277, 0x992f3f6cu) (3278, 0x9db692d0u) (3288, 0x96fb270du) (3438, 0x2ea722b2u) (4003, 0xdf3987e9u)
-        (4012, 0x205080bcu) (4025, 0x19ebed80u) (4034, 0xd02dd7ecu) (4045, 0x4b753d54u) (4053, 0xe7265e2au)
-        (10004,  0x09b6b5e1u) (10016,  0x05be852du) (10023,  0x4dcc3f34u) (10036,  0x5c16bf7du) (10049,  0x3b542151u)
-        (19998,  0x52052da4u) (20338,  0x3174b362u) (20547,  0x5e94b5acu) (20555,  0x5d77d04au) (33742,  0x998c4a1bu)
-        (127733, 0x92aa36acu) (129248, 0x680b9ce2u) (130092, 0x202cab1fu) (130775, 0x09694eb8u) (130780, 0x02e5287fu)
-        (131465, 0x515203adu) (132137, 0xb14a3a42u) (132136, 0x81b5ef99u) (135072, 0xea90da6au) (139756, 0xb3d7fb47u)
-        (141584, 0xeee6259fu) (143866, 0xcd2ed8ddu) (151181, 0xc2377de7u) (151659, 0x2bb1e741u) (151660, 0xade7324du)
-        ;
+            (1,    0x6bf176c7u) (10,   0xc533c5deu) (20,   0x722262a0u) (30,   0xdd0abd8au) (90,   0x0308db9cu)
+            (409,  0xa9e2be4au) (410,  0xc23d7dd1u) (1141, 0xe81ae310u) (1144, 0x6543da9du) (1154, 0x8d110f11u)
+            (2914, 0x4fc1bc8du) (2916, 0x838297bau) (2915, 0xf5c77be4u) (2991, 0x6873f1efu) (3000, 0xffc1801fu)
+            (3001, 0x4b76d1f9u) (3035, 0x5cd70041u) (3036, 0xc689f15au) (3040, 0x19e1fa9eu) (3046, 0xa53146c5u)
+            (3277, 0x992f3f6cu) (3278, 0x9db692d0u) (3288, 0x96fb270du) (3438, 0x2ea722b2u) (4003, 0xdf3987e9u)
+            (4012, 0x205080bcu) (4025, 0x19ebed80u) (4034, 0xd02dd7ecu) (4045, 0x4b753d54u) (4053, 0xe7265e2au)
+            (10004,  0x09b6b5e1u) (10016,  0x05be852du) (10023,  0x4dcc3f34u) (10036,  0x5c16bf7du) (10049,  0x3b542151u)
+            (19998,  0x52052da4u) (20338,  0x3174b362u) (20547,  0x5e94b5acu) (20555,  0x5d77d04au) (33742,  0x998c4a1bu)
+            (127733, 0x92aa36acu) (129248, 0x680b9ce2u) (130092, 0x202cab1fu) (130775, 0x09694eb8u) (130780, 0x02e5287fu)
+            (131465, 0x515203adu) (132137, 0xb14a3a42u) (132136, 0x81b5ef99u) (135072, 0xea90da6au) (139756, 0xb3d7fb47u)
+            (141584, 0xeee6259fu) (143866, 0xcd2ed8ddu) (151181, 0xc2377de7u) (151659, 0x2bb1e741u) (151660, 0xade7324du)
+    ;
     if (mapStakeModifierCheckpoints.count(nHeight)) {
         return nStakeModifierChecksum == mapStakeModifierCheckpoints[nHeight];
     }
     return true;
 }
+
+bool Stake::IsActive()
+{
+    bool nStaking = false;
+    if (mapHashedBlocks.count(chainActive.Tip()->nHeight))
+        nStaking = true;
+    else if (mapHashedBlocks.count(chainActive.Tip()->nHeight - 1) && nLastCoinStakeSearchInterval)
+        nStaking = true;
+    return nStaking;
+}
+
+Stake  Stake::kernel;
+Stake *Stake::Pointer() { return &kernel; }

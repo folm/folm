@@ -18,6 +18,7 @@
 #include "compat/sanity.h"
 #include "key.h"
 #include "main.h"
+#include "stake.h"
 #include "masternodeconfig.h"
 #include "miner.h"
 #include "net.h"
@@ -695,7 +696,10 @@ bool AppInit2(boost::thread_group& threadGroup)
     }
 
     if (mapArgs.count("-reservebalance")) {
-        if (!ParseMoney(mapArgs["-reservebalance"], nReserveBalance)) {
+        CAmount amount = 0;
+        if (!ParseMoney(mapArgs["-reservebalance"], amount)) {
+            stake->nReserveBalance = amount;
+        } else {
             InitError(_("Invalid amount for -reservebalance=<amount>"));
             return false;
         }
@@ -773,7 +777,7 @@ bool AppInit2(boost::thread_group& threadGroup)
 #ifdef ENABLE_WALLET
     if (mapArgs.count("-mintxfee")) {
         CAmount n = 0;
-        if (ParseMoney(mapArgs["-mintxfee"], n) && n > 0)
+        if (ParseMoney(mapArgs["-mintxfee"], n) && n >= 0)
             CWallet::minTxFee = CFeeRate(n);
         else
             return InitError(strprintf(_("Invalid amount for -mintxfee=<amount>: '%s'"), mapArgs["-mintxfee"]));

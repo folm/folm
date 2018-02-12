@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto             -*- c++ -*-
+// Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The FOLM developers
@@ -11,7 +11,6 @@
 #include "amount.h"
 #include "base58.h"
 #include "crypter.h"
-#include "kernel.h"
 #include "key.h"
 #include "keystore.h"
 #include "main.h"
@@ -73,7 +72,7 @@ enum AvailableCoinsType {
     ALL_COINS = 1,
     ONLY_DENOMINATED = 2,
     ONLY_NONDENOMINATED = 3, // ONLY_NOT10000IFMN = 3,
-    ONLY_NONDENOMINATED_NOTMN = 4, // ONLY_NONDENOMINATED_NOT10000IFMN = 4, ONLY_NONDENOMINATED and not 5000 FLM at the same time
+    ONLY_NONDENOMINATED_NOTMN = 4, // ONLY_NONDENOMINATED_NOT10000IFMN = 4, ONLY_NONDENOMINATED and not 10000 FLM at the same time
 };
 
 struct CompactTallyItem {
@@ -130,10 +129,6 @@ public:
  */
 class CWallet : public CCryptoKeyStore, public CValidationInterface
 {
-private:
-    bool SelectCoins(const CAmount& nTargetValue, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet, const CCoinControl* coinControl = NULL, AvailableCoinsType coin_type = ALL_COINS, bool useIX = true) const;
-    //it was public bool SelectCoins(int64_t nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, int64_t& nValueRet, const CCoinControl *coinControl = NULL, AvailableCoinsType coin_type=ALL_COINS, bool useIX = true) const;
-
     CWalletDB* pwalletdbEncryption;
 
     //! the current wallet version: clients below this version are not able to load the wallet
@@ -144,6 +139,8 @@ private:
 
     int64_t nNextResend;
     int64_t nLastResend;
+
+    bool SelectCoins(const std::string &account, const CAmount& nTargetValue, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet, const CCoinControl* coinControl = NULL, AvailableCoinsType coin_type = ALL_COINS, bool useIX = true) const;
 
     /**
      * Used to keep track of spent outpoints, and
@@ -296,7 +293,7 @@ public:
     void AvailableCoins(std::vector<COutput>& vCoins, bool fOnlyConfirmed = true, const CCoinControl* coinControl = NULL, bool fIncludeZeroValue = false, AvailableCoinsType nCoinType = ALL_COINS, bool fUseIX = false) const;
     void AvailableCoinsMN(std::vector<COutput>& vCoins, bool fOnlyConfirmed=true, const CCoinControl *coinControl = NULL, AvailableCoinsType coin_type=ALL_COINS, bool useIX = false) const;
     std::map<CBitcoinAddress, std::vector<COutput> > AvailableCoinsByAddress(bool fConfirmed = true, CAmount maxCoinValue = 0);
-    bool SelectCoinsMinConf(const CAmount& nTargetValue, int nConfMine, int nConfTheirs, std::vector<COutput> vCoins, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet) const;
+    bool SelectCoinsMinConf(const std::string &account, const CAmount& nTargetValue, int nConfMine, int nConfTheirs, std::vector<COutput> vCoins, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet) const;
 
     /// Get 1000DASH output and keys which can be used for the Masternode
     bool GetMasternodeVinAndKeys(CTxIn& txinRet, CPubKey& pubKeyRet, CKey& keyRet, std::string strTxHash = "", std::string strOutputIndex = "");
@@ -396,14 +393,14 @@ public:
     CAmount GetUnconfirmedWatchOnlyBalance() const;
     CAmount GetImmatureWatchOnlyBalance() const;
     bool CreateTransaction(const std::vector<std::pair<CScript, CAmount> >& vecSend,
-        CWalletTx& wtxNew,
-        CReserveKey& reservekey,
-        CAmount& nFeeRet,
-        std::string& strFailReason,
-        const CCoinControl* coinControl = NULL,
-        AvailableCoinsType coin_type = ALL_COINS,
-        bool useIX = false,
-        CAmount nFeePay = 0);
+                           CWalletTx& wtxNew,
+                           CReserveKey& reservekey,
+                           CAmount& nFeeRet,
+                           std::string& strFailReason,
+                           const CCoinControl* coinControl = NULL,
+                           AvailableCoinsType coin_type = ALL_COINS,
+                           bool useIX = false,
+                           CAmount nFeePay = 0);
     bool CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWalletTx& wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl = NULL, AvailableCoinsType coin_type = ALL_COINS, bool useIX = false, CAmount nFeePay = 0);
     bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand = "tx");
     std::string PrepareFolmsendDenominate(int minRounds, int maxRounds);
@@ -428,7 +425,8 @@ public:
     std::set<std::set<CTxDestination> > GetAddressGroupings();
     std::map<CTxDestination, CAmount> GetAddressBalances();
 
-    std::set<CTxDestination> GetAccountAddresses(std::string strAccount) const;
+    std::set<CTxDestination> GetAccountAddresses(const std::string &strAccount) const;
+    bool IsAccountAddress(const std::string &strAccount, const CTxDestination &address) const;
 
     bool GetBudgetSystemCollateralTX(CTransaction& tx, uint256 hash, bool useIX);
     bool GetBudgetSystemCollateralTX(CWalletTx& tx, uint256 hash, bool useIX);
@@ -447,7 +445,7 @@ public:
     bool IsMine(const CTransaction& tx) const
     {
         BOOST_FOREACH (const CTxOut& txout, tx.vout)
-            if (IsMine(txout) != ISMINE_NO) return true;
+        if (IsMine(txout) != ISMINE_NO) return true;
         return false;
     }
 
@@ -977,7 +975,7 @@ public:
             const CTxIn vin = CTxIn(hashTx, i);
 
             if (pwallet->IsSpent(hashTx, i) || pwallet->IsLockedCoin(hashTx, i)) continue;
-            if (fMasterNode && vout[i].nValue == 5000 * COIN) continue; // do not count MN-like outputs
+            if (fMasterNode && vout[i].nValue == 16120 * COIN) continue; // do not count MN-like outputs
 
             const int rounds = pwallet->GetInputDarkSendRounds(vin);
             if (rounds >= -2 && rounds < nDarksendRounds) {
@@ -1119,10 +1117,10 @@ public:
     }
 
     void GetAmounts(std::list<COutputEntry>& listReceived,
-        std::list<COutputEntry>& listSent,
-        CAmount& nFee,
-        std::string& strSentAccount,
-        const isminefilter& filter) const;
+                    std::list<COutputEntry>& listSent,
+                    CAmount& nFee,
+                    std::string& strSentAccount,
+                    const isminefilter& filter) const;
 
     void GetAccountAmounts(const std::string& strAccount, CAmount& nReceived, CAmount& nSent, CAmount& nFee, const isminefilter& filter) const;
 
@@ -1191,7 +1189,7 @@ public:
     int Priority() const
     {
         BOOST_FOREACH (int64_t d, darkSendDenominations)
-            if (tx->vout[i].nValue == d) return 10000;
+        if (tx->vout[i].nValue == d) return 10000;
         if (tx->vout[i].nValue < 1 * COIN) return 20000;
 
         //nondenom return largest first
