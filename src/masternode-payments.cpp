@@ -300,7 +300,7 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
     CAmount blockValue = GetBlockValue(pindexPrev->nHeight);
     CAmount masternodePayment = GetMasternodePayment(pindexPrev->nHeight, blockValue);
 
-    if (hasPayment) {
+    if (hasPayment && pindexPrev->nHeight > 10800) {
         //give fees to miner and masternode
         if (fProofOfStake) {
             /**For Proof Of Stake vout[0] must be null
@@ -329,8 +329,8 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
         LogPrintf("Masternode payment of %s to %s\n", FormatMoney(masternodePayment).c_str(), address2.ToString().c_str());
     } else {
         if (!fProofOfStake)
-            //no masternode detected burn masternode payment
-            txNew.vout[0].nValue = blockValue - masternodePayment + nFees;
+            //no masternode detected give block reward and fees to miner
+            txNew.vout[0].nValue = blockValue + nFees;
     }
 }
 
