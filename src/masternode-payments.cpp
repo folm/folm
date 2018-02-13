@@ -329,8 +329,8 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
         LogPrintf("Masternode payment of %s to %s\n", FormatMoney(masternodePayment).c_str(), address2.ToString().c_str());
     } else {
         if (!fProofOfStake)
-            //no masternode detected give block reward and fees to miner
-            txNew.vout[0].nValue = blockValue + nFees;
+            //no masternode detected burn masternode payment
+            txNew.vout[0].nValue = blockValue - masternodePayment + nFees;
     }
 }
 
