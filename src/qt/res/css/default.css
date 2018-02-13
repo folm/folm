@@ -73,13 +73,12 @@ background-color:#F8F6F6;
 
 QProgressBar {
 color:#d2d2d2;
-border:2px solid grey;
-border-radius:5px;
+border:2px solid #7c43bd;
 background-color:transparent;
 }
 
 QProgressBar::chunk {
-background-color:#000000;
+background-color:#4a148c;
 width: 20px;
 }
 
@@ -113,8 +112,8 @@ color:#333;
 }
 
 QToolTip {
-background-color:#dedbe5;
-color:#333;
+background-color:#7c43bd;
+color:#fff;
 }
 
 QTextEdit {
@@ -836,7 +835,7 @@ margin-left:16px;
 QWidget .QFrame#frame .QLabel#labelBalanceText { /* Available Balance Label */
 qproperty-alignment: 'AlignVCenter | AlignRight';
 min-width:160px;
-background-color:#000000;
+background-color:#7c43bd;
 color:#fff;
 margin-right:5px;
 padding-right:5px;
@@ -940,7 +939,7 @@ qproperty-geometry: rect(10 0 431 35);
 QWidget .QFrame#frameObfuscation .QLabel#label_2 { /* Obfuscation Header */
 qproperty-alignment: 'AlignVCenter | AlignRight';
 min-width:160px;
-background-color:#000000;
+background-color:#7c43bd;
 color:#fff;
 margin-right:5px;
 padding-right:5px;

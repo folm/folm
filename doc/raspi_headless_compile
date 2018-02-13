@@ -1,0 +1,394 @@
+written by: shinebright
+
+# FLMv3 Wallet Compilation Guide for Raspberry Pi (Headless Mode), October 2017, version 2
+
+## 1.Disclaimer
+1. This guide will walk you through the compilation steps of a headless FLM client. That means you won’t have a GUI, just the console version of the wallet (also called rpc wallet). If you are not comfortable with the command line, you may give up on the idea of using the Pi altogether, and opt for a fully featured PC instead (Linux, Mac, or Windows based) with enough resources to run a fully fledged QT wallet.
+2. Once compiled, the wallet can be used for holding FLM funds, coin staking, or to setup a masternode. The specifics for running such variation will not be presented here, and should be obtained at bitcointalk.org, bitfolms website, or the Slack Folm group.
+2. The compilation process described herein was based on the Broadcom BMC2835 (ARMv6) architecture, available in the following Pi models: 2, B, B+, A, A+, zero, and zero W.
+3. Newer Pi models based on the BMC2836 (Pi2) and  BMC2837 (Pi3) architectures are supposed to be backwards compatible, and therefore should also be capable of compiling the wallet, as long as the recommended Raspbian OS version and software packages described in this guide are used. 
+4. Although Pi models with 256Mb RAM should be equally capable of compiling the wallet, the process can be very lengthy and may take several hours, or even days.
+5. This document will guide you in the installation of the wallet, nothing more. It is not, and does not intend to be, an official wallet release. The author of the guide or the FLM Development Team should NOT be held responsible for any loss of FLM funds as a consequence of improper wallet compilation. In short, use the guide at your own risk!
+6. As a safety measure, it is strongly recommended that you make transfer tests with smaller coin amounts to ensure you have a fulling working wallet, prior to managing larger FLM amounts.
+7. If you enconter any dificulties along the compilation process, please PM user shinebright on FLM’s Slack group, and I’ll be glad to help you anyway I can. Please note that I’m no TI expert, just a FLM user with lots of interest in low power consumption staking with the most solid and rewarding cryptocoin!
+
+## 2.Hardware requirements
+
+- Raspberry Pi with 512mb RAM (models B and above)
+- Power cable (5V, 2A minimum recommended)
+- SD card with minimum 8Gb capacity
+- Monitor with suitable connection interface, depending on your Pi model (required for initial setup)
+- USB Keyboard (required for initial setup)
+
+## 3.System requirements
+
+- Raspbian Jessie Lite
+
+Warning: The latest version of Raspbian (Stretch) is not recommended due to potential Boost library version conflicts. If you have Raspbian this version already installed, you are welcome to try compiling FLM wallet anyway, but results are not granted.
+
+## 4.Download Raspbian Jessie Lite
+You can find the latest stable version of Raspbian Jessie Lite here:
+http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-07-05/
+
+Note that Raspbian Lite is the console-only version of the OS, with a very small footprint (ideal to be run in headless mode). 
+
+## 5.Burn the OS into the SD Card
+For this step, I recommend that you follow Raspberry Pi’s official tutorial at
+https://www.raspberrypi.org/documentation/installation/installing-images/
+There you can find detailed instructions for 'burning' the image into the SD card, on various host operating systems (Window, Linux or Mac).
+
+## 6.Boot Raspbian Jessie Lite
+- Insert the SD card with Jessie Lite (obtained in step 5) into your Pi. 
+- Plug in your keyboard and monitor.
+- Connect the ethernet cable (make sure you have a working internet connection).
+- Plug the power cable to the Pi, and wait for the onscreen boot process to finish.
+- Log in as the default pi user:
+	- username: pi
+	- password: raspberry
+
+## 7.Create a new username and password
+
+As a safety precaution, you should create a new user, since the default pi's username and password are too common.
+
+Create a new user
+`sudo adduser USERNAME`
+
+Replace USERNAME with whatever name you desire. You will be asked to provide a password. Make sure to create a strong one, since this user account will harbor all your FLM coins.
+
+Give superuser (sudo) priviledges to the new user
+`sudo usermod -aG sudo USERNAME`
+
+Log in into the new account, typing your new password when prompted
+`su - USERNAME`
+
+## 8.Initial setup
+
+If you intend to connect the Pi via wifi, go to step 9. Otherwise, skip to step 10 (ethernet only).
+
+## 9.Setup wifi connection
+
+Edit the network interfaces file
+`sudo nano /etc/network/interfaces`
+
+Add this to the first line
+`auto wlan0`
+
+And add the following to the end of the file
+`allow-hotplug wlan0`
+`iface wlan0 inet dhcp`
+`wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf`
+`iface default inet dhcp`
+
+Configure wpa_supplicant
+`sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
+
+Add the following to end of the file
+`network={` 
+`ssid="NETWORK_SSID"`
+`psk="NETWORK_PASSWORD"`
+`}`
+
+Where NETWORK_SSID is your network ID, and NETWORK_PASSWORD is, obviously, the password.
+
+Reboot the Pi
+`sudo reboot`
+
+After the boot has finished, login again (please use your NEW username for this, not 'pi') and your Pi should connect automatically to the wifi network.
+
+Additional security-related configuration steps can be found here: https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+
+## 10.Get your IP address
+
+Get your local IP address
+`ifconfig`
+
+Among the results, you should see a line in the following format
+`inet addr:192.168.0.10`
+
+That's your IP address. Save it for the next step. Note that if you have both ethernet and wifi connections working simultaneously, there will be 2 blocks of information, one regarding the former (eth0) and another the latter (wlan0 or something similar). You must decide which connection type you will henceforth use, and save the respective IP address.
+
+If you want to use the Pi as a headless client, go to step 11. On the other hand, if you want to use it as a regular desktop computer with keyboard and monitor, you may skip to step 12.
+
+## 11.Remote connect to the Pi
+ 
+You may now unplug any peripherals (keyboard, display) and establish a remote connection to the Pi via terminal (Mac or Linux) or putty (Windows). You can download putty here: http://www.putty.org. 
+
+From now on, all the steps assume that you are in a console environment, regardless of the your main computer operating system, and that the Pi is connected to the network, either via wifi or ethernet cable. All the commands should now be issued on your main computer, not on the Pi (except for those using it as a regular desktop computer).
+
+Open terminal (Mac or Linux) or putty (Windows) and connect to the Pi via ssh
+
+`ssh USERNAME@ADDRESS`
+
+Where ADDRESS is the IP address obtained in step 11. Once the connection has been established, go to step 12.
+
+## 12.Create a swapfile
+
+Since compilation requires a lot of RAM (Pis are rather limited in this regard), you will need to create a swapfile. A swap size of 1024Mb is recommended, regardless of the amount of RAM your Pi has.
+
+Check available swap size
+`free -m`
+
+If your swap is around 1024 mb, you're fine. Otherwise, you need to change it
+`sudo nano /etc/dphys-swapfile`
+
+Change the swap size: `CONF_SWAPSIZE=1024`
+
+Turn swap on
+`sudo dphys-swapfile swapon`
+
+Reboot the Pi. Issue `free -m` again to confirm swap size has changed.
+
+## 13.Install dependencies
+
+Once the boot process has finished, you will need to update the system
+`sudo apt-get update`
+
+Next, you need to install the compilation dependency packages
+`sudo apt-get install git automake build-essential libtool autotools-dev autoconf pkg-config libssl-dev libboost-all-dev libminiupnpc-dev`
+
+## 14.Download FLM wallet v.3.0.13 from GitHub
+
+Navigate to your home directory
+`cd`
+
+Clone the FLM wallet into your home folder
+`git clone https://github.com/FLMcoin/Folm.git`
+
+This will create the Folm folder inside your home directory
+
+## 15.Install BerkeleyDB-4.8
+
+Download and compile BDB 4.8 from Oracle
+`wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz`
+`tar xzvf db-4.8.30.NC.tar.gz`
+`cd db-4.8.30.NC/build_unix/`
+`../dist/configure --enable-cxx`
+`make`
+`sudo make install`
+
+Export paths
+`export BDB_INCLUDE_PATH="/usr/local/BerkeleyDB.4.8/include"`
+`export BDB_LIB_PATH="/usr/local/BerkeleyDB.4.8/lib"`
+
+Create symbolic links
+`sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so`
+`sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so /usr/lib/libdb_cxx-4.8.so`
+
+credit to https://trancsitu.wordpress.com/tag/ubuntu-14-04/
+
+## 16.Edit the secp256k1 library
+
+This step is required to avoid some compilation errors
+
+Open configure.ac
+`cd Folm/src/secp256k1`
+`sudo nano configure.ac`
+
+Find the line
+`AM_INIT_AUTOMAKE([foreign])`
+
+And make it look like this
+`AM_INIT_AUTOMAKE([foreign subdir-objects])`
+
+## 17.Compile the wallet
+
+Run autogen.sh (this will take some time, so be patient)
+`cd`
+`cd Folm`
+`./autogen.sh`
+
+Run configure (with custom flags)
+`./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib"`
+
+Compile
+`make`
+
+This runs the GCC compiler. If everything goes smoothly, you should now have a compiled wallet. Note that the process may take many hours, depending on the Pi's memory specs and swapfile size.
+
+## 18.Disable the swapfile
+
+After compilation, the swapfile will not be needed anymore, so you can disable it. Leaving it on is not recommended, since successive read/writes can eventually corrupt your SD card.
+`sudo swapoff -a`
+
+Reboot the pi
+`sudo reboot`
+
+## 19.Initiate the wallet
+
+Type
+`cd`
+`cd Folm/src`
+`./folmd`
+
+You should get the following message `FLM server starting`
+
+You may receive an error message regarding rpcuser and rpcpassword. This is perfectly normal (we will sort this our in step 20).
+
+Since this is the first time the wallet is iniated, the Folm wallet configuration folder (.FLMV3) will be freshly created with all configuration files inside it.
+
+If the system hasn't exit the daemon automatically, you can now stop it by hitting Control + C, so we can edit the configuration files (full blockchain synching will be performed later).
+
+## 20.Edit the config file
+
+Navigate to the .FLMV3 folder
+`cd`
+`cd .FLMV3`
+
+Open the folm.conf file
+`sudo nano folm.conf`
+
+The document should be initially blank. Populate it with the following text
+`rpcuser=FLMUSERNAME`
+`rpcpassword=FLMPASSWORD`
+`rpcport=42244`
+`rpcallowip=127.0.0.1` 
+`listen=1`
+`daemon=1`
+`server=1`
+`noirc=1`
+`staking=0`
+`maxconnections=24`
+`addnode=94.100.221.211`
+`addnode=94.130.107.224`
+`addnode=94.130.107.225`
+`addnode=94.130.107.227`
+`addnode=94.130.99.25`
+`addnode=94.177.230.81`
+`addnode=94.197.121.95`
+`addnode=95.18.83.207`
+`addnode=96.37.74.144`
+`addnode=96.38.137.224`
+`addnode=96.39.182.63`
+`addnode=96.39.253.106`
+`addnode=96.60.68.148`
+`addnode=98.146.162.121`
+`addnode=99.192.81.50`
+`addnode=99.21.69.25`
+
+Where FLMUSERNAME and FLMPASSWORD can be random characters (or you can use the values suggested in the error message generated in step 19). You do not need to save or store these values, they are only required at wallet runtime.
+
+Exit the file by hitting Control + X (type “y” for saving and then ENTER)
+
+If you need the most recent node list, please check: https://chainz.cryptoid.info/flm/#!network
+
+## 21.Synchronize to FLM's blockchain
+
+Run the daemon
+`cd`
+`cd Folm/src`
+`./folmd`
+
+You should get the message: `FLM server starting`
+
+Run 'top' to verify resources usage
+`top`
+
+Find folmd (folm daemon) in the table. It should be consuming most of your Pi’s CPU. This is actually expected, since the wallet should now be synchronizing the blockchain.
+
+At this stage, you should wait for the blockchain to be fully downloaded. You will be able to verify this when a dramatic drop in CPU usage happens (from 90% to 5%, for instance). That means the wallet has been fully sync'ed. When that happens, hit Control + Z to exit 'top'.
+
+P.S. The time required for full synchronization depends on your system, internet connection and blockchain size.
+
+## 22.Check wallet information and blockchain synchronization status
+
+Check wallet info
+`./folm-cli getinfo`
+
+This will show your wallet general info, including wallet version, total balance, blocksize, etc. If you get an error message, it problably means the wallet is still synchronizing. Wait a few minutes and try again until you get something like this:
+
+`"version" : 3000013,`
+`"protocolversion" : 70717,`
+`"walletversion" : 61000,`
+`"balance" : 0.00000000,`
+`"mixTX_balance" : 0.00000000,`
+`"blocks" : 18649,`
+`"timeoffset" : 0,`
+`"connections" : 16,`
+`"proxy" : "",`
+`"difficulty" : 17052.66698695,`
+`"testnet" : false,`
+`"keypoololdest" : 1507817040,`
+`"keypoolsize" : 1001,` 
+`"paytxfee" : 0.00000000,`
+`"relayfee" : 0.00010000,`
+`"staking status" : "Staking Not Active",`
+`"errors" : ""`
+
+## 23.Check receiving address
+
+Type
+`./folm-cli getaddressesbyaccount ""`
+
+This will show you the public key (address) generated at wallet creation time.
+
+## 24.Double-check the receiving address
+
+Type
+`./folm-cli validateaddress <ADDRESS>`
+
+You should get: `isvalid=true` and `ismine=true` among the results
+
+This informs that the address belongs to your wallet and can be used to receive funds.
+
+## 25.Encrypt the wallet
+
+Type
+`./folm-cli encryptwallet <YOURPASSPHRASE>`
+
+This may take a few seconds. Make sure you choose a strong, long passphrase. Be careful to secure the passphrase somewhere safe. If you loose it, you will not be able to open the wallet anymore and all your funds will be lost forever. Note that the encryptwallet parameter will not be available anymore after passphrase creation.
+
+## 26.Backup your wallet into your main computer
+
+Check if the blockchain is fully sync'ed, by verifying if the block number matches the latest found here: https://chainz.cryptoid.info/flm/#
+
+If you're using the Pi as a desktop computer with monitor and keyboard, all you have to do is copy the wallet.dat file from the .FLMV3 folder into a pendrive and secure it in a safe place.
+
+If using the Pi as headless client with a Mac or Linux main computer, you will use 'scp' to copy files over the network. This software should be previously installed in most Mac and Linux distributions
+`scp USERNAME@ADDRESS:~/.FLMV3/wallet.dat ~/`
+
+This will copy wallet.dat to your home folder
+
+If using a Windows PC, first you need to download pscp from the putty homepage: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+
+After installation, you should be able to transfer your wallet file over the network to your main computer
+`pscp USERNAME@ADDRESS:~/.FLMV3/wallet.dat C:\Users\YOURNAME\Downloads\`
+
+This will copy wallet.dat to your Downloads folder (make sure you replace YOURNAME by your windows username). Remember to secure the file in a safe place afterwards.
+
+After backup, you can now start transfering funds to you wallet!
+
+## 27.Staking
+
+If you wish to stake, you first need to stop the client. 
+`./folm-cli stop`
+
+Open the folm.conf file
+`cd`
+`cd .FLMV3`
+`sudo nano folm.conf`
+
+Change the line `staking=0` to `staking=1`
+
+Exit the file by hitting Control + x (type “y” for saving and then ENTER)
+
+Restart the client and unlock the wallet for staking
+`cd`
+`cd Folm/src`
+`./folmd`
+
+Wait a few seconds for the wallet to sync.
+
+Unlock the wallet
+`./folm-cli walletpassphrase YOURPASSPHRASE 600000000`
+
+The trailing number is the parameter used for setting the time (in seconds) that the wallet will be unlocked for staking. We usually use a long random number.
+
+## 28.Additional wallet commands
+
+You will need to know additional commands to manage your FLM funds. There are 2 different help parameters that can be used to this end. Each will spit out different results, but are all self-informative
+`./folm-cli help`
+`./folm-cli --help`
+
+If you find this guide helpful, please consider donating to my FLM address: dEDEPoPDcf6RhABkEXttPzzwBX5SMTjiYU
+
+Enjoy your FLMv3 wallet and happy staking!

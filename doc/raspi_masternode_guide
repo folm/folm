@@ -1,0 +1,228 @@
+raspi masternode guide by pazor
+
+FLM v3 Wallet Masternode on Raspberry Pi 2 Model B
+(version: 1.0 - 10.10.2017 - pazor)
+SOURCES
+I rewrite the tutorial from Christian (BitSend).
+SPEED OF THE PI2
+The compiling of the needed file for the FLM wallet/master node takes about 1.5/2h until done.
+The PI2 has an ARM kernel. So just downloading the 32bit version just doesnt cut it....
+PREREQUISITES?
+1. A raspberry Pi 2 model B
+2. 10000 FLM
+3. Unlimited data from your ISP
+4. A stable highspeed internetconnection with a fixed IP address
+5. Know your way around your router OR learn how to
+6. SDcard class 10
+7. Cardreader
+8. Basic skills in Linux / Compiling
+ISP TEST FOR STATIC IP
+(Do both tests before continuing)
+Test 1:
+go to whatismyipaddress.com and take note of your IP. Then pull the plug on your modem, wait a bit and replug. Check the page again. If the same IP then good!
+Test 2:: Take note of IP address and wait 24h and check again. If the same IP then good!
+DISCLAIMER
+Running a Masternode on a PI2 is hardly tested for a longer period of time. Besides, they just got out. Mine is running 24/7 at this moment with no issues, but i cannot guarantee yours will too. So i will take no responsibility for what ever happens to yours. As with the crypto-scene, its highy experimental! At your own risk.
+LET US START!
+1. Grab gear
+Take a grab in your hardware box and take out a micro SHcard class 10 and a cardreader, or buy these. These puppies are cheap so grab a large one. I got a 32gb, for lateral future use also. Even cameras take these. Be sure it fits in your cardreader, else dont forget an SD-adapter. They are usually in the package of the product.
+For example
+https://www.amazon.de/Intenso-Micro-Class-Speicherkarte-SD-Adapter/dp/B008XZO0IW
+https://www.amazon.de/Hama-00114731-Kartenleser-anthrazit-schwarz/dp/B008PASXJC/ref=sr_1_7?s=computers&ie=UTF8&qid=1507650136&sr=1-7&keywords=sd+kartenleser
+2. Grab Operating System
+Head to http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-07-05/2017-07-05-raspbian-jessie-lite.zip to download the RASPBIAN lite image Jessie (Debian 8). Unpack the file to whatever dir you like. Dont use older ones because they dont run on the PI2. The latest RASPBIAN (Stretch, Debian 9) uses some new libraries that could issue some compiling errors.
+3. Flash OS to sdcard
+Head to http://www.raspberrypi.org/documentation/installation/installing-images/ and follow the tutorial to get the downloaded and unpacked image (.img file) on the sdcard. I did the Windows tutorial. After you have flashed the IMG-file to the card put it in your pi2. Be carefully, its a delicate slot.
+4. Booting
+Hook up the Pi2 to your router with an ethernet cable. We do want a stable connection so no wifi.
+Then hookup it up to a powersupply (i got it running on a 1,5Amps phonecharger. Just dont go hooking all sorts of USB on it because then you might need more amps.)
+Your pi2 is now booting the operating system you just flashed to the SDcard.
+5. Fetching the IP
+On Windows press windowsbutton+R. type 'cmd' and press enter. You enter a DOS box. type IPCONFIG and press enter. Scroll up a bit till you see Standard Gateway. Take note of the IP. 99% of the time it starts with 192.168.1.xxx or 192.168.0.xxx
+6. Config your router
+Start your browser and enter that IP. You will now see your router's website. Enter login + password (sticker on router?)
+In the menu's somewhere there is a list of connected devices. They all have a IPaddress. Take note of the one called RASPBERRY.
+Somewhere in the menus of your router you can do a DHCP reservation for the IP address of the PI2. This means everytime the PI2 boots it gets the same IPaddress. Thats what we want. We dont want it to change. Dunno your router so cannot help on this one :( Check manual or do a search on it. You should find some other tutorials.)
+Now also somewhere in the menu of the router there is a NAT or PORT FORWARD menu. Enter the IPaddress of the PI2 and open port 53656. Usally by just filling all portboxes with 53656, IN / OUT etc. Maybe you just have one box to put it in.
+Save the config of the router and reboot it. (also in the menus somewhere)
+You are now re-routes internet traffic on port 53656 (the FLM p2p port) to your Pi2.
+Check http://www.yougetsignal.com/tools/open-ports/ and fill in port 53656 to find it open.
+7. Putty for a terminalconnection
+Now head to your desktop and download putty at www.chiark.greenend.org.uk/~sgtatham/putty/download.html. Take the top one Intel x86/32bit is fine.
+Drag it to your desktop and start it. Enter the IPaddress of the pi at the Host Name, fill Masternode or whatever at Saved Sessions and press Save. That way you can easily load it again. Press Open.
+Now you see a black box with a prompt. Enter 'pi' as login and 'raspberry' as password. You then see a green with blue prompt.
+8a. Setup the PI2
+Now we are gonna setup the PI2 just a little bit before continuing. From now on, whenever you see a single quoted line then thats a command. Type it (without the quote mark) and hit enter.
+'sudo raspi-config'
+You are shown a simple menu. We are gonna do options 1 2 and 3. Use the arrows and tab to navigate.
+1. Expand the filesystem so it uses the whole 32gb of the SDcard
+2. Change the password of the user pi. Make a strong password like you do so, is your Folm wallet.
+3. Make it boot to command-line. So that way we safe some ram by not loading the desktop enviroment we will not be using at all.
+I forgot, if it reboots automaticly or manually. If manual, then:
+'sudo reboot'
+Putty will give an error it has lost connection. Reopen Putty and log in again after 1min. Remember you got a new password for the user 'pi'.
+8b. Change root password and change username pi
+Next we change the root password to something strong as well. Choose a long one:
+'sudo passwd'
+Close putty and login with user 'root'
+Change username 'pi' to your loginname 'NEW'
+'sudo usermod -l NEW -d /home/NEW -m pi'
+'sudo chown NEW /home/NEW'
+Close putty and login as user root again.
+8c. Add a 2GB Swap file
+edit the /etc/dphys-swapfile and change the swap size: `CONF_SWAPSIZE=2048`
+Turn swap on
+'sudo dphys-swapfile swapon'
+Reboot the Pi and check the memory with 
+'free'
+9. Download and install the needed packages
+Login as user root again.
+At the prompt type the following commands in this order to fully update the pi and get it ready for compiling. Press yes to all when asked.
+'sudo apt-get update'
+'sudo apt-get upgrade'
+'sudo apt-get dist-upgrade'
+'sudo apt-get install build-essential libtool autotools-dev autoconf libminiupnpc-dev pkg-config libboost-all-dev libssl-dev joe ufw git libdb5.3-dev libdb5.3++-dev'
+Just copy the whole thing and rightclick mouse in the putty screen. If it fails do one by one as written down here:
+# sudo apt-get install build-essential libtool autotools-dev autoconf
+# sudo apt-get install libminiupnpc-dev
+# sudo apt-get install pkg-config
+# sudo apt-get install libboost-all-dev
+# sudo apt-get install libssl-dev
+# sudo apt-get install joe
+# sudo apt-get install ufw
+# sudo apt-get install git
+# sudo apt-get install libdb5.3-dev libdb5.3++-dev
+there is maybe one too much in the list but this does the job for sure (maybe somebody can tell me which one is not needed, I grabbed them from different tutorials.)
+10. Config the Firewall
+We are going to configure the firewall on the PI2 you just installed to block all ports except port 22(for putty) and 53656(for masternode):
+'sudo ufw allow ssh/tcp'
+'sudo ufw limit ssh/tcp'
+'sudo ufw allow 53656/tcp'
+'sudo ufw logging on'
+'sudo ufw enable'
+Again reboot and again use putty to get back:
+'sudo reboot'
+Check your firewall's status by entering the following command:
+'sudo ufw status'
+It should say active.
+11. Preparing the build
+'ls'
+You will see a empty directory 
+We are now gonna download the newest whole FOLM source from which we will compile the file needed to run the folm wallet (daemon), folmd
+'git clone https://github.com/FLMcoin/Folm.git'
+'ls'
+there should be now a directory Folm
+12. now we build the Berkley DB 4.8 binaries
+'
+cd Folm
+FLM_ROOT=$(pwd)
+# Pick some path to install BDB to, here we create a directory within the folm directory
+BDB_PREFIX="${FLM_ROOT}/db4"
+mkdir -p $BDB_PREFIX
+# Fetch the source and verify that it is not tampered with
+wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
+echo '12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef  db-4.8.30.NC.tar.gz' | sha256sum -c
+# -> db-4.8.30.NC.tar.gz: OK
+tar -xzvf db-4.8.30.NC.tar.gz
+# Build the library and install to our prefix
+cd db-4.8.30.NC/build_unix/
+#  Note: Do a static build so that it can be embedded into the exectuable, instead of having to find a .so at runtime
+../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
+make install
+# Configure FOLM Core to use our own-built instance of BDB
+cd $FLM_ROOT
+./autogen.sh
+./configure --enable-cxx --disable-shared --without-gui LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/ -O2"
+'
+13. compiling the source
+after the successfull run of configure you can start now the compiling by using make. if you want to accelarate you can acivate more then one core by using make -jX (where X is 1 to 4). i used 2 cores
+'make' or 'make -j2'
+Go outside and do something healthy and check back in 2h.
+NOTE1: This will take lots of time and gives errors about arm6 and arm7. Ignore it, let it run. Be aware that closing Putty stops the build so leave it open. 
+14. Checking stuff 'n setting up
+you are still in the Folm folder.
+Now we install the Folm wallet by:
+'make install'
+every compiled/builded binary will now installed into /usr/local/bin
+return to /root by entering 
+'cd'
+We need to make a configfile in there with an commandprompt file-editor Joe, which you installed earlier:
+joe folm.conf
+Type the following in the empty editor or paste this with just a rightmousebuttonclick in the putty screen.
+rpcuser=RANDOMSTRINGOFLETTERSANDNUMBERS
+rpcpassword=LONGERRANDOMSTRINGOFLETTERSANDNUMBERSHAVEFUN
+rpcallowip=127.0.0.1
+port=53656
+rpcport=42244
+listen=1
+server=1
+daemon=1
+logtimestamps=1
+maxconnections=25
+masternode=0
+masternodeprivkey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+masternodeaddr=yourStaticIPaddress:53656
+externalip=yourStaticIPaddress
+Hit CONTROL - K then CONTROL - X to save and exit Joe.
+we need to make a masternode file also, by typing:
+joe masternode.conf
+type the following
+Masternode1 yourStaticIPaddress:53656 masternodeprivkey collateral_output_txid collateral_output_index
+Hit CONTROL - K then CONTROL - X to save and exit Joe.
+For added security, it is recommended to make this file "Read Only" so no one can change it:
+chmod 444 masternode.conf folm.conf
+NOTE1: rpcuser and rpcpassword can be anything, you DONT have to remember them later. Only use letters and numbers.
+NOTE2: Check and recheck. it usually goes wrong here with a typo.
+To preset some settings to make it work we make a directory called .FLMV3 and enter it with:
+mkdir .FLMV3
+cd .FLMV3
+NOTE: this is the workingdirectory of the masternode. Its there, but hidden.
+make symbolic links to the both files in the working directory for easy usage
+ln -s /root/folm.conf folm.conf
+ln -s /root/masternode.conf masternode.conf
+Leave the dir one up back to your home directory:
+cd ..
+14. Lets fire it up for the first time
+Run your folm daemon for the first time:
+folmd
+You will see the message like "Server Starting". It will now startup and configure itself. Also it will go download the blockchain. This will take some time, and only happens once. Check if files are being made with:
+cd .FLMV3
+ls
+(check if there is more then that config file you made earlier made)
+cd ..
+Fire up another putty and at prompt check its progress with:
+top
+The CPU is 100% all the time. When its done it is just about 10%:
+When done, close the second putty and return to the first one and check stats:
+folm-cli getinfo
+Check the blockcount and check if its the same at https://chainz.cryptoid.info/flm See blockheight. If its the same and cpu folmd is max 10% all the time you know its done.
+15. Linking it to your local wallet on your desktop pc.
+32. We are now gonna make a private key so your masternode and local wallet can talk to eachother:
+folm-cli masternode genkey
+NOTE: Dont worry, this is not a key to get to your 10000 folm. They are still safe in your local wallet protected with its own privatekey.
+Select the generated string with your mouse. You dont need to copy it. Dragging mouse copies it automaticly.
+Stop the the masternode and enter the hidden .FLMV3 directory again and edit the configfile:
+folm-cli stop
+cd .FLMV3
+joe folm.conf
+Delete the long XXXXXXX-string and paste the string with a right mousebutton click on the putty screen. Also change masternode=0 to masternode=1 and save n quit with CONTROL - K then CONTROL - X
+enter the XXXXXXX-string to the masternode configuration file too 
+joe masternode.conf
+After leave the dir again to your home directory.
+cd ..
+16. Starting your masternode permanently!
+Restart the deamon and wait for it to idle (remember, you can check with another putty with command 'top' remember?, again takes a bit of time)
+folmd
+Useful commands to check if your masternode is running ok:
+# folm-cli getinfo
+Check version number and block count vs website
+# folm-cli masternode debug
+It should say: masternode successfully started. 
+If anything else its NOT working ok. use this only if you end this tutorial.
+folm-cli masternode list | grep collateral_output_txid
+Check if your ip is red and the line ends with a 1 like: "YOUREXTERNALIPADDRESS:53656" : 1. Then you know its connectes and seen on the network.
+CONGRATS SO FAR! THE HARD WORK IS DONE! 
+for currently configuring the masternode please read also the masternodeguides of cryptonid or ask on the FLM Slack forum for support.
+collateral_output_txid      is the transaction id of the transaction where the 10000 FLM deposit sended to your masternode wallet
+collateral_output_index     is the index of the deposit transaction
+
