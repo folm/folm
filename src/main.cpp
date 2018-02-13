@@ -1627,23 +1627,23 @@ int64_t GetBlockValue(int nHeight)
             nSlowSubsidy /= Params().RAMP_TO_BLOCK();
             nSlowSubsidy *= nHeight;
     }
-    else if (nHeight <= 262800 && nHeight >= Params().RAMP_TO_BLOCK()) {
+    else if (nHeight <= 1440 && nHeight >= Params().RAMP_TO_BLOCK()) {
 	nSubsidy = 45 * COIN;
-    } else if (nHeight <= 525600 && nHeight > 262800) {
+    } else if (nHeight <= 2880 && nHeight > 1440) {
         nSubsidy = 40 * COIN;
-    } else if (nHeight <= 788400 && nHeight > 525600) {
+    } else if (nHeight <= 4320 && nHeight > 2880) {
         nSubsidy = 25 * COIN;
-    } else if (nHeight <= 1051200 && nHeight > 788400) {
+    } else if (nHeight <= 5760 && nHeight > 4320) {
         nSubsidy = 15 * COIN;
-    } else if (nHeight <= 1314000 && nHeight > 1051200) {
+    } else if (nHeight <= 7200 && nHeight > 5760) {
         nSubsidy = 10 * COIN;
-    } else if (nHeight <= 1576800 && nHeight > 1314000) {
+    } else if (nHeight <= 8640 && nHeight > 7200) {
         nSubsidy = 6.65 * COIN;
-    } else if (nHeight <= 1839600 && nHeight > 1576800) {
+    } else if (nHeight <= 10080 && nHeight > 8640) {
         nSubsidy = 5.3 * COIN;
-    } else if (nHeight <= 2102400 && nHeight > 1839600) {
+    } else if (nHeight <= 11520 && nHeight > 10080) {
         nSubsidy = 3.75 * COIN;
-    } else if (nHeight > 2102400) {
+    } else if (nHeight > 11520) {
         nSubsidy = 2.5 * COIN;
     } else {
         nSubsidy = 0 * COIN;
@@ -1657,23 +1657,23 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 
     if (nHeight < Params().RAMP_TO_BLOCK()) {
 	ret = 0;
-    } else if (nHeight <= 262800 && nHeight >= Params().RAMP_TO_BLOCK()) {
+    } else if (nHeight <= 1440 && nHeight >= Params().RAMP_TO_BLOCK()) {
         ret = blockValue / 3 * 1;
-    } else if (nHeight <= 525600 && nHeight > 262800) {
+    } else if (nHeight <= 2880 && nHeight > 1440) {
 	    ret = blockValue / 2 * 1;
-    } else if (nHeight <= 788400 && nHeight > 525600) {
+    } else if (nHeight <= 4320 && nHeight > 2880) {
         ret = blockValue / 5 * 3;
-    } else if (nHeight <= 1051200 && nHeight > 788400) {
+    } else if (nHeight <= 5760 && nHeight > 4320) {
         ret = blockValue / 3 * 2;
-    } else if (nHeight <= 1314000 && nHeight > 1051200) {
+    } else if (nHeight <= 7200 && nHeight > 5760) {
         ret = blockValue / 4 * 3;
-    } else if (nHeight <= 1576800 && nHeight > 1314000) {
+    } else if (nHeight <= 8640 && nHeight > 7200) {
         ret = blockValue / 6.65 * 5;
-    } else if (nHeight <= 1839600 && nHeight > 1576800) {
+    } else if (nHeight <= 10080 && nHeight > 8640) {
         ret = blockValue / 5.3 * 4;
-    } else if (nHeight <= 2102400 && nHeight > 1839600) {
+    } else if (nHeight <= 11520 && nHeight > 10080) {
         ret = blockValue / 3.75 * 3;
-    } else if (nHeight > 2102400) {
+    } else if (nHeight > 11520) {
         ret = blockValue / 5 * 4 ;
         int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
 
