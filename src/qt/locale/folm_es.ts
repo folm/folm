@@ -602,7 +602,7 @@
         <translation>Herramienta de pestañas</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Núcleo Folm</translation>
     </message>
     <message>
@@ -622,11 +622,11 @@
         <translation>Explorar nodos maestros</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
+        <source>&amp;About Folm Core</source>
         <translation>&amp;Sobre el núcleo de Folm</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
+        <source>Show information about Folm Core</source>
         <translation>Mostrar información sobre el núcleo de Folm</translation>
     </message>
     <message>
@@ -682,12 +682,12 @@
         <translation>Ventana del explorador de bloques</translation>
     </message>
     <message>
-        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
-        <translation>Mostrar la ayuda de FOLM Core para obtener una lista de posibles opciones en línea de comandos</translation>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
+        <translation>Mostrar la ayuda de Folm Core para obtener una lista de posibles opciones en línea de comandos</translation>
     </message>
     <message>
-        <source>FOLM Core client</source>
-        <translation>Cliente FOLM Core</translation>
+        <source>Folm Core client</source>
+        <translation>Cliente Folm Core</translation>
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Folm network</source>
@@ -1184,7 +1184,7 @@ MultiEnvío: %1</translation>
         <translation>versión</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Núcleo Folm</translation>
     </message>
     <message>
@@ -1192,8 +1192,8 @@ MultiEnvío: %1</translation>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About FOLM Core</source>
-        <translation>Acerca de FOLM Core</translation>
+        <source>About Folm Core</source>
+        <translation>Acerca de Folm Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1239,16 +1239,16 @@ MultiEnvío: %1</translation>
         <translation>Bienvenido/a</translation>
     </message>
     <message>
-        <source>Welcome to FOLM Core.</source>
-        <translation>Bienvenido/a a FOLM Core.</translation>
+        <source>Welcome to Folm Core.</source>
+        <translation>Bienvenido/a a Folm Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where FOLM Core will store its data.</source>
-        <translation>Al ser la primera vez que se inicia el programa, usted puede elegir dónde guardará FOLM Core sus datos.</translation>
+        <source>As this is the first time the program is launched, you can choose where Folm Core will store its data.</source>
+        <translation>Al ser la primera vez que se inicia el programa, usted puede elegir dónde guardará Folm Core sus datos.</translation>
     </message>
     <message>
-        <source>FOLM Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>FOLM Core descargará y guardará una copia de la cadena de bloques Folm. Por lo menos %1GB de datos serán guardados en esta carpeta, y crecerá con el tiempo. El monedero también se guardará en esta carpeta.</translation>
+        <source>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>Folm Core descargará y guardará una copia de la cadena de bloques Folm. Por lo menos %1GB de datos serán guardados en esta carpeta, y crecerá con el tiempo. El monedero también se guardará en esta carpeta.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1259,7 +1259,7 @@ MultiEnvío: %1</translation>
         <translation>Usar una carpeta de datos personalizada:</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Núcleo Folm</translation>
     </message>
     <message>
@@ -3127,7 +3127,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>FOLM Core is shutting down...</source>
+        <source>Folm Core is shutting down...</source>
         <translation>El programa Folm se está cerrando...</translation>
     </message>
     <message>
@@ -3277,7 +3277,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Núcleo Folm</translation>
     </message>
     <message>
@@ -3293,8 +3293,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Los desarrolladores de Dash Core</translation>
     </message>
     <message>
-        <source>The FOLM Core developers</source>
-        <translation>Los desarrolladores de FOLM Core</translation>
+        <source>The Folm Core developers</source>
+        <translation>Los desarrolladores de Folm Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -3911,8 +3911,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Escuchar únicamente a la tarjeta de red indicada para conexiones JSON-RPC. Use la notación [host]:puerto para IPv6. Esta opción puede ser especificada varias veces (por defecto: escuchar en todas las tarjetas de red)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. FOLM Core is probably already running.</source>
-        <translation>No se puede obtener un bloqueo sobre el directorio de datos %s. FOLM Core esta probablemente en ejecución.</translation>
+        <source>Cannot obtain a lock on data directory %s. Folm Core is probably already running.</source>
+        <translation>No se puede obtener un bloqueo sobre el directorio de datos %s. Folm Core esta probablemente en ejecución.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -4107,8 +4107,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
 </translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. FOLM Core is probably already running.</source>
-        <translation>Imposible conectar a %s en esta computadora. Es probable que FOLM Core ya este corriendo.</translation>
+        <source>Unable to bind to %s on this computer. Folm Core is probably already running.</source>
+        <translation>Imposible conectar a %s en esta computadora. Es probable que Folm Core ya este corriendo.</translation>
     </message>
     <message>
         <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
@@ -4135,8 +4135,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Advertencia: -paytxfee esta muy alta! Esta es la comisión de transacción que pagarás si envías una transacción.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong FOLM Core will not work properly.</source>
-        <translation>Advertencia: Por favor verifique que la fecha y hora de su computadora sean correctas! Si su reloj esta fuera de hora FOLM Core no funcionará adecuadamente.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Folm Core will not work properly.</source>
+        <translation>Advertencia: Por favor verifique que la fecha y hora de su computadora sean correctas! Si su reloj esta fuera de hora Folm Core no funcionará adecuadamente.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4283,12 +4283,12 @@ por ejemplo: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Copyright (C) 2014-%i The Dash Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The FOLM Core Developers</source>
-        <translation>Copyright (C) 2015-%i The FOLM Core Developers</translation>
+        <source>Copyright (C) 2015-%i The Folm Core Developers</source>
+        <translation>Copyright (C) 2015-%i The Folm Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2017-%i The FOLM Core Developers</source>
-        <translation>Copyright (C) 2017-%i The FOLM Core Developers</translation>
+        <source>Copyright (C) 2017-%i The Folm Core Developers</source>
+        <translation>Copyright (C) 2017-%i The Folm Core Developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -4359,7 +4359,7 @@ por ejemplo: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Error al cargar wallet.dat: Billetera dañada</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of FOLM Core</source>
+        <source>Error loading wallet.dat: Wallet requires newer version of Folm Core</source>
         <translation>Error al cargar wallet.dat: La Billetera requiere una nueva versión del Núcleo Folm</translation>
     </message>
     <message>
@@ -4471,8 +4471,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Información</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. FOLM Core is shutting down.</source>
-        <translation>La prueba de salud de inicialización ha fallado. FOLM Core se cerrará.</translation>
+        <source>Initialization sanity check failed. Folm Core is shutting down.</source>
+        <translation>La prueba de salud de inicialización ha fallado. Folm Core se cerrará.</translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -5091,8 +5091,8 @@ por ejemplo: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Monedero bloqueado.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart FOLM Core to complete</source>
-        <translation>Monedero necesita ser reescrito: reinicie FOLM Core para completar</translation>
+        <source>Wallet needed to be rewritten: restart Folm Core to complete</source>
+        <translation>Monedero necesita ser reescrito: reinicie Folm Core para completar</translation>
     </message>
     <message>
         <source>Wallet options:</source>

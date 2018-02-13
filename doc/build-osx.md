@@ -38,14 +38,14 @@ Instructions: Homebrew
 
 #### Install dependencies using Homebrew
 
-        brew install autoconf automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf qt5 libzmq
+        brew install autoconf automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf qt5
 
 ### Building `folmd`
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone https://github.com/folmfolm.git
-        cd FOLM
+        git clone https://FIXME_EATBATTERYS
+        cd Folm
 
 2.  Build folmd:
 
@@ -81,7 +81,7 @@ Creating a release build
 ------------------------
 You can ignore this section if you are building `folmd` for your own use.
 
-folmd/folm-cli binaries are not included in the folm-qt.app bundle.
+folmd/folm-cli binaries are not included in the folm-Qt.app bundle.
 
 If you are building `folmd` or `folm-qt` for others, your build machine should be set up
 as follows for maximum compatibility:
@@ -92,7 +92,7 @@ All dependencies should be compiled with these flags:
  -arch x86_64
  -isysroot $(xcode-select --print-path)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
 
-Once dependencies are compiled, see release-process.md for how the folm-qt.app
+Once dependencies are compiled, see release-process.md for how the Folm-Qt.app
 bundle is packaged and signed to create the .dmg disk image that is distributed.
 
 Running
@@ -104,14 +104,14 @@ directory. We have to first create the RPC configuration file, though.
 Run `./folmd` to get the filename where it should be put, or just try these
 commands:
 
-    echo -e "rpcuser=folmrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/FOLM/folm.conf"
-    chmod 600 "/Users/${USER}/Library/Application Support/FOLM/folm.conf"
+    echo -e "rpcuser=folmrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Folm/folm.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/Folm/folm.conf"
 
 The next time you run it, it will start downloading the blockchain, but it won't
 output anything while it's doing this. This process may take several hours;
 you can monitor its process by looking at the debug.log file, like this:
 
-    tail -f $HOME/Library/Application\ Support/FOLM/debug.log
+    tail -f $HOME/Library/Application\ Support/Folm/debug.log
 
 Other commands:
 -------

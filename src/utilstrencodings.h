@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto             -*- c++ -*-
+// Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -50,7 +50,23 @@ int atoi(const std::string& str);
  * @returns true if the entire string could be parsed as valid integer,
  *   false if not the entire string could be parsed or when overflow or underflow occurred.
  */
-bool ParseInt32(const std::string& str, int32_t* out);
+
+bool ParseInt32(const std::string& str, int32_t *out);
+
+/**
+ * Convert string to signed 64-bit integer with strict parse error feedback.
+ * @returns true if the entire string could be parsed as valid integer,
+ *   false if not the entire string could be parsed or when overflow or underflow occurred.
+*/
+bool ParseInt64(const std::string& str, int64_t *out);
+
+/**
+* Convert string to double with strict parse error feedback.
+ * @returns true if the entire string could be parsed as valid double,
+ *   false if not the entire string could be parsed or when overflow or underflow occurred.
+ */
+bool ParseDouble(const std::string& str, double *out);
+
 
 template <typename T>
 std::string HexStr(const T itbegin, const T itend, bool fSpaces = false)

@@ -2,6 +2,12 @@ Contents
 ===========
 This directory contains tools for developers working on this repository.
 
+check-doc.py
+============
+
+Check if all command line args are documented. The return value indicates the
+number of undocumented args.
+
 github-merge.py
 ===============
 
@@ -12,7 +18,7 @@ For example:
   ./github-merge.py 3077
 
 (in any git repository) will help you merge pull request #3077 for the
-folmFOLM repository.
+folm-crypto/Folm repository.
 
 What it does:
 * Fetch master and the pull request.
@@ -30,16 +36,16 @@ couldn't mess with the sources.
 
 Setup
 ---------
-Configuring the github-merge tool for the FOLM repository is done in the following way:
+Configuring the github-merge tool for the Folm repository is done in the following way:
 
-    git config githubmerge.repository folmFOLM
+    git config githubmerge.repository folm-crypto/Folm
     git config githubmerge.testcmd "make -j4 check" (adapt to whatever you want to use for testing)
     git config --global user.signingkey mykeyid (if you want to GPG sign)
 
 optimize-pngs.py
 ================
 
-A script to optimize png files in the FOLM
+A script to optimize png files in the Folm
 repository (requires pngcrush).
 
 fix-copyright-headers.py
@@ -54,6 +60,23 @@ For example a file changed in 2014 (with 2014 being the current year):
 
 would be changed to:
 ```// Copyright (c) 2009-2014 The Bitcoin developers```
+
+logprint-scanner.py
+===================
+LogPrint and LogPrintf are known to throw exceptions when the number of arguments supplied to the
+LogPrint(f) function is not the same as the number of format specifiers.
+
+Ideally, the presentation of this mismatch would be at compile-time, but instead it is at run-time.
+
+This script scans the src/ directory recursively and looks in each .cpp/.h file and identifies all
+errorneous LogPrint(f) calls where the number of arguments do not match.
+
+The filename and line number of the errorneous occurence is given.
+
+The script returns with the number of erroneous occurences as an error code to help facilitate
+integration with a continuous integration system.
+
+The script can be ran from any working directory inside the git repository.
 
 symbol-check.py
 ===============

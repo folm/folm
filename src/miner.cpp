@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,17 +11,18 @@
 #include "amount.h"
 #include "hash.h"
 #include "main.h"
+#include "masternode-sync.h"
 #include "net.h"
 #include "pow.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
-#include "stake.h"
 #include "timedata.h"
 #include "util.h"
 #include "utilmoneystr.h"
 #ifdef ENABLE_WALLET
 #include "wallet.h"
 #endif
+#include "masternode-payments.h"
 
 #include <boost/thread.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -29,7 +31,7 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// FOLMMiner
+// FolmMiner
 //
 
 //
@@ -55,6 +57,7 @@ public:
 
 uint64_t nLastBlockTx = 0;
 uint64_t nLastBlockSize = 0;
+int64_t nLastCoinStakeSearchInterval = 0;
 
 // We want to sort transactions by priority and fee rate, so:
 typedef boost::tuple<double, CFeeRate, const CTransaction*> TxPriority;
@@ -93,10 +96,9 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     CReserveKey reservekey(pwallet);
 
     // Create new block
-    std::unique_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
+    auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
     if (!pblocktemplate.get())
         return NULL;
-    
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
 
     // -regtest only: allow overriding block.nVersion with
@@ -114,6 +116,9 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     pblocktemplate->vTxFees.push_back(-1);   // updated at end
     pblocktemplate->vTxSigOps.push_back(-1); // updated at end
 
+    // ppcoin: if coinstake available add coinstake tx
+    static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // only initialized at startup
+
     if (fProofOfStake) {
         boost::this_thread::interruption_point();
         pblock->nTime = GetAdjustedTime();
@@ -122,22 +127,20 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         CMutableTransaction txCoinStake;
         int64_t nSearchTime = pblock->nTime; // search to current time
         bool fStakeFound = false;
-        if (nSearchTime >= stake->nLastCoinStakeSearchTime) {
+        if (nSearchTime >= nLastCoinStakeSearchTime) {
             unsigned int nTxNewTime = 0;
-            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - stake->nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
+            if (pwallet->CreateCoinStake(*pwallet, pblock->nBits, nSearchTime - nLastCoinStakeSearchTime, txCoinStake, nTxNewTime)) {
                 pblock->nTime = nTxNewTime;
                 pblock->vtx[0].vout[0].SetEmpty();
                 pblock->vtx.push_back(CTransaction(txCoinStake));
                 fStakeFound = true;
             }
-            stake->nLastCoinStakeSearchInterval = nSearchTime - stake->nLastCoinStakeSearchTime;
-            stake->nLastCoinStakeSearchTime = nSearchTime;
+            nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
+            nLastCoinStakeSearchTime = nSearchTime;
         }
 
-        if (!fStakeFound) {
-            LogPrintf("%s: no coin stake (nBits=%d)\n", __func__, pblock->nBits);
+        if (!fStakeFound)
             return NULL;
-        }
     }
 
     // Largest block you're willing to create:
@@ -154,23 +157,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     // until there are no more or the block reaches this size:
     unsigned int nBlockMinSize = GetArg("-blockminsize", DEFAULT_BLOCK_MIN_SIZE);
     nBlockMinSize = std::min(nBlockMaxSize, nBlockMinSize);
-
-    // Fee-per-kilobyte amount considered the same as "free"
-    // Be careful setting this: if you set it to zero then
-    // a transaction spammer can cheaply fill blocks using
-    // 1-satoshi-fee transactions. It should be set above the real
-    // cost to you of processing a transaction.
-    CAmount nMinTxFee = MIN_TX_FEE, nMaxTxFee = MAX_TX_FEE;
-    if (mapArgs.count("-mintxfee")) {
-        if (!ParseMoney(mapArgs["-mintxfee"], nMinTxFee)) {
-            LogPrintf("%s: invalid -mintxfee (%s), use %d instead", __func__, mapArgs["-mintxfee"], nMinTxFee);
-        }
-    }
-    if (mapArgs.count("-maxtxfee")) {
-        if (!ParseMoney(mapArgs["-maxtxfee"], nMaxTxFee)) {
-            LogPrintf("%s: invalid -maxtxfee (%s), use %d instead", __func__, mapArgs["-maxtxfee"], nMaxTxFee);
-        }
-    }
 
     // Collect memory pool transactions into the block
     CAmount nFees = 0;
@@ -292,7 +278,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
             // Prioritise by fee once past the priority size or we run out of high-priority
             // transactions:
-            if (!fSortedByFee && ((nBlockSize + nTxSize >= nBlockPrioritySize) || !AllowFree(dPriority))) {
+            if (!fSortedByFee &&
+                ((nBlockSize + nTxSize >= nBlockPrioritySize) || !AllowFree(dPriority))) {
                 fSortedByFee = true;
                 comparer = TxPriorityCompare(fSortedByFee);
                 std::make_heap(vecPriority.begin(), vecPriority.end(), comparer);
@@ -302,10 +289,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 continue;
 
             CAmount nTxFees = view.GetValueIn(tx) - tx.GetValueOut();
-            if (nTxFees < nMinTxFee || nMaxTxFee <= nTxFees || MAX_BK_FEE < (nFees+nTxFees)) {
-                LogPrint("debug", "%s: bad tx fee (%d, %d, [%d, %d])", __func__, nFees, nTxFees, nMinTxFee, nMaxTxFee);
-                continue;
-            }
+
             nTxSigOps += GetP2SHSigOpCount(tx, view);
             if (nBlockSigOps + nTxSigOps >= MAX_BLOCK_SIGOPS)
                 continue;
@@ -319,13 +303,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
             CTxUndo txundo;
             UpdateCoins(tx, state, view, txundo, nHeight);
-            if (!state.IsValid()) {
-                LogPrint("debug", "%s: update coins failed (nHeight=%d, reason: %s)", __func__, nHeight, state.GetRejectReason());
-                continue;
-            } else if (!CheckTransaction(tx, state)) {
-                LogPrint("debug", "%s: invalid coins (nHeight=%d, reason: %s)", __func__, nHeight, state.GetRejectReason());
-                continue;
-            }
 
             // Added
             pblock->vtx.push_back(tx);
@@ -337,7 +314,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             nFees += nTxFees;
 
             if (fPrintPriority) {
-                LogPrintf("priority %.1f fee %s txid %s\n", dPriority, feeRate.ToString(), tx.GetHash().ToString());
+                LogPrintf("priority %.1f fee %s txid %s\n",
+                    dPriority, feeRate.ToString(), tx.GetHash().ToString());
             }
 
             // Add transactions that depend on this one to the priority queue
@@ -353,31 +331,41 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                 }
             }
         }
-        if (nBlockSize < nBlockMinSize || nBlockMaxSize < nBlockSize) {
-            LogPrintf("%s: bad block size (nBlockSize=%d, [%d, %d])", __func__, nBlockSize, nBlockMinSize, nBlockMaxSize);
-            return nullptr;
+
+        if (!fProofOfStake) {
+            //Masternode and general budget payments
+            FillBlockPayee(txNew, nFees, fProofOfStake);
+
+            //Make payee
+            if (txNew.vout.size() > 1) {
+                pblock->payee = txNew.vout[1].scriptPubKey;
+            }
         }
-        const char * const ct = (fProofOfStake?"pos":"pow");
 
         nLastBlockTx = nBlockTx;
         nLastBlockSize = nBlockSize;
-        LogPrintf("%s: total size %u (%s, nFees=%d)\n", __func__, nBlockSize, ct, nFees);
+        LogPrintf("CreateNewBlock(): total size %u\n", nBlockSize);
+
 
         // Compute final coinbase transaction.
-        pblock->vtx[0].vin[0].scriptSig = CScript() << nHeight << OP_0;
+		txNew.vin[0].scriptSig = CScript() << nHeight << OP_0;
+        
         if (!fProofOfStake) {
-            pblock->vtx[0].vout[0].nValue = GetProofOfWorkReward(nFees, pindexPrev->nHeight+1);
+            pblock->vtx[0] = txNew;
             pblocktemplate->vTxFees[0] = -nFees;
-            UpdateTime(pblock, pindexPrev);
         }
+
+        // Fill in header
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
+        if (!fProofOfStake)
+            UpdateTime(pblock, pindexPrev);
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         pblock->nNonce = 0;
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
 
         CValidationState state;
         if (!TestBlockValidity(state, *pblock, pindexPrev, false, false)) {
-            LogPrintf("%s: TestBlockValidity failed (%s)\n", __func__, ct);
+            LogPrintf("CreateNewBlock() : TestBlockValidity failed\n");
             return NULL;
         }
     }
@@ -430,7 +418,7 @@ bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     {
         LOCK(cs_main);
         if (pblock->hashPrevBlock != chainActive.Tip()->GetBlockHash())
-            return error("FOLMMiner : generated block is stale");
+            return error("FolmMiner : generated block is stale");
     }
 
     // Remove key from key pool
@@ -445,18 +433,18 @@ bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     // Process this block the same as if we had received it from another node
     CValidationState state;
     if (!ProcessNewBlock(state, NULL, pblock))
-        return error("FOLMMiner : ProcessNewBlock, block not accepted");
+        return error("FolmMiner : ProcessNewBlock, block not accepted");
 
     return true;
 }
 
-static bool fGenerateBitcoins = false;
+bool fGenerateBitcoins = false;
 
 // ***TODO*** that part changed in bitcoin, we are using a mix with old one here for now
 
 void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
 {
-    LogPrintf("FOLMMiner started\n");
+    LogPrintf("FolmMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
     RenameThread("folm-miner");
 
@@ -481,17 +469,16 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
                 continue;
             }
 
-            while (chainActive.Tip()->nTime < 1471482000 || vNodes.empty() || pwallet->IsLocked() || !fMintableCoins || stake->nReserveBalance >= pwallet->GetBalance()) {
-                stake->nLastCoinStakeSearchInterval = 0;
+            while (vNodes.empty() || pwallet->IsLocked() || !fMintableCoins || nReserveBalance >= pwallet->GetBalance() || !masternodeSync.IsSynced()) {
+                nLastCoinStakeSearchInterval = 0;
                 MilliSleep(5000);
                 if (!fGenerateBitcoins && !fProofOfStake)
                     continue;
             }
 
-           //search our map of hashed blocks, see if bestblock has been hashed yet
-            if (stake->mapHashedBlocks.count(chainActive.Tip()->nHeight))
+            if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) //search our map of hashed blocks, see if bestblock has been hashed yet
             {
-                if (GetTime() - stake->mapHashedBlocks[chainActive.Tip()->nHeight] < max(pwallet->nHashInterval, (unsigned int)1))
+                if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < max(pwallet->nHashInterval, (unsigned int)1)) // wait half of the nHashDrift with max wait of 3 minutes
                 {
                     MilliSleep(5000);
                     continue;
@@ -507,7 +494,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
         if (!pindexPrev)
             continue;
 
-        std::unique_ptr<CBlockTemplate> pblocktemplate(CreateNewBlockWithKey(reservekey, pwallet, fProofOfStake));
+        auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlockWithKey(reservekey, pwallet, fProofOfStake));
         if (!pblocktemplate.get())
             continue;
 
@@ -531,7 +518,7 @@ void BitcoinMiner(CWallet* pwallet, bool fProofOfStake)
             continue;
         }
 
-        LogPrintf("Running FOLMMiner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
+        LogPrintf("Running FolmMiner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
             ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
 
         //

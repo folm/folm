@@ -1,13 +1,13 @@
-FOLM Core
+Folm Core
 =====================
 
 Setup
 ---------------------
-[FOLM Core](https://folm.io) is the original FOLM client and it builds the backbone of the network. However, it downloads and stores the entire history of FOLM transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Folm Core](https://folm.io/) is the original Folm client and it builds the backbone of the network. However, it downloads and stores the entire history of Folm transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
-The following are some helpful notes on how to run FOLM on your native platform.
+The following are some helpful notes on how to run Folm on your native platform.
 
 ### Unix
 
@@ -22,17 +22,17 @@ Unpack the files into a directory, and then run folm-qt.exe.
 
 ### OSX
 
-Drag folm-qt to your applications folder, and then run folm-qt.
+Drag Folm-Qt to your applications folder, and then run Folm-Qt.
 
 ### Need Help?
 
-* See the documentation at the [FOLM Wiki](https://github.com/folm/folm/wiki) ***TODO***
+* See the documentation at the [Folm Wiki](https://github.com/folm-crypto/Folm/wiki)
 for help and more information.
-* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=2254046.0) or on the [FOLM Telegram](https://t.me/FOLMcoinOfficialChat).
+* Ask for help on [BitcoinTalk](FIXME Add official BCT URL on ANN) or on the [Folm Discord](https://discord.gg/a7vhegP).
 
 Building
 ---------------------
-The following are developer notes on how to build FOLM on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build Folm on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [OSX Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
@@ -40,7 +40,7 @@ The following are developer notes on how to build FOLM on your native platform. 
 
 Development
 ---------------------
-The Folm repo's [root README](https://github.com/folmFOLM/blob/master/README.md) contains relevant information on the development process and automated testing.
+The Folm repo's [root README](https://github.com/folm-crypto/Folm/blob/master/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
@@ -54,8 +54,7 @@ The Folm repo's [root README](https://github.com/folmFOLM/blob/master/README.md)
 
 ### Resources
 
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [FOLM](http://forum.folm.org/) forum.
-* Join the [FOLM-Dev](https://folm-dev.slack.com/) Slack group ([Sign-Up](https://folm-dev.herokuapp.com/)).
+* Discuss on the [BitcoinTalk](FIXME with URL after ANN) or the [Folm Subreddit](http://reddit.com/r/folmcoin).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

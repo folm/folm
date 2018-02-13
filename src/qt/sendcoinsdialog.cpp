@@ -1,14 +1,15 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "sendcoinsdialog.h"
 #include "ui_sendcoinsdialog.h"
-#include "askpassphrasedialog.h"
 
 #include "addresstablemodel.h"
+#include "askpassphrasedialog.h"
 #include "bitcoinunits.h"
 #include "clientmodel.h"
 #include "coincontroldialog.h"
@@ -59,25 +60,25 @@ SendCoinsDialog::SendCoinsDialog(QWidget* parent) : QDialog(parent),
     connect(ui->splitBlockCheckBox, SIGNAL(stateChanged(int)), this, SLOT(splitBlockChecked(int)));
     connect(ui->splitBlockLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(splitBlockLineEditChanged(const QString&)));
 
-    // FOLM specific
+    // Folm specific
     QSettings settings;
-    if (!settings.contains("bUseObfuscation"))
-        settings.setValue("bUseObfuscation", false);
+    if (!settings.contains("bUseObfuScation"))
+        settings.setValue("bUseObfuScation", false);
     if (!settings.contains("bUseSwiftTX"))
         settings.setValue("bUseSwiftTX", false);
 
-    bool useObfuscation = settings.value("bUseObfuscation").toBool();
+    bool useObfuScation = settings.value("bUseObfuScation").toBool();
     bool useSwiftTX = settings.value("bUseSwiftTX").toBool();
     if (fLiteMode) {
         ui->checkUseObfuscation->setChecked(false);
         ui->checkUseObfuscation->setVisible(false);
         ui->checkSwiftTX->setVisible(false);
-        CoinControlDialog::coinControl->useObfuscation = false;
+        CoinControlDialog::coinControl->useObfuScation = false;
         CoinControlDialog::coinControl->useSwiftTX = false;
     } else {
-        ui->checkUseObfuscation->setChecked(useObfuscation);
+        ui->checkUseObfuscation->setChecked(useObfuScation);
         ui->checkSwiftTX->setChecked(useSwiftTX);
-        CoinControlDialog::coinControl->useObfuscation = useObfuscation;
+        CoinControlDialog::coinControl->useObfuScation = useObfuScation;
         CoinControlDialog::coinControl->useSwiftTX = useSwiftTX;
     }
 
@@ -572,7 +573,7 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
     if (model && model->getOptionsModel()) {
         uint64_t bal = 0;
         QSettings settings;
-        settings.setValue("bUseObfuscation", ui->checkUseObfuscation->isChecked());
+        settings.setValue("bUseObfuScation", ui->checkUseObfuscation->isChecked());
         if (ui->checkUseObfuscation->isChecked()) {
             bal = anonymizedBalance;
         } else {
@@ -590,7 +591,7 @@ void SendCoinsDialog::updateDisplayUnit()
 
     setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(), model->getAnonymizedBalance(),
         model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance());
-    CoinControlDialog::coinControl->useObfuscation = ui->checkUseObfuscation->isChecked();
+    CoinControlDialog::coinControl->useObfuScation = ui->checkUseObfuscation->isChecked();
     coinControlUpdateLabels();
     ui->customFee->setDisplayUnit(model->getOptionsModel()->getDisplayUnit());
     updateMinFeeLabel();
@@ -608,7 +609,7 @@ void SendCoinsDialog::updateSwiftTX()
 void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn& sendCoinsReturn, const QString& msgArg, bool fPrepare)
 {
     bool fAskForUnlock = false;
-
+    
     QPair<QString, CClientUIInterface::MessageBoxFlags> msgParams;
     // Default to a warning message, override if error message is needed
     msgParams.second = CClientUIInterface::MSG_WARNING;
@@ -657,17 +658,17 @@ void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn&
         return;
     }
 
-     // Unlock wallet if it wasn't fully unlocked already
-        if(fAskForUnlock) {
-         model->requestUnlock(false);
-         if(model->getEncryptionStatus () != WalletModel::Unlocked) {
-             msgParams.first = tr("Error: The wallet was unlocked only to anonymize coins. Unlock canceled.");
-         }
-         else {
-      // Wallet unlocked
-         return;
-         }
-     }
+    // Unlock wallet if it wasn't fully unlocked already
+    if(fAskForUnlock) {
+        model->requestUnlock(false);
+        if(model->getEncryptionStatus () != WalletModel::Unlocked) {
+            msgParams.first = tr("Error: The wallet was unlocked only to anonymize coins. Unlock canceled.");
+        }
+        else {
+            // Wallet unlocked
+            return;
+        }
+    }
 
     emit message(tr("Send Coins"), msgParams.first, msgParams.second);
 }
@@ -903,7 +904,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
             ui->labelCoinControlChangeLabel->setText("");
         } else if (!addr.IsValid()) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid FOLM address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Folm address"));
         } else // Valid address
         {
             CPubKey pubkey;
@@ -943,7 +944,7 @@ void SendCoinsDialog::coinControlUpdateLabels()
             CoinControlDialog::payAmounts.append(entry->getValue().amount);
     }
 
-    ui->checkUseObfuscation->setChecked(CoinControlDialog::coinControl->useObfuscation);
+    ui->checkUseObfuscation->setChecked(CoinControlDialog::coinControl->useObfuScation);
 
     if (CoinControlDialog::coinControl->HasSelected()) {
         // actual coin control calculation

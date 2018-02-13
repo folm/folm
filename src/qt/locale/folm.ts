@@ -582,8 +582,8 @@
         <translation>Tabs 工具列</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <source>Send coins to a Folm address</source>
@@ -602,12 +602,12 @@
         <translation>瀏覽 Masternodes</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
-        <translation>&amp;關於 FOLM Core</translation>
+        <source>&amp;About Folm Core</source>
+        <translation>&amp;關於 Folm Core</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
-        <translation>顯示 FOLM Core 相關資訊</translation>
+        <source>Show information about Folm Core</source>
+        <translation>顯示 Folm Core 相關資訊</translation>
     </message>
     <message>
         <source>Modify configuration options for Folm</source>
@@ -662,12 +662,12 @@
         <translation>區塊鏈瀏覽視窗</translation>
     </message>
     <message>
-        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
-        <translation>顯示 FOLM Core 幫助訊息以取得 Folm 命令列表選項</translation>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
+        <translation>顯示 Folm Core 幫助訊息以取得 Folm 命令列表選項</translation>
     </message>
     <message>
-        <source>FOLM Core client</source>
-        <translation>FOLM Core 客戶端</translation>
+        <source>Folm Core client</source>
+        <translation>Folm Core 客戶端</translation>
     </message>
     </context>
 <context>
@@ -696,15 +696,15 @@
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     </context>
 <context>
@@ -888,8 +888,8 @@
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     </context>
 <context>

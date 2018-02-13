@@ -66,7 +66,7 @@ Ubuntu Xenial 16.04 and Windows Subsystem for Linux
     
 Once the tool chain is installed the build steps are common:
 
-Note that for WSL the FOLM Core source path MUST be somewhere in the default mount file system, for example /usr/src/folm, AND not under /mnt/d/. If this is not the case the dependency autoconf scripts will fail. This means you cannot use a directory that located directly on the host Windows file system to perform the build.
+Note that for WSL the folm Core source path MUST be somewhere in the default mount file system, for example /usr/src/folm, AND not under /mnt/d/. If this is not the case the dependency autoconf scripts will fail. This means you cannot use a directory that located directly on the host Windows file system to perform the build.
 
 The next three steps are an example of how to acquire the source in an appropriate way.
 
@@ -126,14 +126,14 @@ Then install [Homebrew](https://brew.sh).
 
 NOTE: Building with Qt4 is still supported, however, could result in a broken UI. Building with Qt5 is recommended.
 
-#### Build FOLM Core
+#### Build Folm Core
 
 1. Clone the folm source code and cd into `folm`
 
         git clone --recursive https://github.com/folm/folm.git
         cd folm
 
-2.  Build FOLM Core:
+2.  Build Folm Core:
 
     Configure and build the headless folm binaries as well as the GUI (if Qt is found).
 

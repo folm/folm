@@ -1,4 +1,3 @@
-// -*- c++ -*-
 #ifndef BITCOIN_BIP38_H
 #define BITCOIN_BIP38_H
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto                     -*- c++ -*-
+// Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -199,7 +199,7 @@ public:
         nStakeTime = 0;
 
         nVersion = 0;
-        hashMerkleRoot = 0;
+        hashMerkleRoot = uint256();
         nTime = 0;
         nBits = 0;
         nNonce = 0;
@@ -221,13 +221,13 @@ public:
         nNonce = block.nNonce;
 
         //Proof of Stake
-        bnChainTrust = 0;
+        bnChainTrust = uint256();
         nMint = 0;
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
         nStakeModifierChecksum = 0;
-        hashProofOfStake = 0;
+        hashProofOfStake = uint256();
 
         if (block.IsProofOfStake()) {
             SetProofOfStake();
@@ -315,7 +315,11 @@ public:
 
     unsigned int GetStakeEntropyBit() const
     {
-        return ((GetBlockHash().Get64()) & 1llu);
+        unsigned int nEntropyBit = ((GetBlockHash().Get64()) & 1);
+        if (fDebug || GetBoolArg("-printstakemodifier", false))
+            LogPrintf("GetStakeEntropyBit: nHeight=%u hashBlock=%s nEntropyBit=%u\n", nHeight, GetBlockHash().ToString().c_str(), nEntropyBit);
+
+        return nEntropyBit;
     }
 
     bool SetStakeEntropyBit(unsigned int nEntropyBit)
@@ -337,13 +341,6 @@ public:
         if (fGeneratedStakeModifier)
             nFlags |= BLOCK_STAKE_MODIFIER;
     }
-
-    /**
-     * Returns true if there are nRequired or more blocks of minVersion or above
-     * in the last Params().ToCheckBlockUpgradeMajority() blocks, starting at pstart 
-     * and going backwards.
-     */
-    static bool IsSuperMajority(int minVersion, const CBlockIndex* pstart, unsigned int nRequired);
 
     std::string ToString() const
     {
@@ -393,13 +390,13 @@ public:
 
     CDiskBlockIndex()
     {
-        hashPrev = 0;
-        hashNext = 0;
+        hashPrev = uint256();
+        hashNext = uint256();
     }
 
     explicit CDiskBlockIndex(CBlockIndex* pindex) : CBlockIndex(*pindex)
     {
-        hashPrev = (pprev ? pprev->GetBlockHash() : 0);
+        hashPrev = (pprev ? pprev->GetBlockHash() : uint256());
     }
 
     ADD_SERIALIZE_METHODS;
@@ -428,11 +425,10 @@ public:
         if (IsProofOfStake()) {
             READWRITE(prevoutStake);
             READWRITE(nStakeTime);
-            READWRITE(hashProofOfStake);
         } else {
             const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
             const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
-            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = 0;
+            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = uint256();
         }
 
         // block header

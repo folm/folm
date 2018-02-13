@@ -1,7 +1,8 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -93,7 +94,7 @@ static inline int64_t roundint64(double d)
 CAmount AmountFromValue(const Value& value)
 {
     double dAmount = value.get_real();
-    if (dAmount <= 0.0 || dAmount > 500000000.0)
+    if (dAmount <= 0.0 || dAmount > 21000000.0)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
     CAmount nAmount = roundint64(dAmount * COIN);
     if (!MoneyRange(nAmount))
@@ -219,10 +220,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop FOLM server.");
+            "\nStop Folm server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "FOLM server stopping";
+    return "Folm server stopping";
 }
 
 
@@ -299,16 +300,36 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
 
-        /* Folm features */
+        /* Pivx features */
         {"folm", "masternode", &masternode, true, true, false},
-        //{"folm", "masternodelist", &masternodelist, true, true, false},
-        //{"folm", "mnbudget", &mnbudget, true, true, false},
-        //{"folm", "mnbudgetvoteraw", &mnbudgetvoteraw, true, true, false},
-        //{"folm", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        //{"folm", "mnsync", &mnsync, true, true, false},
+        {"folm", "listmasternodes", &listmasternodes, true, true, false},
+        {"folm", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"folm", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"folm", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"folm", "masternodedebug", &masternodedebug, true, true, false},
+        {"folm", "startmasternode", &startmasternode, true, true, false},
+        {"folm", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"folm", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"folm", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"folm", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"folm", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"folm", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"folm", "mnbudget", &mnbudget, true, true, false},
+        {"folm", "preparebudget", &preparebudget, true, true, false},
+        {"folm", "submitbudget", &submitbudget, true, true, false},
+        {"folm", "mnbudgetvote", &mnbudgetvote, true, true, false},
+        {"folm", "getbudgetvotes", &getbudgetvotes, true, true, false},
+        {"folm", "getnextsuperblock", &getnextsuperblock, true, true, false},
+        {"folm", "getbudgetprojection", &getbudgetprojection, true, true, false},
+        {"folm", "getbudgetinfo", &getbudgetinfo, true, true, false},
+        {"folm", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
+        {"folm", "mnfinalbudget", &mnfinalbudget, true, true, false},
+        {"folm", "checkbudgets", &checkbudgets, true, true, false},
+        {"folm", "mnsync", &mnsync, true, true, false},
         {"folm", "spork", &spork, true, true, false},
+        {"folm", "getpoolinfo", &getpoolinfo, true, true, false},
 #ifdef ENABLE_WALLET
-        //{"folm", "obfuscation", &obfuscation, false, false, true}, /* not threadSafe because of SendMoney */
+        {"folm", "obfuscation", &obfuscation, false, false, true}, /* not threadSafe because of SendMoney */
 
         /* Wallet */
         {"wallet", "addmultisigaddress", &addmultisigaddress, true, false, true},
@@ -582,7 +603,7 @@ void StartRPCThreads()
                                                "The username and password MUST NOT be the same.\n"
                                                "If the file does not exist, create it with owner-readable-only file permissions.\n"
                                                "It is also recommended to set alertnotify so you are notified of problems;\n"
-                                               "for example: alertnotify=echo %%s | mail -s \"FOLM Alert\" admin@foo.com\n"),
+                                               "for example: alertnotify=echo %%s | mail -s \"Folm Alert\" admin@foo.com\n"),
                                              GetConfigFile().string(),
                                              EncodeBase58(&rand_pwd[0], &rand_pwd[0] + 32)),
             "", CClientUIInterface::MSG_ERROR | CClientUIInterface::SECURE);
@@ -1020,6 +1041,17 @@ json_spirit::Value CRPCTable::execute(const std::string& strMethod, const json_s
     }
 }
 
+std::vector<std::string> CRPCTable::listCommands() const
+{
+    std::vector<std::string> commandList;
+    typedef std::map<std::string, const CRPCCommand*> commandMap;
+
+    std::transform( mapCommands.begin(), mapCommands.end(),
+                   std::back_inserter(commandList),
+                   boost::bind(&commandMap::value_type::first,_1) );
+    return commandList;
+}
+
 std::string HelpExampleCli(string methodname, string args)
 {
     return "> folm-cli " + methodname + " " + args + "\n";
@@ -1029,7 +1061,7 @@ std::string HelpExampleRpc(string methodname, string args)
 {
     return "> curl --user myusername --data-binary '{\"jsonrpc\": \"1.0\", \"id\":\"curltest\", "
            "\"method\": \"" +
-           methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:53654/\n";
+           methodname + "\", \"params\": [" + args + "] }' -H 'content-type: text/plain;' http://127.0.0.1:51473/\n";
 }
 
 const CRPCTable tableRPC;

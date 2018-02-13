@@ -93,7 +93,6 @@ private:
     QMenuBar* appMenuBar;
     QAction* overviewAction;
     QAction* historyAction;
-    QAction* tradingAction;
     QAction* masternodeAction;
     QAction* quitAction;
     QAction* sendCoinsAction;
@@ -102,6 +101,9 @@ private:
     QAction* signMessageAction;
     QAction* verifyMessageAction;
     QAction* bip38ToolAction;
+    QAction* multisigCreateAction;
+    QAction* multisigSpendAction;
+    QAction* multisigSignAction;
     QAction* aboutAction;
     QAction* receiveCoinsAction;
     QAction* optionsAction;
@@ -198,8 +200,6 @@ private slots:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
-    /** Switch to trading page */
- //   void gotoTradingPage();
     /** Switch to Explorer Page */
     void gotoBlockExplorerPage();
     /** Switch to masternode page */
@@ -215,6 +215,11 @@ private slots:
     void gotoVerifyMessageTab(QString addr = "");
     /** Show MultiSend Dialog */
     void gotoMultiSendDialog();
+
+    /** Show MultiSig Dialog */
+    void gotoMultisigCreate();
+    void gotoMultisigSpend();
+    void gotoMultisigSign();
 
     /** Show BIP 38 tool - default to Encryption tab */
     void gotoBip38Tool();

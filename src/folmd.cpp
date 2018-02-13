@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -24,8 +25,8 @@
  *
  * \section intro_sec Introduction
  *
- * This is the developer documentation of the reference client for an experimental new digital currency called FOLM (https://folm.io),
- * which enables instant payments to anyone, anywhere in the world. FOLM uses peer-to-peer technology to operate
+ * This is the developer documentation of the reference client for an experimental new digital currency called Folm (http://www.folm.com),
+ * which enables instant payments to anyone, anywhere in the world. Folm uses peer-to-peer technology to operate
  * with no central authority: managing transactions and issuing money are carried out collectively by the network.
  *
  * The software is a community-driven open source project, released under the MIT license.
@@ -69,13 +70,13 @@ bool AppInit(int argc, char* argv[])
 
     // Process help and version before taking care about datadir
     if (mapArgs.count("-?") || mapArgs.count("-help") || mapArgs.count("-version")) {
-        std::string strUsage = _("FOLM Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = _("Folm Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
 
         if (mapArgs.count("-version")) {
             strUsage += LicenseInfo();
         } else {
             strUsage += "\n" + _("Usage:") + "\n" +
-                        "  folmd [options]                     " + _("Start FOLM Core Daemon") + "\n";
+                        "  folmd [options]                     " + _("Start Folm Core Daemon") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
         }
@@ -105,9 +106,7 @@ bool AppInit(int argc, char* argv[])
         std::string strErr;
         if (!masternodeConfig.read(strErr)) {
             fprintf(stderr, "Error reading masternode configuration file: %s\n", strErr.c_str());
-#if defined(REQUIRE_MASTERNODE_CONFIG)
             return false;
-#endif
         }
 
         // Command-line RPC
@@ -123,7 +122,7 @@ bool AppInit(int argc, char* argv[])
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon) {
-            fprintf(stdout, "FOLM server starting\n");
+            fprintf(stdout, "Folm server starting\n");
 
             // Daemonize
             pid_t pid = fork();

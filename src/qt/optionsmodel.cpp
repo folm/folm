@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -72,13 +73,13 @@ void OptionsModel::Init()
         settings.setValue("fCoinControlFeatures", false);
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
 
-    if (!settings.contains("nDarksendRounds"))
-        settings.setValue("nDarksendRounds", 2);
+    if (!settings.contains("nObfuscationRounds"))
+        settings.setValue("nObfuscationRounds", 2);
 
     if (!settings.contains("nAnonymizeFolmAmount"))
         settings.setValue("nAnonymizeFolmAmount", 1000);
 
-    nDarksendRounds = settings.value("nDarksendRounds").toLongLong();
+    nObfuscationRounds = settings.value("nObfuscationRounds").toLongLong();
     nAnonymizeFolmAmount = settings.value("nAnonymizeFolmAmount").toLongLong();
 
     if (!settings.contains("fShowMasternodesTab"))
@@ -144,8 +145,8 @@ void OptionsModel::Init()
     if (!SoftSetArg("-lang", settings.value("language").toString().toStdString()))
         addOverriddenOption("-lang");
 
-    if (settings.contains("nDarksendRounds"))
-        SoftSetArg("-obfuscationrounds", settings.value("nDarksendRounds").toString().toStdString());
+    if (settings.contains("nObfuscationRounds"))
+        SoftSetArg("-obfuscationrounds", settings.value("nObfuscationRounds").toString().toStdString());
     if (settings.contains("nAnonymizeFolmAmount"))
         SoftSetArg("-anonymizefolmamount", settings.value("nAnonymizeFolmAmount").toString().toStdString());
 
@@ -225,8 +226,8 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
             return settings.value("nDatabaseCache");
         case ThreadsScriptVerif:
             return settings.value("nThreadsScriptVerif");
-        case DarksendRounds:
-            return QVariant(nDarksendRounds);
+        case ObfuscationRounds:
+            return QVariant(nObfuscationRounds);
         case AnonymizeFolmAmount:
             return QVariant(nAnonymizeFolmAmount);
         case Listen:
@@ -332,10 +333,10 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
                 setRestartRequired(true);
             }
             break;
-        case DarksendRounds:
-            nDarksendRounds = value.toInt();
-            settings.setValue("nDarksendRounds", nDarksendRounds);
-            emit obfuscationRoundsChanged(nDarksendRounds);
+        case ObfuscationRounds:
+            nObfuscationRounds = value.toInt();
+            settings.setValue("nObfuscationRounds", nObfuscationRounds);
+            emit obfuscationRoundsChanged(nObfuscationRounds);
             break;
         case AnonymizeFolmAmount:
             nAnonymizeFolmAmount = value.toInt();

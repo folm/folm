@@ -49,6 +49,10 @@ BITCOIN_INCLUDES += $(BDB_CPPFLAGS)
 EXTRA_LIBRARIES += libbitcoin_wallet.a
 endif
 
+if ENABLE_ZMQ
+EXTRA_LIBRARIES += libbitcoin_zmq.a
+endif
+
 if BUILD_BITCOIN_LIBS
 lib_LTLIBRARIES = libbitcoinconsensus.la
 LIBBITCOIN_CONSENSUS=libbitcoinconsensus.la
@@ -68,7 +72,7 @@ if BUILD_BITCOIN_UTILS
 endif
 
 .PHONY: FORCE
-# FOLM Core #
+# folm core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   addrman.h \
@@ -88,25 +92,31 @@ BITCOIN_CORE_H = \
   coincontrol.h \
   coins.h \
   compat.h \
+  compat/sanity.h \
   compressor.h \
   primitives/block.h \
   primitives/transaction.h \
   core_io.h \
   crypter.h \
-  darksend.h \
+  obfuscation.h \
+  obfuscation-relay.h \
   db.h \
   eccryptoverify.h \
   ecwrapper.h \
   hash.h \
   init.h \
-  stake.h \
-  instantx.h \
+  kernel.h \
+  swifttx.h \
   key.h \
   keystore.h \
   leveldbwrapper.h \
   limitedmap.h \
   main.h \
   masternode.h \
+  masternode-payments.h \
+  masternode-budget.h \
+  masternode-sync.h \
+  masternodeman.h \
   masternodeconfig.h \
   merkleblock.h \
   miner.h \
@@ -143,11 +153,15 @@ BITCOIN_CORE_H = \
   utilstrencodings.h \
   utilmoneystr.h \
   utiltime.h \
+  validationinterface.h \
   version.h \
   wallet.h \
   wallet_ismine.h \
   walletdb.h \
-  compat/sanity.h
+  zmq/zmqabstractnotifier.h \
+  zmq/zmqconfig.h \
+  zmq/zmqnotificationinterface.h \
+  zmq/zmqpublishnotifier.h
 
 JSON_H = \
   json/json_spirit.h \
@@ -161,13 +175,13 @@ JSON_H = \
   json/json_spirit_writer_template.h
 
 obj/build.h: FORCE
-	@$(MKDIR_P) "$(builddir)/obj"
-	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
-	  "$(abs_top_srcdir)"
+	@$(MKDIR_P) $(builddir)/obj
+	@$(top_srcdir)/share/genbuild.sh $(abs_top_builddir)/src/obj/build.h \
+	  $(abs_top_srcdir)
 libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
 # server: shared between folmd and folm-qt
-libbitcoin_server_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS)
+libbitcoin_server_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
   alert.cpp \
@@ -184,7 +198,8 @@ libbitcoin_server_a_SOURCES = \
   pow.cpp \
   rest.cpp \
   rpcblockchain.cpp \
-  rpcdarksend.cpp \
+  rpcmasternode.cpp \
+  rpcmasternode-budget.cpp \
   rpcmining.cpp \
   rpcmisc.cpp \
   rpcnet.cpp \
@@ -194,8 +209,20 @@ libbitcoin_server_a_SOURCES = \
   timedata.cpp \
   txdb.cpp \
   txmempool.cpp \
+  validationinterface.cpp \
   $(JSON_H) \
   $(BITCOIN_CORE_H)
+
+if ENABLE_ZMQ
+LIBBITCOIN_ZMQ=libbitcoin_zmq.a
+
+libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
+libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_zmq_a_SOURCES = \
+  zmq/zmqabstractnotifier.cpp \
+  zmq/zmqnotificationinterface.cpp \
+  zmq/zmqpublishnotifier.cpp
+endif
 
 # wallet: shared between folmd and folm-qt, but only linked
 # when wallet enabled
@@ -205,15 +232,20 @@ libbitcoin_wallet_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   bip38.cpp \
-  darksend.cpp \
+  obfuscation.cpp \
+  obfuscation-relay.cpp \
   db.cpp \
   crypter.cpp \
-  instantx.cpp \
+  swifttx.cpp \
   masternode.cpp \
+  masternode-budget.cpp \
+  masternode-payments.cpp \
+  masternode-sync.cpp \
   masternodeconfig.cpp \
+  masternodeman.cpp \
   rpcdump.cpp \
   rpcwallet.cpp \
-  stake.cpp \
+  kernel.cpp \
   wallet.cpp \
   wallet_ismine.cpp \
   walletdb.cpp \
@@ -232,12 +264,15 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/scrypt.cpp \
   crypto/ripemd160.cpp \
   crypto/aes_helper.c \
-  crypto/echo.c \
+  crypto/blake.c \
   crypto/cubehash.c \
-  crypto/jh.c \
-  crypto/skein.c \
-  crypto/gost.c \
+  crypto/echo.c \
   crypto/fugue.c \
+  crypto/gost.c \
+  crypto/groestl.c \
+  crypto/jh.c \
+  crypto/keccak.c \
+  crypto/skein.c \
   crypto/common.h \
   crypto/sha256.h \
   crypto/sha512.h \
@@ -247,13 +282,16 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/scrypt.h \
   crypto/sha1.h \
   crypto/ripemd160.h \
-  crypto/sph_types.h \
-  crypto/sph_jh.h \
-  crypto/sph_skein.h \
+  crypto/sph_blake.h \
+  crypto/sph_cubehash.h \
+  crypto/sph_echo.h \
   crypto/sph_fugue.h \
   crypto/sph_gost.h \
-  crypto/sph_cubehash.h \
-  crypto/sph_echo.h
+  crypto/sph_groestl.h \
+  crypto/sph_jh.h \
+  crypto/sph_keccak.h \
+  crypto/sph_skein.h \
+  crypto/sph_types.h
 
 # univalue JSON library
 univalue_libbitcoin_univalue_a_SOURCES = \
@@ -339,6 +377,10 @@ folmd_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
+if ENABLE_ZMQ
+folmd_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+
 if ENABLE_WALLET
 folmd_LDADD += libbitcoin_wallet.a
 endif
@@ -349,7 +391,7 @@ if TARGET_WINDOWS
 folmd_SOURCES += folmd-res.rc
 endif
 
-folmd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+folmd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 folmd_CPPFLAGS = $(BITCOIN_INCLUDES)
 folmd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
@@ -360,7 +402,8 @@ folm_cli_LDADD = \
   $(LIBBITCOIN_UTIL) \
   $(BOOST_LIBS) \
   $(SSL_LIBS) \
-  $(CRYPTO_LIBS)
+  $(CRYPTO_LIBS) \
+  $(EVENT_LIBS)
 
 folm_cli_SOURCES = \
   folm-cli.cpp
@@ -422,7 +465,14 @@ libbitcoinconsensus_la_LIBADD += secp256k1/libsecp256k1.la
 endif
 endif
 
-CLEANFILES = leveldb/libleveldb.a leveldb/libmemenv.a *.gcda *.gcno
+CLEANFILES = leveldb/libleveldb.a leveldb/libmemenv.a
+CLEANFILES += *.gcda *.gcno
+CLEANFILES += compat/*.gcda compat/*.gcno
+CLEANFILES += crypto/*.gcda crypto/*.gcno
+CLEANFILES += primitives/*.gcda primitives/*.gcno
+CLEANFILES += script/*.gcda script/*.gcno
+CLEANFILES += univalue/*.gcda univalue/*.gcno
+CLEANFILES += zmq/*.gcda zmq/*.gcno
 
 DISTCLEANFILES = obj/build.h
 

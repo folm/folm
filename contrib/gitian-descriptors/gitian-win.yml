@@ -1,11 +1,11 @@
 ---
-name: "folm-win-2.2"
+name: "folm-win-1.2"
 enable_cache: true
 suites:
 - "trusty"
 architectures:
 - "amd64"
-packages: 
+packages:
 - "curl"
 - "g++"
 - "git-core"
@@ -22,12 +22,12 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/folmfolm.git"
+- "url": "https://github.com/folm-crypto/folm.git"
   "dir": "folm"
 files: []
 script: |
   WRAP_DIR=$HOME/wrapped
-  HOSTS="x86_64-w64-mingw32 i686-w64-mingw32"
+  HOSTS="i686-w64-mingw32 x86_64-w64-mingw32"
   CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests"
   FAKETIME_HOST_PROGS="g++ ar ranlib nm windres strip objcopy"
   FAKETIME_PROGS="date makensis zip"

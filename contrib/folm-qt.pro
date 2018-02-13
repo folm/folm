@@ -141,16 +141,14 @@ HEADERS += src/activemasternode.h \
            src/crypto/sha256.h \
            src/crypto/sha512.h \
            src/crypto/sph_blake.h \
-           src/crypto/sph_bmw.h \
-           src/crypto/sph_cubehash.h \
-           src/crypto/sph_echo.h \
            src/crypto/sph_groestl.h \
            src/crypto/sph_jh.h \
            src/crypto/sph_keccak.h \
-           src/crypto/sph_luffa.h \
-           src/crypto/sph_shavite.h \
-           src/crypto/sph_simd.h \
            src/crypto/sph_skein.h \
+           src/crypto/sph_cubehash.h \
+           src/crypto/sph_fugue.h \
+           src/crypto/sph_gost.h \
+           src/crypto/sph_echo.h \
            src/crypto/sph_types.h \
            src/json/json_spirit.h \
            src/json/json_spirit_error_position.h \
@@ -222,7 +220,6 @@ HEADERS += src/activemasternode.h \
            src/script/sigcache.h \
            src/script/sign.h \
            src/script/standard.h \
-           src/test/bignum.h \
            src/univalue/univalue.h \
            src/univalue/univalue_escapes.h \
            src/leveldb/db/builder.h \

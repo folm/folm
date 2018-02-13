@@ -1,7 +1,8 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,11 +10,11 @@
 #include "clientversion.h"
 #include "init.h"
 #include "main.h"
+#include "masternode-sync.h"
 #include "net.h"
 #include "netbase.h"
 #include "rpcserver.h"
 #include "spork.h"
-#include "stake.h"
 #include "timedata.h"
 #include "util.h"
 #ifdef ENABLE_WALLET
@@ -105,9 +106,84 @@ Value getinfo(const Array& params, bool fHelp)
     obj.push_back(Pair("paytxfee", ValueFromAmount(payTxFee.GetFeePerK())));
 #endif
     obj.push_back(Pair("relayfee", ValueFromAmount(::minRelayTxFee.GetFeePerK())));
-    obj.push_back(Pair("staking", (stake->IsActive() ? "Staking Active" : "Staking Not Active")));
+    bool nStaking = false;
+    if (mapHashedBlocks.count(chainActive.Tip()->nHeight))
+        nStaking = true;
+    else if (mapHashedBlocks.count(chainActive.Tip()->nHeight - 1) && nLastCoinStakeSearchInterval)
+        nStaking = true;
+    obj.push_back(Pair("staking status", (nStaking ? "Staking Active" : "Staking Not Active")));
     obj.push_back(Pair("errors", GetWarnings("statusbar")));
     return obj;
+}
+
+Value mnsync(const Array& params, bool fHelp)
+{
+    std::string strMode;
+    if (params.size() == 1)
+        strMode = params[0].get_str();
+
+    if (fHelp || params.size() != 1 || (strMode != "status" && strMode != "reset")) {
+        throw runtime_error(
+            "mnsync \"status|reset\"\n"
+            "\nReturns the sync status or resets sync.\n"
+
+            "\nArguments:\n"
+            "1. \"mode\"    (string, required) either 'status' or 'reset'\n"
+
+            "\nResult ('status' mode):\n"
+            "{\n"
+            "  \"IsBlockchainSynced\": true|false,    (boolean) 'true' if blockchain is synced\n"
+            "  \"lastMasternodeList\": xxxx,        (numeric) Timestamp of last MN list message\n"
+            "  \"lastMasternodeWinner\": xxxx,      (numeric) Timestamp of last MN winner message\n"
+            "  \"lastBudgetItem\": xxxx,            (numeric) Timestamp of last MN budget message\n"
+            "  \"lastFailure\": xxxx,           (numeric) Timestamp of last failed sync\n"
+            "  \"nCountFailures\": n,           (numeric) Number of failed syncs (total)\n"
+            "  \"sumMasternodeList\": n,        (numeric) Number of MN list messages (total)\n"
+            "  \"sumMasternodeWinner\": n,      (numeric) Number of MN winner messages (total)\n"
+            "  \"sumBudgetItemProp\": n,        (numeric) Number of MN budget messages (total)\n"
+            "  \"sumBudgetItemFin\": n,         (numeric) Number of MN budget finalization messages (total)\n"
+            "  \"countMasternodeList\": n,      (numeric) Number of MN list messages (local)\n"
+            "  \"countMasternodeWinner\": n,    (numeric) Number of MN winner messages (local)\n"
+            "  \"countBudgetItemProp\": n,      (numeric) Number of MN budget messages (local)\n"
+            "  \"countBudgetItemFin\": n,       (numeric) Number of MN budget finalization messages (local)\n"
+            "  \"RequestedMasternodeAssets\": n, (numeric) Status code of last sync phase\n"
+            "  \"RequestedMasternodeAttempt\": n, (numeric) Status code of last sync attempt\n"
+            "}\n"
+
+            "\nResult ('reset' mode):\n"
+            "\"status\"     (string) 'success'\n"
+            "\nExamples:\n" +
+            HelpExampleCli("mnsync", "\"status\"") + HelpExampleRpc("mnsync", "\"status\""));
+    }
+
+    if (strMode == "status") {
+        Object obj;
+
+        obj.push_back(Pair("IsBlockchainSynced", masternodeSync.IsBlockchainSynced()));
+        obj.push_back(Pair("lastMasternodeList", masternodeSync.lastMasternodeList));
+        obj.push_back(Pair("lastMasternodeWinner", masternodeSync.lastMasternodeWinner));
+        obj.push_back(Pair("lastBudgetItem", masternodeSync.lastBudgetItem));
+        obj.push_back(Pair("lastFailure", masternodeSync.lastFailure));
+        obj.push_back(Pair("nCountFailures", masternodeSync.nCountFailures));
+        obj.push_back(Pair("sumMasternodeList", masternodeSync.sumMasternodeList));
+        obj.push_back(Pair("sumMasternodeWinner", masternodeSync.sumMasternodeWinner));
+        obj.push_back(Pair("sumBudgetItemProp", masternodeSync.sumBudgetItemProp));
+        obj.push_back(Pair("sumBudgetItemFin", masternodeSync.sumBudgetItemFin));
+        obj.push_back(Pair("countMasternodeList", masternodeSync.countMasternodeList));
+        obj.push_back(Pair("countMasternodeWinner", masternodeSync.countMasternodeWinner));
+        obj.push_back(Pair("countBudgetItemProp", masternodeSync.countBudgetItemProp));
+        obj.push_back(Pair("countBudgetItemFin", masternodeSync.countBudgetItemFin));
+        obj.push_back(Pair("RequestedMasternodeAssets", masternodeSync.RequestedMasternodeAssets));
+        obj.push_back(Pair("RequestedMasternodeAttempt", masternodeSync.RequestedMasternodeAttempt));
+
+        return obj;
+    }
+
+    if (strMode == "reset") {
+        masternodeSync.Reset();
+        return "success";
+    }
+    return "failure";
 }
 
 #ifdef ENABLE_WALLET
@@ -166,10 +242,16 @@ Value spork(const Array& params, bool fHelp)
 {
     if (params.size() == 1 && params[0].get_str() == "show") {
         Object ret;
-        std::map<int, CSporkMessage>::iterator it = mapSporksActive.begin();
-        while (it != mapSporksActive.end()) {
-            ret.push_back(Pair(sporkManager.GetSporkNameByID(it->second.nSporkID), it->second.nValue));
-            it++;
+        for (int nSporkID = SPORK_START; nSporkID <= SPORK_END; nSporkID++) {
+            if (sporkManager.GetSporkNameByID(nSporkID) != "Unknown")
+                ret.push_back(Pair(sporkManager.GetSporkNameByID(nSporkID), GetSporkValue(nSporkID)));
+        }
+        return ret;
+    } else if (params.size() == 1 && params[0].get_str() == "active") {
+        Object ret;
+        for (int nSporkID = SPORK_START; nSporkID <= SPORK_END; nSporkID++) {
+            if (sporkManager.GetSporkNameByID(nSporkID) != "Unknown")
+                ret.push_back(Pair(sporkManager.GetSporkNameByID(nSporkID), IsSporkActive(nSporkID)));
         }
         return ret;
     } else if (params.size() == 2) {
@@ -183,7 +265,7 @@ Value spork(const Array& params, bool fHelp)
 
         //broadcast new spork
         if (sporkManager.UpdateSpork(nSporkID, nValue)) {
-//            ExecuteSpork(nSporkID, nValue);
+            ExecuteSpork(nSporkID, nValue);
             return "success";
         } else {
             return "failure";
@@ -265,7 +347,7 @@ CScript _createmultisig_redeemScript(const Array& params)
     for (unsigned int i = 0; i < keys.size(); i++) {
         const std::string& ks = keys[i].get_str();
 #ifdef ENABLE_WALLET
-        // Case 1: FOLM address and we have full public key:
+        // Case 1: Folm address and we have full public key:
         CBitcoinAddress address(ks);
         if (pwalletMain && address.IsValid()) {
             CKeyID keyID;
@@ -423,6 +505,8 @@ Value getstakingstatus(const Array& params, bool fHelp)
             "  \"walletunlocked\": true|false,     (boolean) if the wallet is unlocked\n"
             "  \"mintablecoins\": true|false,      (boolean) if the wallet has mintable coins\n"
             "  \"enoughcoins\": true|false,        (boolean) if available coins are greater than reserve balance\n"
+            "  \"mnsync\": true|false,             (boolean) if masternode data is synced\n"
+            "  \"staking status\": true|false,     (boolean) if the wallet is staking or not\n"
             "}\n"
             "\nExamples:\n" +
             HelpExampleCli("getstakingstatus", "") + HelpExampleRpc("getstakingstatus", ""));
@@ -433,8 +517,17 @@ Value getstakingstatus(const Array& params, bool fHelp)
     if (pwalletMain) {
         obj.push_back(Pair("walletunlocked", !pwalletMain->IsLocked()));
         obj.push_back(Pair("mintablecoins", pwalletMain->MintableCoins()));
-         obj.push_back(Pair("enoughcoins", stake->nReserveBalance <= pwalletMain->GetBalance()));
+        obj.push_back(Pair("enoughcoins", nReserveBalance <= pwalletMain->GetBalance()));
     }
+    obj.push_back(Pair("mnsync", masternodeSync.IsSynced()));
+
+    bool nStaking = false;
+    if (mapHashedBlocks.count(chainActive.Tip()->nHeight))
+        nStaking = true;
+    else if (mapHashedBlocks.count(chainActive.Tip()->nHeight - 1) && nLastCoinStakeSearchInterval)
+        nStaking = true;
+    obj.push_back(Pair("staking status", nStaking));
+
     return obj;
 }
 #endif // ENABLE_WALLET

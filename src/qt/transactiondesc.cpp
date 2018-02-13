@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,15 +35,53 @@ QString TransactionDesc::FormatTxStatus(const CWalletTx& wtx)
         else
             return tr("Open until %1").arg(GUIUtil::dateTimeStr(wtx.nLockTime));
     } else {
-        int nDepth = wtx.GetDepthInMainChain();
-        if (nDepth < 0)
-            return tr("conflicted");
-        else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
-            return tr("%1/offline").arg(nDepth);
-        else if (nDepth < 6)
-            return tr("%1/unconfirmed").arg(nDepth);
-        else
-            return tr("%1 confirmations").arg(nDepth);
+        int signatures = wtx.GetTransactionLockSignatures();
+        QString strUsingIX = "";
+        if (signatures >= 0) {
+            if (signatures >= SWIFTTX_SIGNATURES_REQUIRED) {
+                int nDepth = wtx.GetDepthInMainChain();
+                if (nDepth < 0)
+                    return tr("conflicted");
+                else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
+                    return tr("%1/offline (verified via swifttx)").arg(nDepth);
+                else if (nDepth < 6)
+                    return tr("%1/confirmed (verified via swifttx)").arg(nDepth);
+                else
+                    return tr("%1 confirmations (verified via swifttx)").arg(nDepth);
+            } else {
+                if (!wtx.IsTransactionLockTimedOut()) {
+                    int nDepth = wtx.GetDepthInMainChain();
+                    if (nDepth < 0)
+                        return tr("conflicted");
+                    else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
+                        return tr("%1/offline (SwiftTX verification in progress - %2 of %3 signatures)").arg(nDepth).arg(signatures).arg(SWIFTTX_SIGNATURES_TOTAL);
+                    else if (nDepth < 6)
+                        return tr("%1/confirmed (SwiftTX verification in progress - %2 of %3 signatures )").arg(nDepth).arg(signatures).arg(SWIFTTX_SIGNATURES_TOTAL);
+                    else
+                        return tr("%1 confirmations (SwiftTX verification in progress - %2 of %3 signatures)").arg(nDepth).arg(signatures).arg(SWIFTTX_SIGNATURES_TOTAL);
+                } else {
+                    int nDepth = wtx.GetDepthInMainChain();
+                    if (nDepth < 0)
+                        return tr("conflicted");
+                    else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
+                        return tr("%1/offline (SwiftTX verification failed)").arg(nDepth);
+                    else if (nDepth < 6)
+                        return tr("%1/confirmed (SwiftTX verification failed)").arg(nDepth);
+                    else
+                        return tr("%1 confirmations").arg(nDepth);
+                }
+            }
+        } else {
+            int nDepth = wtx.GetDepthInMainChain();
+            if (nDepth < 0)
+                return tr("conflicted");
+            else if (GetAdjustedTime() - wtx.nTimeReceived > 2 * 60 && wtx.GetRequestCount() == 0)
+                return tr("%1/offline").arg(nDepth);
+            else if (nDepth < 6)
+                return tr("%1/unconfirmed").arg(nDepth);
+            else
+                return tr("%1 confirmations").arg(nDepth);
+        }
     }
 }
 

@@ -583,7 +583,7 @@ Skriv in en lösenfras i den mellersta boxen. Tryck kryptera för att beräkna d
         <translation>flik vertygsrad</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Kärna</translation>
     </message>
     <message>
@@ -603,11 +603,11 @@ Skriv in en lösenfras i den mellersta boxen. Tryck kryptera för att beräkna d
         <translation>Utforska masternoder</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
+        <source>&amp;About Folm Core</source>
         <translation>Om Folm Kärnan</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
+        <source>Show information about Folm Core</source>
         <translation>Visa information om Folm Kärnan</translation>
     </message>
     <message>
@@ -631,7 +631,7 @@ Skriv in en lösenfras i den mellersta boxen. Tryck kryptera för att beräkna d
         <translation>Kryptera och avkryptera privata nycklar genom användning av lösenfras</translation>
     </message>
     <message>
-        <source>FOLM Core client</source>
+        <source>Folm Core client</source>
         <translation>Folm kärn klient</translation>
     </message>
     <message>
@@ -841,14 +841,14 @@ Skriv in en lösenfras i den mellersta boxen. Tryck kryptera för att beräkna d
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Kärna</translation>
     </message>
     </context>
 <context>
     <name>Intro</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Kärna</translation>
     </message>
     <message>
@@ -1181,7 +1181,7 @@ Skriv in en lösenfras i den mellersta boxen. Tryck kryptera för att beräkna d
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Kärna</translation>
     </message>
     </context>

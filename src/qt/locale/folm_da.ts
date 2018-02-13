@@ -598,7 +598,7 @@
         <translation>Værktøjslinier</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm kerne</translation>
     </message>
     <message>
@@ -618,11 +618,11 @@
         <translation>Vis masternoder</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
+        <source>&amp;About Folm Core</source>
         <translation>&amp;Om Folm kerne</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
+        <source>Show information about Folm Core</source>
         <translation>Vis information om Folm kerne</translation>
     </message>
     <message>
@@ -678,11 +678,11 @@
         <translation>Blockexplorer vindue</translation>
     </message>
     <message>
-        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
         <translation>Vis hjelpetekster fra Folm kernen for at få en liste med mulige Folm kommandolinie-startparametre</translation>
     </message>
     <message>
-        <source>FOLM Core client</source>
+        <source>Folm Core client</source>
         <translation>Folm kerneklient</translation>
     </message>
     <message>
@@ -1160,7 +1160,7 @@ Adresse: %4
         <translation>version</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm kerne</translation>
     </message>
     <message>
@@ -1168,7 +1168,7 @@ Adresse: %4
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About FOLM Core</source>
+        <source>About Folm Core</source>
         <translation>om Folm kerne</translation>
     </message>
     <message>
@@ -1215,15 +1215,15 @@ Adresse: %4
         <translation>Velkommen</translation>
     </message>
     <message>
-        <source>Welcome to FOLM Core.</source>
+        <source>Welcome to Folm Core.</source>
         <translation>Velkommen til Folm kerne</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where FOLM Core will store its data.</source>
+        <source>As this is the first time the program is launched, you can choose where Folm Core will store its data.</source>
         <translation>Da det er første gang programmet startes, kan De vælge hvor Folm kernen skal lagre sine data</translation>
     </message>
     <message>
-        <source>FOLM Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <source>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
         <translation>Folm kernen vil nu hente og gemme en kopi af Folm blockchain. Der skal være mindst %1GB ledigt på lagermediet, og behovet vil stige efterhånden som tiden går. Selve tegnebogen vil også blive gemt her.</translation>
     </message>
     <message>
@@ -1235,7 +1235,7 @@ Adresse: %4
         <translation>Anvend en mappe valgt af brugeren</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm kerne</translation>
     </message>
     <message>
@@ -3093,7 +3093,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>FOLM Core is shutting down...</source>
+        <source>Folm Core is shutting down...</source>
         <translation>Folm kernen lukker ned</translation>
     </message>
     <message>
@@ -3243,7 +3243,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm kerne</translation>
     </message>
     <message>
@@ -3259,7 +3259,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>DASH "core" udviklerne</translation>
     </message>
     <message>
-        <source>The FOLM Core developers</source>
+        <source>The Folm Core developers</source>
         <translation>Folm "core" udviklerne</translation>
     </message>
     <message>
@@ -3861,8 +3861,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Forbind til den opgivne adresse og lyt efter JSON-.RPC forbindelser. Brug [host]:port notation for IPv6. Der kan indsættes flere linier (standard: Forbind til alle interfaces)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. FOLM Core is probably already running.</source>
-        <translation>Kan ikke låse datamappen %s. FOLM Core kører sandsynligvis allerede.</translation>
+        <source>Cannot obtain a lock on data directory %s. Folm Core is probably already running.</source>
+        <translation>Kan ikke låse datamappen %s. Folm core kører sandsynligvis allerede.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -4058,7 +4058,7 @@ For eksempel: alertnotify=Echo %% | mail - s "Folm ALARM!" e-mail@administrator.
 </translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. FOLM Core is probably already running.</source>
+        <source>Unable to bind to %s on this computer. Folm Core is probably already running.</source>
         <translation>Det var ikke muligt at forbinde %s på denne computer. Folm kører sandsynligvis allerede.</translation>
     </message>
     <message>
@@ -4086,8 +4086,8 @@ For eksempel: alertnotify=Echo %% | mail - s "Folm ALARM!" e-mail@administrator.
         <translation>Advarsel! -paytxfee er sat meget højt. Det er dette gebyr De kommer til at betale for transaktionen, hvis De gennemfører. </translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong FOLM Core will not work properly.</source>
-        <translation>Advarsel! Kontroller at computerens dato og tid er korrekt indstillet. Hvis tiden ikke er rigtig, vil FOLM Core ikke fungere ordentligt.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Folm Core will not work properly.</source>
+        <translation>Advarsel! Kontroller at computerens dato og tid er korrekt indstillet. Hvis tiden ikke er rigtig, vil Folm core ikke fungere ordentligt.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4234,12 +4234,12 @@ For eksempel: alertnotify=Echo %% | mail - s "Folm ALARM!" e-mail@administrator.
         <translation>Copyright (C) 2014-%i The Dash Core Developers </translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The FOLM Core Developers</source>
-        <translation>Copyright (C) 2015-%i The FOLM Core Developers</translation>
+        <source>Copyright (C) 2015-%i The Folm Core Developers</source>
+        <translation>Copyright (C) 2015-%i The Folm Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2017-%i The FOLM Core Developers</source>
-        <translation>Copyright (C) 2017-%i The FOLM Core Developers</translation>
+        <source>Copyright (C) 2017-%i The Folm Core Developers</source>
+        <translation>Copyright (C) 2017-%i The Folm Core Developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -4310,8 +4310,8 @@ For eksempel: alertnotify=Echo %% | mail - s "Folm ALARM!" e-mail@administrator.
         <translation>Fejl ved indlæsning af wallet.dat: Tegnebogen er beskadiget</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of FOLM Core</source>
-        <translation>Fejl ved indlæsning af wallet.dat: Tegnebogen kræver en nyere version af FOLM Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Folm Core</source>
+        <translation>Fejl ved indlæsning af wallet.dat: Tegnebogen kræver en nyere version af Folm core</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -4422,8 +4422,8 @@ For eksempel: alertnotify=Echo %% | mail - s "Folm ALARM!" e-mail@administrator.
         <translation>Info:</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. FOLM Core is shutting down.</source>
-        <translation>Initiering af sanitetskontrollen fejlede. FOLM Core lukker ned. </translation>
+        <source>Initialization sanity check failed. Folm Core is shutting down.</source>
+        <translation>Initiering af sanitetskontrollen fejlede. Folm core lukker ned. </translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -4998,8 +4998,8 @@ For eksempel: alertnotify=Echo %% | mail - s "Folm ALARM!" e-mail@administrator.
         <translation>Tegnebogen er låst</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart FOLM Core to complete</source>
-        <translation>Tegnebogen måtte genskrives. Genstart FOLM Core for at gøre færdig</translation>
+        <source>Wallet needed to be rewritten: restart Folm Core to complete</source>
+        <translation>Tegnebogen måtte genskrives. Genstart Folm core for at gøre færdig</translation>
     </message>
     <message>
         <source>Wallet options:</source>

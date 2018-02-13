@@ -22,9 +22,9 @@ Build-Depends: debhelper,
  libqrencode-dev,
  libprotobuf-dev, protobuf-compiler
 Standards-Version: 3.9.2
-Homepage: https://folm.io
-Vcs-Git: git://github.com/folm/folm.git
-Vcs-Browser: http://github.com/folm/folm
+Homepage: http://www.folm.org
+Vcs-Git: git://github.com/bullwark-crypto/Folm.git
+Vcs-Browser: http://github.com/bullwark-crypto/Folm
 
 Package: folmd
 Architecture: any
@@ -55,4 +55,4 @@ Description: peer-to-peer network based digital currency - Qt GUI
  Full transaction history is stored locally at each client.  This
  requires 1+ GB of space, slowly growing.
  .
- This package provides folm-qt, a GUI for Folm based on Qt.
+ This package provides Folm-Qt, a GUI for Folm based on Qt.

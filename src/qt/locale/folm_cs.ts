@@ -598,8 +598,8 @@
         <translation>Nástrojová lišta záložek</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <source>Send coins to a Folm address</source>
@@ -618,12 +618,12 @@
         <translation>Procházet masternody</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
-        <translation>&amp;O FOLM Core</translation>
+        <source>&amp;About Folm Core</source>
+        <translation>&amp;O Folm Core</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
-        <translation>Zobraz informace o FOLM Core</translation>
+        <source>Show information about Folm Core</source>
+        <translation>Zobraz informace o Folm Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Folm</source>
@@ -678,12 +678,12 @@
         <translation>Okno blokového průzkumníka</translation>
     </message>
     <message>
-        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
-        <translation>Zobrazit FOLM Core pomocnou zpráv pro získání seznamu možných parametrů Folm pro příkazy do příkazové řádky</translation>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
+        <translation>Zobrazit Folm Core pomocnou zpráv pro získání seznamu možných parametrů Folm pro příkazy do příkazové řádky</translation>
     </message>
     <message>
-        <source>FOLM Core client</source>
-        <translation>FOLM Core klient</translation>
+        <source>Folm Core client</source>
+        <translation>Folm Core klient</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -1116,12 +1116,12 @@ MultiSend: %1</translation>
         <translation>verze</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
-        <source>About FOLM Core</source>
-        <translation>O FOLM Core</translation>
+        <source>About Folm Core</source>
+        <translation>O Folm Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1155,16 +1155,16 @@ MultiSend: %1</translation>
         <translation>Vítejte</translation>
     </message>
     <message>
-        <source>Welcome to FOLM Core.</source>
-        <translation>Vítejte v FOLM Core.</translation>
+        <source>Welcome to Folm Core.</source>
+        <translation>Vítejte v Folm Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where FOLM Core will store its data.</source>
-        <translation>Při prvním spuštění programu si můžete vybrat, kam bude FOLM Core ukládat svá data.</translation>
+        <source>As this is the first time the program is launched, you can choose where Folm Core will store its data.</source>
+        <translation>Při prvním spuštění programu si můžete vybrat, kam bude Folm Core ukládat svá data.</translation>
     </message>
     <message>
-        <source>FOLM Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>FOLM Core stáhne a uloží kopii Folm blockchainu. Nejméně %1GB dat bude do této složky uloženo a v průběhu času bude ukládat další data. Peněženka bude v této složce uložena také.</translation>
+        <source>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>Folm Core stáhne a uloží kopii Folm blockchainu. Nejméně %1GB dat bude do této složky uloženo a v průběhu času bude ukládat další data. Peněženka bude v této složce uložena také.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1175,8 +1175,8 @@ MultiSend: %1</translation>
         <translation>Použít vlastní složku pro data</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -2278,8 +2278,8 @@ Prosím zkontrolujte adresu a zkuste to znovu.</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     </context>
 <context>

@@ -1,4 +1,4 @@
-// Copyright (c) 2010 Satoshi Nakamoto                  -*- c++ -*-
+// Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -12,7 +12,6 @@
 #include <boost/signals2/last_value.hpp>
 #include <boost/signals2/signal.hpp>
 
-class CAdrenalineNodeConfig;
 class CBasicKeyStore;
 class CWallet;
 class uint256;
@@ -93,8 +92,6 @@ public:
      * @note called with lock cs_mapAlerts held.
      */
     boost::signals2::signal<void(const uint256& hash, ChangeType status)> NotifyAlertChanged;
-
-    boost::signals2::signal<void (const CAdrenalineNodeConfig &nodeConfig)> NotifyAdrenalineNodeChanged;
 
     /** A wallet has been loaded. */
     boost::signals2::signal<void(CWallet* wallet)> LoadWallet;

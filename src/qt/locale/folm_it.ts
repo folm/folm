@@ -590,8 +590,8 @@
         <translation>Schede degli strumenti</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <source>Send coins to a Folm address</source>
@@ -610,12 +610,12 @@
         <translation>Esplora i masternodes</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
-        <translation>&amp;Informazioni FOLM Core</translation>
+        <source>&amp;About Folm Core</source>
+        <translation>&amp;Informazioni Folm Core</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
-        <translation>Visualizza informazioni su FOLM Core</translation>
+        <source>Show information about Folm Core</source>
+        <translation>Visualizza informazioni su Folm Core</translation>
     </message>
     <message>
         <source>Modify configuration options for Folm</source>
@@ -646,8 +646,8 @@
         <translation>Finestra Block Explorer</translation>
     </message>
     <message>
-        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
-        <translation>Mostra il messaggio di aiuto FOLM Core per ottenere un elenco con le possibili opzioni di riga di comando Folm</translation>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
+        <translation>Mostra il messaggio di aiuto Folm Core per ottenere un elenco con le possibili opzioni di riga di comando Folm</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -893,8 +893,8 @@ MultiSend: %1</translation>
         <translation>versione</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
@@ -920,8 +920,8 @@ MultiSend: %1</translation>
         <translation>Benvenuto</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1177,8 +1177,8 @@ MultiSend: %1</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
-        <translation>FOLM Core</translation>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     </context>
 <context>

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2013 The Bitcoin developers           -*- c++ -*-
+// Copyright (c) 2011-2013 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -54,8 +54,6 @@ public slots:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
-    /** Switch to trading page */
-  //  void gotoTradingPage();
     /** Switch to masternode page */
     void gotoMasternodePage();
     /** Switch to receive coins page */
@@ -70,6 +68,9 @@ public slots:
     void gotoVerifyMessageTab(QString addr = "");
     /** Show MultiSend Dialog **/
     void gotoMultiSendDialog();
+
+     /** show a multisig tab **/
+    void gotoMultisigDialog(int index);
 
     /** Show BIP 38 tool - default to Encryption tab */
     void gotoBip38Tool();

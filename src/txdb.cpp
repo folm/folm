@@ -7,13 +7,11 @@
 
 #include "main.h"
 #include "pow.h"
-#include "stake.h"
+#include "uint256.h"
 
 #include <stdint.h>
 
 #include <boost/thread.hpp>
-
-extern map<uint256, uint256> mapProofOfStake;
 
 using namespace std;
 
@@ -79,9 +77,6 @@ CBlockTreeDB::CBlockTreeDB(size_t nCacheSize, bool fMemory, bool fWipe) : CLevel
 
 bool CBlockTreeDB::WriteBlockIndex(const CDiskBlockIndex& blockindex)
 {
-    if (blockindex.IsProofOfStake() && blockindex.hashProofOfStake == 0) {
-        return error("%s: zero stake (block %s)", __func__, blockindex.GetBlockHash().GetHex());
-    }
     return Write(make_pair('b', blockindex.GetBlockHash()), blockindex);
 }
 
@@ -247,26 +242,13 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->nStakeTime = diskindex.nStakeTime;
                 pindexNew->hashProofOfStake = diskindex.hashProofOfStake;
 
-                if (pindexNew->IsProofOfWork() && pindexNew->nHeight <= Params().LAST_POW_BLOCK()) {
+                if (pindexNew->nHeight <= Params().LAST_POW_BLOCK()) {
                     if (!CheckProofOfWork(pindexNew->GetBlockHash(), pindexNew->nBits))
-                        return error("%s: CheckProofOfWork failed: %s", __func__, pindexNew->ToString());
+                        return error("LoadBlockIndex() : CheckProofOfWork failed: %s", pindexNew->ToString());
                 }
-
                 // ppcoin: build setStakeSeen
-                if (pindexNew->IsProofOfStake()) {
-                    stake->setStakeSeen.emplace(pindexNew->prevoutStake, pindexNew->nStakeTime);
-                    auto const hash(pindexNew->GetBlockHash());
-                    if (pindexNew->hashProofOfStake == 0) {
-                        return error("%s: zero stake (block %s)", __func__, hash.GetHex());
-                    } else if (stake->mapProofOfStake.count(hash)) {
-                        auto const &h = stake->mapProofOfStake[hash];
-                        if (h != pindexNew->hashProofOfStake)
-                            return error("%s: diverged stake %s, %s (block %s)\n", __func__, 
-                                         pindexNew->hashProofOfStake.GetHex(), h.GetHex(), hash.GetHex());
-                    } else {
-                        stake->mapProofOfStake.emplace(hash, pindexNew->hashProofOfStake);
-                    }
-                }
+                if (pindexNew->IsProofOfStake())
+                    setStakeSeen.insert(make_pair(pindexNew->prevoutStake, pindexNew->nStakeTime));
 
                 pcursor->Next();
             } else {

@@ -13,6 +13,7 @@
 #include "guiutil.h"
 #include "masternodeconfig.h"
 #include "multisenddialog.h"
+#include "multisigdialog.h"
 #include "optionsmodel.h"
 #include "overviewpage.h"
 #include "receivecoinsdialog.h"
@@ -21,7 +22,6 @@
 #include "transactiontablemodel.h"
 #include "transactionview.h"
 #include "walletmodel.h"
-//#include "tradingdialog.h"
 
 #include "ui_interface.h"
 
@@ -43,7 +43,6 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     overviewPage = new OverviewPage();
     explorerWindow = new BlockExplorer(this);
     transactionsPage = new QWidget(this);
-    //tradingPage = new tradingDialog(this);
     QVBoxLayout* vbox = new QVBoxLayout();
     QHBoxLayout* hbox_buttons = new QHBoxLayout();
     transactionView = new TransactionView(this);
@@ -70,22 +69,20 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     hbox_buttons->addWidget(exportButton);
     vbox->addLayout(hbox_buttons);
     transactionsPage->setLayout(vbox);
-   // tradingPage->setLayout(vbox);
 
     receiveCoinsPage = new ReceiveCoinsDialog();
     sendCoinsPage = new SendCoinsDialog();
 
     addWidget(overviewPage);
     addWidget(transactionsPage);
-  //  addWidget(tradingPage);
     addWidget(receiveCoinsPage);
     addWidget(sendCoinsPage);
     addWidget(explorerWindow);
 
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
-        masternodeManagerPage = new MasternodeManager();
-        addWidget(masternodeManagerPage);
+        masternodeListPage = new MasternodeList();
+        addWidget(masternodeListPage);
     }
 
     // Clicking on a transaction on the overview pre-selects the transaction on the transaction history page
@@ -136,7 +133,7 @@ void WalletView::setClientModel(ClientModel* clientModel)
     sendCoinsPage->setClientModel(clientModel);
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
-        masternodeManagerPage->setClientModel(clientModel);
+        masternodeListPage->setClientModel(clientModel);
     }
 }
 
@@ -149,7 +146,7 @@ void WalletView::setWalletModel(WalletModel* walletModel)
     overviewPage->setWalletModel(walletModel);
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
-        masternodeManagerPage->setWalletModel(walletModel);
+        masternodeListPage->setWalletModel(walletModel);
     }
     receiveCoinsPage->setModel(walletModel);
     sendCoinsPage->setModel(walletModel);
@@ -202,10 +199,6 @@ void WalletView::gotoHistoryPage()
     setCurrentWidget(transactionsPage);
 }
 
-/*void WalletView::gotoTradingPage()
-{
-    setCurrentWidget(tradingPage);
-}*/
 
 void WalletView::gotoBlockExplorerPage()
 {
@@ -216,7 +209,7 @@ void WalletView::gotoMasternodePage()
 {
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
-        setCurrentWidget(masternodeManagerPage);
+        setCurrentWidget(masternodeListPage);
     }
 }
 
@@ -272,6 +265,14 @@ void WalletView::gotoMultiSendDialog()
     multiSendDialog->show();
 }
 
+void WalletView::gotoMultisigDialog(int index)
+{
+    MultisigDialog* multisig = new MultisigDialog(this);
+    multisig->setModel(walletModel);
+    multisig->showTab(index);
+}
+
+
 bool WalletView::handlePaymentRequest(const SendCoinsRecipient& recipient)
 {
     return sendCoinsPage->handlePaymentRequest(recipient);
@@ -292,7 +293,6 @@ void WalletView::encryptWallet(bool status)
     if (!walletModel)
         return;
     AskPassphraseDialog dlg(status ? AskPassphraseDialog::Encrypt : AskPassphraseDialog::Decrypt, this, walletModel);
-//  dlg.setModel(walletModel);
     dlg.exec();
 
     updateEncryptionStatus();
@@ -319,7 +319,6 @@ void WalletView::backupWallet()
 void WalletView::changePassphrase()
 {
     AskPassphraseDialog dlg(AskPassphraseDialog::ChangePass, this, walletModel);
-//  dlg.setModel(walletModel);
     dlg.exec();
 }
 
@@ -331,7 +330,6 @@ void WalletView::unlockWallet()
 
     if (walletModel->getEncryptionStatus() == WalletModel::Locked || walletModel->getEncryptionStatus() == WalletModel::UnlockedForAnonymizationOnly) {
         AskPassphraseDialog dlg(AskPassphraseDialog::UnlockAnonymize, this, walletModel);
-//      dlg.setModel(walletModel);
         dlg.exec();
     }
 }

@@ -518,7 +518,7 @@
         <translation>&amp;Pomoc</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>&amp;Rdzeń bitcoin</translation>
     </message>
     <message>
@@ -538,11 +538,11 @@
         <translation>Przeglądaj masternodes</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
+        <source>&amp;About Folm Core</source>
         <translation>&amp;O rdzeniu bitcoina</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
+        <source>Show information about Folm Core</source>
         <translation>Pokaż informacje o rdzeniu bitcoina</translation>
     </message>
     <message>
@@ -594,11 +594,11 @@
         <translation>Okno eksplorera bloków</translation>
     </message>
     <message>
-        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
         <translation>Pokaż wiadomość pomocy rdzenia Folm, aby dostać listę możliwych opcji Folm command-line</translation>
     </message>
     <message>
-        <source>FOLM Core client</source>
+        <source>Folm Core client</source>
         <translation>Rdzeń Folm klient</translation>
     </message>
     <message>
@@ -916,7 +916,7 @@ MultiWysyłlka: %1</translation>
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>&amp;Rdzeń bitcoin</translation>
     </message>
     </context>
@@ -931,7 +931,7 @@ MultiWysyłlka: %1</translation>
         <translation>Użyj niestandardowej ścieżki danych</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>&amp;Rdzeń bitcoin</translation>
     </message>
     <message>
@@ -1932,7 +1932,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations </translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>&amp;Rdzeń bitcoin</translation>
     </message>
     </context>

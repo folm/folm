@@ -34,8 +34,6 @@ public:
 
     void accept();
 
-    void setModel(WalletModel* model);
-
 private:
     Ui::AskPassphraseDialog* ui;
     Mode mode;

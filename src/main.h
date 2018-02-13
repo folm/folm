@@ -1,7 +1,8 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto             -*- c++ -*-
+// Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -50,27 +51,16 @@ class CValidationState;
 
 struct CBlockTemplate;
 struct CNodeStateStats;
-/**SegWit**/
-static const int SERIALIZE_TRANSACTION_NO_WITNESS = 0x40000000;
-
-#define START_MASTERNODE_PAYMENTS_TESTNET 1432907775
-#define START_MASTERNODE_PAYMENTS 1432907775
-
-static const int64_t DARKSEND_COLLATERAL = (5000*COIN); //5000 FOLM
-static const int64_t DARKSEND_FEE = (0.002*COIN); // reward masternode
-static const int64_t DARKSEND_POOL_MAX = (1999999.99*COIN);
 
 /** Default for -blockmaxsize and -blockminsize, which control the range of sizes the mining code will create **/
-static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 6000000;
+static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 750000;
 static const unsigned int DEFAULT_BLOCK_MIN_SIZE = 0;
-/** The maximum size for mined blocks */
-static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 /** Default for -blockprioritysize, maximum space for zero/low-fee transactions **/
 static const unsigned int DEFAULT_BLOCK_PRIORITY_SIZE = 50000;
 /** Default for accepting alerts from the P2P network. */
 static const bool DEFAULT_ALERTS = true;
 /** The maximum size for transactions we're willing to relay/mine */
-static const unsigned int MAX_STANDARD_TX_SIZE = MAX_BLOCK_SIZE_GEN/5;
+static const unsigned int MAX_STANDARD_TX_SIZE = 100000;
 /** The maximum allowed number of signature check operations in a block (network rule) */
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE / 50;
 /** Maximum number of signature check operations in an IsStandard() P2SH script */
@@ -78,7 +68,7 @@ static const unsigned int MAX_P2SH_SIGOPS = 15;
 /** The maximum number of sigops we're willing to relay/mine in a single tx */
 static const unsigned int MAX_TX_SIGOPS = MAX_BLOCK_SIGOPS / 5;
 /** Default for -maxorphantx, maximum number of orphan transactions kept in memory */
-static const unsigned int DEFAULT_MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
+static const unsigned int DEFAULT_MAX_ORPHAN_TRANSACTIONS = 100;
 /** The maximum size of a blk?????.dat file (since 0.8) */
 static const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB
 /** The pre-allocation chunk size for blk?????.dat files (since 0.8) */
@@ -86,7 +76,7 @@ static const unsigned int BLOCKFILE_CHUNK_SIZE = 0x1000000; // 16 MiB
 /** The pre-allocation chunk size for rev?????.dat files (since 0.8) */
 static const unsigned int UNDOFILE_CHUNK_SIZE = 0x100000; // 1 MiB
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
-static const int COINBASE_MATURITY = 79;
+static const int COINBASE_MATURITY = 100;
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 /** Maximum number of script-checking threads allowed */
@@ -109,7 +99,8 @@ static const unsigned int BLOCK_DOWNLOAD_WINDOW = 1024;
 static const unsigned int DATABASE_WRITE_INTERVAL = 3600;
 /** Maximum length of reject messages. */
 static const unsigned int MAX_REJECT_MESSAGE_LENGTH = 111;
-/** Bloomfilter setting. */
+
+
 static const bool DEFAULT_PEERBLOOMFILTERS = true;
 /** "reject" message codes */
 static const unsigned char REJECT_MALFORMED = 0x01;
@@ -120,11 +111,6 @@ static const unsigned char REJECT_NONSTANDARD = 0x40;
 static const unsigned char REJECT_DUST = 0x41;
 static const unsigned char REJECT_INSUFFICIENTFEE = 0x42;
 static const unsigned char REJECT_CHECKPOINT = 0x43;
-
-static const int64_t STATIC_POS_REWARD = 1 * COIN; //Constant reward 8%
-
-inline bool IsProtocolV2(int nHeight) { return IsTestNet() || nHeight > 0; }
-inline int64_t GetMNCollateral(int nHeight) { return 5000; }
 
 struct BlockHasher {
     size_t operator()(const uint256& hash) const { return hash.GetLow64(); }
@@ -153,6 +139,18 @@ extern bool fAlerts;
 
 extern bool fLargeWorkForkFound;
 extern bool fLargeWorkInvalidChainFound;
+
+extern unsigned int nStakeMinAge;
+extern int64_t nLastCoinStakeSearchInterval;
+extern int64_t nLastCoinStakeSearchTime;
+extern int64_t nReserveBalance;
+
+extern std::map<uint256, int64_t> mapRejectedBlocks;
+extern std::map<unsigned int, unsigned int> mapHashedBlocks;
+extern std::set<std::pair<COutPoint, unsigned int> > setStakeSeen;
+
+/** Best header we've seen so far (used for getheaders queries' starting points). */
+extern CBlockIndex* pindexBestHeader;
 
 /** Minimum disk space required - used in CheckDiskSpace() */
 static const uint64_t nMinDiskSpace = 52428800;
@@ -229,14 +227,11 @@ bool DisconnectBlocksAndReprocess(int blocks);
 
 // ***TODO***
 double ConvertBitsToDouble(unsigned int nBits);
-CAmount GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount = 0);
+int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount = 0);
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock, bool fProofOfStake);
-uint256 GetProofOfStakeLimit(int nHeight);
-inline unsigned int GetTargetSpacing(int nHeight) { return IsProtocolV2(nHeight) ? 240 : 60; }
 
 bool ActivateBestChain(CValidationState& state, CBlock* pblock = NULL);
-CAmount GetProofOfWorkReward(int64_t nFees, int nHeight);
-CAmount GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees, int nHeight);
+CAmount GetBlockValue(int nHeight);
 
 /** Create a new block index entry for a given block hash */
 CBlockIndex* InsertBlockIndex(uint256 hash);
@@ -297,6 +292,7 @@ struct CDiskTxPos : public CDiskBlockPos {
 
 
 CAmount GetMinRelayFee(const CTransaction& tx, unsigned int nBytes, bool fAllowFree);
+bool MoneyRange(CAmount nValueOut);
 
 /**
  * Check transaction inputs, and make sure any
@@ -315,88 +311,6 @@ CAmount GetMinRelayFee(const CTransaction& tx, unsigned int nBytes, bool fAllowF
  * @param[in] mapInputs    Map of previous transactions that have outputs we're spending
  * @return True if all inputs (scriptSigs) use only standard transaction forms
  */
-
-/**
-  * Basic transaction serialization format:
-  * - int32_t nVersion
-  * - std::vector<CTxIn> vin
-  * - std::vector<CTxOut> vout
-  * - uint32_t nLockTime
-  *
-  * Extended transaction serialization format:
-  * - int32_t nVersion
-  * - unsigned char dummy = 0x00
-  * - unsigned char flags (!= 0)
-  * - std::vector<CTxIn> vin
-  * - std::vector<CTxOut> vout
-  * - if (flags & 1):
-  *   - CTxWitness wit;
-  * - uint32_t nLockTime
-  */
- template<typename Stream, typename TxType>
- inline void UnserializeTransaction(TxType& tx, Stream& s) {
-     const bool fAllowWitness = !(s.GetVersion() & SERIALIZE_TRANSACTION_NO_WITNESS);
- 
-     s >> tx.nVersion;
-     unsigned char flags = 0;
-     tx.vin.clear();
-     tx.vout.clear();
-     /* Try to read the vin. In case the dummy is there, this will be read as an empty vector. */
-     s >> tx.vin;
-     if (tx.vin.size() == 0 && fAllowWitness) {
-         /* We read a dummy or an empty vin. */
-         s >> flags;
-         if (flags != 0) {
-           s >> tx.vin;
-             s >> tx.vout;
-         }
-     } else {
-         /* We read a non-empty vin. Assume a normal vout follows. */
-         s >> tx.vout;
-     }
-     if ((flags & 1) && fAllowWitness) {
-         /* The witness flag is present, and we support witnesses. */
-         flags ^= 1;
-         for (size_t i = 0; i < tx.vin.size(); i++) {
-             s >> tx.vin[i].scriptWitness.stack;
-         }
-     }
-     if (flags) {
-         /* Unknown flag in the serialization */
-         throw std::ios_base::failure("Unknown transaction optional data");
-     }
-     s >> tx.nLockTime;
- }
- 
- template<typename Stream, typename TxType>
- inline void SerializeTransaction(const TxType& tx, Stream& s) {
-     const bool fAllowWitness = !(s.GetVersion() & SERIALIZE_TRANSACTION_NO_WITNESS);
- 
-     s << tx.nVersion;
-     unsigned char flags = 0;
-     // Consistency check
-     if (fAllowWitness) {
-         /* Check whether witnesses need to be serialized. */
-         if (tx.HasWitness()) {
-             flags |= 1;
-         }
-     }
-     if (flags) {
-         /* Use extended format in case witnesses are to be serialized. */
-         std::vector<CTxIn> vinDummy;
-         s << vinDummy;
-         s << flags;
-     }
-     s << tx.vin;
-     s << tx.vout;
-     if (flags & 1) {
-         for (size_t i = 0; i < tx.vin.size(); i++) {
-             s << tx.vin[i].scriptWitness.stack;
-         }
-     }
-     s << tx.nLockTime;
- }
- 
 bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs);
 
 /** 
@@ -522,11 +436,10 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 /** Context-independent validity checks */
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool fCheckPOW = true);
 bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
-bool CheckWork(const CBlock &block, CBlockIndex* const pindexPrev);
+bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev);
 
 /** Context-dependent validity checks */
 bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex* pindexPrev);
-bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIndex* pindexPrev);
 
 /** Check a block is completely valid from start to finish (only works on top of our current best block, with cs_main held) */
 bool TestBlockValidity(CValidationState& state, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true);
@@ -700,7 +613,7 @@ struct CBlockTemplate {
     std::vector<int64_t> vTxSigOps;
 };
 
-
+/*
 class CValidationInterface
 {
 protected:
@@ -715,5 +628,5 @@ protected:
     friend void ::UnregisterValidationInterface(CValidationInterface*);
     friend void ::UnregisterAllValidationInterfaces();
 };
-
+*/
 #endif // BITCOIN_MAIN_H

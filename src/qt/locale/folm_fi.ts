@@ -591,7 +591,7 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>&amp;Apua</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Ydin</translation>
     </message>
     <message>
@@ -611,11 +611,11 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Selaa masternodeja</translation>
     </message>
     <message>
-        <source>&amp;About FOLM Core</source>
-        <translation>FOLM Core &amp;ytimestä</translation>
+        <source>&amp;About Folm Core</source>
+        <translation>Folm Core &amp;ytimestä</translation>
     </message>
     <message>
-        <source>Show information about FOLM Core</source>
+        <source>Show information about Folm Core</source>
         <translation>Näytä tietoja Folm Ytimestä</translation>
     </message>
     <message>
@@ -671,11 +671,11 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Lohkon tutkija näkymä</translation>
     </message>
     <message>
-        <source>Show the FOLM Core help message to get a list with possible Folm command-line options</source>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
         <translation>Näytä Folm Ydin apuviesti saadaksesi lista mahdollisista Folm komentolinja komennoista.</translation>
     </message>
     <message>
-        <source>FOLM Core client</source>
+        <source>Folm Core client</source>
         <translation>Folm Ydin asiakasohjelma</translation>
     </message>
     <message>
@@ -934,7 +934,7 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Ydin</translation>
     </message>
     <message>
@@ -953,11 +953,11 @@ Syötä salausavain laatikon keskelle. Paina salaa tuottaaksesi salatun yksityis
         <translation>Tervetuloa</translation>
     </message>
     <message>
-        <source>Welcome to FOLM Core.</source>
+        <source>Welcome to Folm Core.</source>
         <translation>Tervetuloa Folm Ytimeen.</translation>
     </message>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Ydin</translation>
     </message>
     <message>
@@ -2009,8 +2009,8 @@ Please check the address and try again.</source>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>FOLM Core is shutting down...</source>
-        <translation>FOLM Core sammuu...</translation>
+        <source>Folm Core is shutting down...</source>
+        <translation>Folm core sammuu...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2151,7 +2151,7 @@ Please check the address and try again.</source>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>FOLM Core</source>
+        <source>Folm Core</source>
         <translation>Folm Ydin</translation>
     </message>
     <message>
@@ -2167,8 +2167,8 @@ Please check the address and try again.</source>
         <translation>Dash Core kehittäjät</translation>
     </message>
     <message>
-        <source>The FOLM Core developers</source>
-        <translation>FOLM Core kehittäjät</translation>
+        <source>The Folm Core developers</source>
+        <translation>Folm core kehittäjät</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2521,8 +2521,8 @@ Please check the address and try again.</source>
         <translation>Virhe ladattaessa wallet.dat tiedostoa: Lompakko korruptoitunut</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of FOLM Core</source>
-        <translation>Virhe ladattaessa wallet.dat tiedostoa: Lompakko vaatii uudemman version FOLM Coresta</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Folm Core</source>
+        <translation>Virhe ladattaessa wallet.dat tiedostoa: Lompakko vaatii uudemman version Folm Coresta</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>

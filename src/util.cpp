@@ -1,7 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The FOLM developers
+// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -105,22 +106,22 @@ std::string to_internal(const std::string&);
 
 using namespace std;
 
-//FOLM only features
+//Folm only features
 bool fMasterNode = false;
 string strMasterNodePrivKey = "";
 string strMasterNodeAddr = "";
 bool fLiteMode = false;
 bool fEnableSwiftTX = true;
 int nSwiftTXDepth = 5;
-int nDarksendRounds = 2;
+int nObfuscationRounds = 2;
 int nAnonymizeFolmAmount = 1000;
 int nLiquidityProvider = 0;
 /** Spork enforcement enabled time */
 int64_t enforceMasternodePaymentsTime = 4085657524;
 bool fSucessfullyLoaded = false;
-bool fEnableFolmsend = false;
+bool fEnableObfuscation = false;
 /** All denominations used by obfuscation */
-std::vector<int64_t> darkSendDenominations;
+std::vector<int64_t> obfuScationDenominations;
 string strBudgetMode = "";
 
 map<string, string> mapArgs;
@@ -231,7 +232,7 @@ bool LogAcceptCategory(const char* category)
             const vector<string>& categories = mapMultiArgs["-debug"];
             ptrCategory.reset(new set<string>(categories.begin(), categories.end()));
             // thread_specific_ptr automatically deletes the set when the thread ends.
-            // "folm" is a composite category enabling all FOLM-related debug output
+            // "folm" is a composite category enabling all Folm-related debug output
             if (ptrCategory->count(string("folm"))) {
                 ptrCategory->insert(string("obfuscation"));
                 ptrCategory->insert(string("swifttx"));
@@ -288,17 +289,19 @@ int LogPrintStr(const std::string& str)
     return ret;
 }
 
-static void InterpretNegativeSetting(string name, map<string, string>& mapSettingsRet)
+static bool InterpretBool(const std::string& strValue)
 {
-    // interpret -nofoo as -foo=0 (and -nofoo=0 as -foo=1) as long as -foo not set
-    if (name.find("-no") == 0) {
-        std::string positive("-");
-        positive.append(name.begin() + 3, name.end());
-        if (mapSettingsRet.count(positive) == 0) {
-            bool value = !GetBoolArg(name, false);
-            mapSettingsRet[positive] = (value ? "1" : "0");
-        }
-    }
+	if (strValue.empty())
+		return true;
+	return (atoi(strValue) != 0);
+}
+
+static void InterpretNegativeSetting(std::string& strKey, std::string& strValue)
+{
+	if (strKey.length()>3 && strKey[0]=='-' && strKey[1]=='n' && strKey[2]=='o') {
+		strKey = "-" + strKey.substr(3);
+		strValue = InterpretBool(strValue) ? "0" : "1";
+	}
 }
 
 void ParseParameters(int argc, const char* const argv[])
@@ -327,16 +330,12 @@ void ParseParameters(int argc, const char* const argv[])
         // If both --foo and -foo are set, the last takes effect.
         if (str.length() > 1 && str[1] == '-')
             str = str.substr(1);
+	InterpretNegativeSetting(str, strValue);
 
         mapArgs[str] = strValue;
         mapMultiArgs[str].push_back(strValue);
     }
 
-    // New 0.6 features:
-    BOOST_FOREACH (const PAIRTYPE(string, string) & entry, mapArgs) {
-        // interpret -nofoo as -foo=0 (and -nofoo=0 as -foo=1) as long as -foo not set
-        InterpretNegativeSetting(entry.first, mapArgs);
-    }
 }
 
 std::string GetArg(const std::string& strArg, const std::string& strDefault)
@@ -348,34 +347,16 @@ std::string GetArg(const std::string& strArg, const std::string& strDefault)
 
 int64_t GetArg(const std::string& strArg, int64_t nDefault)
 {
-    if (mapArgs.count(strArg)) {
-        int64_t n;
-        try {
-            n = std::stoi(mapArgs[strArg]);
-        } catch (const std::exception& e) {
-            return nDefault;
-        }
-
-        return n;
-    }
-    return nDefault;
+	if (mapArgs.count(strArg))
+		return atoi64(mapArgs[strArg]);
+	return nDefault;
 }
 
 bool GetBoolArg(const std::string& strArg, bool fDefault)
 {
-    if (mapArgs.count(strArg)) {
-        if (mapArgs[strArg].empty())
-            return true;
-
-        int n;
-        try {
-            n = std::stoi(mapArgs[strArg]);
-        } catch (const std::exception& e) {
-            return fDefault;
-        }
-        return n;
-    }
-    return fDefault;
+	if (mapArgs.count(strArg))
+		return InterpretBool(mapArgs[strArg]);
+	return fDefault;
 }
 
 bool SoftSetArg(const std::string& strArg, const std::string& strValue)
@@ -392,6 +373,21 @@ bool SoftSetBoolArg(const std::string& strArg, bool fValue)
         return SoftSetArg(strArg, std::string("1"));
     else
         return SoftSetArg(strArg, std::string("0"));
+}
+
+static const int screenWidth = 79;
+static const int optIndent = 2;
+static const int msgIndent = 7;
+
+std::string HelpMessageGroup(const std::string &message) {
+    return std::string(message) + std::string("\n\n");
+}
+
+std::string HelpMessageOpt(const std::string &option, const std::string &message) {
+    return std::string(optIndent,' ') + std::string(option) +
+           std::string("\n") + std::string(msgIndent,' ') +
+           FormatParagraph(message, screenWidth - msgIndent, msgIndent) +
+           std::string("\n\n");
 }
 
 static std::string FormatException(std::exception* pex, const char* pszThread)
@@ -421,13 +417,13 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\FOLM
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\FOLM
-// Mac: ~/Library/Application Support/FOLM
+// Windows < Vista: C:\Documents and Settings\Username\Application Data\Folm
+// Windows >= Vista: C:\Users\Username\AppData\Roaming\Folm
+// Mac: ~/Library/Application Support/Folm
 // Unix: ~/.folm
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "FOLM";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Folm";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -439,7 +435,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "FOLM";
+    return pathRet / "Folm";
 #else
     // Unix
     return pathRet / ".folm";
@@ -521,12 +517,12 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
     for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it) {
         // Don't overwrite existing settings so command line settings override folm.conf
         string strKey = string("-") + it->string_key;
-        if (mapSettingsRet.count(strKey) == 0) {
-            mapSettingsRet[strKey] = it->value[0];
-            // interpret nofoo=1 as foo=0 (and nofoo=0 as foo=1) as long as foo not set)
-            InterpretNegativeSetting(strKey, mapSettingsRet);
-        }
-        mapMultiSettingsRet[strKey].push_back(it->value[0]);
+    	string strValue = it->value[0];
+	InterpretNegativeSetting(strKey, strValue);
+	if (mapSettingsRet.count(strKey) == 0)
+		mapSettingsRet[strKey] = strValue;
+	mapMultiSettingsRet[strKey].push_back(strValue);
+
     }
     // If datadir is changed in .conf file:
     ClearDatadirCache();

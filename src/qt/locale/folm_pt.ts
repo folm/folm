@@ -1242,8 +1242,8 @@
         <translation>Carteira esta bloqueada.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart FOLM Core to complete</source>
-        <translation>Carteira precisa ser reescrita: reinicie o FOLM Core para completar.</translation>
+        <source>Wallet needed to be rewritten: restart Folm Core to complete</source>
+        <translation>Carteira precisa ser reescrita: reinicie o Folm Core para completar.</translation>
     </message>
     <message>
         <source>Wallet options:</source>
