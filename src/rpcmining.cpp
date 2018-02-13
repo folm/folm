@@ -382,7 +382,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
         lpval = find_value(oparam, "longpollid");
 
-        if (strMode == "proposal") {
+        if (strMode == "proposal" || strMode == "submit") {
             const Value& dataval = find_value(oparam, "data");
             if (dataval.type() != str_type)
                 throw JSONRPCError(RPC_TYPE_ERROR, "Missing data String key for proposal");

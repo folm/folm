@@ -116,6 +116,10 @@ OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
     nDisplayUnit = 0; // just make sure it's not unitialized
     ui->setupUi(this);
 
+    #ifdef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
+        ui->toggleObfuscation->setIcon(QIcon());
+    #endif
+
     // Recent transactions
     ui->listTransactions->setItemDelegate(txdelegate);
     ui->listTransactions->setIconSize(QSize(DECORATION_SIZE, DECORATION_SIZE));
