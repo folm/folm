@@ -56,12 +56,13 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 static Checkpoints::MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
                 (0, uint256("0x00000aec3ce04601f5a475eab9f30dfccfb1eb9076a9c6c853e07a7734809c98"))
-		(10, uint256("0x000004df093d73d11068eb52f61572bf457b0925aa78f74ab2287832be42fc12"));
+		        (10, uint256("0x000004df093d73d11068eb52f61572bf457b0925aa78f74ab2287832be42fc12"))
+		        (500, uint256("0x00000000000b9160602ee8949d8c5cdffb5cb261ee4a66add0ca1686815cf54c"));
 
 static const Checkpoints::CCheckpointData data = {
         &mapCheckpoints,
-        1518900397,// * UNIX timestamp of last checkpoint block
-        10,    // * total number of transactions between genesis and last checkpoint
+        1519041909,// * UNIX timestamp of last checkpoint block
+        557,    // * total number of transactions between genesis and last checkpoint
         //   (the tx=... number in the SetBestChain debug.log lines)
         2000        // * estimated number of transactions per day after checkpoint
 };
@@ -133,9 +134,15 @@ public:
         assert(hashGenesisBlock == uint256("0x00000aec3ce04601f5a475eab9f30dfccfb1eb9076a9c6c853e07a7734809c98"));
         assert(genesis.hashMerkleRoot == uint256("0x985190fcf993fea0ab74ca2e9cc59300469055edd73512ef23bb01cce0aaea81"));
 
-
-        //  vSeeds.push_back(CDNSSeedData("folm-node03.folmcoin.com", "folm-node03.folmcoin.com"));
-        //	vSeeds.push_back(CDNSSeedData("folm-node02.folmcoin.com", "folm-node02.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node10.folmcoin.com", "folm-node10.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node09.folmcoin.com", "folm-node09.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node08.folmcoin.com", "folm-node08.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node07.folmcoin.com", "folm-node07.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node06.folmcoin.com", "folm-node06.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node05.folmcoin.com", "folm-node05.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node04.folmcoin.com", "folm-node04.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node03.folmcoin.com", "folm-node03.folmcoin.com"));
+        vSeeds.push_back(CDNSSeedData("folm-node02.folmcoin.com", "folm-node02.folmcoin.com"));
         vSeeds.push_back(CDNSSeedData("folm-node01.folmcoin.com", "folm-node01.folmcoin.com"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 36); // Folm address start with F
