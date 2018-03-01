@@ -245,15 +245,16 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
         }
     }
 
-    //check for masternode payee
-    if (masternodePayments.IsTransactionValid(txNew, nBlockHeight))
-        return true;
-    LogPrintf("Invalid mn payment detected %s\n", txNew.ToString().c_str());
+    if(nBlockHeight > 10799){
+        //check for masternode payee
+        if (masternodePayments.IsTransactionValid(txNew, nBlockHeight))
+            return true;
+        LogPrintf("Invalid mn payment detected %s\n", txNew.ToString().c_str());
 
-    if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT))
-        return false;
-    LogPrintf("Masternode payment enforcement is disabled, accepting block\n");
-
+        if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT))
+            return false;
+        LogPrintf("Masternode payment enforcement is disabled, accepting block\n");
+        }
     return true;
 }
 
@@ -522,6 +523,8 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransaction& txNew)
 
     std::string strPayeesPossible = "";
 
+    if(nBlockHeight>10799){
+
     CAmount nReward = GetBlockValue(nBlockHeight);
 
     if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)) {
@@ -572,6 +575,8 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransaction& txNew)
     }
 
     LogPrintf("CMasternodePayments::IsTransactionValid - Missing required payment of %s to %s\n", FormatMoney(requiredMasternodePayment).c_str(), strPayeesPossible.c_str());
+
+    }
     return false;
 }
 
