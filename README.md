@@ -1,4 +1,4 @@
-![Folm Logo](https://folm.io/images/logo_at_readme.jpg)
+![Folm Logo](https://folm.io/images/logo_at_readme.png)
 
 "Valuable secure Privacy cryptocurrency"
 
