@@ -59,12 +59,15 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
 		        (10, uint256("0x000004df093d73d11068eb52f61572bf457b0925aa78f74ab2287832be42fc12"))
 		        (500, uint256("0x00000000000b9160602ee8949d8c5cdffb5cb261ee4a66add0ca1686815cf54c"))
 		        (5000, uint256("0x00000000001044f5653026712e9af65c74a4a0878afb848de05e458625c8187a"))
-		        (7200, uint256("0x0000000000057bd12ed10785d6636299dc4840360b40f3126b59e9f997e069ea"));
+		        (7200, uint256("0x0000000000057bd12ed10785d6636299dc4840360b40f3126b59e9f997e069ea"))
+		        (10802, uint256("0x0000000000033d9285e516da50779f81268240047904c4e1377c5ad39ec9d6ac"))
+		        (15425, uint256("0x0000000000003b88cd7ae706ad099d7854e43ce6c591c86c6c8ec241d4560525"));
+
 
 static const Checkpoints::CCheckpointData data = {
         &mapCheckpoints,
-        1519887793,// * UNIX timestamp of last checkpoint block
-        9054,    // * total number of transactions between genesis and last checkpoint
+        1520926214,// * UNIX timestamp of last checkpoint block
+        23067,    // * total number of transactions between genesis and last checkpoint
         //   (the tx=... number in the SetBestChain debug.log lines)
         2000        // * estimated number of transactions per day after checkpoint
 };
@@ -99,7 +102,7 @@ public:
         pchMessageStart[1] = 0x6f;
         pchMessageStart[2] = 0x6c;
         pchMessageStart[3] = 0x6d;
-        vAlertPubKey = ParseHex("042da06568454d47e0b2349c6953b069690d13fd501e081ee8679cf4a0daaacb7c131f640048df4275a9fa172b34f12349856624031f76a56096aa1a");
+        vAlertPubKey = ParseHex("042da06568454d47e0b2349c6953b069690d13fd501e081ee8679cf4a0daaacb7c131f640048df4275a9fa172b34f12349856624031f76a56096aa1a71fe47b66f");
         nDefaultPort = 53656;
         bnProofOfWorkLimit = ~uint256(0) >> 20; // Folm starting difficulty is 1 / 2^12
         nMaxReorganizationDepth = 100;
@@ -195,7 +198,7 @@ public:
         pchMessageStart[2] = 0xf4;
         pchMessageStart[3] = 0xa0;
 
-        vAlertPubKey = ParseHex("048b8e440b71f26bbd54808da0c19cb4eece2b839afe5749876525ecd183120ce4fc57adee9ee4456843c074afd32ef42048e4504b8503e5ac7e9bf4");
+        vAlertPubKey = ParseHex("048b8e440b71f26bbd54808da0c19cb4eece2b839afe5749876525ecd183120ce4fc57adee9ee4456843c074afd32ef42048e4504b8503e5ac7e9bf41efdefac6f");
         nDefaultPort = 43246;
         nMinerThreads = 0;
         nTargetTimespan = 1 * 120; // 120 Seconds
@@ -235,7 +238,7 @@ public:
         fMineBlocksOnDemand = false;
         fTestnetToBeDeprecatedFieldRPC = true;
         nPoolMaxTransactions = 2;
-        strSporkKey = "04d35db018d163f596b73a3256b0c5e53eff499760ca0acb32ea5a7c5a8616bbb61d2bb4df1a0fbfc4b69b6d9da1734f4ab89406f9a94088acee9c5f771b508b60";
+        strSporkKey = "0425a68d2a8b1f375f69926ff68c8350982d2890984d4b09e118cc29e6359ae1caf0669ecef05b671fb75b8452cb30a7d36d09ccb9693988510fc547ee45c904ce";
         strObfuscationPoolDummyAddress = "TUQ57Fbh1crybrDhV6X9SDH95H4oSq4v6p";
         nStartMasternodePayments = 1420837558; //Fri, 09 Jan 2015 21:05:58 GMT
     }
