@@ -2,7 +2,6 @@
 
 "Valuable secure Privacy cryptocurrency"
 
-[![Build Status](https://travis-ci.org/folm/folm.svg?branch=master)](https://travis-ci.org/folm/folm)
 <a href="https://discord.gg/uDmpSHx"><img src="https://discordapp.com/api/guilds/398369914760593419/embed.png" alt="Discord server" /></a>
 
 
