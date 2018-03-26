@@ -106,6 +106,9 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"submitbudget", 3},
         {"submitbudget", 5},
         {"submitbudget", 7},
+        { "getblockhashes", 0 },
+        { "getblockhashes", 1 },
+        { "getblockhashes", 2 },
         // disabled until removal of the legacy 'masternode' command
         //{"startmasternode", 1},
         {"mnvoteraw", 1},
