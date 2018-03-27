@@ -27,6 +27,9 @@
 #include "sync.h"
 #include "tinyformat.h"
 #include "txmempool.h"
+#include "spentindex.h"
+#include "addressindex.h"
+#include "timestampindex.h"
 #include "uint256.h"
 #include "undo.h"
 
@@ -412,7 +415,7 @@ public:
     ScriptError GetScriptError() const { return error; }
 };
 
-
+bool GetSpentIndex(CSpentIndexKey &key, CSpentIndexValue &value);
 /** Functions for disk access for blocks */
 bool WriteBlockToDisk(CBlock& block, CDiskBlockPos& pos);
 bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos);

@@ -7,6 +7,7 @@
 #define BITCOIN_TXDB_H
 
 #include "leveldbwrapper.h"
+#include "spentindex.h"
 #include "main.h"
 
 #include <map>
@@ -63,6 +64,7 @@ public:
     bool WriteFlag(const std::string& name, bool fValue);
     bool ReadFlag(const std::string& name, bool& fValue);
     bool LoadBlockIndexGuts();
+    bool ReadSpentIndex(CSpentIndexKey &key, CSpentIndexValue &value);
 };
 
 #endif // BITCOIN_TXDB_H
