@@ -98,6 +98,8 @@ Value importprivkey(const Array& params, bool fHelp)
             "\nImport using a label and without rescan\n" + HelpExampleCli("importprivkey", "\"mykey\" \"testing\" false") +
             "\nAs a JSON-RPC call\n" + HelpExampleRpc("importprivkey", "\"mykey\", \"testing\", false"));
 
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+
     EnsureWalletIsUnlocked();
 
     string strSecret = params[0].get_str();
@@ -162,6 +164,8 @@ Value importaddress(const Array& params, bool fHelp)
             "\nImport using a label without rescan\n" + HelpExampleCli("importaddress", "\"myaddress\" \"testing\" false") +
             "\nAs a JSON-RPC call\n" + HelpExampleRpc("importaddress", "\"myaddress\", \"testing\", false"));
 
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+
     CScript script;
 
     CBitcoinAddress address(params[0].get_str());
@@ -222,6 +226,8 @@ Value importwallet(const Array& params, bool fHelp)
             HelpExampleCli("dumpwallet", "\"test\"") +
             "\nImport the wallet\n" + HelpExampleCli("importwallet", "\"test\"") +
             "\nImport using the json rpc call\n" + HelpExampleRpc("importwallet", "\"test\""));
+
+    LOCK2(cs_main, pwalletMain->cs_wallet);
 
     EnsureWalletIsUnlocked();
 
@@ -319,6 +325,8 @@ Value dumpprivkey(const Array& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("dumpprivkey", "\"myaddress\"") + HelpExampleCli("importprivkey", "\"mykey\"") + HelpExampleRpc("dumpprivkey", "\"myaddress\""));
 
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+
     EnsureWalletIsUnlocked();
 
     string strAddress = params[0].get_str();
@@ -345,6 +353,8 @@ Value dumpwallet(const Array& params, bool fHelp)
             "1. \"filename\"    (string, required) The filename\n"
             "\nExamples:\n" +
             HelpExampleCli("dumpwallet", "\"test\"") + HelpExampleRpc("dumpwallet", "\"test\""));
+
+    LOCK2(cs_main, pwalletMain->cs_wallet);
 
     EnsureWalletIsUnlocked();
 
@@ -406,6 +416,8 @@ Value bip38encrypt(const Array& params, bool fHelp)
             "\"key\"                (string) The encrypted private key\n"
             "\nExamples:\n");
 
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+
     EnsureWalletIsUnlocked();
 
     string strAddress = params[0].get_str();
@@ -444,6 +456,8 @@ Value bip38decrypt(const Array& params, bool fHelp)
             "\nResult:\n"
             "\"key\"                (string) The decrypted private key\n"
             "\nExamples:\n");
+
+    LOCK2(cs_main, pwalletMain->cs_wallet);
 
     EnsureWalletIsUnlocked();
 

@@ -121,6 +121,8 @@ Value getnetworkhashps(const Array& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("getnetworkhashps", "") + HelpExampleRpc("getnetworkhashps", ""));
 
+    LOCK(cs_main);
+
     return GetNetworkHashPS(params.size() > 0 ? params[0].get_int() : 120, params.size() > 1 ? params[1].get_int() : -1);
 }
 
@@ -137,6 +139,8 @@ Value getgenerate(const Array& params, bool fHelp)
             "true|false      (boolean) If the server is set to generate coins or not\n"
             "\nExamples:\n" +
             HelpExampleCli("getgenerate", "") + HelpExampleRpc("getgenerate", ""));
+
+    LOCK(cs_main);
 
     return GetBoolArg("-gen", false);
 }
@@ -305,6 +309,8 @@ Value prioritisetransaction(const Array& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("prioritisetransaction", "\"txid\" 0.0 10000") + HelpExampleRpc("prioritisetransaction", "\"txid\", 0.0, 10000"));
 
+    LOCK(cs_main);
+
     uint256 hash = ParseHashStr(params[0].get_str(), "txid");
 
     CAmount nAmount = params[2].get_int64();
@@ -406,6 +412,8 @@ Value getblocktemplate(const Array& params, bool fHelp)
 
             "\nExamples:\n" +
             HelpExampleCli("getblocktemplate", "") + HelpExampleRpc("getblocktemplate", ""));
+
+    LOCK(cs_main);
 
     std::string strMode = "template";
     Value lpval = Value::null;

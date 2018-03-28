@@ -35,7 +35,7 @@ Value getconnectioncount(const Array& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("getconnectioncount", "") + HelpExampleRpc("getconnectioncount", ""));
 
-    LOCK(cs_vNodes);
+    LOCK2(cs_main, cs_vNodes);
     return (int)vNodes.size();
 }
 
@@ -51,7 +51,7 @@ Value ping(const Array& params, bool fHelp)
             HelpExampleCli("ping", "") + HelpExampleRpc("ping", ""));
 
     // Request that each node send a ping during next message processing pass
-    LOCK(cs_vNodes);
+    LOCK2(cs_main, cs_vNodes);
     BOOST_FOREACH (CNode* pNode, vNodes) {
         pNode->fPingQueued = true;
     }
@@ -109,6 +109,7 @@ Value getpeerinfo(const Array& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("getpeerinfo", "") + HelpExampleRpc("getpeerinfo", ""));
 
+    LOCK(cs_main);
     vector<CNodeStats> vstats;
     CopyNodeStats(vstats);
 
@@ -380,6 +381,8 @@ Value getnetworkinfo(const Array& params, bool fHelp)
             "}\n"
             "\nExamples:\n" +
             HelpExampleCli("getnetworkinfo", "") + HelpExampleRpc("getnetworkinfo", ""));
+
+    LOCK(cs_main);
 
     Object obj;
     obj.push_back(Pair("version", CLIENT_VERSION));
