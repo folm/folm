@@ -17,6 +17,7 @@
 #include "spork.h"
 #include "timedata.h"
 #include "util.h"
+
 #ifdef ENABLE_WALLET
 #include "wallet.h"
 #include "walletdb.h"
@@ -490,6 +491,9 @@ Value setmocktime(const Array& params, bool fHelp)
 
     return Value::null;
 }
+
+
+//Other functions
 
 #ifdef ENABLE_WALLET
 Value getstakingstatus(const Array& params, bool fHelp)

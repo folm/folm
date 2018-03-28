@@ -106,9 +106,12 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"submitbudget", 3},
         {"submitbudget", 5},
         {"submitbudget", 7},
-        { "getblockhashes", 0 },
-        { "getblockhashes", 1 },
-        { "getblockhashes", 2 },
+
+        //New functions for Folmcore
+        {"getblockhashes", 0 },
+        {"getblockhashes", 1 },
+        {"getblockhashes", 2 },
+
         // disabled until removal of the legacy 'masternode' command
         //{"startmasternode", 1},
         {"mnvoteraw", 1},
@@ -117,7 +120,9 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"reservebalance", 1},
         {"setstakesplitthreshold", 0},
         {"autocombinerewards", 0},
-        {"autocombinerewards", 1}};
+        {"autocombinerewards", 1}
+        };
+
 
 class CRPCConvertTable
 {

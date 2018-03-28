@@ -295,11 +295,11 @@ crypto_libbitcoin_crypto_a_SOURCES = \
 
 # univalue JSON library
 univalue_libbitcoin_univalue_a_SOURCES = \
-  univalue/univalue.cpp \
-  univalue/univalue_read.cpp \
-  univalue/univalue_write.cpp \
-  univalue/univalue_escapes.h \
-  univalue/univalue.h
+  univalue/lib/univalue.cpp \
+  univalue/lib/univalue_read.cpp \
+  univalue/lib/univalue_write.cpp \
+  univalue/lib/univalue_escapes.h \
+  univalue/include/univalue.h
 
 # common: shared between folmd, and folm-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(BITCOIN_INCLUDES)

@@ -220,8 +220,8 @@ HEADERS += src/activemasternode.h \
            src/script/sigcache.h \
            src/script/sign.h \
            src/script/standard.h \
-           src/univalue/univalue.h \
-           src/univalue/univalue_escapes.h \
+           src/univalue/include/univalue.h \
+           src/univalue/lib/univalue_escapes.h \
            src/leveldb/db/builder.h \
            src/leveldb/db/db_impl.h \
            src/leveldb/db/db_iter.h \
@@ -555,9 +555,9 @@ SOURCES += src/activemasternode.cpp \
            src/test/util_tests.cpp \
            src/test/wallet_tests.cpp \
            src/univalue/gen.cpp \
-           src/univalue/univalue.cpp \
-           src/univalue/univalue_read.cpp \
-           src/univalue/univalue_write.cpp \
+           src/univalue/lib/univalue.cpp \
+           src/univalue/lib/univalue_read.cpp \
+           src/univalue/lib/univalue_write.cpp \
            src/leveldb/db/autocompact_test.cc \
            src/leveldb/db/builder.cc \
            src/leveldb/db/c.cc \
