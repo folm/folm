@@ -14,7 +14,7 @@
 
 #include <math.h>
 
-unsigned int static DarkGravityWave(const CBlockIndex* pindexLast) 
+unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const Consensus::Params& param)
 {
     /* current difficulty formula, folm - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
     const CBlockIndex* BlockLastSolved = pindexLast;
@@ -106,9 +106,9 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast)
     return bnNew.GetCompact();	
 }
 	
-unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock, const Consensus::Params& params)
 {
-	return DarkGravityWave(pindexLast);
+	return DarkGravityWave(pindexLast,params);
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits)

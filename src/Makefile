@@ -96,7 +96,7 @@ am__append_2 = $(builddir)/leveldb/libleveldb.a
 am__append_3 = $(builddir)/leveldb/libmemenv.a
 am__append_4 = $(BDB_CPPFLAGS)
 am__append_5 = libbitcoin_wallet.a
-am__append_6 = libbitcoin_zmq.a
+#am__append_6 = libbitcoin_zmq.a
 bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
 	$(am__EXEEXT_4) $(am__EXEEXT_5)
 TESTS = $(am__EXEEXT_6) $(am__EXEEXT_5)
@@ -104,7 +104,7 @@ am__append_7 = folmd
 am__append_8 = folm-cli folm-tx
 #am__append_9 = compat/glibc_compat.cpp \
 #	compat/glibcxx_compat.cpp
-am__append_10 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+#am__append_10 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 am__append_11 = libbitcoin_wallet.a
 #
 #am__append_12 = folmd-res.rc
@@ -133,7 +133,7 @@ am__append_11 = libbitcoin_wallet.a
 #  test/rpc_wallet_tests.cpp
 
 #am__append_20 = $(LIBBITCOIN_WALLET)
-#am__append_21 = $(ZMQ_LIBS)
+##am__append_21 = $(ZMQ_LIBS)
 #am__append_22 = $(CLEAN_BITCOIN_TEST)
 am__append_23 = qt/folm-qt
 am__append_24 = qt/libbitcoinqt.a
@@ -174,7 +174,7 @@ am__append_25 = \
 #am__append_26 = $(BITCOIN_MM)
 #am__append_27 = $(BITCOIN_RC)
 am__append_28 = $(LIBBITCOIN_WALLET)
-am__append_29 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+#am__append_29 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 am__append_30 = $(CLEAN_QT)
 #am__append_31 = qt/test/test_folm-qt
 #am__append_32 = qt/test/test_folm-qt
@@ -183,7 +183,7 @@ am__append_30 = $(CLEAN_QT)
 #  qt/test/paymentservertests.cpp
 
 #am__append_35 = $(LIBBITCOIN_WALLET)
-#am__append_36 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+##am__append_36 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 #am__append_37 = $(CLEAN_BITCOIN_QT_TEST)
 subdir = src
 SUBDIRS =
@@ -390,9 +390,9 @@ libbitcoin_zmq_a_AR = $(AR) $(ARFLAGS)
 libbitcoin_zmq_a_LIBADD =
 am__libbitcoin_zmq_a_SOURCES_DIST = zmq/zmqabstractnotifier.cpp \
 	zmq/zmqnotificationinterface.cpp zmq/zmqpublishnotifier.cpp
-am_libbitcoin_zmq_a_OBJECTS = zmq/libbitcoin_zmq_a-zmqabstractnotifier.$(OBJEXT) \
-	zmq/libbitcoin_zmq_a-zmqnotificationinterface.$(OBJEXT) \
-	zmq/libbitcoin_zmq_a-zmqpublishnotifier.$(OBJEXT)
+#am_libbitcoin_zmq_a_OBJECTS = zmq/libbitcoin_zmq_a-zmqabstractnotifier.$(OBJEXT) \
+#	zmq/libbitcoin_zmq_a-zmqnotificationinterface.$(OBJEXT) \
+#	zmq/libbitcoin_zmq_a-zmqpublishnotifier.$(OBJEXT)
 libbitcoin_zmq_a_OBJECTS = $(am_libbitcoin_zmq_a_OBJECTS)
 qt_libbitcoinqt_a_AR = $(AR) $(ARFLAGS)
 qt_libbitcoinqt_a_LIBADD =
@@ -742,8 +742,8 @@ am_folmd_OBJECTS = folmd-folmd.$(OBJEXT) $(am__objects_11)
 folmd_OBJECTS = $(am_folmd_OBJECTS)
 am__DEPENDENCIES_2 = $(am__append_2)
 am__DEPENDENCIES_3 = $(am__append_3)
-am__DEPENDENCIES_4 = $(LIBBITCOIN_ZMQ) \
-	$(am__DEPENDENCIES_1)
+#am__DEPENDENCIES_4 = $(LIBBITCOIN_ZMQ) \
+#	$(am__DEPENDENCIES_1)
 folmd_DEPENDENCIES = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
 	$(LIBBITCOIN_UNIVALUE) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
 	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) $(LIBSECP256K1) \
@@ -767,9 +767,9 @@ am__objects_14 = qt/res/folm-qt-res.$(OBJEXT)
 am_qt_folm_qt_OBJECTS = qt/qt_folm_qt-folm.$(OBJEXT) \
 	$(am__objects_13) $(am__objects_15)
 qt_folm_qt_OBJECTS = $(am_qt_folm_qt_OBJECTS)
-am__DEPENDENCIES_5 =  \
-	$(LIBBITCOIN_ZMQ) \
-	$(am__DEPENDENCIES_1)
+#am__DEPENDENCIES_5 =  \
+#	$(LIBBITCOIN_ZMQ) \
+#	$(am__DEPENDENCIES_1)
 qt_folm_qt_DEPENDENCIES = qt/libbitcoinqt.a \
 	$(LIBBITCOIN_SERVER) $(am__append_28) \
 	$(am__DEPENDENCIES_5) $(LIBBITCOIN_CLI) \
@@ -800,9 +800,9 @@ am__qt_test_test_folm_qt_SOURCES_DIST = qt/test/test_main.cpp \
 #	$(am__objects_18)
 qt_test_test_folm_qt_OBJECTS = $(am_qt_test_test_folm_qt_OBJECTS) \
 	$(nodist_qt_test_test_folm_qt_OBJECTS)
-#am__DEPENDENCIES_6 =  \
-#	$(LIBBITCOIN_ZMQ) \
-#	$(am__DEPENDENCIES_1)
+##am__DEPENDENCIES_6 =  \
+##	$(LIBBITCOIN_ZMQ) \
+##	$(am__DEPENDENCIES_1)
 #qt_test_test_folm_qt_DEPENDENCIES =  \
 #	$(LIBBITCOINQT) $(LIBBITCOIN_SERVER) \
 #	$(am__append_35) $(am__DEPENDENCIES_6) \
@@ -897,8 +897,8 @@ am__test_test_folm_SOURCES_DIST = test/bignum.h \
 test_test_folm_OBJECTS = $(am_test_test_folm_OBJECTS) \
 	$(nodist_test_test_folm_OBJECTS)
 #am__DEPENDENCIES_7 = libbitcoinconsensus.la
-#am__DEPENDENCIES_8 =  \
-#	$(am__DEPENDENCIES_1)
+##am__DEPENDENCIES_8 =  \
+##	$(am__DEPENDENCIES_1)
 #test_test_folm_DEPENDENCIES = $(LIBBITCOIN_SERVER) \
 #	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
 #	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
@@ -1261,13 +1261,13 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-ACLOCAL = ${SHELL} /home/splendour/projects/folm/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/folm/folm/build-aux/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = /usr/bin/ar
-AUTOCONF = ${SHELL} /home/splendour/projects/folm/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/splendour/projects/folm/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /home/splendour/projects/folm/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /home/folm/folm/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/folm/folm/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /home/folm/folm/build-aux/missing automake-1.15
 AWK = mawk
 BDB_CPPFLAGS = 
 BDB_LIBS = -ldb_cxx-4.8
@@ -1358,7 +1358,7 @@ LTLIBOBJS =
 LT_SYS_LIBRARY_PATH = 
 LUPDATE = /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
 MAINT = 
-MAKEINFO = ${SHELL} /home/splendour/projects/folm/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/folm/folm/build-aux/missing makeinfo
 MAKENSIS = 
 MANIFEST_TOOL = :
 MINIUPNPC_CPPFLAGS = 
@@ -1440,11 +1440,11 @@ X11XCB_CFLAGS =
 X11XCB_LIBS = 
 XGETTEXT = /usr/bin/xgettext
 ZMQ_CFLAGS = 
-ZMQ_LIBS = -lzmq
-abs_builddir = /home/splendour/projects/folm/src
-abs_srcdir = /home/splendour/projects/folm/src
-abs_top_builddir = /home/splendour/projects/folm
-abs_top_srcdir = /home/splendour/projects/folm
+ZMQ_LIBS = 
+abs_builddir = /home/folm/folm/src
+abs_srcdir = /home/folm/folm/src
+abs_top_builddir = /home/folm/folm
+abs_top_srcdir = /home/folm/folm
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -1476,7 +1476,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/splendour/projects/folm/build-aux/install-sh
+install_sh = ${SHELL} /home/folm/folm/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -1659,13 +1659,13 @@ libbitcoin_server_a_SOURCES = \
   $(JSON_H) \
   $(BITCOIN_CORE_H)
 
-LIBBITCOIN_ZMQ = libbitcoin_zmq.a
-libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
-libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_zmq_a_SOURCES = \
-  zmq/zmqabstractnotifier.cpp \
-  zmq/zmqnotificationinterface.cpp \
-  zmq/zmqpublishnotifier.cpp
+#LIBBITCOIN_ZMQ = libbitcoin_zmq.a
+#libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
+#libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+#libbitcoin_zmq_a_SOURCES = \
+#  zmq/zmqabstractnotifier.cpp \
+#  zmq/zmqnotificationinterface.cpp \
+#  zmq/zmqpublishnotifier.cpp
 
 
 # wallet: shared between folmd and folm-qt, but only linked
