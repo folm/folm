@@ -20,6 +20,8 @@
 #include "script/sign.h"
 #include "script/standard.h"
 #include "uint256.h"
+#include "univalue/univalue.h"
+
 #ifdef ENABLE_WALLET
 #include "wallet.h"
 #endif
@@ -27,7 +29,7 @@
 #include <stdint.h>
 
 #include <boost/assign/list_of.hpp>
-#include "univalue/univalue.h"
+
 
 using namespace boost;
 using namespace boost::assign;
@@ -242,8 +244,10 @@ UniValue listunspent(const UniValue& params, bool fHelp)
 
     set<CBitcoinAddress> setAddress;
     if (params.size() > 2) {
-        Univalue inputs = params[2].get_array();
-        BOOST_FOREACH (UniValue& input, inputs) {
+        UniValue inputs = params[2].get_array();
+         for (unsigned int i = 0; i < inputs.size(); i++) {
+
+            UniValue input = inputs[i];
             CBitcoinAddress address(input.get_str());
             if (!address.IsValid())
                 throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Folm address: ") + input.get_str());
@@ -342,12 +346,15 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
 
     CMutableTransaction rawTx;
 
-    BOOST_FOREACH (const Value& input, inputs) {
+
+    for (unsigned int i = 0; i < inputs.size(); i++) {
+         UniValue input = inputs[i];
+
         const UniValue& o = input.get_obj();
 
         uint256 txid = ParseHashO(o, "txid");
 
-        const Value& vout_v = find_value(o, "vout");
+        const UniValue& vout_v = find_value(o, "vout");
         if (!vout_v.isNum())
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, missing vout key");
         int nOutput = vout_v.get_int();
@@ -359,17 +366,19 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
     }
 
     set<CBitcoinAddress> setAddress;
-    BOOST_FOREACH (const Pair& s, sendTo) {
-        CBitcoinAddress address(s.name_);
+    vector<string> addrList = sendTo.getKeys();
+    BOOST_FOREACH(const string& name_, addrList) {
+        CBitcoinAddress address(name_);
+
         if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Folm address: ") + s.name_);
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Folm address: ") + name_);
 
         if (setAddress.count(address))
-            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ") + s.name_);
+            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ") + name_);
         setAddress.insert(address);
 
         CScript scriptPubKey = GetScriptForDestination(address.Get());
-        CAmount nAmount = AmountFromValue(s.value_);
+        CAmount nAmount = AmountFromValue(sendTo[name_]);
 
         CTxOut out(nAmount, scriptPubKey);
         rawTx.vout.push_back(out);
@@ -579,8 +588,9 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
     CBasicKeyStore tempKeystore;
     if (params.size() > 2 && !params[2].isNull()) {
         fGivenKeys = true;
-        Univalue keys = params[2].get_array();
-        BOOST_FOREACH (Univalue k, keys) {
+        UniValue keys = params[2].get_array();
+        for (unsigned int idx = 0; idx < keys.size(); idx++) {
+            UniValue k = keys[idx];
             CBitcoinSecret vchSecret;
             bool fGood = vchSecret.SetString(k.get_str());
             if (!fGood)
@@ -598,12 +608,14 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
 
     // Add previous txouts given in the RPC call:
     if (params.size() > 1 && !params[1].isNull()) {
-        Univalue prevTxs = params[1].get_array();
-        BOOST_FOREACH (UniValue& p, prevTxs) {
+        UniValue prevTxs = params[1].get_array();
+        for (unsigned int idx = 0; idx < prevTxs.size(); idx++) {
+
+            UniValue p = prevTxs[idx];
             if (!p.isObject())
                 throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "expected object with {\"txid'\",\"vout\",\"scriptPubKey\"}");
 
-            Univalue prevOut = p.get_obj();
+            UniValue prevOut = p.get_obj();
 
             RPCTypeCheckObj(prevOut, map_list_of("txid", UniValue::VSTR)("vout", UniValue::VNUM)("scriptPubKey", UniValue::VSTR));
 
@@ -634,8 +646,8 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
             // given), add redeemScript to the tempKeystore so it can be signed:
             if (fGivenKeys && scriptPubKey.IsPayToScriptHash()) {
                 RPCTypeCheckObj(prevOut, map_list_of("txid", UniValue::VSTR)("vout", UniValue::VNUM)("scriptPubKey", UniValue::VSTR)("redeemScript", UniValue::VSTR));
-                Value v = find_value(prevOut, "redeemScript");
-                if (!(v == Value::null)) {
+                UniValue v = find_value(prevOut, "redeemScript");
+                if (!(v.isNull())) {
                     vector<unsigned char> rsData(ParseHexV(v, "redeemScript"));
                     CScript redeemScript(rsData.begin(), rsData.end());
                     tempKeystore.AddCScript(redeemScript);

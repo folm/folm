@@ -20,7 +20,7 @@
 #include "univalue/univalue.h"
 using namespace std;
 
-void budgetToJSON(CBudgetProposal* pbudgetProposal, Object& bObj)
+void budgetToJSON(CBudgetProposal* pbudgetProposal, UniValue& bObj)
 {
     CTxDestination address1;
     ExtractDestination(pbudgetProposal->GetPayee(), address1);
@@ -78,20 +78,26 @@ UniValue mnbudget(const UniValue& params, bool fHelp)
             "  nextblock          - Get next superblock for budget system\n");
 
     if (strCommand == "nextblock") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getnextsuperblock(newParams, fHelp);
     }
 
     if (strCommand == "prepare") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return preparebudget(newParams, fHelp);
     }
 
     if (strCommand == "submit") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return submitbudget(newParams, fHelp);
     }
 
@@ -105,26 +111,34 @@ UniValue mnbudget(const UniValue& params, bool fHelp)
     }
 
     if (strCommand == "projection") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getbudgetprojection(newParams, fHelp);
     }
 
     if (strCommand == "show" || strCommand == "getinfo") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getbudgetinfo(newParams, fHelp);
     }
 
     if (strCommand == "getvotes") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getbudgetvotes(newParams, fHelp);
     }
 
     if (strCommand == "check") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return checkbudgets(newParams, fHelp);
     }
 
@@ -858,7 +872,7 @@ UniValue mnfinalbudget(const UniValue& params, bool fHelp)
         int success = 0;
         int failed = 0;
 
-        UniValue ret(UniValue::VOBJ);
+        UniValue resultsObj(UniValue::VOBJ);
 
         BOOST_FOREACH (CMasternodeConfig::CMasternodeEntry mne, masternodeConfig.getEntries()) {
             std::string errorMessage;

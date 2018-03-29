@@ -164,32 +164,42 @@ UniValue masternode(const UniValue& params, bool fHelp)
             "  winners      - Print list of masternode winners\n");
 
     if (strCommand == "list") {
-        vector<UniValue> newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return listmasternodes(newParams, fHelp);
     }
 
     if (strCommand == "connect") {
-        UniValue newParams(params.size() -1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return masternodeconnect(newParams, fHelp);
     }
 
     if (strCommand == "count") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getmasternodecount(newParams, fHelp);
     }
 
     if (strCommand == "current") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return masternodecurrent(newParams, fHelp);
     }
 
     if (strCommand == "debug") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return masternodedebug(newParams, fHelp);
     }
 
@@ -198,38 +208,50 @@ UniValue masternode(const UniValue& params, bool fHelp)
     }
 
     if (strCommand == "genkey") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return createmasternodekey(newParams, fHelp);
     }
 
     if (strCommand == "list-conf") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return listmasternodeconf(newParams, fHelp);
     }
 
     if (strCommand == "outputs") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getmasternodeoutputs(newParams, fHelp);
     }
 
     if (strCommand == "status") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getmasternodestatus(newParams, fHelp);
     }
 
     if (strCommand == "winners") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getmasternodewinners(newParams, fHelp);
     }
 
     if (strCommand == "calcscore") {
-        UniValue newParams(params.size() - 1);
-        std::copy(params.begin() + 1, params.end(), newParams.begin());
+        UniValue newParams(UniValue::VARR);
+        for (unsigned int i = 0; i < params.size()-1; ++i) {
+            newParams.push_back(params[i]);
+        }
         return getmasternodescores(newParams, fHelp);
     }
 

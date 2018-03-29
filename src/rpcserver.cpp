@@ -1035,9 +1035,10 @@ std::vector<std::string> CRPCTable::listCommands() const
     std::vector<std::string> commandList;
     typedef std::map<std::string, const CRPCCommand*> commandMap;
 
-    std::transform( mapCommands.begin(), mapCommands.end(),
+     /*  TODO fix
+      * std::transform( mapCommands.begin(), mapCommands.end(),
                    std::back_inserter(commandList),
-                   boost::bind(&commandMap::UniValue::VType::first,_1) );
+                  boost::bind(&commandMap::UniValue::VType::first,_1) ); */
     return commandList;
 }
 

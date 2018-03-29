@@ -260,7 +260,7 @@ int ReadHTTPMessage(std::basic_istream<char>& stream, map<string, string>& mapHe
  * http://www.codeproject.com/KB/recipes/JSON_Spirit.aspx
  */
 
-string JSONRPCRequest(const string& strMethod, const UniUniValue& params, const UniValue& id)
+string JSONRPCRequest(const string& strMethod, const UniValue& params, const UniValue& id)
 {
     UniValue request(UniValue::VOBJ);
     request.push_back(Pair("method", strMethod));
@@ -269,7 +269,7 @@ string JSONRPCRequest(const string& strMethod, const UniUniValue& params, const 
     return request.write() + "\n";
 }
 
-Object JSONRPCReplyObj(const UniValue& result, const UniValue& error, const UniValue& id)
+UniValue JSONRPCReplyObj(const UniValue& result, const UniValue& error, const UniValue& id)
 {
     UniValue reply(UniValue::VOBJ);
     if (!error.isNull())
