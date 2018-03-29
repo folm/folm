@@ -14,6 +14,7 @@
 
 #include "addrman.h"
 #include "chainparams.h"
+#include "consensus/validation.h"
 #include "clientversion.h"
 #include "miner.h"
 #include "obfuscation.h"

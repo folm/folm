@@ -8,6 +8,7 @@
 
 #include "amount.h"
 #include "base58.h"
+#include "consensus/validation.h"
 #include "chainparams.h"
 #include "core_io.h"
 #include "init.h"
@@ -15,8 +16,11 @@
 #include "miner.h"
 #include "net.h"
 #include "pow.h"
+#include "primitives/transaction.h"
 #include "rpcserver.h"
 #include "util.h"
+#include "script/script.h"
+#include "script/script_error.h"
 #ifdef ENABLE_WALLET
 #include "db.h"
 #include "wallet.h"

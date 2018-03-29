@@ -5,6 +5,8 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "masternode.h"
+#include "consensus/consensus.h"
+#include "consensus/validation.h"
 #include "addrman.h"
 #include "masternodeman.h"
 #include "obfuscation.h"

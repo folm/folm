@@ -2,6 +2,8 @@
 
 
 #include "spork.h"
+#include "consensus/consensus.h"
+#include "consensus/validation.h"
 #include "base58.h"
 #include "key.h"
 #include "main.h"
