@@ -312,7 +312,7 @@ am_libbitcoin_server_a_OBJECTS =  \
 	libbitcoin_server_a-txdb.$(OBJEXT) \
 	libbitcoin_server_a-txmempool.$(OBJEXT) \
 	libbitcoin_server_a-validationinterface.$(OBJEXT) \
-	$(am__objects_1) $(am__objects_1)
+	$(am__objects_1)
 libbitcoin_server_a_OBJECTS = $(am_libbitcoin_server_a_OBJECTS)
 libbitcoin_util_a_AR = $(AR) $(ARFLAGS)
 libbitcoin_util_a_LIBADD =
@@ -723,8 +723,8 @@ am__folm_cli_SOURCES_DIST = folm-cli.cpp folm-cli-res.rc
 #am__objects_10 = folm-cli-res.$(OBJEXT)
 am_folm_cli_OBJECTS = folm_cli-folm-cli.$(OBJEXT) $(am__objects_10)
 folm_cli_OBJECTS = $(am_folm_cli_OBJECTS)
-folm_cli_DEPENDENCIES = $(LIBBITCOIN_CLI) $(LIBBITCOIN_UTIL) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+folm_cli_DEPENDENCIES = $(LIBBITCOIN_CLI) $(LIBBITCOIN_UNIVALUE) \
+	$(LIBBITCOIN_UTIL) $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 folm_cli_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -1618,17 +1618,6 @@ BITCOIN_CORE_H = \
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h
 
-JSON_H = \
-  json/json_spirit.h \
-  json/json_spirit_error_position.h \
-  json/json_spirit_reader.h \
-  json/json_spirit_reader_template.h \
-  json/json_spirit_stream_reader.h \
-  json/json_spirit_utils.h \
-  json/json_spirit_value.h \
-  json/json_spirit_writer.h \
-  json/json_spirit_writer_template.h
-
 
 # server: shared between folmd and folm-qt
 libbitcoin_server_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
@@ -1660,7 +1649,6 @@ libbitcoin_server_a_SOURCES = \
   txdb.cpp \
   txmempool.cpp \
   validationinterface.cpp \
-  $(JSON_H) \
   $(BITCOIN_CORE_H)
 
 LIBBITCOIN_ZMQ = libbitcoin_zmq.a
@@ -1816,6 +1804,7 @@ folmd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 # folm-cli binary #
 folm_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
+  $(LIBBITCOIN_UNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(BOOST_LIBS) \
   $(SSL_LIBS) \
