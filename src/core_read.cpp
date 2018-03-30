@@ -24,7 +24,7 @@ using namespace boost;
 using namespace boost::algorithm;
 using namespace std;
 
-CScript ParseScript(std::string s)
+CScript ParseScript(const std::string& s)
 {
     CScript result;
 

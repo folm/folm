@@ -50,7 +50,7 @@ public:
     {
         return DoS(0, ret, _chRejectCode, _strRejectReason);
     }
-    bool Error(std::string strRejectReasonIn = "")
+    bool Error(const std::string& strRejectReasonIn)
     {
         if (mode == MODE_VALID)
             strRejectReason = strRejectReasonIn;
