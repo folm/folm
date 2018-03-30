@@ -1,2 +1,3 @@
 debian/manpages/folmd.1
 debian/manpages/folm.conf.5
+debian/manpages/folm-cli.1

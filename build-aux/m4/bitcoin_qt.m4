@@ -240,6 +240,7 @@ AC_DEFUN([BITCOIN_QT_CONFIGURE],[
     fi
   ],[
     bitcoin_enable_qt=no
+    bitcoin_enable_qt_test=no
   ])
   AC_MSG_RESULT([$bitcoin_enable_qt (Qt${bitcoin_qt_got_major_vers})])
 
