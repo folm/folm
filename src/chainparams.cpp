@@ -119,6 +119,7 @@ public:
 
         const char* pszTimestamp = "17 February 2018 - Folm Coin - Week of chaos, again, engulfs Trump";
         CMutableTransaction txNew;
+        txNew.nVersion = 1;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
