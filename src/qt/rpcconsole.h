@@ -21,6 +21,7 @@ class RPCConsole;
 }
 
 QT_BEGIN_NAMESPACE
+class QMenu;
 class QItemSelection;
 QT_END_NAMESPACE
 
@@ -58,6 +59,8 @@ private slots:
     void resizeEvent(QResizeEvent* event);
     void showEvent(QShowEvent* event);
     void hideEvent(QHideEvent* event);
+    /** Show custom context menu on Peers tab */
+    void showMenu(const QPoint& point);
 
 public slots:
     void clear();
@@ -100,6 +103,8 @@ public slots:
     void peerSelected(const QItemSelection& selected, const QItemSelection& deselected);
     /** Handle updated peer information */
     void peerLayoutChanged();
+    /** Disconnect a selected node on the Peers tab */
+    void disconnectSelectedNode();
     /** Show folder with wallet backups in default browser */
     void showBackups();
 
@@ -130,6 +135,7 @@ private:
     QStringList history;
     int historyPtr;
     NodeId cachedNodeid;
+    QMenu *contextMenu;
     QCompleter *autoCompleter;
 };
 
