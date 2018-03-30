@@ -28,7 +28,6 @@
 
 #include "univalue/univalue.h"
 
-using namespace json_spirit;
 using namespace std;
 
 void EnsureWalletIsUnlocked();
