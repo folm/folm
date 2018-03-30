@@ -14,6 +14,7 @@
 #include "sync.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "utilmoneystr.h"
 #include "utilstrencodings.h"
 #include "univalue/univalue.h"
 
@@ -118,25 +119,22 @@ void RPCTypeCheckObj(const UniValue& o,
     }
 }
 
-static inline int64_t roundint64(double d)
-{
-    return (int64_t)(d > 0 ? d + 0.5 : d - 0.5);
-}
 
 CAmount AmountFromValue(const UniValue& value)
 {
-    double dAmount = value.get_real();
-    if (dAmount <= 0.0 || dAmount > 21000000.0)
+    if (!value.isReal() && !value.isNum())
+         throw JSONRPCError(RPC_TYPE_ERROR, "Amount is not a number");
+    CAmount amount;
+    if (!ParseMoney(value.getValStr(), amount))
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
-    CAmount nAmount = roundint64(dAmount * COIN);
-    if (!MoneyRange(nAmount))
-        throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
-    return nAmount;
+    if (!MoneyRange(amount))
+        throw JSONRPCError(RPC_TYPE_ERROR, "Amount out of range");
+     return amount;
 }
 
 UniValue ValueFromAmount(const CAmount& amount)
 {
-    return (double)amount / (double)COIN;
+    return UniValue(UniValue::VREAL, FormatMoney(amount));
 }
 
 uint256 ParseHashV(const UniValue& v, string strName)
