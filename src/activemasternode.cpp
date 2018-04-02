@@ -1,3 +1,7 @@
+// Copyright (c) 2014-2016 The Dash Core developers
+// Copyright (c) 2017-2018 The Folm Core developers
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "activemasternode.h"
 #include "addrman.h"
@@ -19,7 +23,7 @@ void CActiveMasternode::ManageStatus()
     if (fDebug) LogPrintf("CActiveMasternode::ManageStatus() - Begin\n");
 
     //need correct blocks to send ping
-    if (Params().NetworkID() != CBaseChainParams::REGTEST && !masternodeSync.IsBlockchainSynced()) {
+    if (Params().NetworkIDString() != CBaseChainParams::REGTEST && !masternodeSync.IsBlockchainSynced()) {
         status = ACTIVE_MASTERNODE_SYNC_IN_PROCESS;
         LogPrintf("CActiveMasternode::ManageStatus() - %s\n", GetStatus());
         return;
@@ -63,7 +67,7 @@ void CActiveMasternode::ManageStatus()
             service = CService(strMasterNodeAddr);
         }
 
-        if (Params().NetworkID() == CBaseChainParams::MAIN) {
+        if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
             if (service.GetPort() != 53656) {
                 notCapableReason = strprintf("Invalid port: %u - only 53656 is supported on mainnet.", service.GetPort());
                 LogPrintf("CActiveMasternode::ManageStatus() - not capable: %s\n", notCapableReason);
@@ -262,7 +266,7 @@ bool CActiveMasternode::Register(std::string strService, std::string strKeyMaste
     }
 
     CService service = CService(strService);
-    if (Params().NetworkID() == CBaseChainParams::MAIN) {
+    if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
         if (service.GetPort() != 53656) {
             errorMessage = strprintf("Invalid port %u for masternode %s - only 53656 is supported on mainnet.", service.GetPort(), strService);
             LogPrintf("CActiveMasternode::Register() - %s\n", errorMessage);
@@ -371,7 +375,7 @@ bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& secr
     // Find the vin
     if (!strTxHash.empty()) {
         // Let's find it
-        uint256 txHash(strTxHash);
+        uint256 txHash(uint256S(strTxHash));
         int outputIndex;
         try {
             outputIndex = std::stoi(strOutputIndex.c_str());

@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2015-2016 The Dash developers
+// Copyright (c) 2017-2018 The Dash developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef ACTIVEMASTERNODE_H
@@ -12,7 +13,7 @@
 #include "net.h"
 #include "obfuscation.h"
 #include "sync.h"
-#include "wallet.h"
+#include "wallet/wallet.h"
 
 #define ACTIVE_MASTERNODE_INITIAL 0 // initial state
 #define ACTIVE_MASTERNODE_SYNC_IN_PROCESS 1
