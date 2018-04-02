@@ -499,7 +499,7 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += HelpMessageOpt("-limitdescendantsize=<n>", strprintf("Do not accept transactions if any ancestor would have more than <n> kilobytes of in-mempool descendants (default: %u).", DEFAULT_DESCENDANT_SIZE_LIMIT));
     }
     string debugCategories = "addrman, alert, bench, coindb, db, lock, rand, rpc, selectcoins, mempool, mempoolrej, net, proxy, prune, http, libevent, tor, zmq, "
-            "folm (or specifically: obfuscation, swifttx, masternode, keepass, mnpayments, mnbudget)"; // Don't translate these and qt below
+            "folm (or specifically: obfuscation, swifttx, masternode, mnpayments, mnbudget)"; // Don't translate these and qt below
     if (mode == HMM_BITCOIN_QT)
         debugCategories += ", qt";
     strUsage += HelpMessageOpt("-debug=<category>", strprintf(_("Output debugging information (default: %u, supplying <category> is optional)"), 0) + ". " +
@@ -1303,9 +1303,6 @@ bool AppInit2(boost::thread_group& threadGroup, CScheduler& scheduler)
         if (!errorString.empty())
             return InitError(errorString);
 
-
-    // Initialize KeePass Integration
-    keePassInt.init();
 
     } // (!fDisableWallet)
 #endif // ENABLE_WALLET
