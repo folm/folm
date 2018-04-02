@@ -211,13 +211,13 @@ void CObfuscationPool::ProcessMessageObfuscation(CNode* pfrom, std::string& strC
                 tx.vout.push_back(o);
 
                 if (o.scriptPubKey.size() != 25) {
-                    LogPrintf("dsi - non-standard pubkey detected! %s\n", o.scriptPubKey.ToString());
+                    LogPrintf("dsi - non-standard pubkey detected! %s\n", ScriptToAsmStr(o.scriptPubKey));
                     errorID = ERR_NON_STANDARD_PUBKEY;
                     pfrom->PushMessage("dssu", sessionID, GetState(), GetEntriesCount(), MASTERNODE_REJECTED, errorID);
                     return;
                 }
                 if (!o.scriptPubKey.IsNormalPaymentScript()) {
-                    LogPrintf("dsi - invalid script! %s\n", o.scriptPubKey.ToString());
+                    LogPrintf("dsi - invalid script! %s\n", ScriptToAsmStr(o.scriptPubKey));
                     errorID = ERR_INVALID_SCRIPT;
                     pfrom->PushMessage("dssu", sessionID, GetState(), GetEntriesCount(), MASTERNODE_REJECTED, errorID);
                     return;
@@ -231,7 +231,7 @@ void CObfuscationPool::ProcessMessageObfuscation(CNode* pfrom, std::string& strC
 
                 CTransaction tx2;
                 uint256 hash;
-                if (GetTransaction(i.prevout.hash, tx2, hash, true)) {
+                if (GetTransaction(i.prevout.hash, tx2, Params().GetConsensus(), hash, true)) {
                     if (tx2.vout.size() > i.prevout.n) {
                         nValueIn += tx2.vout[i.prevout.n].nValue;
                     }
@@ -263,7 +263,7 @@ void CObfuscationPool::ProcessMessageObfuscation(CNode* pfrom, std::string& strC
 
             {
                 LOCK(cs_main);
-                if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL, false, true)) {
+                if (!AcceptToMemoryPool(mempool, state, CTransaction(tx), false, NULL, false, true, true)) {
                     LogPrintf("dsi -- transaction not valid! \n");
                     errorID = ERR_INVALID_TX;
                     pfrom->PushMessage("dssu", sessionID, GetState(), GetEntriesCount(), MASTERNODE_REJECTED, errorID);
@@ -939,7 +939,7 @@ bool CObfuscationPool::SignatureValid(const CScript& newSig, const CTxIn& newVin
     if (found >= 0) { //might have to do this one input at a time?
         int n = found;
         txNew.vin[n].scriptSig = newSig;
-        LogPrint("obfuscation", "CObfuscationPool::SignatureValid() - Sign with sig %s\n", newSig.ToString().substr(0, 24));
+        LogPrint("obfuscation", "CObfuscationPool::SignatureValid() - Sign with sig %s\n", ScriptToAsmStr(newSig).ToString().substr(0, 24));
         if (!VerifyScript(txNew.vin[n].scriptSig, sigPubKey, SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_STRICTENC, MutableTransactionSignatureChecker(&txNew, n))) {
             LogPrint("obfuscation", "CObfuscationPool::SignatureValid() - Signing - Error signing input %u\n", n);
             return false;
@@ -972,7 +972,7 @@ bool CObfuscationPool::IsCollateralValid(const CTransaction& txCollateral)
     BOOST_FOREACH (const CTxIn i, txCollateral.vin) {
         CTransaction tx2;
         uint256 hash;
-        if (GetTransaction(i.prevout.hash, tx2, hash, true)) {
+        if (GetTransaction(i.prevout.hash, tx2, Params().GetConsensus(), hash, true)) {
             if (tx2.vout.size() > i.prevout.n) {
                 nValueIn += tx2.vout[i.prevout.n].nValue;
             }
@@ -997,7 +997,7 @@ bool CObfuscationPool::IsCollateralValid(const CTransaction& txCollateral)
     {
         LOCK(cs_main);
         CValidationState state;
-        if (!AcceptableInputs(mempool, state, txCollateral, true, NULL)) {
+        if (!AcceptToMemoryPool(mempool, state, txCollateral, true, NULL, false, true, true)) {
             if (fDebug) LogPrintf("CObfuscationPool::IsCollateralValid - didn't pass IsAcceptable\n");
             return false;
         }
@@ -1063,7 +1063,7 @@ bool CObfuscationPool::AddEntry(const std::vector<CTxIn>& newInput, const CAmoun
 
 bool CObfuscationPool::AddScriptSig(const CTxIn& newVin)
 {
-    LogPrint("obfuscation", "CObfuscationPool::AddScriptSig -- new sig  %s\n", newVin.scriptSig.ToString().substr(0, 24));
+    LogPrint("obfuscation", "CObfuscationPool::AddScriptSig -- new sig  %s\n", ScriptToAsmStr(newVin.scriptSig).substr(0, 24));
 
 
     BOOST_FOREACH (const CObfuScationEntry& v, entries) {
@@ -1080,18 +1080,18 @@ bool CObfuscationPool::AddScriptSig(const CTxIn& newVin)
         return false;
     }
 
-    LogPrint("obfuscation", "CObfuscationPool::AddScriptSig -- sig %s\n", newVin.ToString());
+    LogPrint("obfuscation", "CObfuscationPool::AddScriptSig -- sig %s\n", ScriptToAsmStr(newVin.scriptSig));
 
     BOOST_FOREACH (CTxIn& vin, finalTransaction.vin) {
         if (newVin.prevout == vin.prevout && vin.nSequence == newVin.nSequence) {
             vin.scriptSig = newVin.scriptSig;
             vin.prevPubKey = newVin.prevPubKey;
-            LogPrint("obfuscation", "CObfuScationPool::AddScriptSig -- adding to finalTransaction  %s\n", newVin.scriptSig.ToString().substr(0, 24));
+            LogPrint("obfuscation", "CObfuScationPool::AddScriptSig -- adding to finalTransaction  %s\n", ScriptToAsmStr(newVin.scriptSig).substr(0, 24));
         }
     }
     for (unsigned int i = 0; i < entries.size(); i++) {
         if (entries[i].AddSig(newVin)) {
-            LogPrint("obfuscation", "CObfuScationPool::AddScriptSig -- adding  %s\n", newVin.scriptSig.ToString().substr(0, 24));
+            LogPrint("obfuscation", "CObfuScationPool::AddScriptSig -- adding  %s\n", ScriptToAsmStr(newVin.scriptSig).substr(0, 24));
             return true;
         }
     }
@@ -1186,7 +1186,7 @@ void CObfuscationPool::SendObfuscationDenominate(std::vector<CTxIn>& vin, std::v
                 MilliSleep(50);
                 continue;
             }
-            if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL, false, true)) {
+            if (!AcceptToMemoryPool(mempool, state, CTransaction(tx), false, NULL, false, true, true)) {
                 LogPrintf("dsi -- transaction not valid! %s \n", tx.ToString());
                 UnlockCoins();
                 SetNull();
@@ -1320,7 +1320,7 @@ bool CObfuscationPool::SignFinalTransaction(CTransaction& finalTransactionNew, C
                 }
 
                 sigs.push_back(finalTransaction.vin[mine]);
-                LogPrint("obfuscation", " -- dss %d %d %s\n", mine, (int)sigs.size(), finalTransaction.vin[mine].scriptSig.ToString());
+                LogPrint("obfuscation", " -- dss %d %d %s\n", mine, (int)sigs.size(), ScriptToAsmStr(finalTransaction.vin[mine].scriptSig)));
             }
         }
 
@@ -1685,14 +1685,16 @@ bool CObfuscationPool::SendRandomPaymentToSelf()
 
     CWalletTx wtx;
     CAmount nFeeRet = 0;
+    int nChangePosRet = -1;
     std::string strFail = "";
-    vector<pair<CScript, CAmount> > vecSend;
+    vector< CRecipient > vecSend;
 
     // ****** Add fees ************ /
     vecSend.push_back(make_pair(scriptChange, nPayment));
 
     CCoinControl* coinControl = NULL;
-    bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekey, nFeeRet, strFail, coinControl, ONLY_DENOMINATED);
+    bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekey,
+             nFeeRet, nChangePosRet, strFail, coinControl, true, ONLY_DENOMINATED);
     if (!success) {
         LogPrintf("SendRandomPaymentToSelf: Error - %s\n", strFail);
         return false;
@@ -1710,8 +1712,9 @@ bool CObfuscationPool::MakeCollateralAmounts()
 {
     CWalletTx wtx;
     CAmount nFeeRet = 0;
+    int nChangePosRet = -1;
     std::string strFail = "";
-    vector<pair<CScript, CAmount> > vecSend;
+    vector< CRecipient > vecSend;
     CCoinControl coinControl;
     coinControl.fAllowOtherInputs = false;
     coinControl.fAllowWatchOnly = false;
@@ -1725,18 +1728,18 @@ bool CObfuscationPool::MakeCollateralAmounts()
     assert(reservekeyCollateral.GetReservedKey(vchPubKey)); // should never fail, as we just unlocked
     scriptCollateral = GetScriptForDestination(vchPubKey.GetID());
 
-    vecSend.push_back(make_pair(scriptCollateral, OBFUSCATION_COLLATERAL * 4));
+    vecSend.push_back((CRecipient){scriptCollateral, OBFUSCATION_COLLATERAL*4, false});
 
     // try to use non-denominated and not mn-like funds
     bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekeyChange,
-        nFeeRet, strFail, &coinControl, ONLY_NONDENOMINATED_NOT10000IFMN);
+        nFeeRet, nChangePosRet, strFail, &coinControl, true, ONLY_NONDENOMINATED_NOT10000IFMN);
     if (!success) {
         // if we failed (most likeky not enough funds), try to use all coins instead -
         // MN-like funds should not be touched in any case and we can't mix denominated without collaterals anyway
         CCoinControl* coinControlNull = NULL;
         LogPrintf("MakeCollateralAmounts: ONLY_NONDENOMINATED_NOT10000IFMN Error - %s\n", strFail);
         success = pwalletMain->CreateTransaction(vecSend, wtx, reservekeyChange,
-            nFeeRet, strFail, coinControlNull, ONLY_NOT10000IFMN);
+            nFeeRet, nChangePosRet, strFail, coinControlNull, true, ONLY_NOT10000IFMN);
         if (!success) {
             LogPrintf("MakeCollateralAmounts: ONLY_NOT10000IFMN Error - %s\n", strFail);
             reservekeyCollateral.ReturnKey();
@@ -1764,8 +1767,9 @@ bool CObfuscationPool::CreateDenominated(CAmount nTotalValue)
 {
     CWalletTx wtx;
     CAmount nFeeRet = 0;
+    int nChangePosRet = -1;
     std::string strFail = "";
-    vector<pair<CScript, CAmount> > vecSend;
+    vector< CRecipient > vecSend;
     CAmount nValueLeft = nTotalValue;
 
     // make our collateral address
@@ -1782,7 +1786,7 @@ bool CObfuscationPool::CreateDenominated(CAmount nTotalValue)
 
     // ****** Add collateral outputs ************ /
     if (!pwalletMain->HasCollateralInputs()) {
-        vecSend.push_back(make_pair(scriptCollateral, OBFUSCATION_COLLATERAL * 4));
+        vecSend.push_back((CRecipient){scriptCollateral, OBFUSCATION_COLLATERAL*4, false});
         nValueLeft -= OBFUSCATION_COLLATERAL * 4;
     }
 
@@ -1800,7 +1804,7 @@ bool CObfuscationPool::CreateDenominated(CAmount nTotalValue)
             // TODO: do not keep reservekeyDenom here
             reservekeyDenom.KeepKey();
 
-            vecSend.push_back(make_pair(scriptDenom, v));
+            vecSend.push_back((CRecipient){scriptDenom, v, false});
 
             //increment outputs and subtract denomination amount
             nOutputs++;
@@ -1816,7 +1820,7 @@ bool CObfuscationPool::CreateDenominated(CAmount nTotalValue)
 
     CCoinControl* coinControl = NULL;
     bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekeyChange,
-        nFeeRet, strFail, coinControl, ONLY_NONDENOMINATED_NOT10000IFMN);
+        nFeeRet, nChangePosRet, strFail, coinControl, true, ONLY_NONDENOMINATED_NOT10000IFMN);
     if (!success) {
         LogPrintf("CreateDenominated: Error - %s\n", strFail);
         // TODO: return reservekeyDenom here
@@ -2110,7 +2114,7 @@ bool CObfuScationSigner::IsVinAssociatedWithPubkey(CTxIn& vin, CPubKey& pubkey)
 
     CTransaction txVin;
     uint256 hash;
-    if (GetTransaction(vin.prevout.hash, txVin, hash, true)) {
+    if (GetTransaction(vin.prevout.hash, txVin, Params().GetConsensus(), hash, true)) {
         BOOST_FOREACH (CTxOut out, txVin.vout) {
             if (out.nValue == 5000 * COIN) {
                 if (out.scriptPubKey == payee2) return true;
