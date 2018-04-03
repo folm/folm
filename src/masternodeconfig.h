@@ -1,5 +1,4 @@
-
-// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2014-2015-6 The Dash Core developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
@@ -108,11 +107,7 @@ public:
 
     int getCount()
     {
-        int c = -1;
-        BOOST_FOREACH (CMasternodeEntry e, entries) {
-            if (e.getAlias() != "") c++;
-        }
-        return c;
+        return (int)entries.size();
     }
 
 private:
