@@ -1,9 +1,10 @@
-// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2014-2016 The Dash Core developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "core_io.h"
 #include "init.h"
 #include "main.h"
 
@@ -29,7 +30,7 @@ int nSubmittedFinalBudget;
 int GetBudgetPaymentCycleBlocks()
 {
     // Amount of blocks in a months period of time (using 1 minutes per) = (60*24*30)
-    if (Params().NetworkID() == CBaseChainParams::MAIN) return 28800;
+    if (Params().NetworkIDString()  == CBaseChainParams::MAIN) return 28800;
     //for testing purposes
 
     return 144; //ten times per day
@@ -39,7 +40,7 @@ bool IsBudgetCollateralValid(uint256 nTxCollateralHash, uint256 nExpectedHash, s
 {
     CTransaction txCollateral;
     uint256 nBlockHash;
-    if (!GetTransaction(nTxCollateralHash, txCollateral, nBlockHash, true)) {
+    if (!GetTransaction(nTxCollateralHash, txCollateral,Params().GetConsensus(), nBlockHash, true)) {
         strError = strprintf("Can't find collateral tx %s", txCollateral.ToString());
         LogPrintf("CBudgetProposalBroadcast::IsBudgetCollateralValid - %s\n", strError);
         return false;
@@ -73,7 +74,7 @@ bool IsBudgetCollateralValid(uint256 nTxCollateralHash, uint256 nExpectedHash, s
     */
 
     int conf = GetIXConfirmations(nTxCollateralHash);
-    if (nBlockHash != uint256(0)) {
+    if (nBlockHash != uint256()) {
         BlockMap::iterator mi = mapBlockIndex.find(nBlockHash);
         if (mi != mapBlockIndex.end() && (*mi).second) {
             CBlockIndex* pindex = (*mi).second;
@@ -156,7 +157,7 @@ void CBudgetManager::SubmitFinalBudget()
         return;
     }
 
-    CFinalizedBudgetBroadcast tempBudget(strBudgetName, nBlockStart, vecTxBudgetPayments, 0);
+    CFinalizedBudgetBroadcast tempBudget(strBudgetName, nBlockStart, vecTxBudgetPayments, uint256());
     if (mapSeenFinalizedBudgets.count(tempBudget.GetHash())) {
         LogPrintf("CBudgetManager::SubmitFinalBudget - Budget already exists - %s\n", tempBudget.GetHash().ToString());
         nSubmittedHeight = nCurrentHeight;
@@ -476,7 +477,7 @@ void CBudgetManager::FillBlockPayee(CMutableTransaction& txNew, CAmount nFees, b
         ++it;
     }
 
-    CAmount blockValue = GetBlockValue(pindexPrev->nHeight);
+    CAmount blockValue = GetBlockSubsidy(pindexPrev->nHeight);
 
     if (fProofOfStake) {
         if (nHighestCount > 0) {
@@ -663,7 +664,7 @@ struct sortProposalsByVotes {
     {
         if (left.second != right.second)
             return (left.second > right.second);
-        return (left.first->nFeeTXHash > right.first->nFeeTXHash);
+        return (UintToArith256(left.first->nFeeTXHash) > UintToArith256(right.first->nFeeTXHash));
     }
 };
 
@@ -788,7 +789,7 @@ CAmount CBudgetManager::GetTotalBudget(int nHeight)
 {
     if (chainActive.Tip() == NULL) return 0;
 
-    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
+    if (Params().NetworkIDString()  == CBaseChainParams::TESTNET) {
         CAmount nSubsidy = 500 * COIN;
         return ((nSubsidy / 100) * 10) * 146;
     }
@@ -830,7 +831,7 @@ void CBudgetManager::NewBlock()
         LOCK(cs_vNodes);
         BOOST_FOREACH (CNode* pnode, vNodes)
             if (pnode->nVersion >= ActiveProtocol())
-                Sync(pnode, 0, true);
+                Sync(pnode, uint256(), true);
 
         MarkSynced();
     }
@@ -929,8 +930,8 @@ void CBudgetManager::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
         uint256 nProp;
         vRecv >> nProp;
 
-        if (Params().NetworkID() == CBaseChainParams::MAIN) {
-            if (nProp == 0) {
+        if (Params().NetworkIDString()  == CBaseChainParams::MAIN) {
+            if (nProp == uint256()) {
                 if (pfrom->HasFulfilledRequest("mnvs")) {
                     LogPrintf("mnvs - peer already asked me for the list\n");
                     Misbehaving(pfrom->GetId(), 20);
@@ -1190,7 +1191,7 @@ void CBudgetManager::Sync(CNode* pfrom, uint256 nProp, bool fPartial)
     std::map<uint256, CBudgetProposalBroadcast>::iterator it1 = mapSeenMasternodeBudgetProposals.begin();
     while (it1 != mapSeenMasternodeBudgetProposals.end()) {
         CBudgetProposal* pbudgetProposal = FindProposal((*it1).first);
-        if (pbudgetProposal && pbudgetProposal->fValid && (nProp == 0 || (*it1).first == nProp)) {
+        if (pbudgetProposal && pbudgetProposal->fValid && (nProp == uint256() || (*it1).first == nProp)) {
             pfrom->PushInventory(CInv(MSG_BUDGET_PROPOSAL, (*it1).second.GetHash()));
             nInvCount++;
 
@@ -1563,7 +1564,7 @@ void CBudgetProposalBroadcast::Relay()
 CBudgetVote::CBudgetVote()
 {
     vin = CTxIn();
-    nProposalHash = 0;
+    nProposalHash = uint256();
     nVote = VOTE_ABSTAIN;
     nTime = 0;
     fValid = true;
@@ -1699,7 +1700,7 @@ void CFinalizedBudget::AutoCheck()
 
     //do this 1 in 4 blocks -- spread out the voting activity on mainnet
     // -- this function is only called every fourteenth block, so this is really 1 in 56 blocks
-    if (Params().NetworkID() == CBaseChainParams::MAIN && rand() % 4 != 0) {
+    if (Params().NetworkIDString()  == CBaseChainParams::MAIN && rand() % 4 != 0) {
         LogPrintf("CFinalizedBudget::AutoCheck - waiting\n");
         return;
     }
@@ -1714,13 +1715,13 @@ void CFinalizedBudget::AutoCheck()
 
         for (unsigned int i = 0; i < vecBudgetPayments.size(); i++) {
             LogPrintf("CFinalizedBudget::AutoCheck - nProp %d %s\n", i, vecBudgetPayments[i].nProposalHash.ToString());
-            LogPrintf("CFinalizedBudget::AutoCheck - Payee %d %s\n", i, vecBudgetPayments[i].payee.ToString());
+            LogPrintf("CFinalizedBudget::AutoCheck - Payee %d %s\n", i,  ScriptToAsmStr(vecBudgetPayments[i].payee));
             LogPrintf("CFinalizedBudget::AutoCheck - nAmount %d %lli\n", i, vecBudgetPayments[i].nAmount);
         }
 
         for (unsigned int i = 0; i < vBudgetProposals.size(); i++) {
             LogPrintf("CFinalizedBudget::AutoCheck - nProp %d %s\n", i, vBudgetProposals[i]->GetHash().ToString());
-            LogPrintf("CFinalizedBudget::AutoCheck - Payee %d %s\n", i, vBudgetProposals[i]->GetPayee().ToString());
+            LogPrintf("CFinalizedBudget::AutoCheck - Payee %d %s\n", i, ScriptToAsmStr(vBudgetProposals[i]->GetPayee()));
             LogPrintf("CFinalizedBudget::AutoCheck - nAmount %d %lli\n", i, vBudgetProposals[i]->GetAmount());
         }
 
@@ -1747,8 +1748,8 @@ void CFinalizedBudget::AutoCheck()
             }
 
             // if(vecBudgetPayments[i].payee != vBudgetProposals[i]->GetPayee()){ -- triggered with false positive
-            if (vecBudgetPayments[i].payee.ToString() != vBudgetProposals[i]->GetPayee().ToString()) {
-                LogPrintf("CFinalizedBudget::AutoCheck - item #%d payee doesn't match %s %s\n", i, vecBudgetPayments[i].payee.ToString(), vBudgetProposals[i]->GetPayee().ToString());
+            if(vecBudgetPayments[i].payee != vBudgetProposals[i]->GetPayee()){
+                LogPrintf("CFinalizedBudget::AutoCheck - item #%d payee doesn't match %s %s\n", i, ScriptToAsmStr(vecBudgetPayments[i].payee), ScriptToAsmStr(vBudgetProposals[i]->GetPayee()));
                 return;
             }
 
@@ -1863,7 +1864,7 @@ bool CFinalizedBudget::IsValid(std::string& strError, bool fCheckCollateral)
         strError = "Invalid BlockStart == 0";
         return false;
     }
-    if (nFeeTXHash == 0) {
+    if (nFeeTXHash == uint256()) {
         strError = "Invalid FeeTx == 0";
         return false;
     }
@@ -1962,7 +1963,7 @@ CFinalizedBudgetBroadcast::CFinalizedBudgetBroadcast()
     vecBudgetPayments.clear();
     mapVotes.clear();
     vchSig.clear();
-    nFeeTXHash = 0;
+    nFeeTXHash = uint256();
 }
 
 CFinalizedBudgetBroadcast::CFinalizedBudgetBroadcast(const CFinalizedBudget& other)
@@ -1994,7 +1995,7 @@ void CFinalizedBudgetBroadcast::Relay()
 CFinalizedBudgetVote::CFinalizedBudgetVote()
 {
     vin = CTxIn();
-    nBudgetHash = 0;
+    nBudgetHash = uint256();
     nTime = 0;
     vchSig.clear();
     fValid = true;

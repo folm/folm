@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2014-2015 The Dash Core developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Copyright (c) 2017-2018 The Folm developers
 
@@ -288,7 +288,7 @@ public:
     {
         payee = CScript();
         nAmount = 0;
-        nProposalHash = 0;
+        nProposalHash = uint256();
     }
 
     ADD_SERIALIZE_METHODS;
@@ -297,7 +297,7 @@ public:
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
     {
-        READWRITE(payee);
+        READWRITE(*(CScriptBase*)(&payee));
         READWRITE(nAmount);
         READWRITE(nProposalHash);
     }
@@ -492,7 +492,7 @@ public:
     bool IsEstablished()
     {
         //Proposals must be at least a day old to make it into a budget
-        if (Params().NetworkID() == CBaseChainParams::MAIN) return (nTime < GetTime() - (60 * 60 * 24));
+        if (Params().NetworkIDString() == CBaseChainParams::MAIN) return (nTime < GetTime() - (60 * 60 * 24));
 
         //for testing purposes - 4 hours
         return (nTime < GetTime() - (60 * 5));
@@ -526,7 +526,7 @@ public:
         ss << nBlockStart;
         ss << nBlockEnd;
         ss << nAmount;
-        ss << address;
+        ss << *(CScriptBase*)(&address);
         uint256 h1 = ss.GetHash();
 
         return h1;
@@ -544,7 +544,7 @@ public:
         READWRITE(nBlockStart);
         READWRITE(nBlockEnd);
         READWRITE(nAmount);
-        READWRITE(address);
+        READWRITE(*(CScriptBase*)(&address))
         READWRITE(nTime);
         READWRITE(nFeeTXHash);
 
@@ -601,7 +601,7 @@ public:
         READWRITE(nBlockStart);
         READWRITE(nBlockEnd);
         READWRITE(nAmount);
-        READWRITE(address);
+        READWRITE(*(CScriptBase*)(&address))
         READWRITE(nFeeTXHash);
     }
 };
