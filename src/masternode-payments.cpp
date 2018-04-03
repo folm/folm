@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2014-2015 The Dash Core developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Copyright (c) 2017-2018 The Folm developers
 // Distributed under the MIT/X11 software license, see the accompanying
@@ -298,7 +298,7 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
         }
     }
 
-    CAmount blockValue = GetBlockValue(pindexPrev->nHeight);
+    CAmount blockValue = GetBlockSubsidy(pindexPrev->nHeight);
     CAmount masternodePayment = GetMasternodePayment(pindexPrev->nHeight, blockValue);
 
     if (hasPayment && pindexPrev->nHeight > 10800) {
@@ -356,7 +356,7 @@ void CMasternodePayments::ProcessMessageMasternodePayments(CNode* pfrom, std::st
         int nCountNeeded;
         vRecv >> nCountNeeded;
 
-        if (Params().NetworkID() == CBaseChainParams::MAIN) {
+        if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
             if (pfrom->HasFulfilledRequest("mnget")) {
                 LogPrintf("mnget - peer already asked me for the list\n");
                 Misbehaving(pfrom->GetId(), 20);
@@ -432,7 +432,7 @@ bool CMasternodePaymentWinner::Sign(CKey& keyMasternode, CPubKey& pubKeyMasterno
 
     std::string strMessage = vinMasternode.prevout.ToStringShort() +
                              boost::lexical_cast<std::string>(nBlockHeight) +
-                             payee.ToString();
+                             ScriptToAsmStr(payee);
 
     if (!obfuScationSigner.SignMessage(strMessage, errorMessage, vchSig, keyMasternode)) {
         LogPrintf("CMasternodePing::Sign() - Error: %s\n", errorMessage.c_str());
@@ -489,7 +489,7 @@ bool CMasternodePayments::IsScheduled(CMasternode& mn, int nNotBlockHeight)
 
 bool CMasternodePayments::AddWinningMasternode(CMasternodePaymentWinner& winnerIn)
 {
-    uint256 blockHash = 0;
+    uint256 blockHash = uint256();
     if (!GetBlockHash(blockHash, winnerIn.nBlockHeight - 100)) {
         return false;
     }
@@ -769,7 +769,7 @@ bool CMasternodePaymentWinner::SignatureValid()
     if (pmn != NULL) {
         std::string strMessage = vinMasternode.prevout.ToStringShort() +
                                  boost::lexical_cast<std::string>(nBlockHeight) +
-                                 payee.ToString();
+                                 ScriptToAsmStr(payee);
 
         std::string errorMessage = "";
         if (!obfuScationSigner.VerifyMessage(pmn->pubKeyMasternode, vchSig, strMessage, errorMessage)) {
