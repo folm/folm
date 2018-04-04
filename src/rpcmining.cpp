@@ -8,7 +8,9 @@
 
 #include "amount.h"
 #include "base58.h"
+#include "consensus/consensus.h"
 #include "consensus/validation.h"
+#include "chain.h"
 #include "chainparams.h"
 #include "core_io.h"
 #include "init.h"
@@ -18,19 +20,21 @@
 #include "pow.h"
 #include "primitives/transaction.h"
 #include "rpcserver.h"
+#include "txmempool.h"
 #include "util.h"
 #include "script/script.h"
 #include "script/script_error.h"
 #ifdef ENABLE_WALLET
-#include "db.h"
-#include "wallet.h"
+#include "masternode-sync.h"
 #endif
-
+#include "utilstrencodings.h"
+#include "validationinterface.h"
 #include <stdint.h>
 
 #include <boost/assign/list_of.hpp>
+#include <boost/shared_ptr.hpp>
 
-#include "univalue/univalue.h"
+#include "univalue.h"
 
 using namespace std;
 
@@ -81,7 +85,7 @@ UniValue GetNetworkHashPS(int lookup, int height)
 
     // If lookup is -1, then use blocks since last difficulty change.
     if (lookup <= 0)
-        lookup = pb->nHeight % 2016 + 1;
+        lookup = pb->nHeight % Params().GetConsensus().DifficultyAdjustmentInterval() + 1;
 
     // If lookup is larger than chain, then set it to chain length.
     if (lookup > pb->nHeight)
@@ -101,7 +105,7 @@ UniValue GetNetworkHashPS(int lookup, int height)
     if (minTime == maxTime)
         return 0;
 
-    uint256 workDiff = pb->nChainWork - pb0->nChainWork;
+    arith_uint256 workDiff = pb->nChainWork - pb0->nChainWork;
     int64_t timeDiff = maxTime - minTime;
 
     return (int64_t)(workDiff.getdouble() / timeDiff);
@@ -144,9 +148,66 @@ UniValue getgenerate(const UniValue& params, bool fHelp)
 
     LOCK(cs_main);
 
-    return GetBoolArg("-gen", false);
+    return GetBoolArg("-gen", DEFAULT_GENERATE);
 }
 
+   "\nGenerate 11 blocks\n"
+            + HelpExampleCli("generate", "11")
+        );
+
+    if (!Params().MineBlocksOnDemand())
+        throw JSONRPCError(RPC_METHOD_NOT_FOUND, "This method can only be used on regtest");
+
+    int nHeightStart = 0;
+    int nHeightEnd = 0;
+    int nHeight = 0;
+    int nGenerate = params[0].get_int();
+
+    boost::shared_ptr<CReserveScript> coinbaseScript;
+    GetMainSignals().ScriptForMining(coinbaseScript);
+
+    // If the keypool is exhausted, no script is returned at all.  Catch this.
+    if (!coinbaseScript)
+        throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, "Error: Keypool ran out, please call keypoolrefill first");
+
+    //throw an error if no script was provided
+    if (coinbaseScript->reserveScript.empty())
+        throw JSONRPCError(RPC_INTERNAL_ERROR, "No coinbase script available (mining requires a wallet)");
+
+    {   // Don't keep cs_main locked
+        LOCK(cs_main);
+        nHeightStart = chainActive.Height();
+        nHeight = nHeightStart;
+        nHeightEnd = nHeightStart+nGenerate;
+    }
+    unsigned int nExtraNonce = 0;
+    UniValue blockHashes(UniValue::VARR);
+    while (nHeight < nHeightEnd)
+    {
+        auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(Params(), coinbaseScript->reserveScript));
+        if (!pblocktemplate.get())
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
+        CBlock *pblock = &pblocktemplate->block;
+        {
+            LOCK(cs_main);
+            IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
+        }
+        while (!CheckProofOfWork(pblock->GetHash(), pblock->nBits, Params().GetConsensus())) {
+            // Yes, there is a chance every nonce could fail to satisfy the -regtest
+            // target -- 1 in 2^(2^32). That ain't gonna happen.
+            ++pblock->nNonce;
+        }
+        CValidationState state;
+        if (!ProcessNewBlock(state, Params(), NULL, pblock, true, NULL))
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted");
+        ++nHeight;
+        blockHashes.push_back(pblock->GetHash().GetHex());
+
+        //mark script as important because it was used at least for one coinbase output
+        coinbaseScript->KeepScript();
+    }
+    return blockHashes;
+}
 
 UniValue setgenerate(const UniValue& params, bool fHelp)
 {
@@ -169,64 +230,23 @@ UniValue setgenerate(const UniValue& params, bool fHelp)
             "\nTurn off generation\n" + HelpExampleCli("setgenerate", "false") +
             "\nUsing json rpc\n" + HelpExampleRpc("setgenerate", "true, 1"));
 
-    if (pwalletMain == NULL)
-        throw JSONRPCError(RPC_METHOD_NOT_FOUND, "Method not found (disabled)");
+    if (Params().MineBlocksOnDemand())
+        throw JSONRPCError(RPC_METHOD_NOT_FOUND, "Use the generate method instead of setgenerate on this network");
 
     bool fGenerate = true;
     if (params.size() > 0)
         fGenerate = params[0].get_bool();
 
-    int nGenProcLimit = -1;
+    int nGenProcLimit = GetArg("-genproclimit", DEFAULT_GENERATE_THREADS);
     if (params.size() > 1) {
         nGenProcLimit = params[1].get_int();
         if (nGenProcLimit == 0)
             fGenerate = false;
     }
 
-    // -regtest mode: don't return until nGenProcLimit blocks are generated
-    if (fGenerate && Params().MineBlocksOnDemand()) {
-        int nHeightStart = 0;
-        int nHeightEnd = 0;
-        int nHeight = 0;
-        int nGenerate = (nGenProcLimit > 0 ? nGenProcLimit : 1);
-        CReserveKey reservekey(pwalletMain);
-
-        { // Don't keep cs_main locked
-            LOCK(cs_main);
-            nHeightStart = chainActive.Height();
-            nHeight = nHeightStart;
-            nHeightEnd = nHeightStart + nGenerate;
-        }
-        unsigned int nExtraNonce = 0;
-        UniValue blockHashes(UniValue::VARR);
-        while (nHeight < nHeightEnd) {
-            auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlockWithKey(reservekey, pwalletMain, false));
-            if (!pblocktemplate.get())
-                throw JSONRPCError(RPC_INTERNAL_ERROR, "Wallet keypool empty");
-            CBlock* pblock = &pblocktemplate->block;
-            {
-                LOCK(cs_main);
-                IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
-            }
-            while (!CheckProofOfWork(pblock->GetHash(), pblock->nBits)) {
-                // Yes, there is a chance every nonce could fail to satisfy the -regtest
-                // target -- 1 in 2^(2^32). That ain't gonna happen.
-                ++pblock->nNonce;
-            }
-            CValidationState state;
-            if (!ProcessNewBlock(state, NULL, pblock))
-                throw JSONRPCError(RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted");
-            ++nHeight;
-            blockHashes.push_back(pblock->GetHash().GetHex());
-        }
-        return blockHashes;
-    } else // Not -regtest: start generate thread, return immediately
-    {
-        mapArgs["-gen"] = (fGenerate ? "1" : "0");
-        mapArgs["-genproclimit"] = itostr(nGenProcLimit);
-        GenerateBitcoins(fGenerate, pwalletMain, nGenProcLimit);
-    }
-
+    mapArgs["-gen"] = (fGenerate ? "1" : "0");
+    mapArgs ["-genproclimit"] = itostr(nGenProcLimit);
+    GenerateBitcoins(fGenerate, nGenProcLimit, Params());
     return NullUniValue;
 }
 
@@ -264,7 +284,6 @@ UniValue getmininginfo(const UniValue& params, bool fHelp)
             "  \"errors\": \"...\"          (string) Current errors\n"
             "  \"generate\": true|false     (boolean) If the generation is on or off (see getgenerate or setgenerate calls)\n"
             "  \"genproclimit\": n          (numeric) The processor limit for generation. -1 if no generation. (see getgenerate or setgenerate calls)\n"
-            "  \"hashespersec\": n          (numeric) The hashes per second of the generation, or 0 if no generation.\n"
             "  \"pooledtx\": n              (numeric) The size of the mem pool\n"
             "  \"testnet\": true|false      (boolean) If using testnet or not\n"
             "  \"chain\": \"xxxx\",         (string) current network name as defined in BIP70 (main, test, regtest)\n"
@@ -272,21 +291,20 @@ UniValue getmininginfo(const UniValue& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("getmininginfo", "") + HelpExampleRpc("getmininginfo", ""));
 
+    LOCK(cs_main);
+
     UniValue obj(UniValue::VOBJ);
     obj.push_back(Pair("blocks", (int)chainActive.Height()));
     obj.push_back(Pair("currentblocksize", (uint64_t)nLastBlockSize));
     obj.push_back(Pair("currentblocktx", (uint64_t)nLastBlockTx));
     obj.push_back(Pair("difficulty", (double)GetDifficulty()));
     obj.push_back(Pair("errors", GetWarnings("statusbar")));
-    obj.push_back(Pair("genproclimit", (int)GetArg("-genproclimit", -1)));
+    obj.push_back(Pair("genproclimit", (int)GetArg("-genproclimit", DEFAULT_GENERATE_THREADS)));
     obj.push_back(Pair("networkhashps", getnetworkhashps(params, false)));
     obj.push_back(Pair("pooledtx", (uint64_t)mempool.size()));
     obj.push_back(Pair("testnet", Params().TestnetToBeDeprecatedFieldRPC()));
     obj.push_back(Pair("chain", Params().NetworkIDString()));
-#ifdef ENABLE_WALLET
     obj.push_back(Pair("generate", getgenerate(params, false)));
-    obj.push_back(Pair("hashespersec", gethashespersec(params, false)));
-#endif
     return obj;
 }
 
@@ -404,10 +422,6 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             "  \"masternode_payments_enforced\" : true|false, (boolean) true, if masternode payments are enforced\n"
             "  \"payee\" : \"xxx\",                (string) required payee for the next block\n"
             "  \"payee_amount\" : n,               (numeric) required amount to pay\n"
-            "  \"votes\" : [\n                     (array) show vote candidates\n"
-            "        { ... }                       (json object) vote candidate\n"
-            "        ,...\n"
-            "  ],\n"
             "  \"masternode_payments\" : true|false,         (boolean) true, if masternode payments are enabled\n"
             "  \"enforce_masternode_payments\" : true|false  (boolean) true, if masternode payments are enforced\n"
             "}\n"
@@ -455,7 +469,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             if (block.hashPrevBlock != pindexPrev->GetBlockHash())
                 return "inconclusive-not-best-prevblk";
             CValidationState state;
-            TestBlockValidity(state, block, pindexPrev, false, true);
+            TestBlockValidity(state, Params(), block, pindexPrev, false, true);
             return BIP22ValidationResult(state);
         }
     }
@@ -489,11 +503,8 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             nTransactionsUpdatedLastLP = nTransactionsUpdatedLast;
         }
 
-// Release the wallet and main lock while waiting
-#ifdef ENABLE_WALLET
-        if (pwalletMain)
-            LEAVE_CRITICAL_SECTION(pwalletMain->cs_wallet);
-#endif
+        // Release the wallet and main lock while waiting
+
         LEAVE_CRITICAL_SECTION(cs_main);
         {
             checktxtime = boost::get_system_time() + boost::posix_time::minutes(1);
@@ -509,10 +520,6 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             }
         }
         ENTER_CRITICAL_SECTION(cs_main);
-#ifdef ENABLE_WALLET
-        if (pwalletMain)
-            ENTER_CRITICAL_SECTION(pwalletMain->cs_wallet);
-#endif
 
         if (!IsRPCRunning())
             throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Shutting down");
@@ -540,7 +547,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
         }
 
 	CScript scriptDummy = CScript() << OP_TRUE;
-        pblocktemplate = CreateNewBlock(scriptDummy, pwalletMain, false);
+        pblocktemplate = CreateNewBlock(Params(), scriptDummy, pwalletMain, false);
         if (!pblocktemplate)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
 
@@ -552,7 +559,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     CBlock* pblock = &pblocktemplate->block; // pointer for convenience
 
     // Update nTime
-    UpdateTime(pblock, pindexPrev);
+    UpdateTime(pblock, Params().GetConsensus(), pindexPrev);
     pblock->nNonce = 0;
 
     UniValue aCaps(UniValue::VARR); aCaps.push_back("proposal");
@@ -622,7 +629,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
     UniValue aux(UniValue::VOBJ);
     aux.push_back(Pair("flags", HexStr(COINBASE_FLAGS.begin(), COINBASE_FLAGS.end())));
 
-    uint256 hashTarget = uint256().SetCompact(pblock->nBits);
+    arith_uint256 hashTarget = arith_uint256().SetCompact(pblock->nBits);
 
     static UniValue aMutable(UniValue::VARR);
     if (aMutable.empty()) {
@@ -745,7 +752,7 @@ UniValue submitblock(const UniValue& params, bool fHelp)
     CValidationState state;
     submitblock_StateCatcher sc(block.GetHash());
     RegisterValidationInterface(&sc);
-    bool fAccepted = ProcessNewBlock(state, NULL, &block);
+    bool fAccepted = ProcessNewBlock(state,Params(), NULL, &block, true, NULL);
     UnregisterValidationInterface(&sc);
     if (fBlockPresent) {
         if (fAccepted && !sc.found)
@@ -765,16 +772,15 @@ UniValue estimatefee(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "estimatefee nblocks\n"
-            "\nEstimates the approximate fee per kilobyte\n"
-            "needed for a transaction to begin confirmation\n"
-            "within nblocks blocks.\n"
+            "\nEstimates the approximate fee per kilobyte needed for a transaction to begin\n"
+            "confirmation within nblocks blocks.\n"
             "\nArguments:\n"
             "1. nblocks     (numeric)\n"
             "\nResult:\n"
-            "n :    (numeric) estimated fee-per-kilobyte\n"
+            "n         (numeric) estimated fee-per-kilobyte\n"
             "\n"
-            "-1.0 is returned if not enough transactions and\n"
-            "blocks have been observed to make an estimate.\n"
+            "A negative value is returned if not enough transactions and blocks\n"
+            "have been observed to make an estimate.\n"
             "\nExample:\n" +
             HelpExampleCli("estimatefee", "6"));
 
@@ -796,16 +802,15 @@ UniValue estimatepriority(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "estimatepriority nblocks\n"
-            "\nEstimates the approximate priority\n"
-            "a zero-fee transaction needs to begin confirmation\n"
-            "within nblocks blocks.\n"
+            "\nEstimates the approximate priority a zero-fee transaction needs to begin\n"
+            "confirmation within nblocks blocks.\n"
             "\nArguments:\n"
             "1. nblocks     (numeric)\n"
             "\nResult:\n"
             "n :    (numeric) estimated priority\n"
             "\n"
-            "-1.0 is returned if not enough transactions and\n"
-            "blocks have been observed to make an estimate.\n"
+            "A negative value is returned if not enough transactions and blocks\n"
+            "have been observed to make an estimate.\n"
             "\nExample:\n" +
             HelpExampleCli("estimatepriority", "6"));
 
@@ -816,4 +821,76 @@ UniValue estimatepriority(const UniValue& params, bool fHelp)
         nBlocks = 1;
 
     return mempool.estimatePriority(nBlocks);
+}
+
+UniValue estimatesmartfee(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+                "estimatesmartfee nblocks\n"
+                        "\nWARNING: This interface is unstable and may disappear or change!\n"
+                        "\nEstimates the approximate fee per kilobyte needed for a transaction to begin\n"
+                        "confirmation within nblocks blocks if possible and return the number of blocks\n"
+                        "for which the estimate is valid.\n"
+                        "\nArguments:\n"
+                        "1. nblocks     (numeric)\n"
+                        "\nResult:\n"
+                        "{\n"
+                        "  \"feerate\" : x.x,     (numeric) estimate fee-per-kilobyte (in BTC)\n"
+                        "  \"blocks\" : n         (numeric) block number where estimate was found\n"
+                        "}\n"
+                        "\n"
+                        "A negative value is returned if not enough transactions and blocks\n"
+                        "have been observed to make an estimate for any number of blocks.\n"
+                        "However it will not return a value below the mempool reject fee.\n"
+                        "\nExample:\n"
+                + HelpExampleCli("estimatesmartfee", "6")
+        );
+
+    RPCTypeCheck(params, boost::assign::list_of(UniValue::VNUM));
+
+    int nBlocks = params[0].get_int();
+
+    UniValue result(UniValue::VOBJ);
+    int answerFound;
+    CFeeRate feeRate = mempool.estimateSmartFee(nBlocks, &answerFound);
+    result.push_back(Pair("feerate", feeRate == CFeeRate(0) ? -1.0 : ValueFromAmount(feeRate.GetFeePerK())));
+    result.push_back(Pair("blocks", answerFound));
+    return result;
+}
+
+UniValue estimatesmartpriority(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+                "estimatesmartpriority nblocks\n"
+                        "\nWARNING: This interface is unstable and may disappear or change!\n"
+                        "\nEstimates the approximate priority a zero-fee transaction needs to begin\n"
+                        "confirmation within nblocks blocks if possible and return the number of blocks\n"
+                        "for which the estimate is valid.\n"
+                        "\nArguments:\n"
+                        "1. nblocks     (numeric)\n"
+                        "\nResult:\n"
+                        "{\n"
+                        "  \"priority\" : x.x,    (numeric) estimated priority\n"
+                        "  \"blocks\" : n         (numeric) block number where estimate was found\n"
+                        "}\n"
+                        "\n"
+                        "A negative value is returned if not enough transactions and blocks\n"
+                        "have been observed to make an estimate for any number of blocks.\n"
+                        "However if the mempool reject fee is set it will return 1e9 * MAX_MONEY.\n"
+                        "\nExample:\n"
+                + HelpExampleCli("estimatesmartpriority", "6")
+        );
+
+    RPCTypeCheck(params, boost::assign::list_of(UniValue::VNUM));
+
+    int nBlocks = params[0].get_int();
+
+    UniValue result(UniValue::VOBJ);
+    int answerFound;
+    double priority = mempool.estimateSmartPriority(nBlocks, &answerFound);
+    result.push_back(Pair("priority", priority));
+    result.push_back(Pair("blocks", answerFound));
+    return result;
 }
