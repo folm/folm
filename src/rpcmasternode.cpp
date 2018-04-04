@@ -894,7 +894,7 @@ UniValue getmasternodescores (const UniValue& params, bool fHelp)
             "\nPrint list of winning masternode by score\n"
 
             "\nArguments:\n"
-            "1. blocks      (numeric, optional) Show the last n blocks (default 10)\n"
+            "1. blocks      (numeric, opcxtional) Show the last n blocks (default 10)\n"
 
             "\nResult:\n"
             "{\n"
