@@ -10,25 +10,24 @@
 #include "clientversion.h"
 #include "init.h"
 #include "main.h"
-#include "masternode-sync.h"
 #include "net.h"
 #include "netbase.h"
 #include "rpcserver.h"
 #include "spork.h"
+#include "utilstrencodings.h"
 #include "timedata.h"
 #include "util.h"
 #ifdef ENABLE_WALLET
-#include "wallet.h"
-#include "walletdb.h"
+#include "masternode-sync.h"
+#include "wallet/wallet.h"
+#include "wallet/walletdb.h"
 #endif
 
 #include <stdint.h>
 
 #include <boost/assign/list_of.hpp>
-#include "univalue/univalue.h"
+#include "univalue.h"
 
-using namespace boost;
-using namespace boost::assign;
 using namespace std;
 
 /**
@@ -74,7 +73,12 @@ UniValue getinfo(const UniValue& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("getinfo", "") + HelpExampleRpc("getinfo", ""));
 
+#ifdef ENABLE_WALLET
+    LOCK2(cs_main, pwalletMain ? &pwalletMain->cs_wallet : NULL);
+#else
     LOCK(cs_main);
+#endif
+
 
 
     proxyType proxy;
@@ -94,7 +98,7 @@ UniValue getinfo(const UniValue& params, bool fHelp)
     obj.push_back(Pair("blocks", (int)chainActive.Height()));
     obj.push_back(Pair("timeoffset", GetTimeOffset()));
     obj.push_back(Pair("connections", (int)vNodes.size()));
-    obj.push_back(Pair("proxy", (proxy.IsValid() ? proxy.ToStringIPPort() : string())));
+    obj.push_back(Pair("proxy", (proxy.IsValid() ? proxy.proxy.ToStringIPPort() : string())));
     obj.push_back(Pair("difficulty", (double)GetDifficulty()));
     obj.push_back(Pair("testnet", Params().TestnetToBeDeprecatedFieldRPC()));
 #ifdef ENABLE_WALLET
@@ -194,17 +198,14 @@ private:
     isminetype mine;
 
 public:
-    DescribeAddressVisitor(isminetype mineIn) : mine(mineIn) {}
+    UniValue operator()(const CNoDestination &dest) const { return UniValue(UniValue::VOBJ); }
 
-    UniValue operator()(const CNoDestination& dest) const { return UniValue(UniValue::VOBJ); }
-
-    UniValue operator()(const CKeyID& keyID) const
+    UniValue operator()(const CKeyID &keyID) const
     {
         UniValue obj(UniValue::VOBJ);
         CPubKey vchPubKey;
         obj.push_back(Pair("isscript", false));
-        if (mine == ISMINE_SPENDABLE) {
-            pwalletMain->GetPubKey(keyID, vchPubKey);
+        if (pwalletMain && pwalletMain->GetPubKey(keyID, vchPubKey)) {
             obj.push_back(Pair("pubkey", HexStr(vchPubKey)));
             obj.push_back(Pair("iscompressed", vchPubKey.IsCompressed()));
         }
@@ -214,10 +215,9 @@ public:
     UniValue operator()(const CScriptID& scriptID) const
     {
         UniValue obj(UniValue::VOBJ);
+        CScript subscript;
         obj.push_back(Pair("isscript", true));
-        if (mine != ISMINE_NO) {
-            CScript subscript;
-            pwalletMain->GetCScript(scriptID, subscript);
+        if (pwalletMain && pwalletMain->GetCScript(scriptID, subscript)) {
             std::vector<CTxDestination> addresses;
             txnouttype whichType;
             int nRequired;
@@ -291,18 +291,23 @@ UniValue validateaddress(const UniValue& params, bool fHelp)
             "\nResult:\n"
             "{\n"
             "  \"isvalid\" : true|false,         (boolean) If the address is valid or not. If not, this is the only property returned.\n"
-            "  \"address\" : \"folmaddress\", (string) The folm address validated\n"
+            "  \"address\" : \"folmaddress\",    (string) The folm address validated\n"
             "  \"ismine\" : true|false,          (boolean) If the address is yours or not\n"
             "  \"isscript\" : true|false,        (boolean) If the key is a script\n"
             "  \"pubkey\" : \"publickeyhex\",    (string) The hex value of the raw public key\n"
             "  \"iscompressed\" : true|false,    (boolean) If the address is compressed\n"
-            "  \"account\" : \"account\"         (string) The account associated with the address, \"\" is the default account\n"
+            "  \"account\" : \"account\"         (string) DEPRECATED. The account associated with the address, \"\" is the default account\n"
             "}\n"
-            "\nExamples:\n" +
-            HelpExampleCli("validateaddress", "\"1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc\"") + HelpExampleRpc("validateaddress", "\"1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc\""));
+            "\nExamples:\n"
+            + HelpExampleCli("validateaddress", "\"FmKhk4vn9mueL97JNtSJrK5QB7r7kuuuFz\"")
+            + HelpExampleRpc("validateaddress", "\"FmKhk4vn9mueL97JNtSJrK5QB7r7kuuuFz\"")
+        );
 
+#ifdef ENABLE_WALLET
+    LOCK2(cs_main, pwalletMain ? &pwalletMain->cs_wallet : NULL);
+#else
     LOCK(cs_main);
-
+#endif
 
     CBitcoinAddress address(params[0].get_str());
     bool isValid = address.IsValid();
@@ -313,14 +318,16 @@ UniValue validateaddress(const UniValue& params, bool fHelp)
         CTxDestination dest = address.Get();
         string currentAddress = address.ToString();
         ret.push_back(Pair("address", currentAddress));
+
+         CScript scriptPubKey = GetScriptForDestination(dest);
+        ret.push_back(Pair("scriptPubKey", HexStr(scriptPubKey.begin(), scriptPubKey.end())));
+
 #ifdef ENABLE_WALLET
         isminetype mine = pwalletMain ? IsMine(*pwalletMain, dest) : ISMINE_NO;
         ret.push_back(Pair("ismine", (mine & ISMINE_SPENDABLE) ? true : false));
-        if (mine != ISMINE_NO) {
-            ret.push_back(Pair("iswatchonly", (mine & ISMINE_WATCH_ONLY) ? true : false));
-            UniValue detail = boost::apply_visitor(DescribeAddressVisitor(mine), dest);
-            ret.pushKVs(detail);
-        }
+        ret.push_back(Pair("iswatchonly", (mine & ISMINE_WATCH_ONLY) ? true: false));
+        UniValue detail = boost::apply_visitor(DescribeAddressVisitor(), dest);
+        ret.pushKVs(detail);
         if (pwalletMain && pwalletMain->mapAddressBook.count(dest))
             ret.push_back(Pair("account", pwalletMain->mapAddressBook[dest].name));
 #endif
@@ -411,8 +418,8 @@ UniValue createmultisig(const UniValue& params, bool fHelp)
 
                      "\nExamples:\n"
                      "\nCreate a multisig address from 2 addresses\n" +
-                     HelpExampleCli("createmultisig", "2 \"[\\\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\\\",\\\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\\\"]\"") +
-                     "\nAs a json rpc call\n" + HelpExampleRpc("createmultisig", "2, \"[\\\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\\\",\\\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\\\"]\"");
+                     HelpExampleCli("createmultisig", "2 \"[\\\"FebvsiHuZzkpHcCkUFcBWqY8imPvUisBX7\\\",\\\"FoG8zBzTJuwWT54ktSZUB9dMdbbi1rpF5U\\\"]\"") +
+                     "\nAs a json rpc call\n" + HelpExampleRpc("createmultisig", "2, \"[\\\"FebvsiHuZzkpHcCkUFcBWqY8imPvUisBX7\\\",\\\"FoG8zBzTJuwWT54ktSZUB9dMdbbi1rpF5U\\\"]\"");
         throw runtime_error(msg);
     }
 
@@ -443,9 +450,9 @@ UniValue verifymessage(const UniValue& params, bool fHelp)
             "\nExamples:\n"
             "\nUnlock the wallet for 30 seconds\n" +
             HelpExampleCli("walletpassphrase", "\"mypassphrase\" 30") +
-            "\nCreate the signature\n" + HelpExampleCli("signmessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\" \"my message\"") +
-            "\nVerify the signature\n" + HelpExampleCli("verifymessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\" \"signature\" \"my message\"") +
-            "\nAs json rpc\n" + HelpExampleRpc("verifymessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\", \"signature\", \"my message\""));
+            "\nCreate the signature\n" + HelpExampleCli("signmessage", "\"FW26QN4Y98jt8pwp1ae4nU9Lsj36s9P4Uk\" \"my message\"") +
+            "\nVerify the signature\n" + HelpExampleCli("verifymessage", "\"FW26QN4Y98jt8pwp1ae4nU9Lsj36s9P4Uk\" \"signature\" \"my message\"") +
+            "\nAs json rpc\n" + HelpExampleRpc("verifymessage", "\"FW26QN4Y98jt8pwp1ae4nU9Lsj36s9P4Uk\", \"signature\", \"my message\""));
 
     LOCK(cs_main);
 
@@ -491,11 +498,18 @@ UniValue setmocktime(const UniValue& params, bool fHelp)
     if (!Params().MineBlocksOnDemand())
         throw runtime_error("setmocktime for regression testing (-regtest mode) only");
 
-    LOCK(cs_main);
+    // cs_vNodes is locked and node send/receive times are updated
+    // atomically with the time change to prevent peers from being
+    // disconnected because we think we haven't communicated with them
+    // in a long time.
+    LOCK2(cs_main, cs_vNodes);
 
     RPCTypeCheck(params, boost::assign::list_of(UniValue::VNUM));
-    SetMockTime(params[0].get_int64());
 
+    uint64_t t = GetTime();
+    BOOST_FOREACH(CNode* pnode, vNodes) {
+        pnode->nLastSend = pnode->nLastRecv = t;
+    }
     return NullUniValue;
 }
 
