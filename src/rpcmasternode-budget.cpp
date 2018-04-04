@@ -1,6 +1,6 @@
-// Copyright (c) 2014-2015 The Dash Developers
+// Copyright (c) 2014-2016 The Dash Core Developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2017-2018 The Folm Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,7 @@
 
 #include <fstream>
 
-#include "univalue/univalue.h"
+#include "univalue.h"
 using namespace std;
 
 void budgetToJSON(CBudgetProposal* pbudgetProposal, UniValue& bObj)
@@ -212,7 +212,7 @@ UniValue preparebudget(const UniValue& params, bool fHelp)
     //*************************************************************************
 
     // create transaction 15 minutes into the future, to allow for confirmation time
-    CBudgetProposalBroadcast budgetProposalBroadcast(strProposalName, strURL, nPaymentCount, scriptPubKey, nAmount, nBlockStart, 0);
+    CBudgetProposalBroadcast budgetProposalBroadcast(strProposalName, strURL, nPaymentCount, scriptPubKey, nAmount, nBlockStart,  uint256());
 
     std::string strError = "";
     if (!budgetProposalBroadcast.IsValid(strError, false))
@@ -867,7 +867,7 @@ UniValue mnfinalbudget(const UniValue& params, bool fHelp)
             throw runtime_error("Correct usage is 'mnfinalbudget vote-many BUDGET_HASH'");
 
         std::string strHash = params[1].get_str();
-        uint256 hash(strHash);
+        uint256 hash = uint256S(strHash);
 
         int success = 0;
         int failed = 0;

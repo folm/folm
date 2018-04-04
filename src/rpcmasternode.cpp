@@ -18,7 +18,8 @@
 
 #include <boost/tokenizer.hpp>
 
-#include "univalue/univalue.h"
+#include <iomanip>
+#include "univalue.h"
 
 #include <fstream>
 
@@ -165,7 +166,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "list") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return listmasternodes(newParams, fHelp);
@@ -173,7 +174,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "connect") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return masternodeconnect(newParams, fHelp);
@@ -181,7 +182,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "count") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return getmasternodecount(newParams, fHelp);
@@ -189,7 +190,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "current") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return masternodecurrent(newParams, fHelp);
@@ -197,7 +198,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "debug") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return masternodedebug(newParams, fHelp);
@@ -209,7 +210,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "genkey") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return createmasternodekey(newParams, fHelp);
@@ -217,7 +218,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "list-conf") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return listmasternodeconf(newParams, fHelp);
@@ -225,7 +226,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "outputs") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return getmasternodeoutputs(newParams, fHelp);
@@ -233,7 +234,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "status") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return getmasternodestatus(newParams, fHelp);
@@ -241,7 +242,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "winners") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return getmasternodewinners(newParams, fHelp);
@@ -249,7 +250,7 @@ UniValue masternode(const UniValue& params, bool fHelp)
 
     if (strCommand == "calcscore") {
         UniValue newParams(UniValue::VARR);
-        for (unsigned int i = 0; i < params.size()-1; ++i) {
+        for (unsigned int i = 1; i < params.size(); i++) {
             newParams.push_back(params[i]);
         }
         return getmasternodescores(newParams, fHelp);
@@ -451,7 +452,7 @@ UniValue masternodedebug (const UniValue& params, bool fHelp)
         return activeMasternode.GetStatus();
 
     CTxIn vin = CTxIn();
-    CPubKey pubkey = CScript();
+    CPubKey pubkey = CPubKey();
     CKey key;
     if (!activeMasternode.GetMasterNodeVin(vin, pubkey, key))
         throw runtime_error("Missing masternode input, please look at the documentation for instructions on masternode creation\n");
@@ -545,7 +546,7 @@ UniValue startmasternode (const UniValue& params, bool fHelp)
             int nIndex;
             if(!mne.castOutputIndex(nIndex))
                 continue;
-            CTxIn vin = CTxIn(uint256(mne.getTxHash()), uint32_t(nIndex));
+            CTxIn vin = CTxIn(uint256S(mne.getTxHash()), uint32_t(nIndex));
             CMasternode* pmn = mnodeman.Find(vin);
 
             if (pmn != NULL) {
@@ -723,7 +724,7 @@ UniValue listmasternodeconf (const UniValue& params, bool fHelp)
         int nIndex;
         if(!mne.castOutputIndex(nIndex))
             continue;
-        CTxIn vin = CTxIn(uint256(mne.getTxHash()), uint32_t(nIndex));
+        CTxIn vin = CTxIn(uint256S(mne.getTxHash()), uint32_t(nIndex));
         CMasternode* pmn = mnodeman.Find(vin);
 
         std::string strStatus = pmn ? pmn->Status() : "MISSING";
@@ -916,10 +917,10 @@ UniValue getmasternodescores (const UniValue& params, bool fHelp)
 
     std::vector<CMasternode> vMasternodes = mnodeman.GetFullMasternodeVector();
     for (int nHeight = chainActive.Tip()->nHeight - nLast; nHeight < chainActive.Tip()->nHeight + 20; nHeight++) {
-        uint256 nHigh = 0;
+        arith_uint256 nHigh = 0;
         CMasternode* pBestMasternode = NULL;
         BOOST_FOREACH (CMasternode& mn, vMasternodes) {
-            uint256 n = mn.CalculateScore(1, nHeight - 100);
+            arith_uint256 n = UintToArith256(mn.CalculateScore(1, nHeight-100));
             if (n > nHigh) {
                 nHigh = n;
                 pBestMasternode = &mn;
