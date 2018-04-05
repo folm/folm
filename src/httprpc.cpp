@@ -17,6 +17,9 @@
 #include <boost/algorithm/string.hpp> // boost::trim
 #include <boost/foreach.hpp> //BOOST_FOREACH
 
+/** WWW-Authenticate to present with 401 Unauthorized response */
+static const char* WWW_AUTH_HEADER_DATA = "Basic realm=\"jsonrpc\"";
+
 /** Simple one-shot callback timer to be used by the RPC mechanism to e.g.
  * re-lock the wellet.
  */
@@ -24,7 +27,7 @@ class HTTPRPCTimer : public RPCTimerBase
 {
 public:
     HTTPRPCTimer(struct event_base* eventBase, boost::function<void(void)>& func, int64_t millis) :
-            ev(eventBase, false, func)
+        ev(eventBase, false, func)
     {
         struct timeval tv;
         tv.tv_sec = millis/1000;
@@ -79,7 +82,7 @@ static void JSONErrorReply(HTTPRequest* req, const UniValue& objError, const Uni
 //This function checks username and password against -rpcauth
 //entries from config file.
 static bool multiUserAuthorized(std::string strUserPass)
-{
+{    
     if (strUserPass.find(":") == std::string::npos) {
         return false;
     }
@@ -106,8 +109,8 @@ static bool multiUserAuthorized(std::string strUserPass)
             std::string strHash = vFields[2];
 
             unsigned int KEY_SIZE = 32;
-            unsigned char *out = new unsigned char[KEY_SIZE];
-
+            unsigned char *out = new unsigned char[KEY_SIZE]; 
+            
             CHMAC_SHA256(reinterpret_cast<const unsigned char*>(strSalt.c_str()), strSalt.size()).Write(reinterpret_cast<const unsigned char*>(strPass.c_str()), strPass.size()).Finalize(out);
             std::vector<unsigned char> hexvec(out, out+KEY_SIZE);
             std::string strHashFromPass = HexStr(hexvec);
@@ -129,7 +132,7 @@ static bool RPCAuthorized(const std::string& strAuth)
     std::string strUserPass64 = strAuth.substr(6);
     boost::trim(strUserPass64);
     std::string strUserPass = DecodeBase64(strUserPass64);
-
+    
     //Check if authorized under single-user field
     if (TimingResistantEqual(strUserPass, strRPCUserColonPass)) {
         return true;
@@ -147,6 +150,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
     // Check authorization
     std::pair<bool, std::string> authHeader = req->GetHeader("authorization");
     if (!authHeader.first) {
+        req->WriteHeader("WWW-Authenticate", WWW_AUTH_HEADER_DATA);
         req->WriteReply(HTTP_UNAUTHORIZED);
         return false;
     }
@@ -159,6 +163,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
            shouldn't have their RPC port exposed. */
         MilliSleep(250);
 
+        req->WriteHeader("WWW-Authenticate", WWW_AUTH_HEADER_DATA);
         req->WriteReply(HTTP_UNAUTHORIZED);
         return false;
     }
@@ -180,7 +185,7 @@ static bool HTTPReq_JSONRPC(HTTPRequest* req, const std::string &)
             // Send reply
             strReply = JSONRPCReply(result, NullUniValue, jreq.id);
 
-            // array of requests
+        // array of requests
         } else if (valRequest.isArray())
             strReply = JSONRPCExecBatch(valRequest.get_array());
         else
@@ -205,8 +210,8 @@ static bool InitRPCAuthentication()
         LogPrintf("No rpcpassword set - using random cookie authentication\n");
         if (!GenerateAuthCookie(&strRPCUserColonPass)) {
             uiInterface.ThreadSafeMessageBox(
-                    _("Error: A fatal internal error occurred, see debug.log for details"), // Same message as AbortNode
-                    "", CClientUIInterface::MSG_ERROR);
+                _("Error: A fatal internal error occurred, see debug.log for details"), // Same message as AbortNode
+                "", CClientUIInterface::MSG_ERROR);
             return false;
         }
     } else {

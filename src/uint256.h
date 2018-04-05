@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2016 The Dash Core developers
+// Copyright (c) 2014-2016 The Folm Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -70,11 +70,6 @@ public:
     const unsigned char* end() const
     {
         return &data[WIDTH];
-    }
-
-    uint64_t Get64(int n = 0) const
-    {
-        return data[2 * n] | (uint64_t)data[2 * n + 1] << 32;
     }
 
     unsigned int size() const

@@ -31,14 +31,14 @@ enum HTTPStatusCode
 enum RPCErrorCode
 {
     //! Standard JSON-RPC 2.0 errors
-            RPC_INVALID_REQUEST  = -32600,
+    RPC_INVALID_REQUEST  = -32600,
     RPC_METHOD_NOT_FOUND = -32601,
     RPC_INVALID_PARAMS   = -32602,
     RPC_INTERNAL_ERROR   = -32603,
     RPC_PARSE_ERROR      = -32700,
 
     //! General application defined errors
-            RPC_MISC_ERROR                  = -1,  //! std::exception thrown in command handling
+    RPC_MISC_ERROR                  = -1,  //! std::exception thrown in command handling
     RPC_FORBIDDEN_BY_SAFE_MODE      = -2,  //! Server is in safe mode, and command is not allowed in safe mode
     RPC_TYPE_ERROR                  = -3,  //! Unexpected type was passed as parameter
     RPC_INVALID_ADDRESS_OR_KEY      = -5,  //! Invalid address or key
@@ -52,12 +52,12 @@ enum RPCErrorCode
     RPC_IN_WARMUP                   = -28, //! Client still warming up
 
     //! Aliases for backward compatibility
-            RPC_TRANSACTION_ERROR           = RPC_VERIFY_ERROR,
+    RPC_TRANSACTION_ERROR           = RPC_VERIFY_ERROR,
     RPC_TRANSACTION_REJECTED        = RPC_VERIFY_REJECTED,
     RPC_TRANSACTION_ALREADY_IN_CHAIN= RPC_VERIFY_ALREADY_IN_CHAIN,
 
     //! P2P client errors
-            RPC_CLIENT_NOT_CONNECTED        = -9,  //! Folm is not connected
+    RPC_CLIENT_NOT_CONNECTED        = -9,  //! Folm is not connected
     RPC_CLIENT_IN_INITIAL_DOWNLOAD  = -10, //! Still downloading initial blocks
     RPC_CLIENT_NODE_ALREADY_ADDED   = -23, //! Node is already added
     RPC_CLIENT_NODE_NOT_ADDED       = -24, //! Node has not been added before
@@ -65,7 +65,7 @@ enum RPCErrorCode
     RPC_CLIENT_INVALID_IP_OR_SUBNET = -30, //! Invalid IP/Subnet
 
     //! Wallet errors
-            RPC_WALLET_ERROR                = -4,  //! Unspecified problem with wallet (key not found etc.)
+    RPC_WALLET_ERROR                = -4,  //! Unspecified problem with wallet (key not found etc.)
     RPC_WALLET_INSUFFICIENT_FUNDS   = -6,  //! Not enough funds in wallet or account
     RPC_WALLET_INVALID_ACCOUNT_NAME = -11, //! Invalid account name
     RPC_WALLET_KEYPOOL_RAN_OUT      = -12, //! Keypool ran out, call keypoolrefill first

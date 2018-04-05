@@ -1,8 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2016 The Dash Core developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2014-2016 The Folm Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,17 +14,14 @@
 #include "version.h"
 
 #include <stdint.h>
-
-
 #include <fstream>
-
-#include "univalue.h"
 
 using namespace std;
 
-
 /**
- * HTTP protocol
+ * JSON-RPC protocol.  Bitcoin speaks version 1.0 for maximum compatibility,
+ * but uses JSON-RPC 1.1/2.0 standards for parts of the 1.0 standard that were
+ * unspecified (HTTP errors and contents of 'error').
  * 
  * 1.0 spec: http://json-rpc.org/wiki/specification
  * 1.2 spec: http://jsonrpc.org/historical/json-rpc-over-http.html
@@ -65,31 +60,6 @@ UniValue JSONRPCError(int code, const string& message)
     error.push_back(Pair("code", code));
     error.push_back(Pair("message", message));
     return error;
-}
-
-string HTTPError(int nStatus, bool keepalive, bool headersOnly)
-{
-    if (nStatus == HTTP_UNAUTHORIZED)
-        return strprintf("HTTP/1.0 401 Authorization Required\r\n"
-                         "Date: %s\r\n"
-                         "Server: folm-json-rpc/%s\r\n"
-                         "WWW-Authenticate: Basic realm=\"jsonrpc\"\r\n"
-                         "Content-Type: text/html\r\n"
-                         "Content-Length: 296\r\n"
-                         "\r\n"
-                         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\r\n"
-                         "\"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd\">\r\n"
-                         "<HTML>\r\n"
-                         "<HEAD>\r\n"
-                         "<TITLE>Error</TITLE>\r\n"
-                         "<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=ISO-8859-1'>\r\n"
-                         "</HEAD>\r\n"
-                         "<BODY><H1>401 Unauthorized.</H1></BODY>\r\n"
-                         "</HTML>\r\n",
-            rfc1123Time(), FormatFullVersion());
-
-    return HTTPReply(nStatus, httpStatusDescription(nStatus), keepalive,
-        headersOnly, "text/plain");
 }
 
 /** Username used when cookie authentication is in use (arbitrary, only for
@@ -155,3 +125,4 @@ void DeleteAuthCookie()
         LogPrintf("%s: Unable to remove random auth cookie file: %s\n", __func__, e.what());
     }
 }
+

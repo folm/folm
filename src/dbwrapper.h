@@ -82,7 +82,7 @@ public:
      * @param[in] obfuscate_key    If passed, XOR data with this key.
      */
     CDBIterator(leveldb::Iterator *piterIn, const std::vector<unsigned char>* obfuscate_key) :
-            piter(piterIn), obfuscate_key(obfuscate_key) { };
+        piter(piterIn), obfuscate_key(obfuscate_key) { };
     ~CDBIterator();
 
     bool Valid();
@@ -277,3 +277,4 @@ public:
 };
 
 #endif // BITCOIN_DBWRAPPER_H
+

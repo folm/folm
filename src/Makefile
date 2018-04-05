@@ -99,7 +99,7 @@ am__append_5 = libbitcoin_wallet.a
 am__append_6 = libbitcoin_zmq.a
 bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
 	$(am__EXEEXT_4) $(am__EXEEXT_5) $(am__EXEEXT_6)
-TESTS = $(am__EXEEXT_7) $(am__EXEEXT_6)
+TESTS = $(am__EXEEXT_3) $(am__EXEEXT_6)
 am__append_7 = folmd
 am__append_8 = folm-cli folm-tx
 #am__append_9 = compat/glibc_compat.cpp
@@ -109,7 +109,7 @@ am__append_12 = libbitcoin_wallet.a
 #am__append_13 = folm-cli-res.rc
 #am__append_14 = folm-tx-res.rc
 #am__append_15 = compat/glibc_compat.cpp
-#am__append_16 = test/test_folm test/bitcoin-util-test.py
+#am__append_16 = test/test_folm
 #am__append_17 = test/test_folm
 #am__append_18 = \
 #	test/bctest.py \
@@ -122,62 +122,59 @@ am__append_12 = libbitcoin_wallet.a
 #	test/data/tx394b54bb.hex \
 #	test/data/txcreate1.hex \
 #	test/data/txcreate2.hex \
+#	test/data/txcreatedata1.hex \
+#	test/data/txcreatedata2.hex \
 #	test/data/txcreatesign.hex
 
 #am__append_19 = \
 #  test/accounting_tests.cpp \
-#  test/wallet_tests.cpp \
+#  wallet/test/wallet_tests.cpp \
 #  test/rpc_wallet_tests.cpp
 
 #am__append_20 = $(LIBBITCOIN_WALLET)
 #am__append_21 = $(ZMQ_LIBS)
 #am__append_22 = $(CLEAN_BITCOIN_TEST)
-am__append_23 = bench/bench_dash
+am__append_23 = bench/bench_folm
 am__append_24 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 am__append_25 = $(LIBBITCOIN_WALLET)
 am__append_26 = $(CLEAN_BITCOIN_BENCH)
-#am__append_27 = qt/folm-qt
-#am__append_28 = qt/libbitcoinqt.a
-##am__append_29 = qt/winshutdownmonitor.cpp
-#am__append_30 = \
-#  qt/addressbookpage.cpp \
-#  qt/addresstablemodel.cpp \
-#  qt/askpassphrasedialog.cpp \
-#  qt/bip38tooldialog.cpp \
-#  qt/blockexplorer.cpp \
-#  qt/coincontroldialog.cpp \
-#  qt/coincontroltreewidget.cpp \
-#  qt/obfuscationconfig.cpp \
-#  qt/editaddressdialog.cpp \
-#  qt/masternodelist.cpp \
-#  qt/multisenddialog.cpp \
-#  qt/multisigdialog.cpp \
-#  qt/openuridialog.cpp \
-#  qt/overviewpage.cpp \
-#  qt/paymentrequestplus.cpp \
-#  qt/paymentserver.cpp \
-#  qt/receivecoinsdialog.cpp \
-#  qt/receiverequestdialog.cpp \
-#  qt/recentrequeststablemodel.cpp \
-#  qt/sendcoinsdialog.cpp \
-#  qt/sendcoinsentry.cpp \
-#  qt/signverifymessagedialog.cpp \
-#  qt/transactiondesc.cpp \
-#  qt/transactiondescdialog.cpp \
-#  qt/transactionfilterproxy.cpp \
-#  qt/transactionrecord.cpp \
-#  qt/transactiontablemodel.cpp \
-#  qt/transactionview.cpp \
-#  qt/walletframe.cpp \
-#  qt/walletmodel.cpp \
-#  qt/walletmodeltransaction.cpp \
-#  qt/walletview.cpp
+am__append_27 = qt/folm-qt
+am__append_28 = qt/libbitcoinqt.a
+#am__append_29 = qt/winshutdownmonitor.cpp
+am__append_30 = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/obfuscationconfig.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/overviewpage.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/receivecoinsdialog.cpp \
+  qt/receiverequestdialog.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/sendcoinsdialog.cpp \
+  qt/sendcoinsentry.cpp \
+  qt/signverifymessagedialog.cpp \
+  qt/transactiondesc.cpp \
+  qt/transactiondescdialog.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/transactionview.cpp \
+  qt/walletframe.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/walletview.cpp
 
-##am__append_31 = $(BITCOIN_MM)
-##am__append_32 = $(BITCOIN_RC)
-#am__append_33 = $(LIBBITCOIN_WALLET)
-#am__append_34 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
-#am__append_35 = $(CLEAN_QT)
+#am__append_31 = $(BITCOIN_MM)
+#am__append_32 = $(BITCOIN_RC)
+am__append_33 = $(LIBBITCOIN_WALLET)
+am__append_34 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+am__append_35 = $(CLEAN_QT)
 #am__append_36 = qt/test/test_folm-qt
 #am__append_37 = qt/test/test_folm-qt
 #am__append_38 = qt/test/moc_paymentservertests.cpp
@@ -236,6 +233,8 @@ am_crypto_libbitcoin_crypto_a_OBJECTS =  \
 	crypto/crypto_libbitcoin_crypto_a-bmw.$(OBJEXT) \
 	crypto/crypto_libbitcoin_crypto_a-cubehash.$(OBJEXT) \
 	crypto/crypto_libbitcoin_crypto_a-echo.$(OBJEXT) \
+	crypto/crypto_libbitcoin_crypto_a-fugue.$(OBJEXT) \
+	crypto/crypto_libbitcoin_crypto_a-gost.$(OBJEXT) \
 	crypto/crypto_libbitcoin_crypto_a-groestl.$(OBJEXT) \
 	crypto/crypto_libbitcoin_crypto_a-jh.$(OBJEXT) \
 	crypto/crypto_libbitcoin_crypto_a-keccak.$(OBJEXT) \
@@ -331,16 +330,17 @@ am__libbitcoin_util_a_SOURCES_DIST = support/pagelocker.cpp \
 	coincontrol.h coins.h compat.h compat/byteswap.h \
 	compat/endian.h compat/sanity.h compressor.h \
 	consensus/consensus.h consensus/merkle.h consensus/params.h \
-	consensus/validation.h core_io.h darksend.h darksend-relay.h \
-	core_memusage.h hash.h httprpc.h httpserver.h init.h \
-	instantx.h key.h keepass.h keystore.h dbwrapper.h limitedmap.h \
-	main.h masternode.h masternode-payments.h masternode-budget.h \
-	masternode-sync.h masternodeman.h masternodeconfig.h \
-	memusage.h merkleblock.h miner.h net.h netbase.h noui.h \
-	policy/fees.h policy/policy.h policy/rbf.h pow.h prevector.h \
-	primitives/block.h primitives/transaction.h protocol.h \
-	pubkey.h random.h reverselock.h rpcclient.h rpcprotocol.h \
-	rpcserver.h scheduler.h script/interpreter.h script/script.h \
+	consensus/validation.h core_io.h obfuscation.h \
+	dsnotificationinterface.h obfuscation-relay.h core_memusage.h \
+	hash.h httprpc.h httpserver.h init.h swifttx.h key.h keepass.h \
+	keystore.h dbwrapper.h limitedmap.h main.h masternode.h \
+	masternode-payments.h masternode-budget.h masternode-sync.h \
+	masternodeman.h masternodeconfig.h memusage.h merkleblock.h \
+	miner.h net.h netbase.h noui.h policy/fees.h policy/policy.h \
+	policy/rbf.h pow.h prevector.h primitives/block.h \
+	primitives/transaction.h protocol.h pubkey.h random.h \
+	reverselock.h rpcclient.h rpcprotocol.h rpcserver.h \
+	scheduler.h script/interpreter.h script/script.h \
 	script/script_error.h script/sigcache.h script/sign.h \
 	script/standard.h serialize.h spork.h streams.h \
 	support/allocators/secure.h support/allocators/zeroafterfree.h \
@@ -378,9 +378,10 @@ libbitcoin_wallet_a_AR = $(AR) $(ARFLAGS)
 libbitcoin_wallet_a_LIBADD =
 am_libbitcoin_wallet_a_OBJECTS =  \
 	libbitcoin_wallet_a-activemasternode.$(OBJEXT) \
-	libbitcoin_wallet_a-darksend.$(OBJEXT) \
-	libbitcoin_wallet_a-darksend-relay.$(OBJEXT) \
-	libbitcoin_wallet_a-instantx.$(OBJEXT) \
+	libbitcoin_wallet_a-obfuscation.$(OBJEXT) \
+	libbitcoin_wallet_a-dsnotificationinterface.$(OBJEXT) \
+	libbitcoin_wallet_a-obfuscation-relay.$(OBJEXT) \
+	libbitcoin_wallet_a-swifttx.$(OBJEXT) \
 	libbitcoin_wallet_a-masternode.$(OBJEXT) \
 	libbitcoin_wallet_a-masternode-budget.$(OBJEXT) \
 	libbitcoin_wallet_a-masternode-payments.$(OBJEXT) \
@@ -409,20 +410,18 @@ qt_libbitcoinqt_a_AR = $(AR) $(ARFLAGS)
 qt_libbitcoinqt_a_LIBADD =
 am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/bitcoinaddressvalidator.cpp qt/bitcoinamountfield.cpp \
-	qt/bitcoingui.cpp qt/bitcoinunits.cpp qt/blockexplorer.cpp \
-	qt/clientmodel.cpp qt/csvmodelwriter.cpp qt/guiutil.cpp \
-	qt/intro.cpp qt/masternodelist.cpp qt/networkstyle.cpp \
-	qt/notificator.cpp qt/optionsdialog.cpp qt/optionsmodel.cpp \
-	qt/peertablemodel.cpp qt/platformstyle.cpp \
+	qt/bitcoingui.cpp qt/bitcoinunits.cpp qt/clientmodel.cpp \
+	qt/csvmodelwriter.cpp qt/guiutil.cpp qt/intro.cpp \
+	qt/networkstyle.cpp qt/notificator.cpp qt/optionsdialog.cpp \
+	qt/optionsmodel.cpp qt/peertablemodel.cpp qt/platformstyle.cpp \
 	qt/qvalidatedlineedit.cpp qt/qvaluecombobox.cpp \
 	qt/rpcconsole.cpp qt/splashscreen.cpp \
 	qt/trafficgraphwidget.cpp qt/utilitydialog.cpp \
 	qt/winshutdownmonitor.cpp qt/addressbookpage.cpp \
 	qt/addresstablemodel.cpp qt/askpassphrasedialog.cpp \
-	qt/bip38tooldialog.cpp qt/coincontroldialog.cpp \
-	qt/coincontroltreewidget.cpp qt/obfuscationconfig.cpp \
-	qt/editaddressdialog.cpp qt/multisenddialog.cpp \
-	qt/multisigdialog.cpp qt/openuridialog.cpp qt/overviewpage.cpp \
+	qt/coincontroldialog.cpp qt/coincontroltreewidget.cpp \
+	qt/obfuscationconfig.cpp qt/editaddressdialog.cpp \
+	qt/openuridialog.cpp qt/overviewpage.cpp \
 	qt/paymentrequestplus.cpp qt/paymentserver.cpp \
 	qt/receivecoinsdialog.cpp qt/receiverequestdialog.cpp \
 	qt/recentrequeststablemodel.cpp qt/sendcoinsdialog.cpp \
@@ -434,14 +433,12 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/walletmodeltransaction.cpp qt/walletview.cpp \
 	qt/addressbookpage.h qt/addresstablemodel.h \
 	qt/askpassphrasedialog.h qt/bantablemodel.h \
-	qt/bip38tooldialog.h qt/bitcoinaddressvalidator.h \
-	qt/bitcoinamountfield.h qt/bitcoingui.h qt/bitcoinunits.h \
-	qt/blockexplorer.h qt/clientmodel.h qt/coincontroldialog.h \
-	qt/coincontroltreewidget.h qt/csvmodelwriter.h \
-	qt/obfuscationconfig.h qt/editaddressdialog.h \
-	qt/guiconstants.h qt/guiutil.h qt/intro.h \
-	qt/macdockiconhandler.h qt/macnotificationhandler.h \
-	qt/masternodelist.h qt/multisenddialog.h qt/multisigdialog.h \
+	qt/bitcoinaddressvalidator.h qt/bitcoinamountfield.h \
+	qt/bitcoingui.h qt/bitcoinunits.h qt/clientmodel.h \
+	qt/coincontroldialog.h qt/coincontroltreewidget.h \
+	qt/csvmodelwriter.h qt/obfuscationconfig.h \
+	qt/editaddressdialog.h qt/guiconstants.h qt/guiutil.h \
+	qt/intro.h qt/macdockiconhandler.h qt/macnotificationhandler.h \
 	qt/networkstyle.h qt/notificator.h qt/openuridialog.h \
 	qt/optionsdialog.h qt/optionsmodel.h qt/overviewpage.h \
 	qt/paymentrequestplus.h qt/paymentserver.h qt/peertablemodel.h \
@@ -456,190 +453,332 @@ am__qt_libbitcoinqt_a_SOURCES_DIST = qt/bantablemodel.cpp \
 	qt/transactionview.h qt/utilitydialog.h qt/walletframe.h \
 	qt/walletmodel.h qt/walletmodeltransaction.h qt/walletview.h \
 	qt/winshutdownmonitor.h qt/forms/addressbookpage.ui \
-	qt/forms/askpassphrasedialog.ui qt/forms/bip38tooldialog.ui \
-	qt/forms/coincontroldialog.ui qt/forms/blockexplorer.ui \
+	qt/forms/askpassphrasedialog.ui qt/forms/coincontroldialog.ui \
 	qt/forms/obfuscationconfig.ui qt/forms/editaddressdialog.ui \
 	qt/forms/helpmessagedialog.ui qt/forms/intro.ui \
-	qt/forms/masternodelist.ui qt/forms/multisenddialog.ui \
-	qt/forms/multisigdialog.ui qt/forms/openuridialog.ui \
-	qt/forms/optionsdialog.ui qt/forms/overviewpage.ui \
-	qt/forms/receivecoinsdialog.ui \
+	qt/forms/openuridialog.ui qt/forms/optionsdialog.ui \
+	qt/forms/overviewpage.ui qt/forms/receivecoinsdialog.ui \
 	qt/forms/receiverequestdialog.ui qt/forms/debugwindow.ui \
-	qt/folm.qrc qt/folm_locale.qrc qt/locale/folm_bg.ts \
-	qt/locale/folm_ca.ts qt/locale/folm_cs.ts qt/locale/folm_da.ts \
-	qt/locale/folm_de.ts qt/locale/folm_en.ts \
-	qt/locale/folm_en_US.ts qt/locale/folm_es.ts \
-	qt/locale/folm_fi.ts qt/locale/folm_fr_FR.ts \
-	qt/locale/folm_it.ts qt/locale/folm_ja.ts \
-	qt/locale/folm_ko_KR.ts qt/locale/folm_nl.ts \
-	qt/locale/folm_pl.ts qt/locale/folm_pt.ts \
-	qt/locale/folm_pt_BR.ts qt/locale/folm_ro_RO.ts \
-	qt/locale/folm_ru.ts qt/locale/folm_sk.ts qt/locale/folm_sv.ts \
-	qt/locale/folm_uk.ts qt/locale/folm_zh_CN.ts \
-	qt/locale/folm_zh_TW.ts qt/paymentrequest.proto \
-	qt/res/icons/add.png qt/res/icons/address-book.png \
-	qt/res/icons/bitcoin.ico qt/res/icons/bitcoin.png \
-	qt/res/icons/bitcoin_testnet.ico \
-	qt/res/icons/bitcoin_testnet.png qt/res/icons/browse.png \
-	qt/res/icons/clock1.png qt/res/icons/clock2.png \
-	qt/res/icons/clock3.png qt/res/icons/clock4.png \
-	qt/res/icons/clock5.png qt/res/icons/configure.png \
-	qt/res/icons/connect0_16.png qt/res/icons/connect1_16.png \
-	qt/res/icons/connect2_16.png qt/res/icons/connect3_16.png \
-	qt/res/icons/connect4_16.png qt/res/icons/debugwindow.png \
-	qt/res/icons/edit.png qt/res/icons/editcopy.png \
-	qt/res/icons/editpaste.png qt/res/icons/explorer.png \
-	qt/res/icons/export.png qt/res/icons/eye.png \
-	qt/res/icons/eye_minus.png qt/res/icons/eye_plus.png \
-	qt/res/icons/filesave.png qt/res/icons/history.png \
-	qt/res/icons/key.png qt/res/icons/lock_closed.png \
-	qt/res/icons/lock_open.png qt/res/icons/masternodes.png \
-	qt/res/icons/overview.png qt/res/icons/qrcode.png \
-	qt/res/icons/quit.png qt/res/icons/receive.png \
-	qt/res/icons/remove.png qt/res/icons/send.png \
-	qt/res/icons/staking_active.png \
-	qt/res/icons/staking_inactive.png qt/res/icons/synced.png \
-	qt/res/icons/trade.png qt/res/icons/transaction0.png \
-	qt/res/icons/transaction2.png \
-	qt/res/icons/transaction_conflicted.png \
-	qt/res/icons/tx_inout.png qt/res/icons/tx_input.png \
-	qt/res/icons/tx_output.png qt/res/icons/tx_mined.png \
-	qt/res/icons/unit_folm.png qt/res/icons/unit_mfolm.png \
-	qt/res/icons/unit_ufolm.png qt/res/icons/unit_tfolm.png \
-	qt/res/icons/unit_tmfolm.png qt/res/icons/unit_tufolm.png \
-	qt/res/images/about.png qt/res/images/splash.png \
-	qt/res/images/splash_testnet.png \
-	qt/res/images/folm_logo_horizontal.png \
-	qt/res/images/downArrow.png qt/res/images/downArrow_small.png \
-	qt/res/images/upArrow_small.png \
-	qt/res/images/leftArrow_small.png \
-	qt/res/images/rightArrow_small.png \
-	qt/res/images/qtreeview_selected.png \
-	qt/res/images/walletFrame.png qt/res/images/walletFrame_bg.png \
-	qt/res/css/default.css $(wildcard \
-	$(srcdir)/qt/res/movies/spinner-*.png)
-##am__objects_3 = qt/qt_libbitcoinqt_a-winshutdownmonitor.$(OBJEXT)
-#am__objects_4 = qt/qt_libbitcoinqt_a-addressbookpage.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-addresstablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-askpassphrasedialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-bip38tooldialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-blockexplorer.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-coincontroldialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-coincontroltreewidget.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-obfuscationconfig.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-editaddressdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-masternodelist.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-multisenddialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-multisigdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-openuridialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-overviewpage.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-paymentrequestplus.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-paymentserver.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-receivecoinsdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-receiverequestdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-recentrequeststablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-sendcoinsdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-sendcoinsentry.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-signverifymessagedialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-transactiondesc.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-transactiondescdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-transactionfilterproxy.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-transactionrecord.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-transactiontablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-transactionview.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-walletframe.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-walletmodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-walletmodeltransaction.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-walletview.$(OBJEXT)
-#am__objects_5 =  \
-#	qt/qt_libbitcoinqt_a-bantablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-bitcoinaddressvalidator.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-bitcoinamountfield.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-bitcoingui.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-bitcoinunits.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-blockexplorer.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-clientmodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-csvmodelwriter.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-guiutil.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-intro.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-masternodelist.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-networkstyle.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-notificator.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-optionsdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-optionsmodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-peertablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-platformstyle.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-qvalidatedlineedit.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-qvaluecombobox.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-rpcconsole.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-splashscreen.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-trafficgraphwidget.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-utilitydialog.$(OBJEXT) \
-#	$(am__objects_3) $(am__objects_4)
-#am_qt_libbitcoinqt_a_OBJECTS = $(am__objects_5) \
-#	$(am__objects_1) $(am__objects_1) \
-#	$(am__objects_1) $(am__objects_1) \
-#	$(am__objects_1) $(am__objects_1) \
-#	$(am__objects_1) $(am__objects_1) \
-#	$(am__objects_1) $(am__objects_1)
-#am__objects_6 = qt/qt_libbitcoinqt_a-moc_addressbookpage.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_addresstablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_askpassphrasedialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_bantablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_bip38tooldialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_bitcoinamountfield.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_bitcoingui.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_bitcoinunits.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_blockexplorer.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_clientmodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_coincontroldialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_coincontroltreewidget.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_csvmodelwriter.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_obfuscationconfig.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_editaddressdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_guiutil.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_intro.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_macdockiconhandler.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_macnotificationhandler.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_masternodelist.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_multisenddialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_multisigdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_notificator.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_openuridialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_optionsdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_optionsmodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_overviewpage.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_peertablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_paymentserver.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_qvalidatedlineedit.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_qvaluecombobox.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_receivecoinsdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_receiverequestdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_recentrequeststablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_rpcconsole.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_sendcoinsdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_sendcoinsentry.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_signverifymessagedialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_splashscreen.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_trafficgraphwidget.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_transactiondesc.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_transactiondescdialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_transactionfilterproxy.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_transactiontablemodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_transactionview.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_utilitydialog.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_walletframe.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_walletmodel.$(OBJEXT) \
-#	qt/qt_libbitcoinqt_a-moc_walletview.$(OBJEXT)
-#am__objects_7 = qt/qt_libbitcoinqt_a-paymentrequest.pb.$(OBJEXT)
-#am__objects_8 =  \
-#	qt/qt_libbitcoinqt_a-qrc_folm.$(OBJEXT)
-#am__objects_9 = qt/qt_libbitcoinqt_a-qrc_folm_locale.$(OBJEXT)
-#nodist_qt_libbitcoinqt_a_OBJECTS = $(am__objects_6) \
-#	$(am__objects_1) $(am__objects_7) \
-#	$(am__objects_1) $(am__objects_8) \
-#	$(am__objects_9)
+	qt/forms/sendcoinsdialog.ui qt/forms/sendcoinsentry.ui \
+	qt/forms/signverifymessagedialog.ui \
+	qt/forms/transactiondescdialog.ui qt/folm.qrc \
+	qt/folm_locale.qrc qt/locale/folm_bg.ts qt/locale/folm_de.ts \
+	qt/locale/folm_en.ts qt/locale/folm_es.ts qt/locale/folm_fi.ts \
+	qt/locale/folm_fr.ts qt/locale/folm_it.ts qt/locale/folm_ja.ts \
+	qt/locale/folm_pl.ts qt/locale/folm_pt.ts qt/locale/folm_ru.ts \
+	qt/locale/folm_sk.ts qt/locale/folm_sv.ts qt/locale/folm_vi.ts \
+	qt/locale/folm_zh_CN.ts qt/locale/folm_zh_TW.ts \
+	qt/paymentrequest.proto qt/res/icons/bitcoin.ico \
+	qt/res/icons/bitcoin.png qt/res/icons/drkblue/add.png \
+	qt/res/icons/drkblue/address-book.png \
+	qt/res/icons/drkblue/browse.png \
+	qt/res/icons/drkblue/clock1.png \
+	qt/res/icons/drkblue/clock2.png \
+	qt/res/icons/drkblue/clock3.png \
+	qt/res/icons/drkblue/clock4.png \
+	qt/res/icons/drkblue/clock5.png \
+	qt/res/icons/drkblue/configure.png \
+	qt/res/icons/drkblue/connect0_16.png \
+	qt/res/icons/drkblue/connect1_16.png \
+	qt/res/icons/drkblue/connect2_16.png \
+	qt/res/icons/drkblue/connect3_16.png \
+	qt/res/icons/drkblue/connect4_16.png \
+	qt/res/icons/drkblue/debugwindow.png \
+	qt/res/icons/drkblue/drkblue_editpaste.png \
+	qt/res/icons/drkblue/drkblue_address-book.png \
+	qt/res/icons/drkblue/drkblue_editcopy.png \
+	qt/res/icons/drkblue/drkblue_remove.png \
+	qt/res/icons/drkblue/edit.png \
+	qt/res/icons/drkblue/editcopy.png \
+	qt/res/icons/drkblue/editpaste.png \
+	qt/res/icons/drkblue/export.png qt/res/icons/drkblue/eye.png \
+	qt/res/icons/drkblue/eye_minus.png \
+	qt/res/icons/drkblue/eye_plus.png \
+	qt/res/icons/drkblue/filesave.png \
+	qt/res/icons/drkblue/history.png qt/res/icons/drkblue/key.png \
+	qt/res/icons/drkblue/lock_closed.png \
+	qt/res/icons/drkblue/lock_open.png \
+	qt/res/icons/drkblue/overview.png \
+	qt/res/icons/drkblue/quit.png qt/res/icons/drkblue/receive.png \
+	qt/res/icons/drkblue/remove.png qt/res/icons/drkblue/send.png \
+	qt/res/icons/drkblue/synced.png \
+	qt/res/icons/drkblue/transaction0.png \
+	qt/res/icons/drkblue/transaction2.png \
+	qt/res/icons/drkblue/transaction_conflicted.png \
+	qt/res/icons/drkblue/tx_inout.png \
+	qt/res/icons/drkblue/tx_input.png \
+	qt/res/icons/drkblue/tx_output.png \
+	qt/res/icons/drkblue/tx_mined.png \
+	qt/res/icons/drkblue/about.png \
+	qt/res/icons/drkblue/about_qt.png \
+	qt/res/icons/drkblue/info.png qt/res/icons/drkblue/open.png \
+	qt/res/icons/drkblue/verify.png qt/res/icons/crownium/add.png \
+	qt/res/icons/crownium/address-book.png \
+	qt/res/icons/crownium/browse.png \
+	qt/res/icons/crownium/clock1.png \
+	qt/res/icons/crownium/clock2.png \
+	qt/res/icons/crownium/clock3.png \
+	qt/res/icons/crownium/clock4.png \
+	qt/res/icons/crownium/clock5.png \
+	qt/res/icons/crownium/configure.png \
+	qt/res/icons/crownium/connect0_16.png \
+	qt/res/icons/crownium/connect1_16.png \
+	qt/res/icons/crownium/connect2_16.png \
+	qt/res/icons/crownium/connect3_16.png \
+	qt/res/icons/crownium/connect4_16.png \
+	qt/res/icons/crownium/debugwindow.png \
+	qt/res/icons/crownium/drkblue_editpaste.png \
+	qt/res/icons/crownium/drkblue_address-book.png \
+	qt/res/icons/crownium/drkblue_editcopy.png \
+	qt/res/icons/crownium/drkblue_remove.png \
+	qt/res/icons/crownium/edit.png \
+	qt/res/icons/crownium/editcopy.png \
+	qt/res/icons/crownium/editpaste.png \
+	qt/res/icons/crownium/export.png qt/res/icons/crownium/eye.png \
+	qt/res/icons/crownium/eye_minus.png \
+	qt/res/icons/crownium/eye_plus.png \
+	qt/res/icons/crownium/filesave.png \
+	qt/res/icons/crownium/history.png \
+	qt/res/icons/crownium/key.png \
+	qt/res/icons/crownium/lock_closed.png \
+	qt/res/icons/crownium/lock_open.png \
+	qt/res/icons/crownium/overview.png \
+	qt/res/icons/crownium/quit.png \
+	qt/res/icons/crownium/receive.png \
+	qt/res/icons/crownium/remove.png \
+	qt/res/icons/crownium/send.png \
+	qt/res/icons/crownium/synced.png \
+	qt/res/icons/crownium/transaction0.png \
+	qt/res/icons/crownium/transaction2.png \
+	qt/res/icons/crownium/transaction_conflicted.png \
+	qt/res/icons/crownium/tx_inout.png \
+	qt/res/icons/crownium/tx_input.png \
+	qt/res/icons/crownium/tx_output.png \
+	qt/res/icons/crownium/tx_mined.png \
+	qt/res/icons/crownium/about.png \
+	qt/res/icons/crownium/about_qt.png \
+	qt/res/icons/crownium/info.png qt/res/icons/crownium/open.png \
+	qt/res/icons/crownium/verify.png qt/res/icons/light/add.png \
+	qt/res/icons/light/address-book.png \
+	qt/res/icons/light/browse.png qt/res/icons/light/clock1.png \
+	qt/res/icons/light/clock2.png qt/res/icons/light/clock3.png \
+	qt/res/icons/light/clock4.png qt/res/icons/light/clock5.png \
+	qt/res/icons/light/configure.png \
+	qt/res/icons/light/connect0_16.png \
+	qt/res/icons/light/connect1_16.png \
+	qt/res/icons/light/connect2_16.png \
+	qt/res/icons/light/connect3_16.png \
+	qt/res/icons/light/connect4_16.png \
+	qt/res/icons/light/debugwindow.png \
+	qt/res/icons/light/drkblue_editpaste.png \
+	qt/res/icons/light/drkblue_address-book.png \
+	qt/res/icons/light/drkblue_editcopy.png \
+	qt/res/icons/light/drkblue_remove.png \
+	qt/res/icons/light/edit.png qt/res/icons/light/editcopy.png \
+	qt/res/icons/light/editpaste.png qt/res/icons/light/export.png \
+	qt/res/icons/light/eye.png qt/res/icons/light/eye_minus.png \
+	qt/res/icons/light/eye_plus.png \
+	qt/res/icons/light/filesave.png qt/res/icons/light/history.png \
+	qt/res/icons/light/key.png qt/res/icons/light/lock_closed.png \
+	qt/res/icons/light/lock_open.png \
+	qt/res/icons/light/overview.png qt/res/icons/light/quit.png \
+	qt/res/icons/light/receive.png qt/res/icons/light/remove.png \
+	qt/res/icons/light/send.png qt/res/icons/light/synced.png \
+	qt/res/icons/light/transaction0.png \
+	qt/res/icons/light/transaction2.png \
+	qt/res/icons/light/transaction_conflicted.png \
+	qt/res/icons/light/tx_inout.png \
+	qt/res/icons/light/tx_input.png \
+	qt/res/icons/light/tx_output.png \
+	qt/res/icons/light/tx_mined.png qt/res/icons/light/about.png \
+	qt/res/icons/light/about_qt.png qt/res/icons/light/info.png \
+	qt/res/icons/light/open.png qt/res/icons/light/verify.png \
+	qt/res/icons/trad/add.png qt/res/icons/trad/address-book.png \
+	qt/res/icons/trad/browse.png qt/res/icons/trad/clock1.png \
+	qt/res/icons/trad/clock2.png qt/res/icons/trad/clock3.png \
+	qt/res/icons/trad/clock4.png qt/res/icons/trad/clock5.png \
+	qt/res/icons/trad/configure.png \
+	qt/res/icons/trad/connect0_16.png \
+	qt/res/icons/trad/connect1_16.png \
+	qt/res/icons/trad/connect2_16.png \
+	qt/res/icons/trad/connect3_16.png \
+	qt/res/icons/trad/connect4_16.png \
+	qt/res/icons/trad/debugwindow.png \
+	qt/res/icons/trad/drkblue_editpaste.png \
+	qt/res/icons/trad/drkblue_address-book.png \
+	qt/res/icons/trad/drkblue_editcopy.png \
+	qt/res/icons/trad/drkblue_remove.png \
+	qt/res/icons/trad/edit.png qt/res/icons/trad/editcopy.png \
+	qt/res/icons/trad/editpaste.png qt/res/icons/trad/export.png \
+	qt/res/icons/trad/eye.png qt/res/icons/trad/eye_minus.png \
+	qt/res/icons/trad/eye_plus.png qt/res/icons/trad/filesave.png \
+	qt/res/icons/trad/history.png qt/res/icons/trad/key.png \
+	qt/res/icons/trad/lock_closed.png \
+	qt/res/icons/trad/lock_open.png qt/res/icons/trad/overview.png \
+	qt/res/icons/trad/quit.png qt/res/icons/trad/receive.png \
+	qt/res/icons/trad/remove.png qt/res/icons/trad/send.png \
+	qt/res/icons/trad/synced.png \
+	qt/res/icons/trad/transaction0.png \
+	qt/res/icons/trad/transaction2.png \
+	qt/res/icons/trad/transaction_conflicted.png \
+	qt/res/icons/trad/tx_inout.png qt/res/icons/trad/tx_input.png \
+	qt/res/icons/trad/tx_output.png qt/res/icons/trad/tx_mined.png \
+	qt/res/icons/trad/about.png qt/res/icons/trad/about_qt.png \
+	qt/res/icons/trad/info.png qt/res/icons/trad/open.png \
+	qt/res/icons/trad/verify.png qt/res/images/drkblue/about.png \
+	qt/res/images/drkblue/splash.png \
+	qt/res/images/drkblue/folm_logo_horizontal.png \
+	qt/res/images/drkblue/drkblue_downArrow.png \
+	qt/res/images/drkblue/drkblue_downArrow_small.png \
+	qt/res/images/drkblue/drkblue_upArrow_small.png \
+	qt/res/images/drkblue/drkblue_leftArrow_small.png \
+	qt/res/images/drkblue/drkblue_rightArrow_small.png \
+	qt/res/images/drkblue/drkblue_qtreeview_selected.png \
+	qt/res/images/drkblue/drkblue_walletFrame_bg.png \
+	qt/res/images/drkblue/drkblue_walletFrame.png \
+	qt/res/images/crownium/about.png \
+	qt/res/images/crownium/splash.png \
+	qt/res/images/crownium/folm_logo_horizontal.png \
+	qt/res/images/crownium/drkblue_downArrow.png \
+	qt/res/images/crownium/drkblue_downArrow_small.png \
+	qt/res/images/crownium/drkblue_upArrow_small.png \
+	qt/res/images/crownium/drkblue_leftArrow_small.png \
+	qt/res/images/crownium/drkblue_rightArrow_small.png \
+	qt/res/images/crownium/drkblue_qtreeview_selected.png \
+	qt/res/images/crownium/drkblue_walletFrame_bg.png \
+	qt/res/images/crownium/drkblue_walletFrame.png \
+	qt/res/images/light/about.png qt/res/images/light/splash.png \
+	qt/res/images/light/folm_logo_horizontal.png \
+	qt/res/images/light/drkblue_downArrow.png \
+	qt/res/images/light/drkblue_downArrow_small.png \
+	qt/res/images/light/drkblue_upArrow_small.png \
+	qt/res/images/light/drkblue_leftArrow_small.png \
+	qt/res/images/light/drkblue_rightArrow_small.png \
+	qt/res/images/light/drkblue_qtreeview_selected.png \
+	qt/res/images/light/drkblue_walletFrame_bg.png \
+	qt/res/images/light/drkblue_walletFrame.png \
+	qt/res/images/trad/about.png qt/res/images/trad/splash.png \
+	qt/res/images/trad/folm_logo_horizontal.png \
+	qt/res/images/trad/drkblue_downArrow.png \
+	qt/res/images/trad/drkblue_downArrow_small.png \
+	qt/res/images/trad/drkblue_upArrow_small.png \
+	qt/res/images/trad/drkblue_leftArrow_small.png \
+	qt/res/images/trad/drkblue_rightArrow_small.png \
+	qt/res/images/trad/drkblue_qtreeview_selected.png \
+	qt/res/images/trad/drkblue_walletFrame_bg.png \
+	qt/res/images/trad/drkblue_walletFrame.png \
+	qt/res/css/drkblue.css qt/res/css/crownium.css \
+	qt/res/css/light.css $(wildcard qt/res/movies/spinner-*.png)
+#am__objects_3 = qt/qt_libbitcoinqt_a-winshutdownmonitor.$(OBJEXT)
+am__objects_4 = qt/qt_libbitcoinqt_a-addressbookpage.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-addresstablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-askpassphrasedialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-coincontroldialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-coincontroltreewidget.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-obfuscationconfig.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-editaddressdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-openuridialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-overviewpage.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-paymentrequestplus.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-paymentserver.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-receivecoinsdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-receiverequestdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-recentrequeststablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-sendcoinsdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-sendcoinsentry.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-signverifymessagedialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-transactiondesc.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-transactiondescdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-transactionfilterproxy.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-transactionrecord.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-transactiontablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-transactionview.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-walletframe.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-walletmodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-walletmodeltransaction.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-walletview.$(OBJEXT)
+am__objects_5 =  \
+	qt/qt_libbitcoinqt_a-bantablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-bitcoinaddressvalidator.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-bitcoinamountfield.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-bitcoingui.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-bitcoinunits.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-clientmodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-csvmodelwriter.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-guiutil.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-intro.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-networkstyle.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-notificator.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-optionsdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-optionsmodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-peertablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-platformstyle.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-qvalidatedlineedit.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-qvaluecombobox.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-rpcconsole.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-splashscreen.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-trafficgraphwidget.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-utilitydialog.$(OBJEXT) \
+	$(am__objects_3) $(am__objects_4)
+am_qt_libbitcoinqt_a_OBJECTS = $(am__objects_5) \
+	$(am__objects_1) $(am__objects_1) \
+	$(am__objects_1) $(am__objects_1) \
+	$(am__objects_1) $(am__objects_1) \
+	$(am__objects_1) $(am__objects_1) \
+	$(am__objects_1) $(am__objects_1)
+am__objects_6 = qt/qt_libbitcoinqt_a-moc_addressbookpage.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_addresstablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_askpassphrasedialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_bantablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_bitcoinamountfield.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_bitcoingui.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_bitcoinunits.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_clientmodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_coincontroldialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_coincontroltreewidget.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_csvmodelwriter.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_obfuscationconfig.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_editaddressdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_guiutil.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_intro.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_macdockiconhandler.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_macnotificationhandler.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_notificator.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_openuridialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_optionsdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_optionsmodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_overviewpage.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_peertablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_paymentserver.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_qvalidatedlineedit.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_qvaluecombobox.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_receivecoinsdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_receiverequestdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_recentrequeststablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_rpcconsole.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_sendcoinsdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_sendcoinsentry.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_signverifymessagedialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_splashscreen.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_trafficgraphwidget.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_transactiondesc.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_transactiondescdialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_transactionfilterproxy.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_transactiontablemodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_transactionview.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_utilitydialog.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_walletframe.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_walletmodel.$(OBJEXT) \
+	qt/qt_libbitcoinqt_a-moc_walletview.$(OBJEXT)
+am__objects_7 = qt/qt_libbitcoinqt_a-paymentrequest.pb.$(OBJEXT)
+am__objects_8 =  \
+	qt/qt_libbitcoinqt_a-qrc_folm.$(OBJEXT)
+am__objects_9 = qt/qt_libbitcoinqt_a-qrc_folm_locale.$(OBJEXT)
+nodist_qt_libbitcoinqt_a_OBJECTS = $(am__objects_6) \
+	$(am__objects_1) $(am__objects_7) \
+	$(am__objects_1) $(am__objects_8) \
+	$(am__objects_9)
 qt_libbitcoinqt_a_OBJECTS = $(am_qt_libbitcoinqt_a_OBJECTS) \
 	$(nodist_qt_libbitcoinqt_a_OBJECTS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
@@ -710,23 +849,23 @@ am__EXEEXT_1 = folmd$(EXEEXT)
 am__EXEEXT_2 = folm-cli$(EXEEXT) \
 	folm-tx$(EXEEXT)
 #am__EXEEXT_3 = test/test_folm$(EXEEXT)
-am__EXEEXT_4 = bench/bench_dash$(EXEEXT)
-#am__EXEEXT_5 = qt/folm-qt$(EXEEXT)
+am__EXEEXT_4 = bench/bench_folm$(EXEEXT)
+am__EXEEXT_5 = qt/folm-qt$(EXEEXT)
 #am__EXEEXT_6 = qt/test/test_folm-qt$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
-am__bench_bench_dash_SOURCES_DIST = bench/bench_dash.cpp \
+am__bench_bench_folm_SOURCES_DIST = bench/bench_folm.cpp \
 	bench/bench.cpp bench/bench.h bench/Examples.cpp
-am_bench_bench_dash_OBJECTS = bench/bench_bench_dash-bench_dash.$(OBJEXT) \
-	bench/bench_bench_dash-bench.$(OBJEXT) \
-	bench/bench_bench_dash-Examples.$(OBJEXT)
-bench_bench_dash_OBJECTS = $(am_bench_bench_dash_OBJECTS)
+am_bench_bench_folm_OBJECTS = bench/bench_bench_folm-bench_folm.$(OBJEXT) \
+	bench/bench_bench_folm-bench.$(OBJEXT) \
+	bench/bench_bench_folm-Examples.$(OBJEXT)
+bench_bench_folm_OBJECTS = $(am_bench_bench_folm_OBJECTS)
 am__DEPENDENCIES_1 = $(am__append_2)
 am__DEPENDENCIES_2 = $(am__append_3)
 am__DEPENDENCIES_3 =
 am__DEPENDENCIES_4 =  \
 	$(LIBBITCOIN_ZMQ) \
 	$(am__DEPENDENCIES_3)
-bench_bench_dash_DEPENDENCIES =  \
+bench_bench_folm_DEPENDENCIES =  \
 	$(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
 	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
@@ -735,10 +874,10 @@ bench_bench_dash_DEPENDENCIES =  \
 	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
 	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
 	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3)
-bench_bench_dash_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+bench_bench_folm_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) \
-	$(bench_bench_dash_LDFLAGS) $(LDFLAGS) -o $@
+	$(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) \
+	$(bench_bench_folm_LDFLAGS) $(LDFLAGS) -o $@
 am__folm_cli_SOURCES_DIST = folm-cli.cpp folm-cli-res.rc
 #am__objects_11 = folm-cli-res.$(OBJEXT)
 am_folm_cli_OBJECTS = folm_cli-folm-cli.$(OBJEXT) $(am__objects_11)
@@ -777,32 +916,32 @@ folmd_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(CXXFLAGS) $(folmd_LDFLAGS) $(LDFLAGS) -o $@
 am__qt_folm_qt_SOURCES_DIST = qt/folm.cpp qt/macdockiconhandler.mm \
 	qt/macnotificationhandler.mm qt/res/folm-qt-res.rc
-#am__objects_14 =  \
-#	qt/qt_folm_qt-macdockiconhandler.$(OBJEXT) \
-#	qt/qt_folm_qt-macnotificationhandler.$(OBJEXT)
-##am__objects_15 =  \
-##	$(am__objects_14)
-#am__objects_16 = qt/res/folm-qt-res.$(OBJEXT)
-##am__objects_17 =  \
-##	$(am__objects_16)
-#am_qt_folm_qt_OBJECTS = qt/qt_folm_qt-folm.$(OBJEXT) \
-#	$(am__objects_15) $(am__objects_17)
+am__objects_14 =  \
+	qt/qt_folm_qt-macdockiconhandler.$(OBJEXT) \
+	qt/qt_folm_qt-macnotificationhandler.$(OBJEXT)
+#am__objects_15 =  \
+#	$(am__objects_14)
+am__objects_16 = qt/res/folm-qt-res.$(OBJEXT)
+#am__objects_17 =  \
+#	$(am__objects_16)
+am_qt_folm_qt_OBJECTS = qt/qt_folm_qt-folm.$(OBJEXT) \
+	$(am__objects_15) $(am__objects_17)
 qt_folm_qt_OBJECTS = $(am_qt_folm_qt_OBJECTS)
-#am__DEPENDENCIES_6 =  \
-#	$(LIBBITCOIN_ZMQ) \
-#	$(am__DEPENDENCIES_3)
-#qt_folm_qt_DEPENDENCIES = qt/libbitcoinqt.a \
-#	$(LIBBITCOIN_SERVER) $(am__append_33) \
-#	$(am__DEPENDENCIES_6) $(LIBBITCOIN_CLI) \
-#	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
-#	$(LIBBITCOIN_CRYPTO) $(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
-#	$(LIBSECP256K1) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_3)
+am__DEPENDENCIES_6 =  \
+	$(LIBBITCOIN_ZMQ) \
+	$(am__DEPENDENCIES_3)
+qt_folm_qt_DEPENDENCIES = qt/libbitcoinqt.a \
+	$(LIBBITCOIN_SERVER) $(am__append_33) \
+	$(am__DEPENDENCIES_6) $(LIBBITCOIN_CLI) \
+	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
+	$(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
+	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
+	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
+	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
+	$(am__DEPENDENCIES_3) $(LIBSECP256K1) \
+	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3)
 qt_folm_qt_LINK = $(LIBTOOL) $(AM_V_lt) $(qt_folm_qt_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(OBJCXXLD) $(AM_OBJCXXFLAGS) \
 	$(OBJCXXFLAGS) $(qt_folm_qt_LDFLAGS) $(LDFLAGS) -o $@
@@ -829,7 +968,7 @@ qt_test_test_folm_qt_OBJECTS = $(am_qt_test_test_folm_qt_OBJECTS) \
 #	$(am__append_40) $(am__DEPENDENCIES_7) \
 #	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
 #	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
-#	$(am__DEPENDENCIES_1) \
+#	$(LIBUNIVALUE) $(am__DEPENDENCIES_1) \
 #	$(am__DEPENDENCIES_2) \
 #	$(am__DEPENDENCIES_3) \
 #	$(am__DEPENDENCIES_3) \
@@ -845,40 +984,52 @@ qt_test_test_folm_qt_OBJECTS = $(am_qt_test_test_folm_qt_OBJECTS) \
 #	$(am__DEPENDENCIES_3)
 qt_test_test_folm_qt_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(qt_test_test_folm_qt_LDFLAGS) \
-	$(LDFLAGS) -o $@
-am__test_test_folm_SOURCES_DIST = test/bignum.h \
+	$(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) \
+	$(qt_test_test_folm_qt_LDFLAGS) $(LDFLAGS) -o $@
+am__test_test_folm_SOURCES_DIST = test/arith_uint256_tests.cpp \
+	test/scriptnum10.h test/addrman_tests.cpp test/alert_tests.cpp \
 	test/allocator_tests.cpp test/base32_tests.cpp \
 	test/base58_tests.cpp test/base64_tests.cpp \
+	test/bip32_tests.cpp test/bloom_tests.cpp \
 	test/checkblock_tests.cpp test/Checkpoints_tests.cpp \
 	test/coins_tests.cpp test/compress_tests.cpp \
 	test/crypto_tests.cpp test/DoS_tests.cpp test/getarg_tests.cpp \
-	test/hash_tests.cpp test/key_tests.cpp test/main_tests.cpp \
-	test/mempool_tests.cpp test/mruset_tests.cpp \
+	test/hash_tests.cpp test/key_tests.cpp \
+	test/limitedmap_tests.cpp test/dbwrapper_tests.cpp \
+	test/main_tests.cpp test/mempool_tests.cpp \
+	test/merkle_tests.cpp test/miner_tests.cpp \
 	test/multisig_tests.cpp test/netbase_tests.cpp \
-	test/pmt_tests.cpp test/rpc_tests.cpp test/sanity_tests.cpp \
+	test/pmt_tests.cpp test/policyestimator_tests.cpp \
+	test/pow_tests.cpp test/prevector_tests.cpp \
+	test/reverselock_tests.cpp test/rpc_tests.cpp \
+	test/sanity_tests.cpp test/scheduler_tests.cpp \
 	test/script_P2SH_tests.cpp test/script_tests.cpp \
 	test/scriptnum_tests.cpp test/serialize_tests.cpp \
 	test/sighash_tests.cpp test/sigopcount_tests.cpp \
-	test/skiplist_tests.cpp test/test_folm.cpp \
-	test/timedata_tests.cpp test/transaction_tests.cpp \
+	test/skiplist_tests.cpp test/streams_tests.cpp \
+	test/test_folm.cpp test/test_folm.h test/timedata_tests.cpp \
+	test/transaction_tests.cpp test/txvalidationcache_tests.cpp \
 	test/uint256_tests.cpp test/univalue_tests.cpp \
 	test/util_tests.cpp test/accounting_tests.cpp \
-	test/wallet_tests.cpp test/rpc_wallet_tests.cpp \
+	wallet/test/wallet_tests.cpp test/rpc_wallet_tests.cpp \
 	test/data/script_valid.json test/data/base58_keys_valid.json \
-	test/data/sig_canonical.json test/data/sig_noncanonical.json \
 	test/data/base58_encode_decode.json \
 	test/data/base58_keys_invalid.json \
 	test/data/script_invalid.json test/data/tx_invalid.json \
 	test/data/tx_valid.json test/data/sighash.json \
 	test/data/alertTests.raw
 #am__objects_21 = test/test_test_folm-accounting_tests.$(OBJEXT) \
-#	test/test_test_folm-wallet_tests.$(OBJEXT) \
+#	wallet/test/test_test_folm-wallet_tests.$(OBJEXT) \
 #	test/test_test_folm-rpc_wallet_tests.$(OBJEXT)
-#am__objects_22 = test/test_test_folm-allocator_tests.$(OBJEXT) \
+#am__objects_22 = test/test_test_folm-arith_uint256_tests.$(OBJEXT) \
+#	test/test_test_folm-addrman_tests.$(OBJEXT) \
+#	test/test_test_folm-alert_tests.$(OBJEXT) \
+#	test/test_test_folm-allocator_tests.$(OBJEXT) \
 #	test/test_test_folm-base32_tests.$(OBJEXT) \
 #	test/test_test_folm-base58_tests.$(OBJEXT) \
 #	test/test_test_folm-base64_tests.$(OBJEXT) \
+#	test/test_test_folm-bip32_tests.$(OBJEXT) \
+#	test/test_test_folm-bloom_tests.$(OBJEXT) \
 #	test/test_test_folm-checkblock_tests.$(OBJEXT) \
 #	test/test_test_folm-Checkpoints_tests.$(OBJEXT) \
 #	test/test_test_folm-coins_tests.$(OBJEXT) \
@@ -888,14 +1039,22 @@ am__test_test_folm_SOURCES_DIST = test/bignum.h \
 #	test/test_test_folm-getarg_tests.$(OBJEXT) \
 #	test/test_test_folm-hash_tests.$(OBJEXT) \
 #	test/test_test_folm-key_tests.$(OBJEXT) \
+#	test/test_test_folm-limitedmap_tests.$(OBJEXT) \
+#	test/test_test_folm-dbwrapper_tests.$(OBJEXT) \
 #	test/test_test_folm-main_tests.$(OBJEXT) \
 #	test/test_test_folm-mempool_tests.$(OBJEXT) \
-#	test/test_test_folm-mruset_tests.$(OBJEXT) \
+#	test/test_test_folm-merkle_tests.$(OBJEXT) \
+#	test/test_test_folm-miner_tests.$(OBJEXT) \
 #	test/test_test_folm-multisig_tests.$(OBJEXT) \
 #	test/test_test_folm-netbase_tests.$(OBJEXT) \
 #	test/test_test_folm-pmt_tests.$(OBJEXT) \
+#	test/test_test_folm-policyestimator_tests.$(OBJEXT) \
+#	test/test_test_folm-pow_tests.$(OBJEXT) \
+#	test/test_test_folm-prevector_tests.$(OBJEXT) \
+#	test/test_test_folm-reverselock_tests.$(OBJEXT) \
 #	test/test_test_folm-rpc_tests.$(OBJEXT) \
 #	test/test_test_folm-sanity_tests.$(OBJEXT) \
+#	test/test_test_folm-scheduler_tests.$(OBJEXT) \
 #	test/test_test_folm-script_P2SH_tests.$(OBJEXT) \
 #	test/test_test_folm-script_tests.$(OBJEXT) \
 #	test/test_test_folm-scriptnum_tests.$(OBJEXT) \
@@ -903,9 +1062,11 @@ am__test_test_folm_SOURCES_DIST = test/bignum.h \
 #	test/test_test_folm-sighash_tests.$(OBJEXT) \
 #	test/test_test_folm-sigopcount_tests.$(OBJEXT) \
 #	test/test_test_folm-skiplist_tests.$(OBJEXT) \
+#	test/test_test_folm-streams_tests.$(OBJEXT) \
 #	test/test_test_folm-test_folm.$(OBJEXT) \
 #	test/test_test_folm-timedata_tests.$(OBJEXT) \
 #	test/test_test_folm-transaction_tests.$(OBJEXT) \
+#	test/test_test_folm-txvalidationcache_tests.$(OBJEXT) \
 #	test/test_test_folm-uint256_tests.$(OBJEXT) \
 #	test/test_test_folm-univalue_tests.$(OBJEXT) \
 #	test/test_test_folm-util_tests.$(OBJEXT) \
@@ -922,17 +1083,18 @@ am__DEPENDENCIES_8 = libbitcoinconsensus.la
 #test_test_folm_DEPENDENCIES = $(LIBBITCOIN_SERVER) \
 #	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
 #	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
-#	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+#	$(LIBUNIVALUE) $(am__DEPENDENCIES_1) \
+#	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) \
+#	$(am__DEPENDENCIES_3) $(LIBSECP256K1) \
+#	$(am__append_20) $(am__DEPENDENCIES_8) \
 #	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
-#	$(LIBSECP256K1) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_3) $(am__append_20) \
-#	$(am__DEPENDENCIES_8) $(am__DEPENDENCIES_3) \
 #	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_9)
+#	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_3) \
+#	$(am__DEPENDENCIES_9)
 test_test_folm_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_test_folm_LDFLAGS) \
-	$(LDFLAGS) -o $@
+	$(test_test_folm_CXXFLAGS) $(CXXFLAGS) \
+	$(test_test_folm_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -1010,7 +1172,7 @@ SOURCES = $(crypto_libbitcoin_crypto_a_SOURCES) \
 	$(libbitcoin_wallet_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) \
 	$(qt_libbitcoinqt_a_SOURCES) \
 	$(nodist_qt_libbitcoinqt_a_SOURCES) \
-	$(libbitcoinconsensus_la_SOURCES) $(bench_bench_dash_SOURCES) \
+	$(libbitcoinconsensus_la_SOURCES) $(bench_bench_folm_SOURCES) \
 	$(folm_cli_SOURCES) $(folm_tx_SOURCES) $(folmd_SOURCES) \
 	$(qt_folm_qt_SOURCES) $(qt_test_test_folm_qt_SOURCES) \
 	$(nodist_qt_test_test_folm_qt_SOURCES) \
@@ -1023,7 +1185,7 @@ DIST_SOURCES = $(crypto_libbitcoin_crypto_a_SOURCES) \
 	$(am__libbitcoin_zmq_a_SOURCES_DIST) \
 	$(am__qt_libbitcoinqt_a_SOURCES_DIST) \
 	$(am__libbitcoinconsensus_la_SOURCES_DIST) \
-	$(am__bench_bench_dash_SOURCES_DIST) \
+	$(am__bench_bench_folm_SOURCES_DIST) \
 	$(am__folm_cli_SOURCES_DIST) $(am__folm_tx_SOURCES_DIST) \
 	$(am__folmd_SOURCES_DIST) $(am__qt_folm_qt_SOURCES_DIST) \
 	$(am__qt_test_test_folm_qt_SOURCES_DIST) \
@@ -1226,8 +1388,6 @@ am__set_TESTS_bases = \
   bases=`for i in $$bases; do echo $$i; done | sed 's/\.log$$//'`; \
   bases=`echo $$bases`
 RECHECK_LOGS = $(TEST_LOGS)
-#am__EXEEXT_7 = test/test_folm$(EXEEXT) \
-#	test/bitcoin-util-test.py
 TEST_SUITE_LOG = test-suite.log
 TEST_EXTENSIONS =  .test
 LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
@@ -1280,13 +1440,13 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-ACLOCAL = ${SHELL} /home/splendour/projects/folm/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/splendour/projects/folm-folm/build-aux/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = /usr/bin/ar
-AUTOCONF = ${SHELL} /home/splendour/projects/folm/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/splendour/projects/folm/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /home/splendour/projects/folm/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /home/splendour/projects/folm-folm/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/splendour/projects/folm-folm/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /home/splendour/projects/folm-folm/build-aux/missing automake-1.15
 AWK = mawk
 BDB_CPPFLAGS = 
 BDB_LIBS = -ldb_cxx-4.8
@@ -1300,7 +1460,7 @@ BOOST_SYSTEM_LIB = -lboost_system
 BOOST_THREAD_LIB = -lboost_thread
 BOOST_UNIT_TEST_FRAMEWORK_LIB = 
 BREW = 
-BUILD_QT = 
+BUILD_QT = qt
 BUILD_TEST = 
 BUILD_TEST_QT = 
 CC = gcc
@@ -1309,9 +1469,9 @@ CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CLIENT_VERSION_BUILD = 0
 CLIENT_VERSION_IS_RELEASE = true
-CLIENT_VERSION_MAJOR = 0
-CLIENT_VERSION_MINOR = 12
-CLIENT_VERSION_REVISION = 1
+CLIENT_VERSION_MAJOR = 4
+CLIENT_VERSION_MINOR = 0
+CLIENT_VERSION_REVISION = 0
 COMPARISON_TOOL_REORG_TESTS = 0
 COPYRIGHT_YEAR = 2016
 CPP = gcc -E
@@ -1370,18 +1530,18 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBTOOL_APP_LDFLAGS = 
 LIPO = 
 LN_S = ln -s
-LRELEASE = 
+LRELEASE = /usr/lib/x86_64-linux-gnu/qt5/bin/lrelease
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-LUPDATE = 
+LUPDATE = /usr/lib/x86_64-linux-gnu/qt5/bin/lupdate
 MAINT = 
-MAKEINFO = ${SHELL} /home/splendour/projects/folm/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/splendour/projects/folm-folm/build-aux/missing makeinfo
 MAKENSIS = 
 MANIFEST_TOOL = :
 MINIUPNPC_CPPFLAGS = 
 MINIUPNPC_LIBS = 
 MKDIR_P = /bin/mkdir -p
-MOC = 
+MOC = /usr/lib/x86_64-linux-gnu/qt5/bin/moc
 MOC_DEFS = -DHAVE_CONFIG_H -I$(srcdir)
 NM = /usr/bin/nm -B
 NMEDIT = 
@@ -1395,10 +1555,10 @@ OTOOL64 =
 PACKAGE = folm
 PACKAGE_BUGREPORT = https://github.com/folmpay/folm/issues
 PACKAGE_NAME = Folm Core
-PACKAGE_STRING = Folm Core 0.12.1
+PACKAGE_STRING = Folm Core 4.0.0
 PACKAGE_TARNAME = folm
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.12.1
+PACKAGE_VERSION = 4.0.0
 PATH_SEPARATOR = :
 PIC_FLAGS = -fPIC
 PIE_FLAGS = -fPIE
@@ -1406,9 +1566,9 @@ PKG_CONFIG = /usr/bin/pkg-config
 PKG_CONFIG_LIBDIR = 
 PKG_CONFIG_PATH = 
 PORT = 
-PROTOBUF_CFLAGS = 
-PROTOBUF_LIBS = 
-PROTOC = 
+PROTOBUF_CFLAGS = -pthread
+PROTOBUF_LIBS = -lprotobuf -pthread -lpthread
+PROTOC = /usr/bin/protoc
 PTHREAD_CC = gcc
 PTHREAD_CFLAGS = -pthread
 PTHREAD_LIBS = 
@@ -1421,21 +1581,21 @@ QTPRINT_CFLAGS =
 QTPRINT_LIBS = 
 QTXCBQPA_CFLAGS = 
 QTXCBQPA_LIBS = 
-QT_CFLAGS = 
-QT_DBUS_CFLAGS = 
-QT_DBUS_INCLUDES = 
-QT_DBUS_LIBS = 
-QT_INCLUDES = 
+QT_CFLAGS = -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5
+QT_DBUS_CFLAGS = -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5
+QT_DBUS_INCLUDES = -I/usr/include/x86_64-linux-gnu/qt5/QtDBus -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5
+QT_DBUS_LIBS = -lQt5DBus -lQt5Core
+QT_INCLUDES = -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5
 QT_LDFLAGS = 
-QT_LIBS = 
-QT_PIE_FLAGS = 
-QT_SELECT = qt
-QT_TEST_CFLAGS = 
-QT_TEST_INCLUDES = 
-QT_TEST_LIBS = 
+QT_LIBS = -lQt5Network -lQt5Widgets -lQt5Gui -lQt5Core
+QT_PIE_FLAGS = -fPIC
+QT_SELECT = qt5
+QT_TEST_CFLAGS = -I/usr/include/x86_64-linux-gnu/qt5/QtTest -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5
+QT_TEST_INCLUDES = -I/usr/include/x86_64-linux-gnu/qt5/QtTest -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/x86_64-linux-gnu/qt5
+QT_TEST_LIBS = -lQt5Test -lQt5Core
 QT_TRANSLATION_DIR = 
 RANLIB = /usr/bin/ranlib
-RCC = 
+RCC = /usr/lib/x86_64-linux-gnu/qt5/bin/rcc
 READELF = /usr/bin/readelf
 RELDFLAGS = 
 SED = /bin/sed
@@ -1445,10 +1605,10 @@ SSL_CFLAGS =
 SSL_LIBS = -lssl
 STRIP = /usr/bin/strip
 TESTDEFS = 
-UIC = 
+UIC = /usr/lib/x86_64-linux-gnu/qt5/bin/uic
 USE_QRCODE = 
 USE_UPNP = 
-VERSION = 0.12.1
+VERSION = 4.0.0
 WINDOWS_BITS = 
 WINDRES = 
 X11XCB_CFLAGS = 
@@ -1456,10 +1616,10 @@ X11XCB_LIBS =
 XGETTEXT = /usr/bin/xgettext
 ZMQ_CFLAGS = 
 ZMQ_LIBS = -lzmq
-abs_builddir = /home/splendour/projects/folm/src
-abs_srcdir = /home/splendour/projects/folm/src
-abs_top_builddir = /home/splendour/projects/folm
-abs_top_srcdir = /home/splendour/projects/folm
+abs_builddir = /home/splendour/projects/folm-folm/src
+abs_srcdir = /home/splendour/projects/folm-folm/src
+abs_top_builddir = /home/splendour/projects/folm-folm
+abs_top_srcdir = /home/splendour/projects/folm-folm
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -1491,7 +1651,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/splendour/projects/folm/build-aux/install-sh
+install_sh = ${SHELL} /home/splendour/projects/folm-folm/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -1569,14 +1729,15 @@ BITCOIN_CORE_H = \
   consensus/params.h \
   consensus/validation.h \
   core_io.h \
-  darksend.h \
-  darksend-relay.h \
+  obfuscation.h \
+  dsnotificationinterface.h \
+  obfuscation-relay.h \
   core_memusage.h \
   hash.h \
   httprpc.h \
   httpserver.h \
   init.h \
-  instantx.h \
+  swifttx.h \
   key.h \
   keepass.h \
   keystore.h \
@@ -1703,9 +1864,10 @@ libbitcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
-  darksend.cpp \
-  darksend-relay.cpp \
-  instantx.cpp \
+  obfuscation.cpp \
+  dsnotificationinterface.cpp \
+  obfuscation-relay.cpp \
+  swifttx.cpp \
   masternode.cpp \
   masternode-budget.cpp \
   masternode-payments.cpp \
@@ -1725,8 +1887,8 @@ libbitcoin_wallet_a_SOURCES = \
 
 
 # crypto primitives library
-crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES)
-crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES) $(PIC_FLAGS)
+crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(PIC_FLAGS)
 crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/common.h \
   crypto/hmac_sha256.cpp \
@@ -1739,6 +1901,8 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/bmw.c \
   crypto/cubehash.c \
   crypto/echo.c \
+  crypto/fugue.c \
+  crypto/gost.c \
   crypto/groestl.c \
   crypto/jh.c \
   crypto/keccak.c \
@@ -1756,6 +1920,8 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_bmw.h \
   crypto/sph_cubehash.h \
   crypto/sph_echo.h \
+  crypto/sph_fugue.h \
+  crypto/sph_gost.h \
   crypto/sph_groestl.h \
   crypto/sph_jh.h \
   crypto/sph_keccak.h \
@@ -1884,8 +2050,6 @@ EXTRA_DIST = leveldb $(am__append_18)
 #JSON_TEST_FILES = \
 #  test/data/script_valid.json \
 #  test/data/base58_keys_valid.json \
-#  test/data/sig_canonical.json \
-#  test/data/sig_noncanonical.json \
 #  test/data/base58_encode_decode.json \
 #  test/data/base58_keys_invalid.json \
 #  test/data/script_invalid.json \
@@ -1895,61 +2059,73 @@ EXTRA_DIST = leveldb $(am__append_18)
 
 #RAW_TEST_FILES = test/data/alertTests.raw
 #GENERATED_TEST_FILES = $(JSON_TEST_FILES:.json=.json.h) $(RAW_TEST_FILES:.raw=.raw.h)
-#BITCOIN_TESTS = test/bignum.h \
+#BITCOIN_TESTS = test/arith_uint256_tests.cpp \
+#	test/scriptnum10.h test/addrman_tests.cpp \
+#	test/alert_tests.cpp \
 #	test/allocator_tests.cpp \
 #	test/base32_tests.cpp test/base58_tests.cpp \
-#	test/base64_tests.cpp \
+#	test/base64_tests.cpp test/bip32_tests.cpp \
+#	test/bloom_tests.cpp \
 #	test/checkblock_tests.cpp \
 #	test/Checkpoints_tests.cpp \
 #	test/coins_tests.cpp \
 #	test/compress_tests.cpp \
 #	test/crypto_tests.cpp test/DoS_tests.cpp \
 #	test/getarg_tests.cpp test/hash_tests.cpp \
-#	test/key_tests.cpp test/main_tests.cpp \
-#	test/mempool_tests.cpp \
-#	test/mruset_tests.cpp \
+#	test/key_tests.cpp \
+#	test/limitedmap_tests.cpp \
+#	test/dbwrapper_tests.cpp \
+#	test/main_tests.cpp test/mempool_tests.cpp \
+#	test/merkle_tests.cpp test/miner_tests.cpp \
 #	test/multisig_tests.cpp \
 #	test/netbase_tests.cpp test/pmt_tests.cpp \
+#	test/policyestimator_tests.cpp \
+#	test/pow_tests.cpp test/prevector_tests.cpp \
+#	test/reverselock_tests.cpp \
 #	test/rpc_tests.cpp test/sanity_tests.cpp \
+#	test/scheduler_tests.cpp \
 #	test/script_P2SH_tests.cpp \
 #	test/script_tests.cpp \
 #	test/scriptnum_tests.cpp \
 #	test/serialize_tests.cpp \
 #	test/sighash_tests.cpp \
 #	test/sigopcount_tests.cpp \
-#	test/skiplist_tests.cpp test/test_folm.cpp \
-#	test/timedata_tests.cpp \
+#	test/skiplist_tests.cpp \
+#	test/streams_tests.cpp test/test_folm.cpp \
+#	test/test_folm.h test/timedata_tests.cpp \
 #	test/transaction_tests.cpp \
+#	test/txvalidationcache_tests.cpp \
 #	test/uint256_tests.cpp \
 #	test/univalue_tests.cpp test/util_tests.cpp \
 #	$(am__append_19)
 #test_test_folm_SOURCES = $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
-#test_test_folm_CPPFLAGS = $(BITCOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS)
+#test_test_folm_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS) $(EVENT_CFLAGS)
 #test_test_folm_LDADD = $(LIBBITCOIN_SERVER) \
 #	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
 #	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
-#	$(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) \
-#	$(LIBMEMENV) $(BOOST_LIBS) \
+#	$(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+#	$(BOOST_LIBS) \
 #	$(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
-#	$(LIBSECP256K1) $(EVENT_LIBS) \
-#	$(EVENT_PTHREADS_LIBS) $(am__append_20) \
+#	$(LIBSECP256K1) $(am__append_20) \
 #	$(LIBBITCOIN_CONSENSUS) $(BDB_LIBS) \
 #	$(SSL_LIBS) $(CRYPTO_LIBS) \
-#	$(MINIUPNPC_LIBS) $(am__append_21)
+#	$(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) \
+#	$(EVENT_LIBS) $(am__append_21)
+#test_test_folm_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 #test_test_folm_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
 #nodist_test_test_folm_SOURCES = $(GENERATED_TEST_FILES)
 #CLEAN_BITCOIN_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
 BENCH_SRCDIR = bench
-BENCH_BINARY = bench/bench_dash$(EXEEXT)
-bench_bench_dash_SOURCES = \
-  bench/bench_dash.cpp \
+BENCH_BINARY = bench/bench_folm$(EXEEXT)
+bench_bench_folm_SOURCES = \
+  bench/bench_folm.cpp \
   bench/bench.cpp \
   bench/bench.h \
   bench/Examples.cpp
 
-bench_bench_dash_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CLFAGS) $(EVENT_PTHREADS_CFLAGS) -I$(builddir)/bench/
-bench_bench_dash_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bench_bench_dash_LDADD = $(LIBBITCOIN_SERVER) \
+bench_bench_folm_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CLFAGS) $(EVENT_PTHREADS_CFLAGS) -I$(builddir)/bench/
+bench_bench_folm_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bench_bench_folm_LDADD = $(LIBBITCOIN_SERVER) \
 	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UNIVALUE) \
 	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
 	$(LIBLEVELDB) $(LIBMEMENV) $(LIBSECP256K1) \
@@ -1957,319 +2133,473 @@ bench_bench_dash_LDADD = $(LIBBITCOIN_SERVER) \
 	$(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) \
 	$(CRYPTO_LIBS) $(MINIUPNPC_LIBS) \
 	$(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
-bench_bench_dash_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+bench_bench_folm_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 CLEAN_BITCOIN_BENCH = bench/*.gcda bench/*.gcno
 
 # folm qt core #
-#QT_TS = \
-#  qt/locale/folm_bg.ts \
-#  qt/locale/folm_ca.ts \
-#  qt/locale/folm_cs.ts \
-#  qt/locale/folm_da.ts \
-#  qt/locale/folm_de.ts \
-#  qt/locale/folm_en.ts \
-#  qt/locale/folm_en_US.ts \
-#  qt/locale/folm_es.ts \
-#  qt/locale/folm_fi.ts \
-#  qt/locale/folm_fr_FR.ts \
-#  qt/locale/folm_it.ts \
-#  qt/locale/folm_ja.ts \
-#  qt/locale/folm_ko_KR.ts \
-#  qt/locale/folm_nl.ts \
-#  qt/locale/folm_pl.ts \
-#  qt/locale/folm_pt.ts \
-#  qt/locale/folm_pt_BR.ts \
-#  qt/locale/folm_ro_RO.ts \
-#  qt/locale/folm_ru.ts \
-#  qt/locale/folm_sk.ts \
-#  qt/locale/folm_sv.ts \
-#  qt/locale/folm_uk.ts \
-#  qt/locale/folm_zh_CN.ts \
-#  qt/locale/folm_zh_TW.ts
+QT_TS = \
+  qt/locale/folm_bg.ts \
+  qt/locale/folm_de.ts \
+  qt/locale/folm_en.ts \
+  qt/locale/folm_es.ts \
+  qt/locale/folm_fi.ts \
+  qt/locale/folm_fr.ts \
+  qt/locale/folm_it.ts \
+  qt/locale/folm_ja.ts \
+  qt/locale/folm_pl.ts \
+  qt/locale/folm_pt.ts \
+  qt/locale/folm_ru.ts \
+  qt/locale/folm_sk.ts \
+  qt/locale/folm_sv.ts \
+  qt/locale/folm_vi.ts \
+  qt/locale/folm_zh_CN.ts \
+  qt/locale/folm_zh_TW.ts
 
-#QT_FORMS_UI = \
-#  qt/forms/addressbookpage.ui \
-#  qt/forms/askpassphrasedialog.ui \
-#  qt/forms/bip38tooldialog.ui \
-#  qt/forms/coincontroldialog.ui \
-#  qt/forms/blockexplorer.ui \
-#  qt/forms/obfuscationconfig.ui \
-#  qt/forms/editaddressdialog.ui \
-#  qt/forms/helpmessagedialog.ui \
-#  qt/forms/intro.ui \
-#  qt/forms/masternodelist.ui \
-#  qt/forms/multisenddialog.ui \
-#  qt/forms/multisigdialog.ui \
-#  qt/forms/openuridialog.ui \
-#  qt/forms/optionsdialog.ui \
-#  qt/forms/overviewpage.ui \
-#  qt/forms/receivecoinsdialog.ui \
-#  qt/forms/receiverequestdialog.ui \
-#  qt/forms/debugwindow.ui
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/obfuscationconfig.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/overviewpage.ui \
+  qt/forms/receivecoinsdialog.ui \
+  qt/forms/receiverequestdialog.ui \
+  qt/forms/debugwindow.ui \
+  qt/forms/sendcoinsdialog.ui \
+  qt/forms/sendcoinsentry.ui \
+  qt/forms/signverifymessagedialog.ui \
+  qt/forms/transactiondescdialog.ui
 
-#QT_MOC_CPP = \
-#  qt/moc_addressbookpage.cpp \
-#  qt/moc_addresstablemodel.cpp \
-#  qt/moc_askpassphrasedialog.cpp \
-#  qt/moc_bantablemodel.cpp \
-#  qt/moc_bip38tooldialog.cpp \
-#  qt/moc_bitcoinaddressvalidator.cpp \
-#  qt/moc_bitcoinamountfield.cpp \
-#  qt/moc_bitcoingui.cpp \
-#  qt/moc_bitcoinunits.cpp \
-#  qt/moc_blockexplorer.cpp \
-#  qt/moc_clientmodel.cpp \
-#  qt/moc_coincontroldialog.cpp \
-#  qt/moc_coincontroltreewidget.cpp \
-#  qt/moc_csvmodelwriter.cpp \
-#  qt/moc_obfuscationconfig.cpp \
-#  qt/moc_editaddressdialog.cpp \
-#  qt/moc_guiutil.cpp \
-#  qt/moc_intro.cpp \
-#  qt/moc_macdockiconhandler.cpp \
-#  qt/moc_macnotificationhandler.cpp \
-#  qt/moc_masternodelist.cpp \
-#  qt/moc_multisenddialog.cpp \
-#  qt/moc_multisigdialog.cpp \
-#  qt/moc_notificator.cpp \
-#  qt/moc_openuridialog.cpp \
-#  qt/moc_optionsdialog.cpp \
-#  qt/moc_optionsmodel.cpp \
-#  qt/moc_overviewpage.cpp \
-#  qt/moc_peertablemodel.cpp \
-#  qt/moc_paymentserver.cpp \
-#  qt/moc_qvalidatedlineedit.cpp \
-#  qt/moc_qvaluecombobox.cpp \
-#  qt/moc_receivecoinsdialog.cpp \
-#  qt/moc_receiverequestdialog.cpp \
-#  qt/moc_recentrequeststablemodel.cpp \
-#  qt/moc_rpcconsole.cpp \
-#  qt/moc_sendcoinsdialog.cpp \
-#  qt/moc_sendcoinsentry.cpp \
-#  qt/moc_signverifymessagedialog.cpp \
-#  qt/moc_splashscreen.cpp \
-#  qt/moc_trafficgraphwidget.cpp \
-#  qt/moc_transactiondesc.cpp \
-#  qt/moc_transactiondescdialog.cpp \
-#  qt/moc_transactionfilterproxy.cpp \
-#  qt/moc_transactiontablemodel.cpp \
-#  qt/moc_transactionview.cpp \
-#  qt/moc_utilitydialog.cpp \
-#  qt/moc_walletframe.cpp \
-#  qt/moc_walletmodel.cpp \
-#  qt/moc_walletview.cpp
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/moc_bitcoinamountfield.cpp \
+  qt/moc_bitcoingui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_obfuscationconfig.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_overviewpage.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_receivecoinsdialog.cpp \
+  qt/moc_receiverequestdialog.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_sendcoinsdialog.cpp \
+  qt/moc_sendcoinsentry.cpp \
+  qt/moc_signverifymessagedialog.cpp \
+  qt/moc_splashscreen.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactiondesc.cpp \
+  qt/moc_transactiondescdialog.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_transactionview.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletframe.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/moc_walletview.cpp
 
-#BITCOIN_MM = \
-#  qt/macdockiconhandler.mm \
-#  qt/macnotificationhandler.mm
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
 
-#QT_MOC = \
-#  qt/folm.moc \
-#  qt/bitcoinamountfield.moc \
-#  qt/intro.moc \
-#  qt/overviewpage.moc \
-#  qt/rpcconsole.moc
+QT_MOC = \
+  qt/folm.moc \
+  qt/bitcoinamountfield.moc \
+  qt/intro.moc \
+  qt/overviewpage.moc \
+  qt/rpcconsole.moc
 
-#QT_QRC_CPP = qt/qrc_folm.cpp
-#QT_QRC = qt/folm.qrc
-#QT_QRC_LOCALE_CPP = qt/qrc_folm_locale.cpp
-#QT_QRC_LOCALE = qt/folm_locale.qrc
-#PROTOBUF_CC = qt/paymentrequest.pb.cc
-#PROTOBUF_H = qt/paymentrequest.pb.h
-#PROTOBUF_PROTO = qt/paymentrequest.proto
-#BITCOIN_QT_H = \
-#  qt/addressbookpage.h \
-#  qt/addresstablemodel.h \
-#  qt/askpassphrasedialog.h \
-#  qt/bantablemodel.h \
-#  qt/bip38tooldialog.h \
-#  qt/bitcoinaddressvalidator.h \
-#  qt/bitcoinamountfield.h \
-#  qt/bitcoingui.h \
-#  qt/bitcoinunits.h \
-#  qt/blockexplorer.h \
-#  qt/clientmodel.h \
-#  qt/coincontroldialog.h \
-#  qt/coincontroltreewidget.h \
-#  qt/csvmodelwriter.h \
-#  qt/obfuscationconfig.h \
-#  qt/editaddressdialog.h \
-#  qt/guiconstants.h \
-#  qt/guiutil.h \
-#  qt/intro.h \
-#  qt/macdockiconhandler.h \
-#  qt/macnotificationhandler.h \
-#  qt/masternodelist.h \
-#  qt/multisenddialog.h \
-#  qt/multisigdialog.h \
-#  qt/networkstyle.h \
-#  qt/notificator.h \
-#  qt/openuridialog.h \
-#  qt/optionsdialog.h \
-#  qt/optionsmodel.h \
-#  qt/overviewpage.h \
-#  qt/paymentrequestplus.h \
-#  qt/paymentserver.h \
-#  qt/peertablemodel.h \
-#  qt/platformstyle.h \
-#  qt/platformstyle.h \
-#  qt/qvalidatedlineedit.h \
-#  qt/qvaluecombobox.h \
-#  qt/receivecoinsdialog.h \
-#  qt/receiverequestdialog.h \
-#  qt/recentrequeststablemodel.h \
-#  qt/rpcconsole.h \
-#  qt/sendcoinsdialog.h \
-#  qt/sendcoinsentry.h \
-#  qt/signverifymessagedialog.h \
-#  qt/splashscreen.h \
-#  qt/trafficgraphwidget.h \
-#  qt/transactiondesc.h \
-#  qt/transactiondescdialog.h \
-#  qt/transactionfilterproxy.h \
-#  qt/transactionrecord.h \
-#  qt/transactiontablemodel.h \
-#  qt/transactionview.h \
-#  qt/utilitydialog.h \
-#  qt/walletframe.h \
-#  qt/walletmodel.h \
-#  qt/walletmodeltransaction.h \
-#  qt/walletview.h \
-#  qt/winshutdownmonitor.h
+QT_QRC_CPP = qt/qrc_folm.cpp
+QT_QRC = qt/folm.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_folm_locale.cpp
+QT_QRC_LOCALE = qt/folm_locale.qrc
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/bitcoinamountfield.h \
+  qt/bitcoingui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/obfuscationconfig.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/overviewpage.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/receivecoinsdialog.h \
+  qt/receiverequestdialog.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/sendcoinsdialog.h \
+  qt/sendcoinsentry.h \
+  qt/signverifymessagedialog.h \
+  qt/splashscreen.h \
+  qt/trafficgraphwidget.h \
+  qt/transactiondesc.h \
+  qt/transactiondescdialog.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/transactionview.h \
+  qt/utilitydialog.h \
+  qt/walletframe.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/walletview.h \
+  qt/winshutdownmonitor.h
 
-#RES_ICONS = \
-#  qt/res/icons/add.png \
-#  qt/res/icons/address-book.png \
-#  qt/res/icons/bitcoin.ico \
-#  qt/res/icons/bitcoin.png \
-#  qt/res/icons/bitcoin_testnet.ico \
-#  qt/res/icons/bitcoin_testnet.png \
-#  qt/res/icons/browse.png \
-#  qt/res/icons/clock1.png \
-#  qt/res/icons/clock2.png \
-#  qt/res/icons/clock3.png \
-#  qt/res/icons/clock4.png \
-#  qt/res/icons/clock5.png \
-#  qt/res/icons/configure.png \
-#  qt/res/icons/connect0_16.png \
-#  qt/res/icons/connect1_16.png \
-#  qt/res/icons/connect2_16.png \
-#  qt/res/icons/connect3_16.png \
-#  qt/res/icons/connect4_16.png \
-#  qt/res/icons/debugwindow.png \
-#  qt/res/icons/edit.png \
-#  qt/res/icons/editcopy.png \
-#  qt/res/icons/editpaste.png \
-#  qt/res/icons/explorer.png \
-#  qt/res/icons/export.png \
-#  qt/res/icons/eye.png \
-#  qt/res/icons/eye_minus.png \
-#  qt/res/icons/eye_plus.png \
-#  qt/res/icons/filesave.png \
-#  qt/res/icons/history.png \
-#  qt/res/icons/key.png \
-#  qt/res/icons/lock_closed.png \
-#  qt/res/icons/lock_open.png \
-#  qt/res/icons/masternodes.png \
-#  qt/res/icons/overview.png \
-#  qt/res/icons/qrcode.png \
-#  qt/res/icons/quit.png \
-#  qt/res/icons/receive.png \
-#  qt/res/icons/remove.png \
-#  qt/res/icons/send.png \
-#  qt/res/icons/staking_active.png \
-#  qt/res/icons/staking_inactive.png \
-#  qt/res/icons/synced.png \
-#  qt/res/icons/trade.png \
-#  qt/res/icons/transaction0.png \
-#  qt/res/icons/transaction2.png \
-#  qt/res/icons/transaction_conflicted.png \
-#  qt/res/icons/tx_inout.png \
-#  qt/res/icons/tx_input.png \
-#  qt/res/icons/tx_output.png \
-#  qt/res/icons/tx_mined.png \
-#  qt/res/icons/unit_folm.png \
-#  qt/res/icons/unit_mfolm.png \
-#  qt/res/icons/unit_ufolm.png \
-#  qt/res/icons/unit_tfolm.png \
-#  qt/res/icons/unit_tmfolm.png \
-#  qt/res/icons/unit_tufolm.png
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/drkblue/add.png \
+  qt/res/icons/drkblue/address-book.png \
+  qt/res/icons/drkblue/browse.png \
+  qt/res/icons/drkblue/clock1.png \
+  qt/res/icons/drkblue/clock2.png \
+  qt/res/icons/drkblue/clock3.png \
+  qt/res/icons/drkblue/clock4.png \
+  qt/res/icons/drkblue/clock5.png \
+  qt/res/icons/drkblue/configure.png \
+  qt/res/icons/drkblue/connect0_16.png \
+  qt/res/icons/drkblue/connect1_16.png \
+  qt/res/icons/drkblue/connect2_16.png \
+  qt/res/icons/drkblue/connect3_16.png \
+  qt/res/icons/drkblue/connect4_16.png \
+  qt/res/icons/drkblue/debugwindow.png \
+  qt/res/icons/drkblue/drkblue_editpaste.png \
+  qt/res/icons/drkblue/drkblue_address-book.png \
+  qt/res/icons/drkblue/drkblue_editcopy.png \
+  qt/res/icons/drkblue/drkblue_remove.png \
+  qt/res/icons/drkblue/edit.png \
+  qt/res/icons/drkblue/editcopy.png \
+  qt/res/icons/drkblue/editpaste.png \
+  qt/res/icons/drkblue/export.png \
+  qt/res/icons/drkblue/eye.png \
+  qt/res/icons/drkblue/eye_minus.png \
+  qt/res/icons/drkblue/eye_plus.png \
+  qt/res/icons/drkblue/filesave.png \
+  qt/res/icons/drkblue/history.png \
+  qt/res/icons/drkblue/key.png \
+  qt/res/icons/drkblue/lock_closed.png \
+  qt/res/icons/drkblue/lock_open.png \
+  qt/res/icons/drkblue/overview.png \
+  qt/res/icons/drkblue/quit.png \
+  qt/res/icons/drkblue/receive.png \
+  qt/res/icons/drkblue/remove.png \
+  qt/res/icons/drkblue/send.png \
+  qt/res/icons/drkblue/synced.png \
+  qt/res/icons/drkblue/transaction0.png \
+  qt/res/icons/drkblue/transaction2.png \
+  qt/res/icons/drkblue/transaction_conflicted.png \
+  qt/res/icons/drkblue/tx_inout.png \
+  qt/res/icons/drkblue/tx_input.png \
+  qt/res/icons/drkblue/tx_output.png \
+  qt/res/icons/drkblue/tx_mined.png \
+  qt/res/icons/drkblue/about.png \
+  qt/res/icons/drkblue/about_qt.png \
+  qt/res/icons/drkblue/info.png \
+  qt/res/icons/drkblue/open.png \
+  qt/res/icons/drkblue/verify.png \
+  qt/res/icons/crownium/add.png \
+  qt/res/icons/crownium/address-book.png \
+  qt/res/icons/crownium/browse.png \
+  qt/res/icons/crownium/clock1.png \
+  qt/res/icons/crownium/clock2.png \
+  qt/res/icons/crownium/clock3.png \
+  qt/res/icons/crownium/clock4.png \
+  qt/res/icons/crownium/clock5.png \
+  qt/res/icons/crownium/configure.png \
+  qt/res/icons/crownium/connect0_16.png \
+  qt/res/icons/crownium/connect1_16.png \
+  qt/res/icons/crownium/connect2_16.png \
+  qt/res/icons/crownium/connect3_16.png \
+  qt/res/icons/crownium/connect4_16.png \
+  qt/res/icons/crownium/debugwindow.png \
+  qt/res/icons/crownium/drkblue_editpaste.png \
+  qt/res/icons/crownium/drkblue_address-book.png \
+  qt/res/icons/crownium/drkblue_editcopy.png \
+  qt/res/icons/crownium/drkblue_remove.png \
+  qt/res/icons/crownium/edit.png \
+  qt/res/icons/crownium/editcopy.png \
+  qt/res/icons/crownium/editpaste.png \
+  qt/res/icons/crownium/export.png \
+  qt/res/icons/crownium/eye.png \
+  qt/res/icons/crownium/eye_minus.png \
+  qt/res/icons/crownium/eye_plus.png \
+  qt/res/icons/crownium/filesave.png \
+  qt/res/icons/crownium/history.png \
+  qt/res/icons/crownium/key.png \
+  qt/res/icons/crownium/lock_closed.png \
+  qt/res/icons/crownium/lock_open.png \
+  qt/res/icons/crownium/overview.png \
+  qt/res/icons/crownium/quit.png \
+  qt/res/icons/crownium/receive.png \
+  qt/res/icons/crownium/remove.png \
+  qt/res/icons/crownium/send.png \
+  qt/res/icons/crownium/synced.png \
+  qt/res/icons/crownium/transaction0.png \
+  qt/res/icons/crownium/transaction2.png \
+  qt/res/icons/crownium/transaction_conflicted.png \
+  qt/res/icons/crownium/tx_inout.png \
+  qt/res/icons/crownium/tx_input.png \
+  qt/res/icons/crownium/tx_output.png \
+  qt/res/icons/crownium/tx_mined.png \
+  qt/res/icons/crownium/about.png \
+  qt/res/icons/crownium/about_qt.png \
+  qt/res/icons/crownium/info.png \
+  qt/res/icons/crownium/open.png \
+  qt/res/icons/crownium/verify.png \
+  qt/res/icons/light/add.png \
+  qt/res/icons/light/address-book.png \
+  qt/res/icons/light/browse.png \
+  qt/res/icons/light/clock1.png \
+  qt/res/icons/light/clock2.png \
+  qt/res/icons/light/clock3.png \
+  qt/res/icons/light/clock4.png \
+  qt/res/icons/light/clock5.png \
+  qt/res/icons/light/configure.png \
+  qt/res/icons/light/connect0_16.png \
+  qt/res/icons/light/connect1_16.png \
+  qt/res/icons/light/connect2_16.png \
+  qt/res/icons/light/connect3_16.png \
+  qt/res/icons/light/connect4_16.png \
+  qt/res/icons/light/debugwindow.png \
+  qt/res/icons/light/drkblue_editpaste.png \
+  qt/res/icons/light/drkblue_address-book.png \
+  qt/res/icons/light/drkblue_editcopy.png \
+  qt/res/icons/light/drkblue_remove.png \
+  qt/res/icons/light/edit.png \
+  qt/res/icons/light/editcopy.png \
+  qt/res/icons/light/editpaste.png \
+  qt/res/icons/light/export.png \
+  qt/res/icons/light/eye.png \
+  qt/res/icons/light/eye_minus.png \
+  qt/res/icons/light/eye_plus.png \
+  qt/res/icons/light/filesave.png \
+  qt/res/icons/light/history.png \
+  qt/res/icons/light/key.png \
+  qt/res/icons/light/lock_closed.png \
+  qt/res/icons/light/lock_open.png \
+  qt/res/icons/light/overview.png \
+  qt/res/icons/light/quit.png \
+  qt/res/icons/light/receive.png \
+  qt/res/icons/light/remove.png \
+  qt/res/icons/light/send.png \
+  qt/res/icons/light/synced.png \
+  qt/res/icons/light/transaction0.png \
+  qt/res/icons/light/transaction2.png \
+  qt/res/icons/light/transaction_conflicted.png \
+  qt/res/icons/light/tx_inout.png \
+  qt/res/icons/light/tx_input.png \
+  qt/res/icons/light/tx_output.png \
+  qt/res/icons/light/tx_mined.png \
+  qt/res/icons/light/about.png \
+  qt/res/icons/light/about_qt.png \
+  qt/res/icons/light/info.png \
+  qt/res/icons/light/open.png \
+  qt/res/icons/light/verify.png \
+  qt/res/icons/trad/add.png \
+  qt/res/icons/trad/address-book.png \
+  qt/res/icons/trad/browse.png \
+  qt/res/icons/trad/clock1.png \
+  qt/res/icons/trad/clock2.png \
+  qt/res/icons/trad/clock3.png \
+  qt/res/icons/trad/clock4.png \
+  qt/res/icons/trad/clock5.png \
+  qt/res/icons/trad/configure.png \
+  qt/res/icons/trad/connect0_16.png \
+  qt/res/icons/trad/connect1_16.png \
+  qt/res/icons/trad/connect2_16.png \
+  qt/res/icons/trad/connect3_16.png \
+  qt/res/icons/trad/connect4_16.png \
+  qt/res/icons/trad/debugwindow.png \
+  qt/res/icons/trad/drkblue_editpaste.png \
+  qt/res/icons/trad/drkblue_address-book.png \
+  qt/res/icons/trad/drkblue_editcopy.png \
+  qt/res/icons/trad/drkblue_remove.png \
+  qt/res/icons/trad/edit.png \
+  qt/res/icons/trad/editcopy.png \
+  qt/res/icons/trad/editpaste.png \
+  qt/res/icons/trad/export.png \
+  qt/res/icons/trad/eye.png \
+  qt/res/icons/trad/eye_minus.png \
+  qt/res/icons/trad/eye_plus.png \
+  qt/res/icons/trad/filesave.png \
+  qt/res/icons/trad/history.png \
+  qt/res/icons/trad/key.png \
+  qt/res/icons/trad/lock_closed.png \
+  qt/res/icons/trad/lock_open.png \
+  qt/res/icons/trad/overview.png \
+  qt/res/icons/trad/quit.png \
+  qt/res/icons/trad/receive.png \
+  qt/res/icons/trad/remove.png \
+  qt/res/icons/trad/send.png \
+  qt/res/icons/trad/synced.png \
+  qt/res/icons/trad/transaction0.png \
+  qt/res/icons/trad/transaction2.png \
+  qt/res/icons/trad/transaction_conflicted.png \
+  qt/res/icons/trad/tx_inout.png \
+  qt/res/icons/trad/tx_input.png \
+  qt/res/icons/trad/tx_output.png \
+  qt/res/icons/trad/tx_mined.png \
+  qt/res/icons/trad/about.png \
+  qt/res/icons/trad/about_qt.png \
+  qt/res/icons/trad/info.png \
+  qt/res/icons/trad/open.png \
+  qt/res/icons/trad/verify.png
 
-#BITCOIN_QT_CPP = qt/bantablemodel.cpp \
-#	qt/bitcoinaddressvalidator.cpp \
-#	qt/bitcoinamountfield.cpp qt/bitcoingui.cpp \
-#	qt/bitcoinunits.cpp qt/blockexplorer.cpp \
-#	qt/clientmodel.cpp qt/csvmodelwriter.cpp \
-#	qt/guiutil.cpp qt/intro.cpp \
-#	qt/masternodelist.cpp qt/networkstyle.cpp \
-#	qt/notificator.cpp qt/optionsdialog.cpp \
-#	qt/optionsmodel.cpp qt/peertablemodel.cpp \
-#	qt/platformstyle.cpp qt/qvalidatedlineedit.cpp \
-#	qt/qvaluecombobox.cpp qt/rpcconsole.cpp \
-#	qt/splashscreen.cpp qt/trafficgraphwidget.cpp \
-#	qt/utilitydialog.cpp $(am__append_29) \
-#	$(am__append_30)
-#RES_IMAGES = \
-#  qt/res/images/about.png \
-#  qt/res/images/splash.png \
-#  qt/res/images/splash_testnet.png \
-#  qt/res/images/folm_logo_horizontal.png \
-#  qt/res/images/downArrow.png \
-#  qt/res/images/downArrow_small.png \
-#  qt/res/images/upArrow_small.png \
-#  qt/res/images/leftArrow_small.png \
-#  qt/res/images/rightArrow_small.png \
-#  qt/res/images/qtreeview_selected.png \
-#  qt/res/images/walletFrame.png \
-#  qt/res/images/walletFrame_bg.png \
-#  qt/res/images/walletFrame_bg.png
+BITCOIN_QT_CPP = qt/bantablemodel.cpp \
+	qt/bitcoinaddressvalidator.cpp \
+	qt/bitcoinamountfield.cpp qt/bitcoingui.cpp \
+	qt/bitcoinunits.cpp qt/clientmodel.cpp \
+	qt/csvmodelwriter.cpp qt/guiutil.cpp \
+	qt/intro.cpp qt/networkstyle.cpp \
+	qt/notificator.cpp qt/optionsdialog.cpp \
+	qt/optionsmodel.cpp qt/peertablemodel.cpp \
+	qt/platformstyle.cpp qt/qvalidatedlineedit.cpp \
+	qt/qvaluecombobox.cpp qt/rpcconsole.cpp \
+	qt/splashscreen.cpp qt/trafficgraphwidget.cpp \
+	qt/utilitydialog.cpp $(am__append_29) \
+	$(am__append_30)
+RES_IMAGES = \
+  qt/res/images/drkblue/about.png \
+  qt/res/images/drkblue/splash.png \
+  qt/res/images/drkblue/folm_logo_horizontal.png \
+  qt/res/images/drkblue/drkblue_downArrow.png \
+  qt/res/images/drkblue/drkblue_downArrow_small.png \
+  qt/res/images/drkblue/drkblue_upArrow_small.png \
+  qt/res/images/drkblue/drkblue_leftArrow_small.png \
+  qt/res/images/drkblue/drkblue_rightArrow_small.png \
+  qt/res/images/drkblue/drkblue_qtreeview_selected.png \
+  qt/res/images/drkblue/drkblue_walletFrame_bg.png \
+  qt/res/images/drkblue/drkblue_walletFrame.png \
+  qt/res/images/crownium/about.png \
+  qt/res/images/crownium/splash.png \
+  qt/res/images/crownium/folm_logo_horizontal.png \
+  qt/res/images/crownium/drkblue_downArrow.png \
+  qt/res/images/crownium/drkblue_downArrow_small.png \
+  qt/res/images/crownium/drkblue_upArrow_small.png \
+  qt/res/images/crownium/drkblue_leftArrow_small.png \
+  qt/res/images/crownium/drkblue_rightArrow_small.png \
+  qt/res/images/crownium/drkblue_qtreeview_selected.png \
+  qt/res/images/crownium/drkblue_walletFrame_bg.png \
+  qt/res/images/crownium/drkblue_walletFrame.png \
+  qt/res/images/light/about.png \
+  qt/res/images/light/splash.png \
+  qt/res/images/light/folm_logo_horizontal.png \
+  qt/res/images/light/drkblue_downArrow.png \
+  qt/res/images/light/drkblue_downArrow_small.png \
+  qt/res/images/light/drkblue_upArrow_small.png \
+  qt/res/images/light/drkblue_leftArrow_small.png \
+  qt/res/images/light/drkblue_rightArrow_small.png \
+  qt/res/images/light/drkblue_qtreeview_selected.png \
+  qt/res/images/light/drkblue_walletFrame_bg.png \
+  qt/res/images/light/drkblue_walletFrame.png \
+  qt/res/images/trad/about.png \
+  qt/res/images/trad/splash.png \
+  qt/res/images/trad/folm_logo_horizontal.png \
+  qt/res/images/trad/drkblue_downArrow.png \
+  qt/res/images/trad/drkblue_downArrow_small.png \
+  qt/res/images/trad/drkblue_upArrow_small.png \
+  qt/res/images/trad/drkblue_leftArrow_small.png \
+  qt/res/images/trad/drkblue_rightArrow_small.png \
+  qt/res/images/trad/drkblue_qtreeview_selected.png \
+  qt/res/images/trad/drkblue_walletFrame_bg.png \
+  qt/res/images/trad/drkblue_walletFrame.png
 
-#RES_CSS = \
-#  qt/res/css/default.css
+RES_CSS = \
+  qt/res/css/drkblue.css \
+  qt/res/css/crownium.css \
+  qt/res/css/light.css
 
-#RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
-#BITCOIN_RC = qt/res/folm-qt-res.rc
-#BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
-#  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+RES_MOVIES = $(wildcard qt/res/movies/spinner-*.png)
+BITCOIN_RC = qt/res/folm-qt-res.rc
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
 
-#qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
-#  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
 
-#qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
-#qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
-#  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
 
-#nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
-#  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
 
 
 # forms/foo.h -> forms/ui_foo.h
-#QT_FORMS_H = $(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+QT_FORMS_H = $(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
 
 # folm-qt binary #
-#qt_folm_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
-#  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
+qt_folm_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
 
-#qt_folm_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS
-#qt_folm_qt_SOURCES = qt/folm.cpp $(am__append_31) \
-#	$(am__append_32)
-#qt_folm_qt_LDADD = qt/libbitcoinqt.a \
-#	$(LIBBITCOIN_SERVER) $(am__append_33) \
-#	$(am__append_34) $(LIBBITCOIN_CLI) \
-#	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
-#	$(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UNIVALUE) \
-#	$(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) \
-#	$(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) \
-#	$(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) \
-#	$(CRYPTO_LIBS) $(MINIUPNPC_LIBS) \
-#	$(LIBSECP256K1) $(EVENT_PTHREADS_LIBS) \
-#	$(EVENT_LIBS)
-#qt_folm_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-#qt_folm_qt_LIBTOOLFLAGS = --tag CXX
+qt_folm_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_folm_qt_SOURCES = qt/folm.cpp $(am__append_31) \
+	$(am__append_32)
+qt_folm_qt_LDADD = qt/libbitcoinqt.a \
+	$(LIBBITCOIN_SERVER) $(am__append_33) \
+	$(am__append_34) $(LIBBITCOIN_CLI) \
+	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
+	$(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
+	$(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) \
+	$(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) \
+	$(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) \
+	$(CRYPTO_LIBS) $(MINIUPNPC_LIBS) \
+	$(LIBSECP256K1) $(EVENT_PTHREADS_LIBS) \
+	$(EVENT_LIBS)
+qt_folm_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_folm_qt_LIBTOOLFLAGS = --tag CXX
 
 #locale/foo.ts -> locale/foo.qm
-#QT_QM = $(QT_TS:.ts=.qm)
-#CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
+QT_QM = $(QT_TS:.ts=.qm)
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
 #TEST_QT_MOC_CPP = qt/test/moc_uritests.cpp \
 #	$(am__append_38)
 #TEST_QT_H = \
@@ -2277,7 +2607,7 @@ CLEAN_BITCOIN_BENCH = bench/*.gcda bench/*.gcno
 #  qt/test/paymentrequestdata.h \
 #  qt/test/paymentservertests.h
 
-#qt_test_test_folm_qt_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+#qt_test_test_folm_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
 #  $(QT_INCLUDES) $(QT_TEST_INCLUDES) $(PROTOBUF_CFLAGS)
 
 #qt_test_test_folm_qt_SOURCES =  \
@@ -2289,15 +2619,15 @@ CLEAN_BITCOIN_BENCH = bench/*.gcda bench/*.gcno
 #	$(LIBBITCOIN_SERVER) $(am__append_40) \
 #	$(am__append_41) $(LIBBITCOIN_CLI) \
 #	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
-#	$(LIBBITCOIN_CRYPTO) \
-#	$(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) \
-#	$(LIBMEMENV) $(BOOST_LIBS) \
+#	$(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
+#	$(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) \
 #	$(QT_DBUS_LIBS) $(QT_TEST_LIBS) \
 #	$(QT_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) \
 #	$(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) \
 #	$(MINIUPNPC_LIBS) $(LIBSECP256K1) \
 #	$(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 #qt_test_test_folm_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+#qt_test_test_folm_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 #CLEAN_BITCOIN_QT_TEST = $(TEST_QT_MOC_CPP) qt/test/*.gcda qt/test/*.gcno
 all: all-recursive
 
@@ -2354,6 +2684,10 @@ crypto/crypto_libbitcoin_crypto_a-bmw.$(OBJEXT):  \
 crypto/crypto_libbitcoin_crypto_a-cubehash.$(OBJEXT):  \
 	crypto/$(am__dirstamp) crypto/$(DEPDIR)/$(am__dirstamp)
 crypto/crypto_libbitcoin_crypto_a-echo.$(OBJEXT):  \
+	crypto/$(am__dirstamp) crypto/$(DEPDIR)/$(am__dirstamp)
+crypto/crypto_libbitcoin_crypto_a-fugue.$(OBJEXT):  \
+	crypto/$(am__dirstamp) crypto/$(DEPDIR)/$(am__dirstamp)
+crypto/crypto_libbitcoin_crypto_a-gost.$(OBJEXT):  \
 	crypto/$(am__dirstamp) crypto/$(DEPDIR)/$(am__dirstamp)
 crypto/crypto_libbitcoin_crypto_a-groestl.$(OBJEXT):  \
 	crypto/$(am__dirstamp) crypto/$(DEPDIR)/$(am__dirstamp)
@@ -2532,8 +2866,6 @@ qt/qt_libbitcoinqt_a-bitcoingui.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-bitcoinunits.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-blockexplorer.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-clientmodel.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-csvmodelwriter.$(OBJEXT): qt/$(am__dirstamp) \
@@ -2541,8 +2873,6 @@ qt/qt_libbitcoinqt_a-csvmodelwriter.$(OBJEXT): qt/$(am__dirstamp) \
 qt/qt_libbitcoinqt_a-guiutil.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-intro.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-masternodelist.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-networkstyle.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
@@ -2576,8 +2906,6 @@ qt/qt_libbitcoinqt_a-addresstablemodel.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-askpassphrasedialog.$(OBJEXT):  \
 	qt/$(am__dirstamp) qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-bip38tooldialog.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-coincontroldialog.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-coincontroltreewidget.$(OBJEXT):  \
@@ -2585,10 +2913,6 @@ qt/qt_libbitcoinqt_a-coincontroltreewidget.$(OBJEXT):  \
 qt/qt_libbitcoinqt_a-obfuscationconfig.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-editaddressdialog.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-multisenddialog.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-multisigdialog.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-openuridialog.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
@@ -2638,8 +2962,6 @@ qt/qt_libbitcoinqt_a-moc_askpassphrasedialog.$(OBJEXT):  \
 	qt/$(am__dirstamp) qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_bantablemodel.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-moc_bip38tooldialog.$(OBJEXT):  \
-	qt/$(am__dirstamp) qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.$(OBJEXT):  \
 	qt/$(am__dirstamp) qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_bitcoinamountfield.$(OBJEXT):  \
@@ -2647,8 +2969,6 @@ qt/qt_libbitcoinqt_a-moc_bitcoinamountfield.$(OBJEXT):  \
 qt/qt_libbitcoinqt_a-moc_bitcoingui.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_bitcoinunits.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-moc_blockexplorer.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_clientmodel.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
@@ -2670,12 +2990,6 @@ qt/qt_libbitcoinqt_a-moc_macdockiconhandler.$(OBJEXT):  \
 	qt/$(am__dirstamp) qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_macnotificationhandler.$(OBJEXT):  \
 	qt/$(am__dirstamp) qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-moc_masternodelist.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-moc_multisenddialog.$(OBJEXT):  \
-	qt/$(am__dirstamp) qt/$(DEPDIR)/$(am__dirstamp)
-qt/qt_libbitcoinqt_a-moc_multisigdialog.$(OBJEXT): qt/$(am__dirstamp) \
-	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_notificator.$(OBJEXT): qt/$(am__dirstamp) \
 	qt/$(DEPDIR)/$(am__dirstamp)
 qt/qt_libbitcoinqt_a-moc_openuridialog.$(OBJEXT): qt/$(am__dirstamp) \
@@ -2855,16 +3169,16 @@ bench/$(am__dirstamp):
 bench/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) bench/$(DEPDIR)
 	@: > bench/$(DEPDIR)/$(am__dirstamp)
-bench/bench_bench_dash-bench_dash.$(OBJEXT): bench/$(am__dirstamp) \
+bench/bench_bench_folm-bench_folm.$(OBJEXT): bench/$(am__dirstamp) \
 	bench/$(DEPDIR)/$(am__dirstamp)
-bench/bench_bench_dash-bench.$(OBJEXT): bench/$(am__dirstamp) \
+bench/bench_bench_folm-bench.$(OBJEXT): bench/$(am__dirstamp) \
 	bench/$(DEPDIR)/$(am__dirstamp)
-bench/bench_bench_dash-Examples.$(OBJEXT): bench/$(am__dirstamp) \
+bench/bench_bench_folm-Examples.$(OBJEXT): bench/$(am__dirstamp) \
 	bench/$(DEPDIR)/$(am__dirstamp)
 
-bench/bench_dash$(EXEEXT): $(bench_bench_dash_OBJECTS) $(bench_bench_dash_DEPENDENCIES) $(EXTRA_bench_bench_dash_DEPENDENCIES) bench/$(am__dirstamp)
-	@rm -f bench/bench_dash$(EXEEXT)
-	$(AM_V_CXXLD)$(bench_bench_dash_LINK) $(bench_bench_dash_OBJECTS) $(bench_bench_dash_LDADD) $(LIBS)
+bench/bench_folm$(EXEEXT): $(bench_bench_folm_OBJECTS) $(bench_bench_folm_DEPENDENCIES) $(EXTRA_bench_bench_folm_DEPENDENCIES) bench/$(am__dirstamp)
+	@rm -f bench/bench_folm$(EXEEXT)
+	$(AM_V_CXXLD)$(bench_bench_folm_LINK) $(bench_bench_folm_OBJECTS) $(bench_bench_folm_LDADD) $(LIBS)
 
 folm-cli$(EXEEXT): $(folm_cli_OBJECTS) $(folm_cli_DEPENDENCIES) $(EXTRA_folm_cli_DEPENDENCIES) 
 	@rm -f folm-cli$(EXEEXT)
@@ -2921,6 +3235,12 @@ test/$(am__dirstamp):
 test/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) test/$(DEPDIR)
 	@: > test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-arith_uint256_tests.$(OBJEXT):  \
+	test/$(am__dirstamp) test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-addrman_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-alert_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-allocator_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-base32_tests.$(OBJEXT): test/$(am__dirstamp) \
@@ -2928,6 +3248,10 @@ test/test_test_folm-base32_tests.$(OBJEXT): test/$(am__dirstamp) \
 test/test_test_folm-base58_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-base64_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-bip32_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-bloom_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-checkblock_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
@@ -2947,11 +3271,17 @@ test/test_test_folm-hash_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-key_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-limitedmap_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-dbwrapper_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-main_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-mempool_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
-test/test_test_folm-mruset_tests.$(OBJEXT): test/$(am__dirstamp) \
+test/test_test_folm-merkle_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-miner_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-multisig_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
@@ -2959,9 +3289,19 @@ test/test_test_folm-netbase_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-pmt_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-policyestimator_tests.$(OBJEXT):  \
+	test/$(am__dirstamp) test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-pow_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-prevector_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-reverselock_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-rpc_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-sanity_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-scheduler_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-script_P2SH_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
@@ -2977,12 +3317,16 @@ test/test_test_folm-sigopcount_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-skiplist_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-streams_tests.$(OBJEXT): test/$(am__dirstamp) \
+	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-test_folm.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-timedata_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-transaction_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
+test/test_test_folm-txvalidationcache_tests.$(OBJEXT):  \
+	test/$(am__dirstamp) test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-uint256_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-univalue_tests.$(OBJEXT): test/$(am__dirstamp) \
@@ -2991,8 +3335,15 @@ test/test_test_folm-util_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-accounting_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
-test/test_test_folm-wallet_tests.$(OBJEXT): test/$(am__dirstamp) \
-	test/$(DEPDIR)/$(am__dirstamp)
+wallet/test/$(am__dirstamp):
+	@$(MKDIR_P) wallet/test
+	@: > wallet/test/$(am__dirstamp)
+wallet/test/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) wallet/test/$(DEPDIR)
+	@: > wallet/test/$(DEPDIR)/$(am__dirstamp)
+wallet/test/test_test_folm-wallet_tests.$(OBJEXT):  \
+	wallet/test/$(am__dirstamp) \
+	wallet/test/$(DEPDIR)/$(am__dirstamp)
 test/test_test_folm-rpc_wallet_tests.$(OBJEXT): test/$(am__dirstamp) \
 	test/$(DEPDIR)/$(am__dirstamp)
 
@@ -3019,6 +3370,7 @@ mostlyclean-compile:
 	-rm -f support/*.$(OBJEXT)
 	-rm -f test/*.$(OBJEXT)
 	-rm -f wallet/*.$(OBJEXT)
+	-rm -f wallet/test/*.$(OBJEXT)
 	-rm -f zmq/*.$(OBJEXT)
 
 distclean-compile:
@@ -3084,9 +3436,7 @@ include ./$(DEPDIR)/libbitcoin_util_a-utilmoneystr.Po
 include ./$(DEPDIR)/libbitcoin_util_a-utilstrencodings.Po
 include ./$(DEPDIR)/libbitcoin_util_a-utiltime.Po
 include ./$(DEPDIR)/libbitcoin_wallet_a-activemasternode.Po
-include ./$(DEPDIR)/libbitcoin_wallet_a-darksend-relay.Po
-include ./$(DEPDIR)/libbitcoin_wallet_a-darksend.Po
-include ./$(DEPDIR)/libbitcoin_wallet_a-instantx.Po
+include ./$(DEPDIR)/libbitcoin_wallet_a-dsnotificationinterface.Po
 include ./$(DEPDIR)/libbitcoin_wallet_a-keepass.Po
 include ./$(DEPDIR)/libbitcoin_wallet_a-masternode-budget.Po
 include ./$(DEPDIR)/libbitcoin_wallet_a-masternode-payments.Po
@@ -3094,13 +3444,16 @@ include ./$(DEPDIR)/libbitcoin_wallet_a-masternode-sync.Po
 include ./$(DEPDIR)/libbitcoin_wallet_a-masternode.Po
 include ./$(DEPDIR)/libbitcoin_wallet_a-masternodeconfig.Po
 include ./$(DEPDIR)/libbitcoin_wallet_a-masternodeman.Po
+include ./$(DEPDIR)/libbitcoin_wallet_a-obfuscation-relay.Po
+include ./$(DEPDIR)/libbitcoin_wallet_a-obfuscation.Po
+include ./$(DEPDIR)/libbitcoin_wallet_a-swifttx.Po
 include ./$(DEPDIR)/libbitcoinconsensus_la-hash.Plo
 include ./$(DEPDIR)/libbitcoinconsensus_la-pubkey.Plo
 include ./$(DEPDIR)/libbitcoinconsensus_la-uint256.Plo
 include ./$(DEPDIR)/libbitcoinconsensus_la-utilstrencodings.Plo
-include bench/$(DEPDIR)/bench_bench_dash-Examples.Po
-include bench/$(DEPDIR)/bench_bench_dash-bench.Po
-include bench/$(DEPDIR)/bench_bench_dash-bench_dash.Po
+include bench/$(DEPDIR)/bench_bench_folm-Examples.Po
+include bench/$(DEPDIR)/bench_bench_folm-bench.Po
+include bench/$(DEPDIR)/bench_bench_folm-bench_folm.Po
 include compat/$(DEPDIR)/libbitcoin_util_a-glibc_compat.Po
 include compat/$(DEPDIR)/libbitcoin_util_a-glibc_sanity.Po
 include compat/$(DEPDIR)/libbitcoin_util_a-glibcxx_sanity.Po
@@ -3112,6 +3465,8 @@ include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-blake.Po
 include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-bmw.Po
 include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-cubehash.Po
 include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-echo.Po
+include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-fugue.Po
+include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-gost.Po
 include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-groestl.Po
 include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-hmac_sha256.Po
 include crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-hmac_sha512.Po
@@ -3143,12 +3498,10 @@ include qt/$(DEPDIR)/qt_libbitcoinqt_a-addressbookpage.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-addresstablemodel.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-askpassphrasedialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-bantablemodel.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-bip38tooldialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-bitcoinaddressvalidator.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-bitcoinamountfield.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-bitcoingui.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-bitcoinunits.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-blockexplorer.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-clientmodel.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-coincontroldialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-coincontroltreewidget.Po
@@ -3156,17 +3509,14 @@ include qt/$(DEPDIR)/qt_libbitcoinqt_a-csvmodelwriter.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-editaddressdialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-guiutil.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-intro.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-masternodelist.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_addressbookpage.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_addresstablemodel.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_askpassphrasedialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bantablemodel.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bip38tooldialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bitcoinamountfield.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bitcoingui.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bitcoinunits.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_blockexplorer.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_clientmodel.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_coincontroldialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_coincontroltreewidget.Po
@@ -3176,9 +3526,6 @@ include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_guiutil.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_intro.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_macdockiconhandler.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_macnotificationhandler.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_masternodelist.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisenddialog.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisigdialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_notificator.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_obfuscationconfig.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_openuridialog.Po
@@ -3207,8 +3554,6 @@ include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_utilitydialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_walletframe.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_walletmodel.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_walletview.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-multisenddialog.Po
-include qt/$(DEPDIR)/qt_libbitcoinqt_a-multisigdialog.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-networkstyle.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-notificator.Po
 include qt/$(DEPDIR)/qt_libbitcoinqt_a-obfuscationconfig.Po
@@ -3265,26 +3610,39 @@ include support/$(DEPDIR)/libbitcoin_util_a-pagelocker.Po
 include test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Po
 include test/$(DEPDIR)/test_test_folm-DoS_tests.Po
 include test/$(DEPDIR)/test_test_folm-accounting_tests.Po
+include test/$(DEPDIR)/test_test_folm-addrman_tests.Po
+include test/$(DEPDIR)/test_test_folm-alert_tests.Po
 include test/$(DEPDIR)/test_test_folm-allocator_tests.Po
+include test/$(DEPDIR)/test_test_folm-arith_uint256_tests.Po
 include test/$(DEPDIR)/test_test_folm-base32_tests.Po
 include test/$(DEPDIR)/test_test_folm-base58_tests.Po
 include test/$(DEPDIR)/test_test_folm-base64_tests.Po
+include test/$(DEPDIR)/test_test_folm-bip32_tests.Po
+include test/$(DEPDIR)/test_test_folm-bloom_tests.Po
 include test/$(DEPDIR)/test_test_folm-checkblock_tests.Po
 include test/$(DEPDIR)/test_test_folm-coins_tests.Po
 include test/$(DEPDIR)/test_test_folm-compress_tests.Po
 include test/$(DEPDIR)/test_test_folm-crypto_tests.Po
+include test/$(DEPDIR)/test_test_folm-dbwrapper_tests.Po
 include test/$(DEPDIR)/test_test_folm-getarg_tests.Po
 include test/$(DEPDIR)/test_test_folm-hash_tests.Po
 include test/$(DEPDIR)/test_test_folm-key_tests.Po
+include test/$(DEPDIR)/test_test_folm-limitedmap_tests.Po
 include test/$(DEPDIR)/test_test_folm-main_tests.Po
 include test/$(DEPDIR)/test_test_folm-mempool_tests.Po
-include test/$(DEPDIR)/test_test_folm-mruset_tests.Po
+include test/$(DEPDIR)/test_test_folm-merkle_tests.Po
+include test/$(DEPDIR)/test_test_folm-miner_tests.Po
 include test/$(DEPDIR)/test_test_folm-multisig_tests.Po
 include test/$(DEPDIR)/test_test_folm-netbase_tests.Po
 include test/$(DEPDIR)/test_test_folm-pmt_tests.Po
+include test/$(DEPDIR)/test_test_folm-policyestimator_tests.Po
+include test/$(DEPDIR)/test_test_folm-pow_tests.Po
+include test/$(DEPDIR)/test_test_folm-prevector_tests.Po
+include test/$(DEPDIR)/test_test_folm-reverselock_tests.Po
 include test/$(DEPDIR)/test_test_folm-rpc_tests.Po
 include test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Po
 include test/$(DEPDIR)/test_test_folm-sanity_tests.Po
+include test/$(DEPDIR)/test_test_folm-scheduler_tests.Po
 include test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Po
 include test/$(DEPDIR)/test_test_folm-script_tests.Po
 include test/$(DEPDIR)/test_test_folm-scriptnum_tests.Po
@@ -3292,13 +3650,14 @@ include test/$(DEPDIR)/test_test_folm-serialize_tests.Po
 include test/$(DEPDIR)/test_test_folm-sighash_tests.Po
 include test/$(DEPDIR)/test_test_folm-sigopcount_tests.Po
 include test/$(DEPDIR)/test_test_folm-skiplist_tests.Po
+include test/$(DEPDIR)/test_test_folm-streams_tests.Po
 include test/$(DEPDIR)/test_test_folm-test_folm.Po
 include test/$(DEPDIR)/test_test_folm-timedata_tests.Po
 include test/$(DEPDIR)/test_test_folm-transaction_tests.Po
+include test/$(DEPDIR)/test_test_folm-txvalidationcache_tests.Po
 include test/$(DEPDIR)/test_test_folm-uint256_tests.Po
 include test/$(DEPDIR)/test_test_folm-univalue_tests.Po
 include test/$(DEPDIR)/test_test_folm-util_tests.Po
-include test/$(DEPDIR)/test_test_folm-wallet_tests.Po
 include wallet/$(DEPDIR)/libbitcoin_wallet_a-crypter.Po
 include wallet/$(DEPDIR)/libbitcoin_wallet_a-db.Po
 include wallet/$(DEPDIR)/libbitcoin_wallet_a-rpcdump.Po
@@ -3306,6 +3665,7 @@ include wallet/$(DEPDIR)/libbitcoin_wallet_a-rpcwallet.Po
 include wallet/$(DEPDIR)/libbitcoin_wallet_a-wallet.Po
 include wallet/$(DEPDIR)/libbitcoin_wallet_a-wallet_ismine.Po
 include wallet/$(DEPDIR)/libbitcoin_wallet_a-walletdb.Po
+include wallet/test/$(DEPDIR)/test_test_folm-wallet_tests.Po
 include zmq/$(DEPDIR)/libbitcoin_zmq_a-zmqabstractnotifier.Po
 include zmq/$(DEPDIR)/libbitcoin_zmq_a-zmqnotificationinterface.Po
 include zmq/$(DEPDIR)/libbitcoin_zmq_a-zmqpublishnotifier.Po
@@ -3403,6 +3763,34 @@ crypto/crypto_libbitcoin_crypto_a-echo.obj: crypto/echo.c
 #	$(AM_V_CC)source='crypto/echo.c' object='crypto/crypto_libbitcoin_crypto_a-echo.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o crypto/crypto_libbitcoin_crypto_a-echo.obj `if test -f 'crypto/echo.c'; then $(CYGPATH_W) 'crypto/echo.c'; else $(CYGPATH_W) '$(srcdir)/crypto/echo.c'; fi`
+
+crypto/crypto_libbitcoin_crypto_a-fugue.o: crypto/fugue.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT crypto/crypto_libbitcoin_crypto_a-fugue.o -MD -MP -MF crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-fugue.Tpo -c -o crypto/crypto_libbitcoin_crypto_a-fugue.o `test -f 'crypto/fugue.c' || echo '$(srcdir)/'`crypto/fugue.c
+	$(AM_V_at)$(am__mv) crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-fugue.Tpo crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-fugue.Po
+#	$(AM_V_CC)source='crypto/fugue.c' object='crypto/crypto_libbitcoin_crypto_a-fugue.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o crypto/crypto_libbitcoin_crypto_a-fugue.o `test -f 'crypto/fugue.c' || echo '$(srcdir)/'`crypto/fugue.c
+
+crypto/crypto_libbitcoin_crypto_a-fugue.obj: crypto/fugue.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT crypto/crypto_libbitcoin_crypto_a-fugue.obj -MD -MP -MF crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-fugue.Tpo -c -o crypto/crypto_libbitcoin_crypto_a-fugue.obj `if test -f 'crypto/fugue.c'; then $(CYGPATH_W) 'crypto/fugue.c'; else $(CYGPATH_W) '$(srcdir)/crypto/fugue.c'; fi`
+	$(AM_V_at)$(am__mv) crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-fugue.Tpo crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-fugue.Po
+#	$(AM_V_CC)source='crypto/fugue.c' object='crypto/crypto_libbitcoin_crypto_a-fugue.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o crypto/crypto_libbitcoin_crypto_a-fugue.obj `if test -f 'crypto/fugue.c'; then $(CYGPATH_W) 'crypto/fugue.c'; else $(CYGPATH_W) '$(srcdir)/crypto/fugue.c'; fi`
+
+crypto/crypto_libbitcoin_crypto_a-gost.o: crypto/gost.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT crypto/crypto_libbitcoin_crypto_a-gost.o -MD -MP -MF crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-gost.Tpo -c -o crypto/crypto_libbitcoin_crypto_a-gost.o `test -f 'crypto/gost.c' || echo '$(srcdir)/'`crypto/gost.c
+	$(AM_V_at)$(am__mv) crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-gost.Tpo crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-gost.Po
+#	$(AM_V_CC)source='crypto/gost.c' object='crypto/crypto_libbitcoin_crypto_a-gost.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o crypto/crypto_libbitcoin_crypto_a-gost.o `test -f 'crypto/gost.c' || echo '$(srcdir)/'`crypto/gost.c
+
+crypto/crypto_libbitcoin_crypto_a-gost.obj: crypto/gost.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT crypto/crypto_libbitcoin_crypto_a-gost.obj -MD -MP -MF crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-gost.Tpo -c -o crypto/crypto_libbitcoin_crypto_a-gost.obj `if test -f 'crypto/gost.c'; then $(CYGPATH_W) 'crypto/gost.c'; else $(CYGPATH_W) '$(srcdir)/crypto/gost.c'; fi`
+	$(AM_V_at)$(am__mv) crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-gost.Tpo crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-gost.Po
+#	$(AM_V_CC)source='crypto/gost.c' object='crypto/crypto_libbitcoin_crypto_a-gost.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o crypto/crypto_libbitcoin_crypto_a-gost.obj `if test -f 'crypto/gost.c'; then $(CYGPATH_W) 'crypto/gost.c'; else $(CYGPATH_W) '$(srcdir)/crypto/gost.c'; fi`
 
 crypto/crypto_libbitcoin_crypto_a-groestl.o: crypto/groestl.c
 	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(crypto_libbitcoin_crypto_a_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT crypto/crypto_libbitcoin_crypto_a-groestl.o -MD -MP -MF crypto/$(DEPDIR)/crypto_libbitcoin_crypto_a-groestl.Tpo -c -o crypto/crypto_libbitcoin_crypto_a-groestl.o `test -f 'crypto/groestl.c' || echo '$(srcdir)/'`crypto/groestl.c
@@ -4646,47 +5034,61 @@ libbitcoin_wallet_a-activemasternode.obj: activemasternode.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-activemasternode.obj `if test -f 'activemasternode.cpp'; then $(CYGPATH_W) 'activemasternode.cpp'; else $(CYGPATH_W) '$(srcdir)/activemasternode.cpp'; fi`
 
-libbitcoin_wallet_a-darksend.o: darksend.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-darksend.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-darksend.Tpo -c -o libbitcoin_wallet_a-darksend.o `test -f 'darksend.cpp' || echo '$(srcdir)/'`darksend.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-darksend.Tpo $(DEPDIR)/libbitcoin_wallet_a-darksend.Po
-#	$(AM_V_CXX)source='darksend.cpp' object='libbitcoin_wallet_a-darksend.o' libtool=no \
+libbitcoin_wallet_a-obfuscation.o: obfuscation.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-obfuscation.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-obfuscation.Tpo -c -o libbitcoin_wallet_a-obfuscation.o `test -f 'obfuscation.cpp' || echo '$(srcdir)/'`obfuscation.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-obfuscation.Tpo $(DEPDIR)/libbitcoin_wallet_a-obfuscation.Po
+#	$(AM_V_CXX)source='obfuscation.cpp' object='libbitcoin_wallet_a-obfuscation.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-darksend.o `test -f 'darksend.cpp' || echo '$(srcdir)/'`darksend.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-obfuscation.o `test -f 'obfuscation.cpp' || echo '$(srcdir)/'`obfuscation.cpp
 
-libbitcoin_wallet_a-darksend.obj: darksend.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-darksend.obj -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-darksend.Tpo -c -o libbitcoin_wallet_a-darksend.obj `if test -f 'darksend.cpp'; then $(CYGPATH_W) 'darksend.cpp'; else $(CYGPATH_W) '$(srcdir)/darksend.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-darksend.Tpo $(DEPDIR)/libbitcoin_wallet_a-darksend.Po
-#	$(AM_V_CXX)source='darksend.cpp' object='libbitcoin_wallet_a-darksend.obj' libtool=no \
+libbitcoin_wallet_a-obfuscation.obj: obfuscation.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-obfuscation.obj -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-obfuscation.Tpo -c -o libbitcoin_wallet_a-obfuscation.obj `if test -f 'obfuscation.cpp'; then $(CYGPATH_W) 'obfuscation.cpp'; else $(CYGPATH_W) '$(srcdir)/obfuscation.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-obfuscation.Tpo $(DEPDIR)/libbitcoin_wallet_a-obfuscation.Po
+#	$(AM_V_CXX)source='obfuscation.cpp' object='libbitcoin_wallet_a-obfuscation.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-darksend.obj `if test -f 'darksend.cpp'; then $(CYGPATH_W) 'darksend.cpp'; else $(CYGPATH_W) '$(srcdir)/darksend.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-obfuscation.obj `if test -f 'obfuscation.cpp'; then $(CYGPATH_W) 'obfuscation.cpp'; else $(CYGPATH_W) '$(srcdir)/obfuscation.cpp'; fi`
 
-libbitcoin_wallet_a-darksend-relay.o: darksend-relay.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-darksend-relay.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-darksend-relay.Tpo -c -o libbitcoin_wallet_a-darksend-relay.o `test -f 'darksend-relay.cpp' || echo '$(srcdir)/'`darksend-relay.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-darksend-relay.Tpo $(DEPDIR)/libbitcoin_wallet_a-darksend-relay.Po
-#	$(AM_V_CXX)source='darksend-relay.cpp' object='libbitcoin_wallet_a-darksend-relay.o' libtool=no \
+libbitcoin_wallet_a-dsnotificationinterface.o: dsnotificationinterface.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-dsnotificationinterface.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-dsnotificationinterface.Tpo -c -o libbitcoin_wallet_a-dsnotificationinterface.o `test -f 'dsnotificationinterface.cpp' || echo '$(srcdir)/'`dsnotificationinterface.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-dsnotificationinterface.Tpo $(DEPDIR)/libbitcoin_wallet_a-dsnotificationinterface.Po
+#	$(AM_V_CXX)source='dsnotificationinterface.cpp' object='libbitcoin_wallet_a-dsnotificationinterface.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-darksend-relay.o `test -f 'darksend-relay.cpp' || echo '$(srcdir)/'`darksend-relay.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-dsnotificationinterface.o `test -f 'dsnotificationinterface.cpp' || echo '$(srcdir)/'`dsnotificationinterface.cpp
 
-libbitcoin_wallet_a-darksend-relay.obj: darksend-relay.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-darksend-relay.obj -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-darksend-relay.Tpo -c -o libbitcoin_wallet_a-darksend-relay.obj `if test -f 'darksend-relay.cpp'; then $(CYGPATH_W) 'darksend-relay.cpp'; else $(CYGPATH_W) '$(srcdir)/darksend-relay.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-darksend-relay.Tpo $(DEPDIR)/libbitcoin_wallet_a-darksend-relay.Po
-#	$(AM_V_CXX)source='darksend-relay.cpp' object='libbitcoin_wallet_a-darksend-relay.obj' libtool=no \
+libbitcoin_wallet_a-dsnotificationinterface.obj: dsnotificationinterface.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-dsnotificationinterface.obj -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-dsnotificationinterface.Tpo -c -o libbitcoin_wallet_a-dsnotificationinterface.obj `if test -f 'dsnotificationinterface.cpp'; then $(CYGPATH_W) 'dsnotificationinterface.cpp'; else $(CYGPATH_W) '$(srcdir)/dsnotificationinterface.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-dsnotificationinterface.Tpo $(DEPDIR)/libbitcoin_wallet_a-dsnotificationinterface.Po
+#	$(AM_V_CXX)source='dsnotificationinterface.cpp' object='libbitcoin_wallet_a-dsnotificationinterface.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-darksend-relay.obj `if test -f 'darksend-relay.cpp'; then $(CYGPATH_W) 'darksend-relay.cpp'; else $(CYGPATH_W) '$(srcdir)/darksend-relay.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-dsnotificationinterface.obj `if test -f 'dsnotificationinterface.cpp'; then $(CYGPATH_W) 'dsnotificationinterface.cpp'; else $(CYGPATH_W) '$(srcdir)/dsnotificationinterface.cpp'; fi`
 
-libbitcoin_wallet_a-instantx.o: instantx.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-instantx.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-instantx.Tpo -c -o libbitcoin_wallet_a-instantx.o `test -f 'instantx.cpp' || echo '$(srcdir)/'`instantx.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-instantx.Tpo $(DEPDIR)/libbitcoin_wallet_a-instantx.Po
-#	$(AM_V_CXX)source='instantx.cpp' object='libbitcoin_wallet_a-instantx.o' libtool=no \
+libbitcoin_wallet_a-obfuscation-relay.o: obfuscation-relay.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-obfuscation-relay.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-obfuscation-relay.Tpo -c -o libbitcoin_wallet_a-obfuscation-relay.o `test -f 'obfuscation-relay.cpp' || echo '$(srcdir)/'`obfuscation-relay.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-obfuscation-relay.Tpo $(DEPDIR)/libbitcoin_wallet_a-obfuscation-relay.Po
+#	$(AM_V_CXX)source='obfuscation-relay.cpp' object='libbitcoin_wallet_a-obfuscation-relay.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-instantx.o `test -f 'instantx.cpp' || echo '$(srcdir)/'`instantx.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-obfuscation-relay.o `test -f 'obfuscation-relay.cpp' || echo '$(srcdir)/'`obfuscation-relay.cpp
 
-libbitcoin_wallet_a-instantx.obj: instantx.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-instantx.obj -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-instantx.Tpo -c -o libbitcoin_wallet_a-instantx.obj `if test -f 'instantx.cpp'; then $(CYGPATH_W) 'instantx.cpp'; else $(CYGPATH_W) '$(srcdir)/instantx.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-instantx.Tpo $(DEPDIR)/libbitcoin_wallet_a-instantx.Po
-#	$(AM_V_CXX)source='instantx.cpp' object='libbitcoin_wallet_a-instantx.obj' libtool=no \
+libbitcoin_wallet_a-obfuscation-relay.obj: obfuscation-relay.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-obfuscation-relay.obj -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-obfuscation-relay.Tpo -c -o libbitcoin_wallet_a-obfuscation-relay.obj `if test -f 'obfuscation-relay.cpp'; then $(CYGPATH_W) 'obfuscation-relay.cpp'; else $(CYGPATH_W) '$(srcdir)/obfuscation-relay.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-obfuscation-relay.Tpo $(DEPDIR)/libbitcoin_wallet_a-obfuscation-relay.Po
+#	$(AM_V_CXX)source='obfuscation-relay.cpp' object='libbitcoin_wallet_a-obfuscation-relay.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-instantx.obj `if test -f 'instantx.cpp'; then $(CYGPATH_W) 'instantx.cpp'; else $(CYGPATH_W) '$(srcdir)/instantx.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-obfuscation-relay.obj `if test -f 'obfuscation-relay.cpp'; then $(CYGPATH_W) 'obfuscation-relay.cpp'; else $(CYGPATH_W) '$(srcdir)/obfuscation-relay.cpp'; fi`
+
+libbitcoin_wallet_a-swifttx.o: swifttx.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-swifttx.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-swifttx.Tpo -c -o libbitcoin_wallet_a-swifttx.o `test -f 'swifttx.cpp' || echo '$(srcdir)/'`swifttx.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-swifttx.Tpo $(DEPDIR)/libbitcoin_wallet_a-swifttx.Po
+#	$(AM_V_CXX)source='swifttx.cpp' object='libbitcoin_wallet_a-swifttx.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-swifttx.o `test -f 'swifttx.cpp' || echo '$(srcdir)/'`swifttx.cpp
+
+libbitcoin_wallet_a-swifttx.obj: swifttx.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-swifttx.obj -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-swifttx.Tpo -c -o libbitcoin_wallet_a-swifttx.obj `if test -f 'swifttx.cpp'; then $(CYGPATH_W) 'swifttx.cpp'; else $(CYGPATH_W) '$(srcdir)/swifttx.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_wallet_a-swifttx.Tpo $(DEPDIR)/libbitcoin_wallet_a-swifttx.Po
+#	$(AM_V_CXX)source='swifttx.cpp' object='libbitcoin_wallet_a-swifttx.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_wallet_a-swifttx.obj `if test -f 'swifttx.cpp'; then $(CYGPATH_W) 'swifttx.cpp'; else $(CYGPATH_W) '$(srcdir)/swifttx.cpp'; fi`
 
 libbitcoin_wallet_a-masternode.o: masternode.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_wallet_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_wallet_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_wallet_a-masternode.o -MD -MP -MF $(DEPDIR)/libbitcoin_wallet_a-masternode.Tpo -c -o libbitcoin_wallet_a-masternode.o `test -f 'masternode.cpp' || echo '$(srcdir)/'`masternode.cpp
@@ -5010,20 +5412,6 @@ qt/qt_libbitcoinqt_a-bitcoinunits.obj: qt/bitcoinunits.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-bitcoinunits.obj `if test -f 'qt/bitcoinunits.cpp'; then $(CYGPATH_W) 'qt/bitcoinunits.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/bitcoinunits.cpp'; fi`
 
-qt/qt_libbitcoinqt_a-blockexplorer.o: qt/blockexplorer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-blockexplorer.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-blockexplorer.Tpo -c -o qt/qt_libbitcoinqt_a-blockexplorer.o `test -f 'qt/blockexplorer.cpp' || echo '$(srcdir)/'`qt/blockexplorer.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-blockexplorer.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-blockexplorer.Po
-#	$(AM_V_CXX)source='qt/blockexplorer.cpp' object='qt/qt_libbitcoinqt_a-blockexplorer.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-blockexplorer.o `test -f 'qt/blockexplorer.cpp' || echo '$(srcdir)/'`qt/blockexplorer.cpp
-
-qt/qt_libbitcoinqt_a-blockexplorer.obj: qt/blockexplorer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-blockexplorer.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-blockexplorer.Tpo -c -o qt/qt_libbitcoinqt_a-blockexplorer.obj `if test -f 'qt/blockexplorer.cpp'; then $(CYGPATH_W) 'qt/blockexplorer.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/blockexplorer.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-blockexplorer.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-blockexplorer.Po
-#	$(AM_V_CXX)source='qt/blockexplorer.cpp' object='qt/qt_libbitcoinqt_a-blockexplorer.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-blockexplorer.obj `if test -f 'qt/blockexplorer.cpp'; then $(CYGPATH_W) 'qt/blockexplorer.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/blockexplorer.cpp'; fi`
-
 qt/qt_libbitcoinqt_a-clientmodel.o: qt/clientmodel.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-clientmodel.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-clientmodel.Tpo -c -o qt/qt_libbitcoinqt_a-clientmodel.o `test -f 'qt/clientmodel.cpp' || echo '$(srcdir)/'`qt/clientmodel.cpp
 	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-clientmodel.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-clientmodel.Po
@@ -5079,20 +5467,6 @@ qt/qt_libbitcoinqt_a-intro.obj: qt/intro.cpp
 #	$(AM_V_CXX)source='qt/intro.cpp' object='qt/qt_libbitcoinqt_a-intro.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-intro.obj `if test -f 'qt/intro.cpp'; then $(CYGPATH_W) 'qt/intro.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/intro.cpp'; fi`
-
-qt/qt_libbitcoinqt_a-masternodelist.o: qt/masternodelist.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-masternodelist.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-masternodelist.Tpo -c -o qt/qt_libbitcoinqt_a-masternodelist.o `test -f 'qt/masternodelist.cpp' || echo '$(srcdir)/'`qt/masternodelist.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-masternodelist.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-masternodelist.Po
-#	$(AM_V_CXX)source='qt/masternodelist.cpp' object='qt/qt_libbitcoinqt_a-masternodelist.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-masternodelist.o `test -f 'qt/masternodelist.cpp' || echo '$(srcdir)/'`qt/masternodelist.cpp
-
-qt/qt_libbitcoinqt_a-masternodelist.obj: qt/masternodelist.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-masternodelist.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-masternodelist.Tpo -c -o qt/qt_libbitcoinqt_a-masternodelist.obj `if test -f 'qt/masternodelist.cpp'; then $(CYGPATH_W) 'qt/masternodelist.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/masternodelist.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-masternodelist.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-masternodelist.Po
-#	$(AM_V_CXX)source='qt/masternodelist.cpp' object='qt/qt_libbitcoinqt_a-masternodelist.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-masternodelist.obj `if test -f 'qt/masternodelist.cpp'; then $(CYGPATH_W) 'qt/masternodelist.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/masternodelist.cpp'; fi`
 
 qt/qt_libbitcoinqt_a-networkstyle.o: qt/networkstyle.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-networkstyle.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-networkstyle.Tpo -c -o qt/qt_libbitcoinqt_a-networkstyle.o `test -f 'qt/networkstyle.cpp' || echo '$(srcdir)/'`qt/networkstyle.cpp
@@ -5318,20 +5692,6 @@ qt/qt_libbitcoinqt_a-askpassphrasedialog.obj: qt/askpassphrasedialog.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-askpassphrasedialog.obj `if test -f 'qt/askpassphrasedialog.cpp'; then $(CYGPATH_W) 'qt/askpassphrasedialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/askpassphrasedialog.cpp'; fi`
 
-qt/qt_libbitcoinqt_a-bip38tooldialog.o: qt/bip38tooldialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-bip38tooldialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-bip38tooldialog.Tpo -c -o qt/qt_libbitcoinqt_a-bip38tooldialog.o `test -f 'qt/bip38tooldialog.cpp' || echo '$(srcdir)/'`qt/bip38tooldialog.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-bip38tooldialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-bip38tooldialog.Po
-#	$(AM_V_CXX)source='qt/bip38tooldialog.cpp' object='qt/qt_libbitcoinqt_a-bip38tooldialog.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-bip38tooldialog.o `test -f 'qt/bip38tooldialog.cpp' || echo '$(srcdir)/'`qt/bip38tooldialog.cpp
-
-qt/qt_libbitcoinqt_a-bip38tooldialog.obj: qt/bip38tooldialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-bip38tooldialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-bip38tooldialog.Tpo -c -o qt/qt_libbitcoinqt_a-bip38tooldialog.obj `if test -f 'qt/bip38tooldialog.cpp'; then $(CYGPATH_W) 'qt/bip38tooldialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/bip38tooldialog.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-bip38tooldialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-bip38tooldialog.Po
-#	$(AM_V_CXX)source='qt/bip38tooldialog.cpp' object='qt/qt_libbitcoinqt_a-bip38tooldialog.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-bip38tooldialog.obj `if test -f 'qt/bip38tooldialog.cpp'; then $(CYGPATH_W) 'qt/bip38tooldialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/bip38tooldialog.cpp'; fi`
-
 qt/qt_libbitcoinqt_a-coincontroldialog.o: qt/coincontroldialog.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-coincontroldialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-coincontroldialog.Tpo -c -o qt/qt_libbitcoinqt_a-coincontroldialog.o `test -f 'qt/coincontroldialog.cpp' || echo '$(srcdir)/'`qt/coincontroldialog.cpp
 	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-coincontroldialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-coincontroldialog.Po
@@ -5387,34 +5747,6 @@ qt/qt_libbitcoinqt_a-editaddressdialog.obj: qt/editaddressdialog.cpp
 #	$(AM_V_CXX)source='qt/editaddressdialog.cpp' object='qt/qt_libbitcoinqt_a-editaddressdialog.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-editaddressdialog.obj `if test -f 'qt/editaddressdialog.cpp'; then $(CYGPATH_W) 'qt/editaddressdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/editaddressdialog.cpp'; fi`
-
-qt/qt_libbitcoinqt_a-multisenddialog.o: qt/multisenddialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-multisenddialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-multisenddialog.Tpo -c -o qt/qt_libbitcoinqt_a-multisenddialog.o `test -f 'qt/multisenddialog.cpp' || echo '$(srcdir)/'`qt/multisenddialog.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-multisenddialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-multisenddialog.Po
-#	$(AM_V_CXX)source='qt/multisenddialog.cpp' object='qt/qt_libbitcoinqt_a-multisenddialog.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-multisenddialog.o `test -f 'qt/multisenddialog.cpp' || echo '$(srcdir)/'`qt/multisenddialog.cpp
-
-qt/qt_libbitcoinqt_a-multisenddialog.obj: qt/multisenddialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-multisenddialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-multisenddialog.Tpo -c -o qt/qt_libbitcoinqt_a-multisenddialog.obj `if test -f 'qt/multisenddialog.cpp'; then $(CYGPATH_W) 'qt/multisenddialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/multisenddialog.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-multisenddialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-multisenddialog.Po
-#	$(AM_V_CXX)source='qt/multisenddialog.cpp' object='qt/qt_libbitcoinqt_a-multisenddialog.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-multisenddialog.obj `if test -f 'qt/multisenddialog.cpp'; then $(CYGPATH_W) 'qt/multisenddialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/multisenddialog.cpp'; fi`
-
-qt/qt_libbitcoinqt_a-multisigdialog.o: qt/multisigdialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-multisigdialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-multisigdialog.Tpo -c -o qt/qt_libbitcoinqt_a-multisigdialog.o `test -f 'qt/multisigdialog.cpp' || echo '$(srcdir)/'`qt/multisigdialog.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-multisigdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-multisigdialog.Po
-#	$(AM_V_CXX)source='qt/multisigdialog.cpp' object='qt/qt_libbitcoinqt_a-multisigdialog.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-multisigdialog.o `test -f 'qt/multisigdialog.cpp' || echo '$(srcdir)/'`qt/multisigdialog.cpp
-
-qt/qt_libbitcoinqt_a-multisigdialog.obj: qt/multisigdialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-multisigdialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-multisigdialog.Tpo -c -o qt/qt_libbitcoinqt_a-multisigdialog.obj `if test -f 'qt/multisigdialog.cpp'; then $(CYGPATH_W) 'qt/multisigdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/multisigdialog.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-multisigdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-multisigdialog.Po
-#	$(AM_V_CXX)source='qt/multisigdialog.cpp' object='qt/qt_libbitcoinqt_a-multisigdialog.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-multisigdialog.obj `if test -f 'qt/multisigdialog.cpp'; then $(CYGPATH_W) 'qt/multisigdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/multisigdialog.cpp'; fi`
 
 qt/qt_libbitcoinqt_a-openuridialog.o: qt/openuridialog.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-openuridialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-openuridialog.Tpo -c -o qt/qt_libbitcoinqt_a-openuridialog.o `test -f 'qt/openuridialog.cpp' || echo '$(srcdir)/'`qt/openuridialog.cpp
@@ -5752,20 +6084,6 @@ qt/qt_libbitcoinqt_a-moc_bantablemodel.obj: qt/moc_bantablemodel.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_bantablemodel.obj `if test -f 'qt/moc_bantablemodel.cpp'; then $(CYGPATH_W) 'qt/moc_bantablemodel.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_bantablemodel.cpp'; fi`
 
-qt/qt_libbitcoinqt_a-moc_bip38tooldialog.o: qt/moc_bip38tooldialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_bip38tooldialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bip38tooldialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_bip38tooldialog.o `test -f 'qt/moc_bip38tooldialog.cpp' || echo '$(srcdir)/'`qt/moc_bip38tooldialog.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bip38tooldialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bip38tooldialog.Po
-#	$(AM_V_CXX)source='qt/moc_bip38tooldialog.cpp' object='qt/qt_libbitcoinqt_a-moc_bip38tooldialog.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_bip38tooldialog.o `test -f 'qt/moc_bip38tooldialog.cpp' || echo '$(srcdir)/'`qt/moc_bip38tooldialog.cpp
-
-qt/qt_libbitcoinqt_a-moc_bip38tooldialog.obj: qt/moc_bip38tooldialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_bip38tooldialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bip38tooldialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_bip38tooldialog.obj `if test -f 'qt/moc_bip38tooldialog.cpp'; then $(CYGPATH_W) 'qt/moc_bip38tooldialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_bip38tooldialog.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bip38tooldialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bip38tooldialog.Po
-#	$(AM_V_CXX)source='qt/moc_bip38tooldialog.cpp' object='qt/qt_libbitcoinqt_a-moc_bip38tooldialog.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_bip38tooldialog.obj `if test -f 'qt/moc_bip38tooldialog.cpp'; then $(CYGPATH_W) 'qt/moc_bip38tooldialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_bip38tooldialog.cpp'; fi`
-
 qt/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.o: qt/moc_bitcoinaddressvalidator.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.Tpo -c -o qt/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.o `test -f 'qt/moc_bitcoinaddressvalidator.cpp' || echo '$(srcdir)/'`qt/moc_bitcoinaddressvalidator.cpp
 	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_bitcoinaddressvalidator.Po
@@ -5821,20 +6139,6 @@ qt/qt_libbitcoinqt_a-moc_bitcoinunits.obj: qt/moc_bitcoinunits.cpp
 #	$(AM_V_CXX)source='qt/moc_bitcoinunits.cpp' object='qt/qt_libbitcoinqt_a-moc_bitcoinunits.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_bitcoinunits.obj `if test -f 'qt/moc_bitcoinunits.cpp'; then $(CYGPATH_W) 'qt/moc_bitcoinunits.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_bitcoinunits.cpp'; fi`
-
-qt/qt_libbitcoinqt_a-moc_blockexplorer.o: qt/moc_blockexplorer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_blockexplorer.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_blockexplorer.Tpo -c -o qt/qt_libbitcoinqt_a-moc_blockexplorer.o `test -f 'qt/moc_blockexplorer.cpp' || echo '$(srcdir)/'`qt/moc_blockexplorer.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_blockexplorer.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_blockexplorer.Po
-#	$(AM_V_CXX)source='qt/moc_blockexplorer.cpp' object='qt/qt_libbitcoinqt_a-moc_blockexplorer.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_blockexplorer.o `test -f 'qt/moc_blockexplorer.cpp' || echo '$(srcdir)/'`qt/moc_blockexplorer.cpp
-
-qt/qt_libbitcoinqt_a-moc_blockexplorer.obj: qt/moc_blockexplorer.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_blockexplorer.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_blockexplorer.Tpo -c -o qt/qt_libbitcoinqt_a-moc_blockexplorer.obj `if test -f 'qt/moc_blockexplorer.cpp'; then $(CYGPATH_W) 'qt/moc_blockexplorer.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_blockexplorer.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_blockexplorer.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_blockexplorer.Po
-#	$(AM_V_CXX)source='qt/moc_blockexplorer.cpp' object='qt/qt_libbitcoinqt_a-moc_blockexplorer.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_blockexplorer.obj `if test -f 'qt/moc_blockexplorer.cpp'; then $(CYGPATH_W) 'qt/moc_blockexplorer.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_blockexplorer.cpp'; fi`
 
 qt/qt_libbitcoinqt_a-moc_clientmodel.o: qt/moc_clientmodel.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_clientmodel.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_clientmodel.Tpo -c -o qt/qt_libbitcoinqt_a-moc_clientmodel.o `test -f 'qt/moc_clientmodel.cpp' || echo '$(srcdir)/'`qt/moc_clientmodel.cpp
@@ -5975,48 +6279,6 @@ qt/qt_libbitcoinqt_a-moc_macnotificationhandler.obj: qt/moc_macnotificationhandl
 #	$(AM_V_CXX)source='qt/moc_macnotificationhandler.cpp' object='qt/qt_libbitcoinqt_a-moc_macnotificationhandler.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_macnotificationhandler.obj `if test -f 'qt/moc_macnotificationhandler.cpp'; then $(CYGPATH_W) 'qt/moc_macnotificationhandler.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_macnotificationhandler.cpp'; fi`
-
-qt/qt_libbitcoinqt_a-moc_masternodelist.o: qt/moc_masternodelist.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_masternodelist.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_masternodelist.Tpo -c -o qt/qt_libbitcoinqt_a-moc_masternodelist.o `test -f 'qt/moc_masternodelist.cpp' || echo '$(srcdir)/'`qt/moc_masternodelist.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_masternodelist.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_masternodelist.Po
-#	$(AM_V_CXX)source='qt/moc_masternodelist.cpp' object='qt/qt_libbitcoinqt_a-moc_masternodelist.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_masternodelist.o `test -f 'qt/moc_masternodelist.cpp' || echo '$(srcdir)/'`qt/moc_masternodelist.cpp
-
-qt/qt_libbitcoinqt_a-moc_masternodelist.obj: qt/moc_masternodelist.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_masternodelist.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_masternodelist.Tpo -c -o qt/qt_libbitcoinqt_a-moc_masternodelist.obj `if test -f 'qt/moc_masternodelist.cpp'; then $(CYGPATH_W) 'qt/moc_masternodelist.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_masternodelist.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_masternodelist.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_masternodelist.Po
-#	$(AM_V_CXX)source='qt/moc_masternodelist.cpp' object='qt/qt_libbitcoinqt_a-moc_masternodelist.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_masternodelist.obj `if test -f 'qt/moc_masternodelist.cpp'; then $(CYGPATH_W) 'qt/moc_masternodelist.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_masternodelist.cpp'; fi`
-
-qt/qt_libbitcoinqt_a-moc_multisenddialog.o: qt/moc_multisenddialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_multisenddialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisenddialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_multisenddialog.o `test -f 'qt/moc_multisenddialog.cpp' || echo '$(srcdir)/'`qt/moc_multisenddialog.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisenddialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisenddialog.Po
-#	$(AM_V_CXX)source='qt/moc_multisenddialog.cpp' object='qt/qt_libbitcoinqt_a-moc_multisenddialog.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_multisenddialog.o `test -f 'qt/moc_multisenddialog.cpp' || echo '$(srcdir)/'`qt/moc_multisenddialog.cpp
-
-qt/qt_libbitcoinqt_a-moc_multisenddialog.obj: qt/moc_multisenddialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_multisenddialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisenddialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_multisenddialog.obj `if test -f 'qt/moc_multisenddialog.cpp'; then $(CYGPATH_W) 'qt/moc_multisenddialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_multisenddialog.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisenddialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisenddialog.Po
-#	$(AM_V_CXX)source='qt/moc_multisenddialog.cpp' object='qt/qt_libbitcoinqt_a-moc_multisenddialog.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_multisenddialog.obj `if test -f 'qt/moc_multisenddialog.cpp'; then $(CYGPATH_W) 'qt/moc_multisenddialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_multisenddialog.cpp'; fi`
-
-qt/qt_libbitcoinqt_a-moc_multisigdialog.o: qt/moc_multisigdialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_multisigdialog.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisigdialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_multisigdialog.o `test -f 'qt/moc_multisigdialog.cpp' || echo '$(srcdir)/'`qt/moc_multisigdialog.cpp
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisigdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisigdialog.Po
-#	$(AM_V_CXX)source='qt/moc_multisigdialog.cpp' object='qt/qt_libbitcoinqt_a-moc_multisigdialog.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_multisigdialog.o `test -f 'qt/moc_multisigdialog.cpp' || echo '$(srcdir)/'`qt/moc_multisigdialog.cpp
-
-qt/qt_libbitcoinqt_a-moc_multisigdialog.obj: qt/moc_multisigdialog.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_multisigdialog.obj -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisigdialog.Tpo -c -o qt/qt_libbitcoinqt_a-moc_multisigdialog.obj `if test -f 'qt/moc_multisigdialog.cpp'; then $(CYGPATH_W) 'qt/moc_multisigdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_multisigdialog.cpp'; fi`
-	$(AM_V_at)$(am__mv) qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisigdialog.Tpo qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_multisigdialog.Po
-#	$(AM_V_CXX)source='qt/moc_multisigdialog.cpp' object='qt/qt_libbitcoinqt_a-moc_multisigdialog.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_libbitcoinqt_a-moc_multisigdialog.obj `if test -f 'qt/moc_multisigdialog.cpp'; then $(CYGPATH_W) 'qt/moc_multisigdialog.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/moc_multisigdialog.cpp'; fi`
 
 qt/qt_libbitcoinqt_a-moc_notificator.o: qt/moc_notificator.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_libbitcoinqt_a_CPPFLAGS) $(CPPFLAGS) $(qt_libbitcoinqt_a_CXXFLAGS) $(CXXFLAGS) -MT qt/qt_libbitcoinqt_a-moc_notificator.o -MD -MP -MF qt/$(DEPDIR)/qt_libbitcoinqt_a-moc_notificator.Tpo -c -o qt/qt_libbitcoinqt_a-moc_notificator.o `test -f 'qt/moc_notificator.cpp' || echo '$(srcdir)/'`qt/moc_notificator.cpp
@@ -6536,47 +6798,47 @@ compat/libbitcoinconsensus_la-glibc_compat.lo: compat/glibc_compat.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoinconsensus_la_CPPFLAGS) $(CPPFLAGS) $(libbitcoinconsensus_la_CXXFLAGS) $(CXXFLAGS) -c -o compat/libbitcoinconsensus_la-glibc_compat.lo `test -f 'compat/glibc_compat.cpp' || echo '$(srcdir)/'`compat/glibc_compat.cpp
 
-bench/bench_bench_dash-bench_dash.o: bench/bench_dash.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_dash-bench_dash.o -MD -MP -MF bench/$(DEPDIR)/bench_bench_dash-bench_dash.Tpo -c -o bench/bench_bench_dash-bench_dash.o `test -f 'bench/bench_dash.cpp' || echo '$(srcdir)/'`bench/bench_dash.cpp
-	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_dash-bench_dash.Tpo bench/$(DEPDIR)/bench_bench_dash-bench_dash.Po
-#	$(AM_V_CXX)source='bench/bench_dash.cpp' object='bench/bench_bench_dash-bench_dash.o' libtool=no \
+bench/bench_bench_folm-bench_folm.o: bench/bench_folm.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_folm-bench_folm.o -MD -MP -MF bench/$(DEPDIR)/bench_bench_folm-bench_folm.Tpo -c -o bench/bench_bench_folm-bench_folm.o `test -f 'bench/bench_folm.cpp' || echo '$(srcdir)/'`bench/bench_folm.cpp
+	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_folm-bench_folm.Tpo bench/$(DEPDIR)/bench_bench_folm-bench_folm.Po
+#	$(AM_V_CXX)source='bench/bench_folm.cpp' object='bench/bench_bench_folm-bench_folm.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_dash-bench_dash.o `test -f 'bench/bench_dash.cpp' || echo '$(srcdir)/'`bench/bench_dash.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_folm-bench_folm.o `test -f 'bench/bench_folm.cpp' || echo '$(srcdir)/'`bench/bench_folm.cpp
 
-bench/bench_bench_dash-bench_dash.obj: bench/bench_dash.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_dash-bench_dash.obj -MD -MP -MF bench/$(DEPDIR)/bench_bench_dash-bench_dash.Tpo -c -o bench/bench_bench_dash-bench_dash.obj `if test -f 'bench/bench_dash.cpp'; then $(CYGPATH_W) 'bench/bench_dash.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench_dash.cpp'; fi`
-	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_dash-bench_dash.Tpo bench/$(DEPDIR)/bench_bench_dash-bench_dash.Po
-#	$(AM_V_CXX)source='bench/bench_dash.cpp' object='bench/bench_bench_dash-bench_dash.obj' libtool=no \
+bench/bench_bench_folm-bench_folm.obj: bench/bench_folm.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_folm-bench_folm.obj -MD -MP -MF bench/$(DEPDIR)/bench_bench_folm-bench_folm.Tpo -c -o bench/bench_bench_folm-bench_folm.obj `if test -f 'bench/bench_folm.cpp'; then $(CYGPATH_W) 'bench/bench_folm.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench_folm.cpp'; fi`
+	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_folm-bench_folm.Tpo bench/$(DEPDIR)/bench_bench_folm-bench_folm.Po
+#	$(AM_V_CXX)source='bench/bench_folm.cpp' object='bench/bench_bench_folm-bench_folm.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_dash-bench_dash.obj `if test -f 'bench/bench_dash.cpp'; then $(CYGPATH_W) 'bench/bench_dash.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench_dash.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_folm-bench_folm.obj `if test -f 'bench/bench_folm.cpp'; then $(CYGPATH_W) 'bench/bench_folm.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench_folm.cpp'; fi`
 
-bench/bench_bench_dash-bench.o: bench/bench.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_dash-bench.o -MD -MP -MF bench/$(DEPDIR)/bench_bench_dash-bench.Tpo -c -o bench/bench_bench_dash-bench.o `test -f 'bench/bench.cpp' || echo '$(srcdir)/'`bench/bench.cpp
-	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_dash-bench.Tpo bench/$(DEPDIR)/bench_bench_dash-bench.Po
-#	$(AM_V_CXX)source='bench/bench.cpp' object='bench/bench_bench_dash-bench.o' libtool=no \
+bench/bench_bench_folm-bench.o: bench/bench.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_folm-bench.o -MD -MP -MF bench/$(DEPDIR)/bench_bench_folm-bench.Tpo -c -o bench/bench_bench_folm-bench.o `test -f 'bench/bench.cpp' || echo '$(srcdir)/'`bench/bench.cpp
+	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_folm-bench.Tpo bench/$(DEPDIR)/bench_bench_folm-bench.Po
+#	$(AM_V_CXX)source='bench/bench.cpp' object='bench/bench_bench_folm-bench.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_dash-bench.o `test -f 'bench/bench.cpp' || echo '$(srcdir)/'`bench/bench.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_folm-bench.o `test -f 'bench/bench.cpp' || echo '$(srcdir)/'`bench/bench.cpp
 
-bench/bench_bench_dash-bench.obj: bench/bench.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_dash-bench.obj -MD -MP -MF bench/$(DEPDIR)/bench_bench_dash-bench.Tpo -c -o bench/bench_bench_dash-bench.obj `if test -f 'bench/bench.cpp'; then $(CYGPATH_W) 'bench/bench.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench.cpp'; fi`
-	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_dash-bench.Tpo bench/$(DEPDIR)/bench_bench_dash-bench.Po
-#	$(AM_V_CXX)source='bench/bench.cpp' object='bench/bench_bench_dash-bench.obj' libtool=no \
+bench/bench_bench_folm-bench.obj: bench/bench.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_folm-bench.obj -MD -MP -MF bench/$(DEPDIR)/bench_bench_folm-bench.Tpo -c -o bench/bench_bench_folm-bench.obj `if test -f 'bench/bench.cpp'; then $(CYGPATH_W) 'bench/bench.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench.cpp'; fi`
+	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_folm-bench.Tpo bench/$(DEPDIR)/bench_bench_folm-bench.Po
+#	$(AM_V_CXX)source='bench/bench.cpp' object='bench/bench_bench_folm-bench.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_dash-bench.obj `if test -f 'bench/bench.cpp'; then $(CYGPATH_W) 'bench/bench.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_folm-bench.obj `if test -f 'bench/bench.cpp'; then $(CYGPATH_W) 'bench/bench.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/bench.cpp'; fi`
 
-bench/bench_bench_dash-Examples.o: bench/Examples.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_dash-Examples.o -MD -MP -MF bench/$(DEPDIR)/bench_bench_dash-Examples.Tpo -c -o bench/bench_bench_dash-Examples.o `test -f 'bench/Examples.cpp' || echo '$(srcdir)/'`bench/Examples.cpp
-	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_dash-Examples.Tpo bench/$(DEPDIR)/bench_bench_dash-Examples.Po
-#	$(AM_V_CXX)source='bench/Examples.cpp' object='bench/bench_bench_dash-Examples.o' libtool=no \
+bench/bench_bench_folm-Examples.o: bench/Examples.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_folm-Examples.o -MD -MP -MF bench/$(DEPDIR)/bench_bench_folm-Examples.Tpo -c -o bench/bench_bench_folm-Examples.o `test -f 'bench/Examples.cpp' || echo '$(srcdir)/'`bench/Examples.cpp
+	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_folm-Examples.Tpo bench/$(DEPDIR)/bench_bench_folm-Examples.Po
+#	$(AM_V_CXX)source='bench/Examples.cpp' object='bench/bench_bench_folm-Examples.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_dash-Examples.o `test -f 'bench/Examples.cpp' || echo '$(srcdir)/'`bench/Examples.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_folm-Examples.o `test -f 'bench/Examples.cpp' || echo '$(srcdir)/'`bench/Examples.cpp
 
-bench/bench_bench_dash-Examples.obj: bench/Examples.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_dash-Examples.obj -MD -MP -MF bench/$(DEPDIR)/bench_bench_dash-Examples.Tpo -c -o bench/bench_bench_dash-Examples.obj `if test -f 'bench/Examples.cpp'; then $(CYGPATH_W) 'bench/Examples.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/Examples.cpp'; fi`
-	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_dash-Examples.Tpo bench/$(DEPDIR)/bench_bench_dash-Examples.Po
-#	$(AM_V_CXX)source='bench/Examples.cpp' object='bench/bench_bench_dash-Examples.obj' libtool=no \
+bench/bench_bench_folm-Examples.obj: bench/Examples.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -MT bench/bench_bench_folm-Examples.obj -MD -MP -MF bench/$(DEPDIR)/bench_bench_folm-Examples.Tpo -c -o bench/bench_bench_folm-Examples.obj `if test -f 'bench/Examples.cpp'; then $(CYGPATH_W) 'bench/Examples.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/Examples.cpp'; fi`
+	$(AM_V_at)$(am__mv) bench/$(DEPDIR)/bench_bench_folm-Examples.Tpo bench/$(DEPDIR)/bench_bench_folm-Examples.Po
+#	$(AM_V_CXX)source='bench/Examples.cpp' object='bench/bench_bench_folm-Examples.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_dash_CPPFLAGS) $(CPPFLAGS) $(bench_bench_dash_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_dash-Examples.obj `if test -f 'bench/Examples.cpp'; then $(CYGPATH_W) 'bench/Examples.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/Examples.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(bench_bench_folm_CPPFLAGS) $(CPPFLAGS) $(bench_bench_folm_CXXFLAGS) $(CXXFLAGS) -c -o bench/bench_bench_folm-Examples.obj `if test -f 'bench/Examples.cpp'; then $(CYGPATH_W) 'bench/Examples.cpp'; else $(CYGPATH_W) '$(srcdir)/bench/Examples.cpp'; fi`
 
 folm_cli-folm-cli.o: folm-cli.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(folm_cli_CPPFLAGS) $(CPPFLAGS) $(folm_cli_CXXFLAGS) $(CXXFLAGS) -MT folm_cli-folm-cli.o -MD -MP -MF $(DEPDIR)/folm_cli-folm-cli.Tpo -c -o folm_cli-folm-cli.o `test -f 'folm-cli.cpp' || echo '$(srcdir)/'`folm-cli.cpp
@@ -6635,592 +6897,802 @@ qt/qt_folm_qt-folm.obj: qt/folm.cpp
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/qt_folm_qt-folm.obj `if test -f 'qt/folm.cpp'; then $(CYGPATH_W) 'qt/folm.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/folm.cpp'; fi`
 
 qt/test/qt_test_test_folm_qt-test_main.o: qt/test/test_main.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-test_main.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Tpo -c -o qt/test/qt_test_test_folm_qt-test_main.o `test -f 'qt/test/test_main.cpp' || echo '$(srcdir)/'`qt/test/test_main.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-test_main.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Tpo -c -o qt/test/qt_test_test_folm_qt-test_main.o `test -f 'qt/test/test_main.cpp' || echo '$(srcdir)/'`qt/test/test_main.cpp
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Po
 #	$(AM_V_CXX)source='qt/test/test_main.cpp' object='qt/test/qt_test_test_folm_qt-test_main.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-test_main.o `test -f 'qt/test/test_main.cpp' || echo '$(srcdir)/'`qt/test/test_main.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-test_main.o `test -f 'qt/test/test_main.cpp' || echo '$(srcdir)/'`qt/test/test_main.cpp
 
 qt/test/qt_test_test_folm_qt-test_main.obj: qt/test/test_main.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-test_main.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Tpo -c -o qt/test/qt_test_test_folm_qt-test_main.obj `if test -f 'qt/test/test_main.cpp'; then $(CYGPATH_W) 'qt/test/test_main.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/test_main.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-test_main.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Tpo -c -o qt/test/qt_test_test_folm_qt-test_main.obj `if test -f 'qt/test/test_main.cpp'; then $(CYGPATH_W) 'qt/test/test_main.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/test_main.cpp'; fi`
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-test_main.Po
 #	$(AM_V_CXX)source='qt/test/test_main.cpp' object='qt/test/qt_test_test_folm_qt-test_main.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-test_main.obj `if test -f 'qt/test/test_main.cpp'; then $(CYGPATH_W) 'qt/test/test_main.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/test_main.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-test_main.obj `if test -f 'qt/test/test_main.cpp'; then $(CYGPATH_W) 'qt/test/test_main.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/test_main.cpp'; fi`
 
 qt/test/qt_test_test_folm_qt-uritests.o: qt/test/uritests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-uritests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-uritests.o `test -f 'qt/test/uritests.cpp' || echo '$(srcdir)/'`qt/test/uritests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-uritests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-uritests.o `test -f 'qt/test/uritests.cpp' || echo '$(srcdir)/'`qt/test/uritests.cpp
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Po
 #	$(AM_V_CXX)source='qt/test/uritests.cpp' object='qt/test/qt_test_test_folm_qt-uritests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-uritests.o `test -f 'qt/test/uritests.cpp' || echo '$(srcdir)/'`qt/test/uritests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-uritests.o `test -f 'qt/test/uritests.cpp' || echo '$(srcdir)/'`qt/test/uritests.cpp
 
 qt/test/qt_test_test_folm_qt-uritests.obj: qt/test/uritests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-uritests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-uritests.obj `if test -f 'qt/test/uritests.cpp'; then $(CYGPATH_W) 'qt/test/uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/uritests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-uritests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-uritests.obj `if test -f 'qt/test/uritests.cpp'; then $(CYGPATH_W) 'qt/test/uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/uritests.cpp'; fi`
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-uritests.Po
 #	$(AM_V_CXX)source='qt/test/uritests.cpp' object='qt/test/qt_test_test_folm_qt-uritests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-uritests.obj `if test -f 'qt/test/uritests.cpp'; then $(CYGPATH_W) 'qt/test/uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/uritests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-uritests.obj `if test -f 'qt/test/uritests.cpp'; then $(CYGPATH_W) 'qt/test/uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/uritests.cpp'; fi`
 
 qt/test/qt_test_test_folm_qt-paymentservertests.o: qt/test/paymentservertests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-paymentservertests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-paymentservertests.o `test -f 'qt/test/paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/paymentservertests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-paymentservertests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-paymentservertests.o `test -f 'qt/test/paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/paymentservertests.cpp
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Po
 #	$(AM_V_CXX)source='qt/test/paymentservertests.cpp' object='qt/test/qt_test_test_folm_qt-paymentservertests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-paymentservertests.o `test -f 'qt/test/paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/paymentservertests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-paymentservertests.o `test -f 'qt/test/paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/paymentservertests.cpp
 
 qt/test/qt_test_test_folm_qt-paymentservertests.obj: qt/test/paymentservertests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-paymentservertests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-paymentservertests.obj `if test -f 'qt/test/paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/paymentservertests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-paymentservertests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-paymentservertests.obj `if test -f 'qt/test/paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/paymentservertests.cpp'; fi`
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-paymentservertests.Po
 #	$(AM_V_CXX)source='qt/test/paymentservertests.cpp' object='qt/test/qt_test_test_folm_qt-paymentservertests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-paymentservertests.obj `if test -f 'qt/test/paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/paymentservertests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-paymentservertests.obj `if test -f 'qt/test/paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/paymentservertests.cpp'; fi`
 
 qt/test/qt_test_test_folm_qt-moc_uritests.o: qt/test/moc_uritests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_uritests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_uritests.o `test -f 'qt/test/moc_uritests.cpp' || echo '$(srcdir)/'`qt/test/moc_uritests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_uritests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_uritests.o `test -f 'qt/test/moc_uritests.cpp' || echo '$(srcdir)/'`qt/test/moc_uritests.cpp
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Po
 #	$(AM_V_CXX)source='qt/test/moc_uritests.cpp' object='qt/test/qt_test_test_folm_qt-moc_uritests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_uritests.o `test -f 'qt/test/moc_uritests.cpp' || echo '$(srcdir)/'`qt/test/moc_uritests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_uritests.o `test -f 'qt/test/moc_uritests.cpp' || echo '$(srcdir)/'`qt/test/moc_uritests.cpp
 
 qt/test/qt_test_test_folm_qt-moc_uritests.obj: qt/test/moc_uritests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_uritests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_uritests.obj `if test -f 'qt/test/moc_uritests.cpp'; then $(CYGPATH_W) 'qt/test/moc_uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_uritests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_uritests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_uritests.obj `if test -f 'qt/test/moc_uritests.cpp'; then $(CYGPATH_W) 'qt/test/moc_uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_uritests.cpp'; fi`
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_uritests.Po
 #	$(AM_V_CXX)source='qt/test/moc_uritests.cpp' object='qt/test/qt_test_test_folm_qt-moc_uritests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_uritests.obj `if test -f 'qt/test/moc_uritests.cpp'; then $(CYGPATH_W) 'qt/test/moc_uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_uritests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_uritests.obj `if test -f 'qt/test/moc_uritests.cpp'; then $(CYGPATH_W) 'qt/test/moc_uritests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_uritests.cpp'; fi`
 
 qt/test/qt_test_test_folm_qt-moc_paymentservertests.o: qt/test/moc_paymentservertests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_paymentservertests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.o `test -f 'qt/test/moc_paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/moc_paymentservertests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_paymentservertests.o -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.o `test -f 'qt/test/moc_paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/moc_paymentservertests.cpp
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Po
 #	$(AM_V_CXX)source='qt/test/moc_paymentservertests.cpp' object='qt/test/qt_test_test_folm_qt-moc_paymentservertests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.o `test -f 'qt/test/moc_paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/moc_paymentservertests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.o `test -f 'qt/test/moc_paymentservertests.cpp' || echo '$(srcdir)/'`qt/test/moc_paymentservertests.cpp
 
 qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj: qt/test/moc_paymentservertests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj `if test -f 'qt/test/moc_paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/moc_paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_paymentservertests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -MT qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj -MD -MP -MF qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Tpo -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj `if test -f 'qt/test/moc_paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/moc_paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_paymentservertests.cpp'; fi`
 	$(AM_V_at)$(am__mv) qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Tpo qt/test/$(DEPDIR)/qt_test_test_folm_qt-moc_paymentservertests.Po
 #	$(AM_V_CXX)source='qt/test/moc_paymentservertests.cpp' object='qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj `if test -f 'qt/test/moc_paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/moc_paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_paymentservertests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(qt_test_test_folm_qt_CPPFLAGS) $(CPPFLAGS) $(qt_test_test_folm_qt_CXXFLAGS) $(CXXFLAGS) -c -o qt/test/qt_test_test_folm_qt-moc_paymentservertests.obj `if test -f 'qt/test/moc_paymentservertests.cpp'; then $(CYGPATH_W) 'qt/test/moc_paymentservertests.cpp'; else $(CYGPATH_W) '$(srcdir)/qt/test/moc_paymentservertests.cpp'; fi`
+
+test/test_test_folm-arith_uint256_tests.o: test/arith_uint256_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-arith_uint256_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-arith_uint256_tests.Tpo -c -o test/test_test_folm-arith_uint256_tests.o `test -f 'test/arith_uint256_tests.cpp' || echo '$(srcdir)/'`test/arith_uint256_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-arith_uint256_tests.Tpo test/$(DEPDIR)/test_test_folm-arith_uint256_tests.Po
+#	$(AM_V_CXX)source='test/arith_uint256_tests.cpp' object='test/test_test_folm-arith_uint256_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-arith_uint256_tests.o `test -f 'test/arith_uint256_tests.cpp' || echo '$(srcdir)/'`test/arith_uint256_tests.cpp
+
+test/test_test_folm-arith_uint256_tests.obj: test/arith_uint256_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-arith_uint256_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-arith_uint256_tests.Tpo -c -o test/test_test_folm-arith_uint256_tests.obj `if test -f 'test/arith_uint256_tests.cpp'; then $(CYGPATH_W) 'test/arith_uint256_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/arith_uint256_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-arith_uint256_tests.Tpo test/$(DEPDIR)/test_test_folm-arith_uint256_tests.Po
+#	$(AM_V_CXX)source='test/arith_uint256_tests.cpp' object='test/test_test_folm-arith_uint256_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-arith_uint256_tests.obj `if test -f 'test/arith_uint256_tests.cpp'; then $(CYGPATH_W) 'test/arith_uint256_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/arith_uint256_tests.cpp'; fi`
+
+test/test_test_folm-addrman_tests.o: test/addrman_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-addrman_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-addrman_tests.Tpo -c -o test/test_test_folm-addrman_tests.o `test -f 'test/addrman_tests.cpp' || echo '$(srcdir)/'`test/addrman_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-addrman_tests.Tpo test/$(DEPDIR)/test_test_folm-addrman_tests.Po
+#	$(AM_V_CXX)source='test/addrman_tests.cpp' object='test/test_test_folm-addrman_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-addrman_tests.o `test -f 'test/addrman_tests.cpp' || echo '$(srcdir)/'`test/addrman_tests.cpp
+
+test/test_test_folm-addrman_tests.obj: test/addrman_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-addrman_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-addrman_tests.Tpo -c -o test/test_test_folm-addrman_tests.obj `if test -f 'test/addrman_tests.cpp'; then $(CYGPATH_W) 'test/addrman_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/addrman_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-addrman_tests.Tpo test/$(DEPDIR)/test_test_folm-addrman_tests.Po
+#	$(AM_V_CXX)source='test/addrman_tests.cpp' object='test/test_test_folm-addrman_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-addrman_tests.obj `if test -f 'test/addrman_tests.cpp'; then $(CYGPATH_W) 'test/addrman_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/addrman_tests.cpp'; fi`
+
+test/test_test_folm-alert_tests.o: test/alert_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-alert_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-alert_tests.Tpo -c -o test/test_test_folm-alert_tests.o `test -f 'test/alert_tests.cpp' || echo '$(srcdir)/'`test/alert_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-alert_tests.Tpo test/$(DEPDIR)/test_test_folm-alert_tests.Po
+#	$(AM_V_CXX)source='test/alert_tests.cpp' object='test/test_test_folm-alert_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-alert_tests.o `test -f 'test/alert_tests.cpp' || echo '$(srcdir)/'`test/alert_tests.cpp
+
+test/test_test_folm-alert_tests.obj: test/alert_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-alert_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-alert_tests.Tpo -c -o test/test_test_folm-alert_tests.obj `if test -f 'test/alert_tests.cpp'; then $(CYGPATH_W) 'test/alert_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/alert_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-alert_tests.Tpo test/$(DEPDIR)/test_test_folm-alert_tests.Po
+#	$(AM_V_CXX)source='test/alert_tests.cpp' object='test/test_test_folm-alert_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-alert_tests.obj `if test -f 'test/alert_tests.cpp'; then $(CYGPATH_W) 'test/alert_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/alert_tests.cpp'; fi`
 
 test/test_test_folm-allocator_tests.o: test/allocator_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-allocator_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-allocator_tests.Tpo -c -o test/test_test_folm-allocator_tests.o `test -f 'test/allocator_tests.cpp' || echo '$(srcdir)/'`test/allocator_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-allocator_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-allocator_tests.Tpo -c -o test/test_test_folm-allocator_tests.o `test -f 'test/allocator_tests.cpp' || echo '$(srcdir)/'`test/allocator_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-allocator_tests.Tpo test/$(DEPDIR)/test_test_folm-allocator_tests.Po
 #	$(AM_V_CXX)source='test/allocator_tests.cpp' object='test/test_test_folm-allocator_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-allocator_tests.o `test -f 'test/allocator_tests.cpp' || echo '$(srcdir)/'`test/allocator_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-allocator_tests.o `test -f 'test/allocator_tests.cpp' || echo '$(srcdir)/'`test/allocator_tests.cpp
 
 test/test_test_folm-allocator_tests.obj: test/allocator_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-allocator_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-allocator_tests.Tpo -c -o test/test_test_folm-allocator_tests.obj `if test -f 'test/allocator_tests.cpp'; then $(CYGPATH_W) 'test/allocator_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/allocator_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-allocator_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-allocator_tests.Tpo -c -o test/test_test_folm-allocator_tests.obj `if test -f 'test/allocator_tests.cpp'; then $(CYGPATH_W) 'test/allocator_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/allocator_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-allocator_tests.Tpo test/$(DEPDIR)/test_test_folm-allocator_tests.Po
 #	$(AM_V_CXX)source='test/allocator_tests.cpp' object='test/test_test_folm-allocator_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-allocator_tests.obj `if test -f 'test/allocator_tests.cpp'; then $(CYGPATH_W) 'test/allocator_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/allocator_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-allocator_tests.obj `if test -f 'test/allocator_tests.cpp'; then $(CYGPATH_W) 'test/allocator_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/allocator_tests.cpp'; fi`
 
 test/test_test_folm-base32_tests.o: test/base32_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base32_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-base32_tests.Tpo -c -o test/test_test_folm-base32_tests.o `test -f 'test/base32_tests.cpp' || echo '$(srcdir)/'`test/base32_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base32_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-base32_tests.Tpo -c -o test/test_test_folm-base32_tests.o `test -f 'test/base32_tests.cpp' || echo '$(srcdir)/'`test/base32_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-base32_tests.Tpo test/$(DEPDIR)/test_test_folm-base32_tests.Po
 #	$(AM_V_CXX)source='test/base32_tests.cpp' object='test/test_test_folm-base32_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base32_tests.o `test -f 'test/base32_tests.cpp' || echo '$(srcdir)/'`test/base32_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base32_tests.o `test -f 'test/base32_tests.cpp' || echo '$(srcdir)/'`test/base32_tests.cpp
 
 test/test_test_folm-base32_tests.obj: test/base32_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base32_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-base32_tests.Tpo -c -o test/test_test_folm-base32_tests.obj `if test -f 'test/base32_tests.cpp'; then $(CYGPATH_W) 'test/base32_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base32_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base32_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-base32_tests.Tpo -c -o test/test_test_folm-base32_tests.obj `if test -f 'test/base32_tests.cpp'; then $(CYGPATH_W) 'test/base32_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base32_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-base32_tests.Tpo test/$(DEPDIR)/test_test_folm-base32_tests.Po
 #	$(AM_V_CXX)source='test/base32_tests.cpp' object='test/test_test_folm-base32_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base32_tests.obj `if test -f 'test/base32_tests.cpp'; then $(CYGPATH_W) 'test/base32_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base32_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base32_tests.obj `if test -f 'test/base32_tests.cpp'; then $(CYGPATH_W) 'test/base32_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base32_tests.cpp'; fi`
 
 test/test_test_folm-base58_tests.o: test/base58_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base58_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-base58_tests.Tpo -c -o test/test_test_folm-base58_tests.o `test -f 'test/base58_tests.cpp' || echo '$(srcdir)/'`test/base58_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base58_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-base58_tests.Tpo -c -o test/test_test_folm-base58_tests.o `test -f 'test/base58_tests.cpp' || echo '$(srcdir)/'`test/base58_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-base58_tests.Tpo test/$(DEPDIR)/test_test_folm-base58_tests.Po
 #	$(AM_V_CXX)source='test/base58_tests.cpp' object='test/test_test_folm-base58_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base58_tests.o `test -f 'test/base58_tests.cpp' || echo '$(srcdir)/'`test/base58_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base58_tests.o `test -f 'test/base58_tests.cpp' || echo '$(srcdir)/'`test/base58_tests.cpp
 
 test/test_test_folm-base58_tests.obj: test/base58_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base58_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-base58_tests.Tpo -c -o test/test_test_folm-base58_tests.obj `if test -f 'test/base58_tests.cpp'; then $(CYGPATH_W) 'test/base58_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base58_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base58_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-base58_tests.Tpo -c -o test/test_test_folm-base58_tests.obj `if test -f 'test/base58_tests.cpp'; then $(CYGPATH_W) 'test/base58_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base58_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-base58_tests.Tpo test/$(DEPDIR)/test_test_folm-base58_tests.Po
 #	$(AM_V_CXX)source='test/base58_tests.cpp' object='test/test_test_folm-base58_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base58_tests.obj `if test -f 'test/base58_tests.cpp'; then $(CYGPATH_W) 'test/base58_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base58_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base58_tests.obj `if test -f 'test/base58_tests.cpp'; then $(CYGPATH_W) 'test/base58_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base58_tests.cpp'; fi`
 
 test/test_test_folm-base64_tests.o: test/base64_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base64_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-base64_tests.Tpo -c -o test/test_test_folm-base64_tests.o `test -f 'test/base64_tests.cpp' || echo '$(srcdir)/'`test/base64_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base64_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-base64_tests.Tpo -c -o test/test_test_folm-base64_tests.o `test -f 'test/base64_tests.cpp' || echo '$(srcdir)/'`test/base64_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-base64_tests.Tpo test/$(DEPDIR)/test_test_folm-base64_tests.Po
 #	$(AM_V_CXX)source='test/base64_tests.cpp' object='test/test_test_folm-base64_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base64_tests.o `test -f 'test/base64_tests.cpp' || echo '$(srcdir)/'`test/base64_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base64_tests.o `test -f 'test/base64_tests.cpp' || echo '$(srcdir)/'`test/base64_tests.cpp
 
 test/test_test_folm-base64_tests.obj: test/base64_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base64_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-base64_tests.Tpo -c -o test/test_test_folm-base64_tests.obj `if test -f 'test/base64_tests.cpp'; then $(CYGPATH_W) 'test/base64_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base64_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-base64_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-base64_tests.Tpo -c -o test/test_test_folm-base64_tests.obj `if test -f 'test/base64_tests.cpp'; then $(CYGPATH_W) 'test/base64_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base64_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-base64_tests.Tpo test/$(DEPDIR)/test_test_folm-base64_tests.Po
 #	$(AM_V_CXX)source='test/base64_tests.cpp' object='test/test_test_folm-base64_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base64_tests.obj `if test -f 'test/base64_tests.cpp'; then $(CYGPATH_W) 'test/base64_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base64_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-base64_tests.obj `if test -f 'test/base64_tests.cpp'; then $(CYGPATH_W) 'test/base64_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/base64_tests.cpp'; fi`
+
+test/test_test_folm-bip32_tests.o: test/bip32_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-bip32_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-bip32_tests.Tpo -c -o test/test_test_folm-bip32_tests.o `test -f 'test/bip32_tests.cpp' || echo '$(srcdir)/'`test/bip32_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-bip32_tests.Tpo test/$(DEPDIR)/test_test_folm-bip32_tests.Po
+#	$(AM_V_CXX)source='test/bip32_tests.cpp' object='test/test_test_folm-bip32_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-bip32_tests.o `test -f 'test/bip32_tests.cpp' || echo '$(srcdir)/'`test/bip32_tests.cpp
+
+test/test_test_folm-bip32_tests.obj: test/bip32_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-bip32_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-bip32_tests.Tpo -c -o test/test_test_folm-bip32_tests.obj `if test -f 'test/bip32_tests.cpp'; then $(CYGPATH_W) 'test/bip32_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/bip32_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-bip32_tests.Tpo test/$(DEPDIR)/test_test_folm-bip32_tests.Po
+#	$(AM_V_CXX)source='test/bip32_tests.cpp' object='test/test_test_folm-bip32_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-bip32_tests.obj `if test -f 'test/bip32_tests.cpp'; then $(CYGPATH_W) 'test/bip32_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/bip32_tests.cpp'; fi`
+
+test/test_test_folm-bloom_tests.o: test/bloom_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-bloom_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-bloom_tests.Tpo -c -o test/test_test_folm-bloom_tests.o `test -f 'test/bloom_tests.cpp' || echo '$(srcdir)/'`test/bloom_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-bloom_tests.Tpo test/$(DEPDIR)/test_test_folm-bloom_tests.Po
+#	$(AM_V_CXX)source='test/bloom_tests.cpp' object='test/test_test_folm-bloom_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-bloom_tests.o `test -f 'test/bloom_tests.cpp' || echo '$(srcdir)/'`test/bloom_tests.cpp
+
+test/test_test_folm-bloom_tests.obj: test/bloom_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-bloom_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-bloom_tests.Tpo -c -o test/test_test_folm-bloom_tests.obj `if test -f 'test/bloom_tests.cpp'; then $(CYGPATH_W) 'test/bloom_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/bloom_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-bloom_tests.Tpo test/$(DEPDIR)/test_test_folm-bloom_tests.Po
+#	$(AM_V_CXX)source='test/bloom_tests.cpp' object='test/test_test_folm-bloom_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-bloom_tests.obj `if test -f 'test/bloom_tests.cpp'; then $(CYGPATH_W) 'test/bloom_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/bloom_tests.cpp'; fi`
 
 test/test_test_folm-checkblock_tests.o: test/checkblock_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-checkblock_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-checkblock_tests.Tpo -c -o test/test_test_folm-checkblock_tests.o `test -f 'test/checkblock_tests.cpp' || echo '$(srcdir)/'`test/checkblock_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-checkblock_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-checkblock_tests.Tpo -c -o test/test_test_folm-checkblock_tests.o `test -f 'test/checkblock_tests.cpp' || echo '$(srcdir)/'`test/checkblock_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-checkblock_tests.Tpo test/$(DEPDIR)/test_test_folm-checkblock_tests.Po
 #	$(AM_V_CXX)source='test/checkblock_tests.cpp' object='test/test_test_folm-checkblock_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-checkblock_tests.o `test -f 'test/checkblock_tests.cpp' || echo '$(srcdir)/'`test/checkblock_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-checkblock_tests.o `test -f 'test/checkblock_tests.cpp' || echo '$(srcdir)/'`test/checkblock_tests.cpp
 
 test/test_test_folm-checkblock_tests.obj: test/checkblock_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-checkblock_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-checkblock_tests.Tpo -c -o test/test_test_folm-checkblock_tests.obj `if test -f 'test/checkblock_tests.cpp'; then $(CYGPATH_W) 'test/checkblock_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/checkblock_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-checkblock_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-checkblock_tests.Tpo -c -o test/test_test_folm-checkblock_tests.obj `if test -f 'test/checkblock_tests.cpp'; then $(CYGPATH_W) 'test/checkblock_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/checkblock_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-checkblock_tests.Tpo test/$(DEPDIR)/test_test_folm-checkblock_tests.Po
 #	$(AM_V_CXX)source='test/checkblock_tests.cpp' object='test/test_test_folm-checkblock_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-checkblock_tests.obj `if test -f 'test/checkblock_tests.cpp'; then $(CYGPATH_W) 'test/checkblock_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/checkblock_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-checkblock_tests.obj `if test -f 'test/checkblock_tests.cpp'; then $(CYGPATH_W) 'test/checkblock_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/checkblock_tests.cpp'; fi`
 
 test/test_test_folm-Checkpoints_tests.o: test/Checkpoints_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-Checkpoints_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Tpo -c -o test/test_test_folm-Checkpoints_tests.o `test -f 'test/Checkpoints_tests.cpp' || echo '$(srcdir)/'`test/Checkpoints_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-Checkpoints_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Tpo -c -o test/test_test_folm-Checkpoints_tests.o `test -f 'test/Checkpoints_tests.cpp' || echo '$(srcdir)/'`test/Checkpoints_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Tpo test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Po
 #	$(AM_V_CXX)source='test/Checkpoints_tests.cpp' object='test/test_test_folm-Checkpoints_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-Checkpoints_tests.o `test -f 'test/Checkpoints_tests.cpp' || echo '$(srcdir)/'`test/Checkpoints_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-Checkpoints_tests.o `test -f 'test/Checkpoints_tests.cpp' || echo '$(srcdir)/'`test/Checkpoints_tests.cpp
 
 test/test_test_folm-Checkpoints_tests.obj: test/Checkpoints_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-Checkpoints_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Tpo -c -o test/test_test_folm-Checkpoints_tests.obj `if test -f 'test/Checkpoints_tests.cpp'; then $(CYGPATH_W) 'test/Checkpoints_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/Checkpoints_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-Checkpoints_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Tpo -c -o test/test_test_folm-Checkpoints_tests.obj `if test -f 'test/Checkpoints_tests.cpp'; then $(CYGPATH_W) 'test/Checkpoints_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/Checkpoints_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Tpo test/$(DEPDIR)/test_test_folm-Checkpoints_tests.Po
 #	$(AM_V_CXX)source='test/Checkpoints_tests.cpp' object='test/test_test_folm-Checkpoints_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-Checkpoints_tests.obj `if test -f 'test/Checkpoints_tests.cpp'; then $(CYGPATH_W) 'test/Checkpoints_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/Checkpoints_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-Checkpoints_tests.obj `if test -f 'test/Checkpoints_tests.cpp'; then $(CYGPATH_W) 'test/Checkpoints_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/Checkpoints_tests.cpp'; fi`
 
 test/test_test_folm-coins_tests.o: test/coins_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-coins_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-coins_tests.Tpo -c -o test/test_test_folm-coins_tests.o `test -f 'test/coins_tests.cpp' || echo '$(srcdir)/'`test/coins_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-coins_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-coins_tests.Tpo -c -o test/test_test_folm-coins_tests.o `test -f 'test/coins_tests.cpp' || echo '$(srcdir)/'`test/coins_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-coins_tests.Tpo test/$(DEPDIR)/test_test_folm-coins_tests.Po
 #	$(AM_V_CXX)source='test/coins_tests.cpp' object='test/test_test_folm-coins_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-coins_tests.o `test -f 'test/coins_tests.cpp' || echo '$(srcdir)/'`test/coins_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-coins_tests.o `test -f 'test/coins_tests.cpp' || echo '$(srcdir)/'`test/coins_tests.cpp
 
 test/test_test_folm-coins_tests.obj: test/coins_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-coins_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-coins_tests.Tpo -c -o test/test_test_folm-coins_tests.obj `if test -f 'test/coins_tests.cpp'; then $(CYGPATH_W) 'test/coins_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/coins_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-coins_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-coins_tests.Tpo -c -o test/test_test_folm-coins_tests.obj `if test -f 'test/coins_tests.cpp'; then $(CYGPATH_W) 'test/coins_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/coins_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-coins_tests.Tpo test/$(DEPDIR)/test_test_folm-coins_tests.Po
 #	$(AM_V_CXX)source='test/coins_tests.cpp' object='test/test_test_folm-coins_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-coins_tests.obj `if test -f 'test/coins_tests.cpp'; then $(CYGPATH_W) 'test/coins_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/coins_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-coins_tests.obj `if test -f 'test/coins_tests.cpp'; then $(CYGPATH_W) 'test/coins_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/coins_tests.cpp'; fi`
 
 test/test_test_folm-compress_tests.o: test/compress_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-compress_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-compress_tests.Tpo -c -o test/test_test_folm-compress_tests.o `test -f 'test/compress_tests.cpp' || echo '$(srcdir)/'`test/compress_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-compress_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-compress_tests.Tpo -c -o test/test_test_folm-compress_tests.o `test -f 'test/compress_tests.cpp' || echo '$(srcdir)/'`test/compress_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-compress_tests.Tpo test/$(DEPDIR)/test_test_folm-compress_tests.Po
 #	$(AM_V_CXX)source='test/compress_tests.cpp' object='test/test_test_folm-compress_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-compress_tests.o `test -f 'test/compress_tests.cpp' || echo '$(srcdir)/'`test/compress_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-compress_tests.o `test -f 'test/compress_tests.cpp' || echo '$(srcdir)/'`test/compress_tests.cpp
 
 test/test_test_folm-compress_tests.obj: test/compress_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-compress_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-compress_tests.Tpo -c -o test/test_test_folm-compress_tests.obj `if test -f 'test/compress_tests.cpp'; then $(CYGPATH_W) 'test/compress_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/compress_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-compress_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-compress_tests.Tpo -c -o test/test_test_folm-compress_tests.obj `if test -f 'test/compress_tests.cpp'; then $(CYGPATH_W) 'test/compress_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/compress_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-compress_tests.Tpo test/$(DEPDIR)/test_test_folm-compress_tests.Po
 #	$(AM_V_CXX)source='test/compress_tests.cpp' object='test/test_test_folm-compress_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-compress_tests.obj `if test -f 'test/compress_tests.cpp'; then $(CYGPATH_W) 'test/compress_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/compress_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-compress_tests.obj `if test -f 'test/compress_tests.cpp'; then $(CYGPATH_W) 'test/compress_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/compress_tests.cpp'; fi`
 
 test/test_test_folm-crypto_tests.o: test/crypto_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-crypto_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-crypto_tests.Tpo -c -o test/test_test_folm-crypto_tests.o `test -f 'test/crypto_tests.cpp' || echo '$(srcdir)/'`test/crypto_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-crypto_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-crypto_tests.Tpo -c -o test/test_test_folm-crypto_tests.o `test -f 'test/crypto_tests.cpp' || echo '$(srcdir)/'`test/crypto_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-crypto_tests.Tpo test/$(DEPDIR)/test_test_folm-crypto_tests.Po
 #	$(AM_V_CXX)source='test/crypto_tests.cpp' object='test/test_test_folm-crypto_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-crypto_tests.o `test -f 'test/crypto_tests.cpp' || echo '$(srcdir)/'`test/crypto_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-crypto_tests.o `test -f 'test/crypto_tests.cpp' || echo '$(srcdir)/'`test/crypto_tests.cpp
 
 test/test_test_folm-crypto_tests.obj: test/crypto_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-crypto_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-crypto_tests.Tpo -c -o test/test_test_folm-crypto_tests.obj `if test -f 'test/crypto_tests.cpp'; then $(CYGPATH_W) 'test/crypto_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/crypto_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-crypto_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-crypto_tests.Tpo -c -o test/test_test_folm-crypto_tests.obj `if test -f 'test/crypto_tests.cpp'; then $(CYGPATH_W) 'test/crypto_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/crypto_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-crypto_tests.Tpo test/$(DEPDIR)/test_test_folm-crypto_tests.Po
 #	$(AM_V_CXX)source='test/crypto_tests.cpp' object='test/test_test_folm-crypto_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-crypto_tests.obj `if test -f 'test/crypto_tests.cpp'; then $(CYGPATH_W) 'test/crypto_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/crypto_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-crypto_tests.obj `if test -f 'test/crypto_tests.cpp'; then $(CYGPATH_W) 'test/crypto_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/crypto_tests.cpp'; fi`
 
 test/test_test_folm-DoS_tests.o: test/DoS_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-DoS_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-DoS_tests.Tpo -c -o test/test_test_folm-DoS_tests.o `test -f 'test/DoS_tests.cpp' || echo '$(srcdir)/'`test/DoS_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-DoS_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-DoS_tests.Tpo -c -o test/test_test_folm-DoS_tests.o `test -f 'test/DoS_tests.cpp' || echo '$(srcdir)/'`test/DoS_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-DoS_tests.Tpo test/$(DEPDIR)/test_test_folm-DoS_tests.Po
 #	$(AM_V_CXX)source='test/DoS_tests.cpp' object='test/test_test_folm-DoS_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-DoS_tests.o `test -f 'test/DoS_tests.cpp' || echo '$(srcdir)/'`test/DoS_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-DoS_tests.o `test -f 'test/DoS_tests.cpp' || echo '$(srcdir)/'`test/DoS_tests.cpp
 
 test/test_test_folm-DoS_tests.obj: test/DoS_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-DoS_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-DoS_tests.Tpo -c -o test/test_test_folm-DoS_tests.obj `if test -f 'test/DoS_tests.cpp'; then $(CYGPATH_W) 'test/DoS_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/DoS_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-DoS_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-DoS_tests.Tpo -c -o test/test_test_folm-DoS_tests.obj `if test -f 'test/DoS_tests.cpp'; then $(CYGPATH_W) 'test/DoS_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/DoS_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-DoS_tests.Tpo test/$(DEPDIR)/test_test_folm-DoS_tests.Po
 #	$(AM_V_CXX)source='test/DoS_tests.cpp' object='test/test_test_folm-DoS_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-DoS_tests.obj `if test -f 'test/DoS_tests.cpp'; then $(CYGPATH_W) 'test/DoS_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/DoS_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-DoS_tests.obj `if test -f 'test/DoS_tests.cpp'; then $(CYGPATH_W) 'test/DoS_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/DoS_tests.cpp'; fi`
 
 test/test_test_folm-getarg_tests.o: test/getarg_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-getarg_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-getarg_tests.Tpo -c -o test/test_test_folm-getarg_tests.o `test -f 'test/getarg_tests.cpp' || echo '$(srcdir)/'`test/getarg_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-getarg_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-getarg_tests.Tpo -c -o test/test_test_folm-getarg_tests.o `test -f 'test/getarg_tests.cpp' || echo '$(srcdir)/'`test/getarg_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-getarg_tests.Tpo test/$(DEPDIR)/test_test_folm-getarg_tests.Po
 #	$(AM_V_CXX)source='test/getarg_tests.cpp' object='test/test_test_folm-getarg_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-getarg_tests.o `test -f 'test/getarg_tests.cpp' || echo '$(srcdir)/'`test/getarg_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-getarg_tests.o `test -f 'test/getarg_tests.cpp' || echo '$(srcdir)/'`test/getarg_tests.cpp
 
 test/test_test_folm-getarg_tests.obj: test/getarg_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-getarg_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-getarg_tests.Tpo -c -o test/test_test_folm-getarg_tests.obj `if test -f 'test/getarg_tests.cpp'; then $(CYGPATH_W) 'test/getarg_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/getarg_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-getarg_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-getarg_tests.Tpo -c -o test/test_test_folm-getarg_tests.obj `if test -f 'test/getarg_tests.cpp'; then $(CYGPATH_W) 'test/getarg_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/getarg_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-getarg_tests.Tpo test/$(DEPDIR)/test_test_folm-getarg_tests.Po
 #	$(AM_V_CXX)source='test/getarg_tests.cpp' object='test/test_test_folm-getarg_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-getarg_tests.obj `if test -f 'test/getarg_tests.cpp'; then $(CYGPATH_W) 'test/getarg_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/getarg_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-getarg_tests.obj `if test -f 'test/getarg_tests.cpp'; then $(CYGPATH_W) 'test/getarg_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/getarg_tests.cpp'; fi`
 
 test/test_test_folm-hash_tests.o: test/hash_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-hash_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-hash_tests.Tpo -c -o test/test_test_folm-hash_tests.o `test -f 'test/hash_tests.cpp' || echo '$(srcdir)/'`test/hash_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-hash_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-hash_tests.Tpo -c -o test/test_test_folm-hash_tests.o `test -f 'test/hash_tests.cpp' || echo '$(srcdir)/'`test/hash_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-hash_tests.Tpo test/$(DEPDIR)/test_test_folm-hash_tests.Po
 #	$(AM_V_CXX)source='test/hash_tests.cpp' object='test/test_test_folm-hash_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-hash_tests.o `test -f 'test/hash_tests.cpp' || echo '$(srcdir)/'`test/hash_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-hash_tests.o `test -f 'test/hash_tests.cpp' || echo '$(srcdir)/'`test/hash_tests.cpp
 
 test/test_test_folm-hash_tests.obj: test/hash_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-hash_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-hash_tests.Tpo -c -o test/test_test_folm-hash_tests.obj `if test -f 'test/hash_tests.cpp'; then $(CYGPATH_W) 'test/hash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/hash_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-hash_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-hash_tests.Tpo -c -o test/test_test_folm-hash_tests.obj `if test -f 'test/hash_tests.cpp'; then $(CYGPATH_W) 'test/hash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/hash_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-hash_tests.Tpo test/$(DEPDIR)/test_test_folm-hash_tests.Po
 #	$(AM_V_CXX)source='test/hash_tests.cpp' object='test/test_test_folm-hash_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-hash_tests.obj `if test -f 'test/hash_tests.cpp'; then $(CYGPATH_W) 'test/hash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/hash_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-hash_tests.obj `if test -f 'test/hash_tests.cpp'; then $(CYGPATH_W) 'test/hash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/hash_tests.cpp'; fi`
 
 test/test_test_folm-key_tests.o: test/key_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-key_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-key_tests.Tpo -c -o test/test_test_folm-key_tests.o `test -f 'test/key_tests.cpp' || echo '$(srcdir)/'`test/key_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-key_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-key_tests.Tpo -c -o test/test_test_folm-key_tests.o `test -f 'test/key_tests.cpp' || echo '$(srcdir)/'`test/key_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-key_tests.Tpo test/$(DEPDIR)/test_test_folm-key_tests.Po
 #	$(AM_V_CXX)source='test/key_tests.cpp' object='test/test_test_folm-key_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-key_tests.o `test -f 'test/key_tests.cpp' || echo '$(srcdir)/'`test/key_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-key_tests.o `test -f 'test/key_tests.cpp' || echo '$(srcdir)/'`test/key_tests.cpp
 
 test/test_test_folm-key_tests.obj: test/key_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-key_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-key_tests.Tpo -c -o test/test_test_folm-key_tests.obj `if test -f 'test/key_tests.cpp'; then $(CYGPATH_W) 'test/key_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/key_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-key_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-key_tests.Tpo -c -o test/test_test_folm-key_tests.obj `if test -f 'test/key_tests.cpp'; then $(CYGPATH_W) 'test/key_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/key_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-key_tests.Tpo test/$(DEPDIR)/test_test_folm-key_tests.Po
 #	$(AM_V_CXX)source='test/key_tests.cpp' object='test/test_test_folm-key_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-key_tests.obj `if test -f 'test/key_tests.cpp'; then $(CYGPATH_W) 'test/key_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/key_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-key_tests.obj `if test -f 'test/key_tests.cpp'; then $(CYGPATH_W) 'test/key_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/key_tests.cpp'; fi`
+
+test/test_test_folm-limitedmap_tests.o: test/limitedmap_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-limitedmap_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-limitedmap_tests.Tpo -c -o test/test_test_folm-limitedmap_tests.o `test -f 'test/limitedmap_tests.cpp' || echo '$(srcdir)/'`test/limitedmap_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-limitedmap_tests.Tpo test/$(DEPDIR)/test_test_folm-limitedmap_tests.Po
+#	$(AM_V_CXX)source='test/limitedmap_tests.cpp' object='test/test_test_folm-limitedmap_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-limitedmap_tests.o `test -f 'test/limitedmap_tests.cpp' || echo '$(srcdir)/'`test/limitedmap_tests.cpp
+
+test/test_test_folm-limitedmap_tests.obj: test/limitedmap_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-limitedmap_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-limitedmap_tests.Tpo -c -o test/test_test_folm-limitedmap_tests.obj `if test -f 'test/limitedmap_tests.cpp'; then $(CYGPATH_W) 'test/limitedmap_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/limitedmap_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-limitedmap_tests.Tpo test/$(DEPDIR)/test_test_folm-limitedmap_tests.Po
+#	$(AM_V_CXX)source='test/limitedmap_tests.cpp' object='test/test_test_folm-limitedmap_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-limitedmap_tests.obj `if test -f 'test/limitedmap_tests.cpp'; then $(CYGPATH_W) 'test/limitedmap_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/limitedmap_tests.cpp'; fi`
+
+test/test_test_folm-dbwrapper_tests.o: test/dbwrapper_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-dbwrapper_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-dbwrapper_tests.Tpo -c -o test/test_test_folm-dbwrapper_tests.o `test -f 'test/dbwrapper_tests.cpp' || echo '$(srcdir)/'`test/dbwrapper_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-dbwrapper_tests.Tpo test/$(DEPDIR)/test_test_folm-dbwrapper_tests.Po
+#	$(AM_V_CXX)source='test/dbwrapper_tests.cpp' object='test/test_test_folm-dbwrapper_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-dbwrapper_tests.o `test -f 'test/dbwrapper_tests.cpp' || echo '$(srcdir)/'`test/dbwrapper_tests.cpp
+
+test/test_test_folm-dbwrapper_tests.obj: test/dbwrapper_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-dbwrapper_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-dbwrapper_tests.Tpo -c -o test/test_test_folm-dbwrapper_tests.obj `if test -f 'test/dbwrapper_tests.cpp'; then $(CYGPATH_W) 'test/dbwrapper_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/dbwrapper_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-dbwrapper_tests.Tpo test/$(DEPDIR)/test_test_folm-dbwrapper_tests.Po
+#	$(AM_V_CXX)source='test/dbwrapper_tests.cpp' object='test/test_test_folm-dbwrapper_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-dbwrapper_tests.obj `if test -f 'test/dbwrapper_tests.cpp'; then $(CYGPATH_W) 'test/dbwrapper_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/dbwrapper_tests.cpp'; fi`
 
 test/test_test_folm-main_tests.o: test/main_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-main_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-main_tests.Tpo -c -o test/test_test_folm-main_tests.o `test -f 'test/main_tests.cpp' || echo '$(srcdir)/'`test/main_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-main_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-main_tests.Tpo -c -o test/test_test_folm-main_tests.o `test -f 'test/main_tests.cpp' || echo '$(srcdir)/'`test/main_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-main_tests.Tpo test/$(DEPDIR)/test_test_folm-main_tests.Po
 #	$(AM_V_CXX)source='test/main_tests.cpp' object='test/test_test_folm-main_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-main_tests.o `test -f 'test/main_tests.cpp' || echo '$(srcdir)/'`test/main_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-main_tests.o `test -f 'test/main_tests.cpp' || echo '$(srcdir)/'`test/main_tests.cpp
 
 test/test_test_folm-main_tests.obj: test/main_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-main_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-main_tests.Tpo -c -o test/test_test_folm-main_tests.obj `if test -f 'test/main_tests.cpp'; then $(CYGPATH_W) 'test/main_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-main_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-main_tests.Tpo -c -o test/test_test_folm-main_tests.obj `if test -f 'test/main_tests.cpp'; then $(CYGPATH_W) 'test/main_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-main_tests.Tpo test/$(DEPDIR)/test_test_folm-main_tests.Po
 #	$(AM_V_CXX)source='test/main_tests.cpp' object='test/test_test_folm-main_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-main_tests.obj `if test -f 'test/main_tests.cpp'; then $(CYGPATH_W) 'test/main_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-main_tests.obj `if test -f 'test/main_tests.cpp'; then $(CYGPATH_W) 'test/main_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/main_tests.cpp'; fi`
 
 test/test_test_folm-mempool_tests.o: test/mempool_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-mempool_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-mempool_tests.Tpo -c -o test/test_test_folm-mempool_tests.o `test -f 'test/mempool_tests.cpp' || echo '$(srcdir)/'`test/mempool_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-mempool_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-mempool_tests.Tpo -c -o test/test_test_folm-mempool_tests.o `test -f 'test/mempool_tests.cpp' || echo '$(srcdir)/'`test/mempool_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-mempool_tests.Tpo test/$(DEPDIR)/test_test_folm-mempool_tests.Po
 #	$(AM_V_CXX)source='test/mempool_tests.cpp' object='test/test_test_folm-mempool_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-mempool_tests.o `test -f 'test/mempool_tests.cpp' || echo '$(srcdir)/'`test/mempool_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-mempool_tests.o `test -f 'test/mempool_tests.cpp' || echo '$(srcdir)/'`test/mempool_tests.cpp
 
 test/test_test_folm-mempool_tests.obj: test/mempool_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-mempool_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-mempool_tests.Tpo -c -o test/test_test_folm-mempool_tests.obj `if test -f 'test/mempool_tests.cpp'; then $(CYGPATH_W) 'test/mempool_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/mempool_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-mempool_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-mempool_tests.Tpo -c -o test/test_test_folm-mempool_tests.obj `if test -f 'test/mempool_tests.cpp'; then $(CYGPATH_W) 'test/mempool_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/mempool_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-mempool_tests.Tpo test/$(DEPDIR)/test_test_folm-mempool_tests.Po
 #	$(AM_V_CXX)source='test/mempool_tests.cpp' object='test/test_test_folm-mempool_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-mempool_tests.obj `if test -f 'test/mempool_tests.cpp'; then $(CYGPATH_W) 'test/mempool_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/mempool_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-mempool_tests.obj `if test -f 'test/mempool_tests.cpp'; then $(CYGPATH_W) 'test/mempool_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/mempool_tests.cpp'; fi`
 
-test/test_test_folm-mruset_tests.o: test/mruset_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-mruset_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-mruset_tests.Tpo -c -o test/test_test_folm-mruset_tests.o `test -f 'test/mruset_tests.cpp' || echo '$(srcdir)/'`test/mruset_tests.cpp
-	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-mruset_tests.Tpo test/$(DEPDIR)/test_test_folm-mruset_tests.Po
-#	$(AM_V_CXX)source='test/mruset_tests.cpp' object='test/test_test_folm-mruset_tests.o' libtool=no \
+test/test_test_folm-merkle_tests.o: test/merkle_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-merkle_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-merkle_tests.Tpo -c -o test/test_test_folm-merkle_tests.o `test -f 'test/merkle_tests.cpp' || echo '$(srcdir)/'`test/merkle_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-merkle_tests.Tpo test/$(DEPDIR)/test_test_folm-merkle_tests.Po
+#	$(AM_V_CXX)source='test/merkle_tests.cpp' object='test/test_test_folm-merkle_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-mruset_tests.o `test -f 'test/mruset_tests.cpp' || echo '$(srcdir)/'`test/mruset_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-merkle_tests.o `test -f 'test/merkle_tests.cpp' || echo '$(srcdir)/'`test/merkle_tests.cpp
 
-test/test_test_folm-mruset_tests.obj: test/mruset_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-mruset_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-mruset_tests.Tpo -c -o test/test_test_folm-mruset_tests.obj `if test -f 'test/mruset_tests.cpp'; then $(CYGPATH_W) 'test/mruset_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/mruset_tests.cpp'; fi`
-	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-mruset_tests.Tpo test/$(DEPDIR)/test_test_folm-mruset_tests.Po
-#	$(AM_V_CXX)source='test/mruset_tests.cpp' object='test/test_test_folm-mruset_tests.obj' libtool=no \
+test/test_test_folm-merkle_tests.obj: test/merkle_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-merkle_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-merkle_tests.Tpo -c -o test/test_test_folm-merkle_tests.obj `if test -f 'test/merkle_tests.cpp'; then $(CYGPATH_W) 'test/merkle_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/merkle_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-merkle_tests.Tpo test/$(DEPDIR)/test_test_folm-merkle_tests.Po
+#	$(AM_V_CXX)source='test/merkle_tests.cpp' object='test/test_test_folm-merkle_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-mruset_tests.obj `if test -f 'test/mruset_tests.cpp'; then $(CYGPATH_W) 'test/mruset_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/mruset_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-merkle_tests.obj `if test -f 'test/merkle_tests.cpp'; then $(CYGPATH_W) 'test/merkle_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/merkle_tests.cpp'; fi`
+
+test/test_test_folm-miner_tests.o: test/miner_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-miner_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-miner_tests.Tpo -c -o test/test_test_folm-miner_tests.o `test -f 'test/miner_tests.cpp' || echo '$(srcdir)/'`test/miner_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-miner_tests.Tpo test/$(DEPDIR)/test_test_folm-miner_tests.Po
+#	$(AM_V_CXX)source='test/miner_tests.cpp' object='test/test_test_folm-miner_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-miner_tests.o `test -f 'test/miner_tests.cpp' || echo '$(srcdir)/'`test/miner_tests.cpp
+
+test/test_test_folm-miner_tests.obj: test/miner_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-miner_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-miner_tests.Tpo -c -o test/test_test_folm-miner_tests.obj `if test -f 'test/miner_tests.cpp'; then $(CYGPATH_W) 'test/miner_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/miner_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-miner_tests.Tpo test/$(DEPDIR)/test_test_folm-miner_tests.Po
+#	$(AM_V_CXX)source='test/miner_tests.cpp' object='test/test_test_folm-miner_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-miner_tests.obj `if test -f 'test/miner_tests.cpp'; then $(CYGPATH_W) 'test/miner_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/miner_tests.cpp'; fi`
 
 test/test_test_folm-multisig_tests.o: test/multisig_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-multisig_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-multisig_tests.Tpo -c -o test/test_test_folm-multisig_tests.o `test -f 'test/multisig_tests.cpp' || echo '$(srcdir)/'`test/multisig_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-multisig_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-multisig_tests.Tpo -c -o test/test_test_folm-multisig_tests.o `test -f 'test/multisig_tests.cpp' || echo '$(srcdir)/'`test/multisig_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-multisig_tests.Tpo test/$(DEPDIR)/test_test_folm-multisig_tests.Po
 #	$(AM_V_CXX)source='test/multisig_tests.cpp' object='test/test_test_folm-multisig_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-multisig_tests.o `test -f 'test/multisig_tests.cpp' || echo '$(srcdir)/'`test/multisig_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-multisig_tests.o `test -f 'test/multisig_tests.cpp' || echo '$(srcdir)/'`test/multisig_tests.cpp
 
 test/test_test_folm-multisig_tests.obj: test/multisig_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-multisig_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-multisig_tests.Tpo -c -o test/test_test_folm-multisig_tests.obj `if test -f 'test/multisig_tests.cpp'; then $(CYGPATH_W) 'test/multisig_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/multisig_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-multisig_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-multisig_tests.Tpo -c -o test/test_test_folm-multisig_tests.obj `if test -f 'test/multisig_tests.cpp'; then $(CYGPATH_W) 'test/multisig_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/multisig_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-multisig_tests.Tpo test/$(DEPDIR)/test_test_folm-multisig_tests.Po
 #	$(AM_V_CXX)source='test/multisig_tests.cpp' object='test/test_test_folm-multisig_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-multisig_tests.obj `if test -f 'test/multisig_tests.cpp'; then $(CYGPATH_W) 'test/multisig_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/multisig_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-multisig_tests.obj `if test -f 'test/multisig_tests.cpp'; then $(CYGPATH_W) 'test/multisig_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/multisig_tests.cpp'; fi`
 
 test/test_test_folm-netbase_tests.o: test/netbase_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-netbase_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-netbase_tests.Tpo -c -o test/test_test_folm-netbase_tests.o `test -f 'test/netbase_tests.cpp' || echo '$(srcdir)/'`test/netbase_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-netbase_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-netbase_tests.Tpo -c -o test/test_test_folm-netbase_tests.o `test -f 'test/netbase_tests.cpp' || echo '$(srcdir)/'`test/netbase_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-netbase_tests.Tpo test/$(DEPDIR)/test_test_folm-netbase_tests.Po
 #	$(AM_V_CXX)source='test/netbase_tests.cpp' object='test/test_test_folm-netbase_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-netbase_tests.o `test -f 'test/netbase_tests.cpp' || echo '$(srcdir)/'`test/netbase_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-netbase_tests.o `test -f 'test/netbase_tests.cpp' || echo '$(srcdir)/'`test/netbase_tests.cpp
 
 test/test_test_folm-netbase_tests.obj: test/netbase_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-netbase_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-netbase_tests.Tpo -c -o test/test_test_folm-netbase_tests.obj `if test -f 'test/netbase_tests.cpp'; then $(CYGPATH_W) 'test/netbase_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/netbase_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-netbase_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-netbase_tests.Tpo -c -o test/test_test_folm-netbase_tests.obj `if test -f 'test/netbase_tests.cpp'; then $(CYGPATH_W) 'test/netbase_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/netbase_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-netbase_tests.Tpo test/$(DEPDIR)/test_test_folm-netbase_tests.Po
 #	$(AM_V_CXX)source='test/netbase_tests.cpp' object='test/test_test_folm-netbase_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-netbase_tests.obj `if test -f 'test/netbase_tests.cpp'; then $(CYGPATH_W) 'test/netbase_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/netbase_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-netbase_tests.obj `if test -f 'test/netbase_tests.cpp'; then $(CYGPATH_W) 'test/netbase_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/netbase_tests.cpp'; fi`
 
 test/test_test_folm-pmt_tests.o: test/pmt_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-pmt_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-pmt_tests.Tpo -c -o test/test_test_folm-pmt_tests.o `test -f 'test/pmt_tests.cpp' || echo '$(srcdir)/'`test/pmt_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-pmt_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-pmt_tests.Tpo -c -o test/test_test_folm-pmt_tests.o `test -f 'test/pmt_tests.cpp' || echo '$(srcdir)/'`test/pmt_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-pmt_tests.Tpo test/$(DEPDIR)/test_test_folm-pmt_tests.Po
 #	$(AM_V_CXX)source='test/pmt_tests.cpp' object='test/test_test_folm-pmt_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-pmt_tests.o `test -f 'test/pmt_tests.cpp' || echo '$(srcdir)/'`test/pmt_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-pmt_tests.o `test -f 'test/pmt_tests.cpp' || echo '$(srcdir)/'`test/pmt_tests.cpp
 
 test/test_test_folm-pmt_tests.obj: test/pmt_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-pmt_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-pmt_tests.Tpo -c -o test/test_test_folm-pmt_tests.obj `if test -f 'test/pmt_tests.cpp'; then $(CYGPATH_W) 'test/pmt_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/pmt_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-pmt_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-pmt_tests.Tpo -c -o test/test_test_folm-pmt_tests.obj `if test -f 'test/pmt_tests.cpp'; then $(CYGPATH_W) 'test/pmt_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/pmt_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-pmt_tests.Tpo test/$(DEPDIR)/test_test_folm-pmt_tests.Po
 #	$(AM_V_CXX)source='test/pmt_tests.cpp' object='test/test_test_folm-pmt_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-pmt_tests.obj `if test -f 'test/pmt_tests.cpp'; then $(CYGPATH_W) 'test/pmt_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/pmt_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-pmt_tests.obj `if test -f 'test/pmt_tests.cpp'; then $(CYGPATH_W) 'test/pmt_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/pmt_tests.cpp'; fi`
+
+test/test_test_folm-policyestimator_tests.o: test/policyestimator_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-policyestimator_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-policyestimator_tests.Tpo -c -o test/test_test_folm-policyestimator_tests.o `test -f 'test/policyestimator_tests.cpp' || echo '$(srcdir)/'`test/policyestimator_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-policyestimator_tests.Tpo test/$(DEPDIR)/test_test_folm-policyestimator_tests.Po
+#	$(AM_V_CXX)source='test/policyestimator_tests.cpp' object='test/test_test_folm-policyestimator_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-policyestimator_tests.o `test -f 'test/policyestimator_tests.cpp' || echo '$(srcdir)/'`test/policyestimator_tests.cpp
+
+test/test_test_folm-policyestimator_tests.obj: test/policyestimator_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-policyestimator_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-policyestimator_tests.Tpo -c -o test/test_test_folm-policyestimator_tests.obj `if test -f 'test/policyestimator_tests.cpp'; then $(CYGPATH_W) 'test/policyestimator_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/policyestimator_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-policyestimator_tests.Tpo test/$(DEPDIR)/test_test_folm-policyestimator_tests.Po
+#	$(AM_V_CXX)source='test/policyestimator_tests.cpp' object='test/test_test_folm-policyestimator_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-policyestimator_tests.obj `if test -f 'test/policyestimator_tests.cpp'; then $(CYGPATH_W) 'test/policyestimator_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/policyestimator_tests.cpp'; fi`
+
+test/test_test_folm-pow_tests.o: test/pow_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-pow_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-pow_tests.Tpo -c -o test/test_test_folm-pow_tests.o `test -f 'test/pow_tests.cpp' || echo '$(srcdir)/'`test/pow_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-pow_tests.Tpo test/$(DEPDIR)/test_test_folm-pow_tests.Po
+#	$(AM_V_CXX)source='test/pow_tests.cpp' object='test/test_test_folm-pow_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-pow_tests.o `test -f 'test/pow_tests.cpp' || echo '$(srcdir)/'`test/pow_tests.cpp
+
+test/test_test_folm-pow_tests.obj: test/pow_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-pow_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-pow_tests.Tpo -c -o test/test_test_folm-pow_tests.obj `if test -f 'test/pow_tests.cpp'; then $(CYGPATH_W) 'test/pow_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/pow_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-pow_tests.Tpo test/$(DEPDIR)/test_test_folm-pow_tests.Po
+#	$(AM_V_CXX)source='test/pow_tests.cpp' object='test/test_test_folm-pow_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-pow_tests.obj `if test -f 'test/pow_tests.cpp'; then $(CYGPATH_W) 'test/pow_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/pow_tests.cpp'; fi`
+
+test/test_test_folm-prevector_tests.o: test/prevector_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-prevector_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-prevector_tests.Tpo -c -o test/test_test_folm-prevector_tests.o `test -f 'test/prevector_tests.cpp' || echo '$(srcdir)/'`test/prevector_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-prevector_tests.Tpo test/$(DEPDIR)/test_test_folm-prevector_tests.Po
+#	$(AM_V_CXX)source='test/prevector_tests.cpp' object='test/test_test_folm-prevector_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-prevector_tests.o `test -f 'test/prevector_tests.cpp' || echo '$(srcdir)/'`test/prevector_tests.cpp
+
+test/test_test_folm-prevector_tests.obj: test/prevector_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-prevector_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-prevector_tests.Tpo -c -o test/test_test_folm-prevector_tests.obj `if test -f 'test/prevector_tests.cpp'; then $(CYGPATH_W) 'test/prevector_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/prevector_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-prevector_tests.Tpo test/$(DEPDIR)/test_test_folm-prevector_tests.Po
+#	$(AM_V_CXX)source='test/prevector_tests.cpp' object='test/test_test_folm-prevector_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-prevector_tests.obj `if test -f 'test/prevector_tests.cpp'; then $(CYGPATH_W) 'test/prevector_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/prevector_tests.cpp'; fi`
+
+test/test_test_folm-reverselock_tests.o: test/reverselock_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-reverselock_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-reverselock_tests.Tpo -c -o test/test_test_folm-reverselock_tests.o `test -f 'test/reverselock_tests.cpp' || echo '$(srcdir)/'`test/reverselock_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-reverselock_tests.Tpo test/$(DEPDIR)/test_test_folm-reverselock_tests.Po
+#	$(AM_V_CXX)source='test/reverselock_tests.cpp' object='test/test_test_folm-reverselock_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-reverselock_tests.o `test -f 'test/reverselock_tests.cpp' || echo '$(srcdir)/'`test/reverselock_tests.cpp
+
+test/test_test_folm-reverselock_tests.obj: test/reverselock_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-reverselock_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-reverselock_tests.Tpo -c -o test/test_test_folm-reverselock_tests.obj `if test -f 'test/reverselock_tests.cpp'; then $(CYGPATH_W) 'test/reverselock_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/reverselock_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-reverselock_tests.Tpo test/$(DEPDIR)/test_test_folm-reverselock_tests.Po
+#	$(AM_V_CXX)source='test/reverselock_tests.cpp' object='test/test_test_folm-reverselock_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-reverselock_tests.obj `if test -f 'test/reverselock_tests.cpp'; then $(CYGPATH_W) 'test/reverselock_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/reverselock_tests.cpp'; fi`
 
 test/test_test_folm-rpc_tests.o: test/rpc_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_tests.Tpo -c -o test/test_test_folm-rpc_tests.o `test -f 'test/rpc_tests.cpp' || echo '$(srcdir)/'`test/rpc_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_tests.Tpo -c -o test/test_test_folm-rpc_tests.o `test -f 'test/rpc_tests.cpp' || echo '$(srcdir)/'`test/rpc_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-rpc_tests.Tpo test/$(DEPDIR)/test_test_folm-rpc_tests.Po
 #	$(AM_V_CXX)source='test/rpc_tests.cpp' object='test/test_test_folm-rpc_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_tests.o `test -f 'test/rpc_tests.cpp' || echo '$(srcdir)/'`test/rpc_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_tests.o `test -f 'test/rpc_tests.cpp' || echo '$(srcdir)/'`test/rpc_tests.cpp
 
 test/test_test_folm-rpc_tests.obj: test/rpc_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_tests.Tpo -c -o test/test_test_folm-rpc_tests.obj `if test -f 'test/rpc_tests.cpp'; then $(CYGPATH_W) 'test/rpc_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_tests.Tpo -c -o test/test_test_folm-rpc_tests.obj `if test -f 'test/rpc_tests.cpp'; then $(CYGPATH_W) 'test/rpc_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-rpc_tests.Tpo test/$(DEPDIR)/test_test_folm-rpc_tests.Po
 #	$(AM_V_CXX)source='test/rpc_tests.cpp' object='test/test_test_folm-rpc_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_tests.obj `if test -f 'test/rpc_tests.cpp'; then $(CYGPATH_W) 'test/rpc_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_tests.obj `if test -f 'test/rpc_tests.cpp'; then $(CYGPATH_W) 'test/rpc_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_tests.cpp'; fi`
 
 test/test_test_folm-sanity_tests.o: test/sanity_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sanity_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-sanity_tests.Tpo -c -o test/test_test_folm-sanity_tests.o `test -f 'test/sanity_tests.cpp' || echo '$(srcdir)/'`test/sanity_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sanity_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-sanity_tests.Tpo -c -o test/test_test_folm-sanity_tests.o `test -f 'test/sanity_tests.cpp' || echo '$(srcdir)/'`test/sanity_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-sanity_tests.Tpo test/$(DEPDIR)/test_test_folm-sanity_tests.Po
 #	$(AM_V_CXX)source='test/sanity_tests.cpp' object='test/test_test_folm-sanity_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sanity_tests.o `test -f 'test/sanity_tests.cpp' || echo '$(srcdir)/'`test/sanity_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sanity_tests.o `test -f 'test/sanity_tests.cpp' || echo '$(srcdir)/'`test/sanity_tests.cpp
 
 test/test_test_folm-sanity_tests.obj: test/sanity_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sanity_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-sanity_tests.Tpo -c -o test/test_test_folm-sanity_tests.obj `if test -f 'test/sanity_tests.cpp'; then $(CYGPATH_W) 'test/sanity_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sanity_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sanity_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-sanity_tests.Tpo -c -o test/test_test_folm-sanity_tests.obj `if test -f 'test/sanity_tests.cpp'; then $(CYGPATH_W) 'test/sanity_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sanity_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-sanity_tests.Tpo test/$(DEPDIR)/test_test_folm-sanity_tests.Po
 #	$(AM_V_CXX)source='test/sanity_tests.cpp' object='test/test_test_folm-sanity_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sanity_tests.obj `if test -f 'test/sanity_tests.cpp'; then $(CYGPATH_W) 'test/sanity_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sanity_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sanity_tests.obj `if test -f 'test/sanity_tests.cpp'; then $(CYGPATH_W) 'test/sanity_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sanity_tests.cpp'; fi`
+
+test/test_test_folm-scheduler_tests.o: test/scheduler_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-scheduler_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-scheduler_tests.Tpo -c -o test/test_test_folm-scheduler_tests.o `test -f 'test/scheduler_tests.cpp' || echo '$(srcdir)/'`test/scheduler_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-scheduler_tests.Tpo test/$(DEPDIR)/test_test_folm-scheduler_tests.Po
+#	$(AM_V_CXX)source='test/scheduler_tests.cpp' object='test/test_test_folm-scheduler_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-scheduler_tests.o `test -f 'test/scheduler_tests.cpp' || echo '$(srcdir)/'`test/scheduler_tests.cpp
+
+test/test_test_folm-scheduler_tests.obj: test/scheduler_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-scheduler_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-scheduler_tests.Tpo -c -o test/test_test_folm-scheduler_tests.obj `if test -f 'test/scheduler_tests.cpp'; then $(CYGPATH_W) 'test/scheduler_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/scheduler_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-scheduler_tests.Tpo test/$(DEPDIR)/test_test_folm-scheduler_tests.Po
+#	$(AM_V_CXX)source='test/scheduler_tests.cpp' object='test/test_test_folm-scheduler_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-scheduler_tests.obj `if test -f 'test/scheduler_tests.cpp'; then $(CYGPATH_W) 'test/scheduler_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/scheduler_tests.cpp'; fi`
 
 test/test_test_folm-script_P2SH_tests.o: test/script_P2SH_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_P2SH_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Tpo -c -o test/test_test_folm-script_P2SH_tests.o `test -f 'test/script_P2SH_tests.cpp' || echo '$(srcdir)/'`test/script_P2SH_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_P2SH_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Tpo -c -o test/test_test_folm-script_P2SH_tests.o `test -f 'test/script_P2SH_tests.cpp' || echo '$(srcdir)/'`test/script_P2SH_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Tpo test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Po
 #	$(AM_V_CXX)source='test/script_P2SH_tests.cpp' object='test/test_test_folm-script_P2SH_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_P2SH_tests.o `test -f 'test/script_P2SH_tests.cpp' || echo '$(srcdir)/'`test/script_P2SH_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_P2SH_tests.o `test -f 'test/script_P2SH_tests.cpp' || echo '$(srcdir)/'`test/script_P2SH_tests.cpp
 
 test/test_test_folm-script_P2SH_tests.obj: test/script_P2SH_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_P2SH_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Tpo -c -o test/test_test_folm-script_P2SH_tests.obj `if test -f 'test/script_P2SH_tests.cpp'; then $(CYGPATH_W) 'test/script_P2SH_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_P2SH_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_P2SH_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Tpo -c -o test/test_test_folm-script_P2SH_tests.obj `if test -f 'test/script_P2SH_tests.cpp'; then $(CYGPATH_W) 'test/script_P2SH_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_P2SH_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Tpo test/$(DEPDIR)/test_test_folm-script_P2SH_tests.Po
 #	$(AM_V_CXX)source='test/script_P2SH_tests.cpp' object='test/test_test_folm-script_P2SH_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_P2SH_tests.obj `if test -f 'test/script_P2SH_tests.cpp'; then $(CYGPATH_W) 'test/script_P2SH_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_P2SH_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_P2SH_tests.obj `if test -f 'test/script_P2SH_tests.cpp'; then $(CYGPATH_W) 'test/script_P2SH_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_P2SH_tests.cpp'; fi`
 
 test/test_test_folm-script_tests.o: test/script_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_tests.Tpo -c -o test/test_test_folm-script_tests.o `test -f 'test/script_tests.cpp' || echo '$(srcdir)/'`test/script_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_tests.Tpo -c -o test/test_test_folm-script_tests.o `test -f 'test/script_tests.cpp' || echo '$(srcdir)/'`test/script_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-script_tests.Tpo test/$(DEPDIR)/test_test_folm-script_tests.Po
 #	$(AM_V_CXX)source='test/script_tests.cpp' object='test/test_test_folm-script_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_tests.o `test -f 'test/script_tests.cpp' || echo '$(srcdir)/'`test/script_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_tests.o `test -f 'test/script_tests.cpp' || echo '$(srcdir)/'`test/script_tests.cpp
 
 test/test_test_folm-script_tests.obj: test/script_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_tests.Tpo -c -o test/test_test_folm-script_tests.obj `if test -f 'test/script_tests.cpp'; then $(CYGPATH_W) 'test/script_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-script_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-script_tests.Tpo -c -o test/test_test_folm-script_tests.obj `if test -f 'test/script_tests.cpp'; then $(CYGPATH_W) 'test/script_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-script_tests.Tpo test/$(DEPDIR)/test_test_folm-script_tests.Po
 #	$(AM_V_CXX)source='test/script_tests.cpp' object='test/test_test_folm-script_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_tests.obj `if test -f 'test/script_tests.cpp'; then $(CYGPATH_W) 'test/script_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-script_tests.obj `if test -f 'test/script_tests.cpp'; then $(CYGPATH_W) 'test/script_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/script_tests.cpp'; fi`
 
 test/test_test_folm-scriptnum_tests.o: test/scriptnum_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-scriptnum_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-scriptnum_tests.Tpo -c -o test/test_test_folm-scriptnum_tests.o `test -f 'test/scriptnum_tests.cpp' || echo '$(srcdir)/'`test/scriptnum_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-scriptnum_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-scriptnum_tests.Tpo -c -o test/test_test_folm-scriptnum_tests.o `test -f 'test/scriptnum_tests.cpp' || echo '$(srcdir)/'`test/scriptnum_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-scriptnum_tests.Tpo test/$(DEPDIR)/test_test_folm-scriptnum_tests.Po
 #	$(AM_V_CXX)source='test/scriptnum_tests.cpp' object='test/test_test_folm-scriptnum_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-scriptnum_tests.o `test -f 'test/scriptnum_tests.cpp' || echo '$(srcdir)/'`test/scriptnum_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-scriptnum_tests.o `test -f 'test/scriptnum_tests.cpp' || echo '$(srcdir)/'`test/scriptnum_tests.cpp
 
 test/test_test_folm-scriptnum_tests.obj: test/scriptnum_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-scriptnum_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-scriptnum_tests.Tpo -c -o test/test_test_folm-scriptnum_tests.obj `if test -f 'test/scriptnum_tests.cpp'; then $(CYGPATH_W) 'test/scriptnum_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/scriptnum_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-scriptnum_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-scriptnum_tests.Tpo -c -o test/test_test_folm-scriptnum_tests.obj `if test -f 'test/scriptnum_tests.cpp'; then $(CYGPATH_W) 'test/scriptnum_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/scriptnum_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-scriptnum_tests.Tpo test/$(DEPDIR)/test_test_folm-scriptnum_tests.Po
 #	$(AM_V_CXX)source='test/scriptnum_tests.cpp' object='test/test_test_folm-scriptnum_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-scriptnum_tests.obj `if test -f 'test/scriptnum_tests.cpp'; then $(CYGPATH_W) 'test/scriptnum_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/scriptnum_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-scriptnum_tests.obj `if test -f 'test/scriptnum_tests.cpp'; then $(CYGPATH_W) 'test/scriptnum_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/scriptnum_tests.cpp'; fi`
 
 test/test_test_folm-serialize_tests.o: test/serialize_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-serialize_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-serialize_tests.Tpo -c -o test/test_test_folm-serialize_tests.o `test -f 'test/serialize_tests.cpp' || echo '$(srcdir)/'`test/serialize_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-serialize_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-serialize_tests.Tpo -c -o test/test_test_folm-serialize_tests.o `test -f 'test/serialize_tests.cpp' || echo '$(srcdir)/'`test/serialize_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-serialize_tests.Tpo test/$(DEPDIR)/test_test_folm-serialize_tests.Po
 #	$(AM_V_CXX)source='test/serialize_tests.cpp' object='test/test_test_folm-serialize_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-serialize_tests.o `test -f 'test/serialize_tests.cpp' || echo '$(srcdir)/'`test/serialize_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-serialize_tests.o `test -f 'test/serialize_tests.cpp' || echo '$(srcdir)/'`test/serialize_tests.cpp
 
 test/test_test_folm-serialize_tests.obj: test/serialize_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-serialize_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-serialize_tests.Tpo -c -o test/test_test_folm-serialize_tests.obj `if test -f 'test/serialize_tests.cpp'; then $(CYGPATH_W) 'test/serialize_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/serialize_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-serialize_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-serialize_tests.Tpo -c -o test/test_test_folm-serialize_tests.obj `if test -f 'test/serialize_tests.cpp'; then $(CYGPATH_W) 'test/serialize_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/serialize_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-serialize_tests.Tpo test/$(DEPDIR)/test_test_folm-serialize_tests.Po
 #	$(AM_V_CXX)source='test/serialize_tests.cpp' object='test/test_test_folm-serialize_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-serialize_tests.obj `if test -f 'test/serialize_tests.cpp'; then $(CYGPATH_W) 'test/serialize_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/serialize_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-serialize_tests.obj `if test -f 'test/serialize_tests.cpp'; then $(CYGPATH_W) 'test/serialize_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/serialize_tests.cpp'; fi`
 
 test/test_test_folm-sighash_tests.o: test/sighash_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sighash_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-sighash_tests.Tpo -c -o test/test_test_folm-sighash_tests.o `test -f 'test/sighash_tests.cpp' || echo '$(srcdir)/'`test/sighash_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sighash_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-sighash_tests.Tpo -c -o test/test_test_folm-sighash_tests.o `test -f 'test/sighash_tests.cpp' || echo '$(srcdir)/'`test/sighash_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-sighash_tests.Tpo test/$(DEPDIR)/test_test_folm-sighash_tests.Po
 #	$(AM_V_CXX)source='test/sighash_tests.cpp' object='test/test_test_folm-sighash_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sighash_tests.o `test -f 'test/sighash_tests.cpp' || echo '$(srcdir)/'`test/sighash_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sighash_tests.o `test -f 'test/sighash_tests.cpp' || echo '$(srcdir)/'`test/sighash_tests.cpp
 
 test/test_test_folm-sighash_tests.obj: test/sighash_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sighash_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-sighash_tests.Tpo -c -o test/test_test_folm-sighash_tests.obj `if test -f 'test/sighash_tests.cpp'; then $(CYGPATH_W) 'test/sighash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sighash_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sighash_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-sighash_tests.Tpo -c -o test/test_test_folm-sighash_tests.obj `if test -f 'test/sighash_tests.cpp'; then $(CYGPATH_W) 'test/sighash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sighash_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-sighash_tests.Tpo test/$(DEPDIR)/test_test_folm-sighash_tests.Po
 #	$(AM_V_CXX)source='test/sighash_tests.cpp' object='test/test_test_folm-sighash_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sighash_tests.obj `if test -f 'test/sighash_tests.cpp'; then $(CYGPATH_W) 'test/sighash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sighash_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sighash_tests.obj `if test -f 'test/sighash_tests.cpp'; then $(CYGPATH_W) 'test/sighash_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sighash_tests.cpp'; fi`
 
 test/test_test_folm-sigopcount_tests.o: test/sigopcount_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sigopcount_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-sigopcount_tests.Tpo -c -o test/test_test_folm-sigopcount_tests.o `test -f 'test/sigopcount_tests.cpp' || echo '$(srcdir)/'`test/sigopcount_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sigopcount_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-sigopcount_tests.Tpo -c -o test/test_test_folm-sigopcount_tests.o `test -f 'test/sigopcount_tests.cpp' || echo '$(srcdir)/'`test/sigopcount_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-sigopcount_tests.Tpo test/$(DEPDIR)/test_test_folm-sigopcount_tests.Po
 #	$(AM_V_CXX)source='test/sigopcount_tests.cpp' object='test/test_test_folm-sigopcount_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sigopcount_tests.o `test -f 'test/sigopcount_tests.cpp' || echo '$(srcdir)/'`test/sigopcount_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sigopcount_tests.o `test -f 'test/sigopcount_tests.cpp' || echo '$(srcdir)/'`test/sigopcount_tests.cpp
 
 test/test_test_folm-sigopcount_tests.obj: test/sigopcount_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sigopcount_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-sigopcount_tests.Tpo -c -o test/test_test_folm-sigopcount_tests.obj `if test -f 'test/sigopcount_tests.cpp'; then $(CYGPATH_W) 'test/sigopcount_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sigopcount_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-sigopcount_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-sigopcount_tests.Tpo -c -o test/test_test_folm-sigopcount_tests.obj `if test -f 'test/sigopcount_tests.cpp'; then $(CYGPATH_W) 'test/sigopcount_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sigopcount_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-sigopcount_tests.Tpo test/$(DEPDIR)/test_test_folm-sigopcount_tests.Po
 #	$(AM_V_CXX)source='test/sigopcount_tests.cpp' object='test/test_test_folm-sigopcount_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sigopcount_tests.obj `if test -f 'test/sigopcount_tests.cpp'; then $(CYGPATH_W) 'test/sigopcount_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sigopcount_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-sigopcount_tests.obj `if test -f 'test/sigopcount_tests.cpp'; then $(CYGPATH_W) 'test/sigopcount_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/sigopcount_tests.cpp'; fi`
 
 test/test_test_folm-skiplist_tests.o: test/skiplist_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-skiplist_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-skiplist_tests.Tpo -c -o test/test_test_folm-skiplist_tests.o `test -f 'test/skiplist_tests.cpp' || echo '$(srcdir)/'`test/skiplist_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-skiplist_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-skiplist_tests.Tpo -c -o test/test_test_folm-skiplist_tests.o `test -f 'test/skiplist_tests.cpp' || echo '$(srcdir)/'`test/skiplist_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-skiplist_tests.Tpo test/$(DEPDIR)/test_test_folm-skiplist_tests.Po
 #	$(AM_V_CXX)source='test/skiplist_tests.cpp' object='test/test_test_folm-skiplist_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-skiplist_tests.o `test -f 'test/skiplist_tests.cpp' || echo '$(srcdir)/'`test/skiplist_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-skiplist_tests.o `test -f 'test/skiplist_tests.cpp' || echo '$(srcdir)/'`test/skiplist_tests.cpp
 
 test/test_test_folm-skiplist_tests.obj: test/skiplist_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-skiplist_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-skiplist_tests.Tpo -c -o test/test_test_folm-skiplist_tests.obj `if test -f 'test/skiplist_tests.cpp'; then $(CYGPATH_W) 'test/skiplist_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/skiplist_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-skiplist_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-skiplist_tests.Tpo -c -o test/test_test_folm-skiplist_tests.obj `if test -f 'test/skiplist_tests.cpp'; then $(CYGPATH_W) 'test/skiplist_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/skiplist_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-skiplist_tests.Tpo test/$(DEPDIR)/test_test_folm-skiplist_tests.Po
 #	$(AM_V_CXX)source='test/skiplist_tests.cpp' object='test/test_test_folm-skiplist_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-skiplist_tests.obj `if test -f 'test/skiplist_tests.cpp'; then $(CYGPATH_W) 'test/skiplist_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/skiplist_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-skiplist_tests.obj `if test -f 'test/skiplist_tests.cpp'; then $(CYGPATH_W) 'test/skiplist_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/skiplist_tests.cpp'; fi`
+
+test/test_test_folm-streams_tests.o: test/streams_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-streams_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-streams_tests.Tpo -c -o test/test_test_folm-streams_tests.o `test -f 'test/streams_tests.cpp' || echo '$(srcdir)/'`test/streams_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-streams_tests.Tpo test/$(DEPDIR)/test_test_folm-streams_tests.Po
+#	$(AM_V_CXX)source='test/streams_tests.cpp' object='test/test_test_folm-streams_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-streams_tests.o `test -f 'test/streams_tests.cpp' || echo '$(srcdir)/'`test/streams_tests.cpp
+
+test/test_test_folm-streams_tests.obj: test/streams_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-streams_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-streams_tests.Tpo -c -o test/test_test_folm-streams_tests.obj `if test -f 'test/streams_tests.cpp'; then $(CYGPATH_W) 'test/streams_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/streams_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-streams_tests.Tpo test/$(DEPDIR)/test_test_folm-streams_tests.Po
+#	$(AM_V_CXX)source='test/streams_tests.cpp' object='test/test_test_folm-streams_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-streams_tests.obj `if test -f 'test/streams_tests.cpp'; then $(CYGPATH_W) 'test/streams_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/streams_tests.cpp'; fi`
 
 test/test_test_folm-test_folm.o: test/test_folm.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-test_folm.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-test_folm.Tpo -c -o test/test_test_folm-test_folm.o `test -f 'test/test_folm.cpp' || echo '$(srcdir)/'`test/test_folm.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-test_folm.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-test_folm.Tpo -c -o test/test_test_folm-test_folm.o `test -f 'test/test_folm.cpp' || echo '$(srcdir)/'`test/test_folm.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-test_folm.Tpo test/$(DEPDIR)/test_test_folm-test_folm.Po
 #	$(AM_V_CXX)source='test/test_folm.cpp' object='test/test_test_folm-test_folm.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-test_folm.o `test -f 'test/test_folm.cpp' || echo '$(srcdir)/'`test/test_folm.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-test_folm.o `test -f 'test/test_folm.cpp' || echo '$(srcdir)/'`test/test_folm.cpp
 
 test/test_test_folm-test_folm.obj: test/test_folm.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-test_folm.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-test_folm.Tpo -c -o test/test_test_folm-test_folm.obj `if test -f 'test/test_folm.cpp'; then $(CYGPATH_W) 'test/test_folm.cpp'; else $(CYGPATH_W) '$(srcdir)/test/test_folm.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-test_folm.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-test_folm.Tpo -c -o test/test_test_folm-test_folm.obj `if test -f 'test/test_folm.cpp'; then $(CYGPATH_W) 'test/test_folm.cpp'; else $(CYGPATH_W) '$(srcdir)/test/test_folm.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-test_folm.Tpo test/$(DEPDIR)/test_test_folm-test_folm.Po
 #	$(AM_V_CXX)source='test/test_folm.cpp' object='test/test_test_folm-test_folm.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-test_folm.obj `if test -f 'test/test_folm.cpp'; then $(CYGPATH_W) 'test/test_folm.cpp'; else $(CYGPATH_W) '$(srcdir)/test/test_folm.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-test_folm.obj `if test -f 'test/test_folm.cpp'; then $(CYGPATH_W) 'test/test_folm.cpp'; else $(CYGPATH_W) '$(srcdir)/test/test_folm.cpp'; fi`
 
 test/test_test_folm-timedata_tests.o: test/timedata_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-timedata_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-timedata_tests.Tpo -c -o test/test_test_folm-timedata_tests.o `test -f 'test/timedata_tests.cpp' || echo '$(srcdir)/'`test/timedata_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-timedata_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-timedata_tests.Tpo -c -o test/test_test_folm-timedata_tests.o `test -f 'test/timedata_tests.cpp' || echo '$(srcdir)/'`test/timedata_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-timedata_tests.Tpo test/$(DEPDIR)/test_test_folm-timedata_tests.Po
 #	$(AM_V_CXX)source='test/timedata_tests.cpp' object='test/test_test_folm-timedata_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-timedata_tests.o `test -f 'test/timedata_tests.cpp' || echo '$(srcdir)/'`test/timedata_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-timedata_tests.o `test -f 'test/timedata_tests.cpp' || echo '$(srcdir)/'`test/timedata_tests.cpp
 
 test/test_test_folm-timedata_tests.obj: test/timedata_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-timedata_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-timedata_tests.Tpo -c -o test/test_test_folm-timedata_tests.obj `if test -f 'test/timedata_tests.cpp'; then $(CYGPATH_W) 'test/timedata_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/timedata_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-timedata_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-timedata_tests.Tpo -c -o test/test_test_folm-timedata_tests.obj `if test -f 'test/timedata_tests.cpp'; then $(CYGPATH_W) 'test/timedata_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/timedata_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-timedata_tests.Tpo test/$(DEPDIR)/test_test_folm-timedata_tests.Po
 #	$(AM_V_CXX)source='test/timedata_tests.cpp' object='test/test_test_folm-timedata_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-timedata_tests.obj `if test -f 'test/timedata_tests.cpp'; then $(CYGPATH_W) 'test/timedata_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/timedata_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-timedata_tests.obj `if test -f 'test/timedata_tests.cpp'; then $(CYGPATH_W) 'test/timedata_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/timedata_tests.cpp'; fi`
 
 test/test_test_folm-transaction_tests.o: test/transaction_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-transaction_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-transaction_tests.Tpo -c -o test/test_test_folm-transaction_tests.o `test -f 'test/transaction_tests.cpp' || echo '$(srcdir)/'`test/transaction_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-transaction_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-transaction_tests.Tpo -c -o test/test_test_folm-transaction_tests.o `test -f 'test/transaction_tests.cpp' || echo '$(srcdir)/'`test/transaction_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-transaction_tests.Tpo test/$(DEPDIR)/test_test_folm-transaction_tests.Po
 #	$(AM_V_CXX)source='test/transaction_tests.cpp' object='test/test_test_folm-transaction_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-transaction_tests.o `test -f 'test/transaction_tests.cpp' || echo '$(srcdir)/'`test/transaction_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-transaction_tests.o `test -f 'test/transaction_tests.cpp' || echo '$(srcdir)/'`test/transaction_tests.cpp
 
 test/test_test_folm-transaction_tests.obj: test/transaction_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-transaction_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-transaction_tests.Tpo -c -o test/test_test_folm-transaction_tests.obj `if test -f 'test/transaction_tests.cpp'; then $(CYGPATH_W) 'test/transaction_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/transaction_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-transaction_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-transaction_tests.Tpo -c -o test/test_test_folm-transaction_tests.obj `if test -f 'test/transaction_tests.cpp'; then $(CYGPATH_W) 'test/transaction_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/transaction_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-transaction_tests.Tpo test/$(DEPDIR)/test_test_folm-transaction_tests.Po
 #	$(AM_V_CXX)source='test/transaction_tests.cpp' object='test/test_test_folm-transaction_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-transaction_tests.obj `if test -f 'test/transaction_tests.cpp'; then $(CYGPATH_W) 'test/transaction_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/transaction_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-transaction_tests.obj `if test -f 'test/transaction_tests.cpp'; then $(CYGPATH_W) 'test/transaction_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/transaction_tests.cpp'; fi`
+
+test/test_test_folm-txvalidationcache_tests.o: test/txvalidationcache_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-txvalidationcache_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-txvalidationcache_tests.Tpo -c -o test/test_test_folm-txvalidationcache_tests.o `test -f 'test/txvalidationcache_tests.cpp' || echo '$(srcdir)/'`test/txvalidationcache_tests.cpp
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-txvalidationcache_tests.Tpo test/$(DEPDIR)/test_test_folm-txvalidationcache_tests.Po
+#	$(AM_V_CXX)source='test/txvalidationcache_tests.cpp' object='test/test_test_folm-txvalidationcache_tests.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-txvalidationcache_tests.o `test -f 'test/txvalidationcache_tests.cpp' || echo '$(srcdir)/'`test/txvalidationcache_tests.cpp
+
+test/test_test_folm-txvalidationcache_tests.obj: test/txvalidationcache_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-txvalidationcache_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-txvalidationcache_tests.Tpo -c -o test/test_test_folm-txvalidationcache_tests.obj `if test -f 'test/txvalidationcache_tests.cpp'; then $(CYGPATH_W) 'test/txvalidationcache_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/txvalidationcache_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-txvalidationcache_tests.Tpo test/$(DEPDIR)/test_test_folm-txvalidationcache_tests.Po
+#	$(AM_V_CXX)source='test/txvalidationcache_tests.cpp' object='test/test_test_folm-txvalidationcache_tests.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-txvalidationcache_tests.obj `if test -f 'test/txvalidationcache_tests.cpp'; then $(CYGPATH_W) 'test/txvalidationcache_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/txvalidationcache_tests.cpp'; fi`
 
 test/test_test_folm-uint256_tests.o: test/uint256_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-uint256_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-uint256_tests.Tpo -c -o test/test_test_folm-uint256_tests.o `test -f 'test/uint256_tests.cpp' || echo '$(srcdir)/'`test/uint256_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-uint256_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-uint256_tests.Tpo -c -o test/test_test_folm-uint256_tests.o `test -f 'test/uint256_tests.cpp' || echo '$(srcdir)/'`test/uint256_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-uint256_tests.Tpo test/$(DEPDIR)/test_test_folm-uint256_tests.Po
 #	$(AM_V_CXX)source='test/uint256_tests.cpp' object='test/test_test_folm-uint256_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-uint256_tests.o `test -f 'test/uint256_tests.cpp' || echo '$(srcdir)/'`test/uint256_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-uint256_tests.o `test -f 'test/uint256_tests.cpp' || echo '$(srcdir)/'`test/uint256_tests.cpp
 
 test/test_test_folm-uint256_tests.obj: test/uint256_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-uint256_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-uint256_tests.Tpo -c -o test/test_test_folm-uint256_tests.obj `if test -f 'test/uint256_tests.cpp'; then $(CYGPATH_W) 'test/uint256_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/uint256_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-uint256_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-uint256_tests.Tpo -c -o test/test_test_folm-uint256_tests.obj `if test -f 'test/uint256_tests.cpp'; then $(CYGPATH_W) 'test/uint256_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/uint256_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-uint256_tests.Tpo test/$(DEPDIR)/test_test_folm-uint256_tests.Po
 #	$(AM_V_CXX)source='test/uint256_tests.cpp' object='test/test_test_folm-uint256_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-uint256_tests.obj `if test -f 'test/uint256_tests.cpp'; then $(CYGPATH_W) 'test/uint256_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/uint256_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-uint256_tests.obj `if test -f 'test/uint256_tests.cpp'; then $(CYGPATH_W) 'test/uint256_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/uint256_tests.cpp'; fi`
 
 test/test_test_folm-univalue_tests.o: test/univalue_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-univalue_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-univalue_tests.Tpo -c -o test/test_test_folm-univalue_tests.o `test -f 'test/univalue_tests.cpp' || echo '$(srcdir)/'`test/univalue_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-univalue_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-univalue_tests.Tpo -c -o test/test_test_folm-univalue_tests.o `test -f 'test/univalue_tests.cpp' || echo '$(srcdir)/'`test/univalue_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-univalue_tests.Tpo test/$(DEPDIR)/test_test_folm-univalue_tests.Po
 #	$(AM_V_CXX)source='test/univalue_tests.cpp' object='test/test_test_folm-univalue_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-univalue_tests.o `test -f 'test/univalue_tests.cpp' || echo '$(srcdir)/'`test/univalue_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-univalue_tests.o `test -f 'test/univalue_tests.cpp' || echo '$(srcdir)/'`test/univalue_tests.cpp
 
 test/test_test_folm-univalue_tests.obj: test/univalue_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-univalue_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-univalue_tests.Tpo -c -o test/test_test_folm-univalue_tests.obj `if test -f 'test/univalue_tests.cpp'; then $(CYGPATH_W) 'test/univalue_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/univalue_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-univalue_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-univalue_tests.Tpo -c -o test/test_test_folm-univalue_tests.obj `if test -f 'test/univalue_tests.cpp'; then $(CYGPATH_W) 'test/univalue_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/univalue_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-univalue_tests.Tpo test/$(DEPDIR)/test_test_folm-univalue_tests.Po
 #	$(AM_V_CXX)source='test/univalue_tests.cpp' object='test/test_test_folm-univalue_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-univalue_tests.obj `if test -f 'test/univalue_tests.cpp'; then $(CYGPATH_W) 'test/univalue_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/univalue_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-univalue_tests.obj `if test -f 'test/univalue_tests.cpp'; then $(CYGPATH_W) 'test/univalue_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/univalue_tests.cpp'; fi`
 
 test/test_test_folm-util_tests.o: test/util_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-util_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-util_tests.Tpo -c -o test/test_test_folm-util_tests.o `test -f 'test/util_tests.cpp' || echo '$(srcdir)/'`test/util_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-util_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-util_tests.Tpo -c -o test/test_test_folm-util_tests.o `test -f 'test/util_tests.cpp' || echo '$(srcdir)/'`test/util_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-util_tests.Tpo test/$(DEPDIR)/test_test_folm-util_tests.Po
 #	$(AM_V_CXX)source='test/util_tests.cpp' object='test/test_test_folm-util_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-util_tests.o `test -f 'test/util_tests.cpp' || echo '$(srcdir)/'`test/util_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-util_tests.o `test -f 'test/util_tests.cpp' || echo '$(srcdir)/'`test/util_tests.cpp
 
 test/test_test_folm-util_tests.obj: test/util_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-util_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-util_tests.Tpo -c -o test/test_test_folm-util_tests.obj `if test -f 'test/util_tests.cpp'; then $(CYGPATH_W) 'test/util_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/util_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-util_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-util_tests.Tpo -c -o test/test_test_folm-util_tests.obj `if test -f 'test/util_tests.cpp'; then $(CYGPATH_W) 'test/util_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/util_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-util_tests.Tpo test/$(DEPDIR)/test_test_folm-util_tests.Po
 #	$(AM_V_CXX)source='test/util_tests.cpp' object='test/test_test_folm-util_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-util_tests.obj `if test -f 'test/util_tests.cpp'; then $(CYGPATH_W) 'test/util_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/util_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-util_tests.obj `if test -f 'test/util_tests.cpp'; then $(CYGPATH_W) 'test/util_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/util_tests.cpp'; fi`
 
 test/test_test_folm-accounting_tests.o: test/accounting_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-accounting_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-accounting_tests.Tpo -c -o test/test_test_folm-accounting_tests.o `test -f 'test/accounting_tests.cpp' || echo '$(srcdir)/'`test/accounting_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-accounting_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-accounting_tests.Tpo -c -o test/test_test_folm-accounting_tests.o `test -f 'test/accounting_tests.cpp' || echo '$(srcdir)/'`test/accounting_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-accounting_tests.Tpo test/$(DEPDIR)/test_test_folm-accounting_tests.Po
 #	$(AM_V_CXX)source='test/accounting_tests.cpp' object='test/test_test_folm-accounting_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-accounting_tests.o `test -f 'test/accounting_tests.cpp' || echo '$(srcdir)/'`test/accounting_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-accounting_tests.o `test -f 'test/accounting_tests.cpp' || echo '$(srcdir)/'`test/accounting_tests.cpp
 
 test/test_test_folm-accounting_tests.obj: test/accounting_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-accounting_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-accounting_tests.Tpo -c -o test/test_test_folm-accounting_tests.obj `if test -f 'test/accounting_tests.cpp'; then $(CYGPATH_W) 'test/accounting_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/accounting_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-accounting_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-accounting_tests.Tpo -c -o test/test_test_folm-accounting_tests.obj `if test -f 'test/accounting_tests.cpp'; then $(CYGPATH_W) 'test/accounting_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/accounting_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-accounting_tests.Tpo test/$(DEPDIR)/test_test_folm-accounting_tests.Po
 #	$(AM_V_CXX)source='test/accounting_tests.cpp' object='test/test_test_folm-accounting_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-accounting_tests.obj `if test -f 'test/accounting_tests.cpp'; then $(CYGPATH_W) 'test/accounting_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/accounting_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-accounting_tests.obj `if test -f 'test/accounting_tests.cpp'; then $(CYGPATH_W) 'test/accounting_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/accounting_tests.cpp'; fi`
 
-test/test_test_folm-wallet_tests.o: test/wallet_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-wallet_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo -c -o test/test_test_folm-wallet_tests.o `test -f 'test/wallet_tests.cpp' || echo '$(srcdir)/'`test/wallet_tests.cpp
-	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo test/$(DEPDIR)/test_test_folm-wallet_tests.Po
-#	$(AM_V_CXX)source='test/wallet_tests.cpp' object='test/test_test_folm-wallet_tests.o' libtool=no \
+wallet/test/test_test_folm-wallet_tests.o: wallet/test/wallet_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT wallet/test/test_test_folm-wallet_tests.o -MD -MP -MF wallet/test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo -c -o wallet/test/test_test_folm-wallet_tests.o `test -f 'wallet/test/wallet_tests.cpp' || echo '$(srcdir)/'`wallet/test/wallet_tests.cpp
+	$(AM_V_at)$(am__mv) wallet/test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo wallet/test/$(DEPDIR)/test_test_folm-wallet_tests.Po
+#	$(AM_V_CXX)source='wallet/test/wallet_tests.cpp' object='wallet/test/test_test_folm-wallet_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-wallet_tests.o `test -f 'test/wallet_tests.cpp' || echo '$(srcdir)/'`test/wallet_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o wallet/test/test_test_folm-wallet_tests.o `test -f 'wallet/test/wallet_tests.cpp' || echo '$(srcdir)/'`wallet/test/wallet_tests.cpp
 
-test/test_test_folm-wallet_tests.obj: test/wallet_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-wallet_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo -c -o test/test_test_folm-wallet_tests.obj `if test -f 'test/wallet_tests.cpp'; then $(CYGPATH_W) 'test/wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/wallet_tests.cpp'; fi`
-	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo test/$(DEPDIR)/test_test_folm-wallet_tests.Po
-#	$(AM_V_CXX)source='test/wallet_tests.cpp' object='test/test_test_folm-wallet_tests.obj' libtool=no \
+wallet/test/test_test_folm-wallet_tests.obj: wallet/test/wallet_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT wallet/test/test_test_folm-wallet_tests.obj -MD -MP -MF wallet/test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo -c -o wallet/test/test_test_folm-wallet_tests.obj `if test -f 'wallet/test/wallet_tests.cpp'; then $(CYGPATH_W) 'wallet/test/wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/wallet/test/wallet_tests.cpp'; fi`
+	$(AM_V_at)$(am__mv) wallet/test/$(DEPDIR)/test_test_folm-wallet_tests.Tpo wallet/test/$(DEPDIR)/test_test_folm-wallet_tests.Po
+#	$(AM_V_CXX)source='wallet/test/wallet_tests.cpp' object='wallet/test/test_test_folm-wallet_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-wallet_tests.obj `if test -f 'test/wallet_tests.cpp'; then $(CYGPATH_W) 'test/wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/wallet_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o wallet/test/test_test_folm-wallet_tests.obj `if test -f 'wallet/test/wallet_tests.cpp'; then $(CYGPATH_W) 'wallet/test/wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/wallet/test/wallet_tests.cpp'; fi`
 
 test/test_test_folm-rpc_wallet_tests.o: test/rpc_wallet_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_wallet_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Tpo -c -o test/test_test_folm-rpc_wallet_tests.o `test -f 'test/rpc_wallet_tests.cpp' || echo '$(srcdir)/'`test/rpc_wallet_tests.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_wallet_tests.o -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Tpo -c -o test/test_test_folm-rpc_wallet_tests.o `test -f 'test/rpc_wallet_tests.cpp' || echo '$(srcdir)/'`test/rpc_wallet_tests.cpp
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Tpo test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Po
 #	$(AM_V_CXX)source='test/rpc_wallet_tests.cpp' object='test/test_test_folm-rpc_wallet_tests.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_wallet_tests.o `test -f 'test/rpc_wallet_tests.cpp' || echo '$(srcdir)/'`test/rpc_wallet_tests.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_wallet_tests.o `test -f 'test/rpc_wallet_tests.cpp' || echo '$(srcdir)/'`test/rpc_wallet_tests.cpp
 
 test/test_test_folm-rpc_wallet_tests.obj: test/rpc_wallet_tests.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_wallet_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Tpo -c -o test/test_test_folm-rpc_wallet_tests.obj `if test -f 'test/rpc_wallet_tests.cpp'; then $(CYGPATH_W) 'test/rpc_wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_wallet_tests.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -MT test/test_test_folm-rpc_wallet_tests.obj -MD -MP -MF test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Tpo -c -o test/test_test_folm-rpc_wallet_tests.obj `if test -f 'test/rpc_wallet_tests.cpp'; then $(CYGPATH_W) 'test/rpc_wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_wallet_tests.cpp'; fi`
 	$(AM_V_at)$(am__mv) test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Tpo test/$(DEPDIR)/test_test_folm-rpc_wallet_tests.Po
 #	$(AM_V_CXX)source='test/rpc_wallet_tests.cpp' object='test/test_test_folm-rpc_wallet_tests.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_wallet_tests.obj `if test -f 'test/rpc_wallet_tests.cpp'; then $(CYGPATH_W) 'test/rpc_wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_wallet_tests.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_test_folm_CPPFLAGS) $(CPPFLAGS) $(test_test_folm_CXXFLAGS) $(CXXFLAGS) -c -o test/test_test_folm-rpc_wallet_tests.obj `if test -f 'test/rpc_wallet_tests.cpp'; then $(CYGPATH_W) 'test/rpc_wallet_tests.cpp'; else $(CYGPATH_W) '$(srcdir)/test/rpc_wallet_tests.cpp'; fi`
 
 .cpp.o:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -7572,13 +8044,6 @@ test/test_folm.log: test/test_folm$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-test/bitcoin-util-test.py.log: test/bitcoin-util-test.py
-	@p='test/bitcoin-util-test.py'; \
-	b='test/bitcoin-util-test.py'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 qt/test/test_folm-qt.log: qt/test/test_folm-qt$(EXEEXT)
 	@p='qt/test/test_folm-qt$(EXEEXT)'; \
 	b='qt/test/test_folm-qt'; \
@@ -7724,6 +8189,8 @@ distclean-generic:
 	-rm -f test/$(am__dirstamp)
 	-rm -f wallet/$(DEPDIR)/$(am__dirstamp)
 	-rm -f wallet/$(am__dirstamp)
+	-rm -f wallet/test/$(DEPDIR)/$(am__dirstamp)
+	-rm -f wallet/test/$(am__dirstamp)
 	-rm -f zmq/$(DEPDIR)/$(am__dirstamp)
 	-rm -f zmq/$(am__dirstamp)
 	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
@@ -7737,7 +8204,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 	clean-libtool clean-local mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf ./$(DEPDIR) bench/$(DEPDIR) compat/$(DEPDIR) consensus/$(DEPDIR) crypto/$(DEPDIR) policy/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) support/$(DEPDIR) test/$(DEPDIR) wallet/$(DEPDIR) zmq/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) bench/$(DEPDIR) compat/$(DEPDIR) consensus/$(DEPDIR) crypto/$(DEPDIR) policy/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) support/$(DEPDIR) test/$(DEPDIR) wallet/$(DEPDIR) wallet/test/$(DEPDIR) zmq/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -7783,7 +8250,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf ./$(DEPDIR) bench/$(DEPDIR) compat/$(DEPDIR) consensus/$(DEPDIR) crypto/$(DEPDIR) policy/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) support/$(DEPDIR) test/$(DEPDIR) wallet/$(DEPDIR) zmq/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) bench/$(DEPDIR) compat/$(DEPDIR) consensus/$(DEPDIR) crypto/$(DEPDIR) policy/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) support/$(DEPDIR) test/$(DEPDIR) wallet/$(DEPDIR) wallet/test/$(DEPDIR) zmq/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -7886,7 +8353,10 @@ check-security: $(bin_PROGRAMS)
 #	rm -f $(CLEAN_BITCOIN_TEST) $(test_test_folm_OBJECTS) $(TEST_BINARY)
 
 #check-local:
+#	@echo "Running test/bitcoin-util-test.py..."
+#	$(AM_V_at)srcdir=$(srcdir) PYTHONPATH=$(builddir)/test $(srcdir)/test/bitcoin-util-test.py
 #	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C secp256k1 check
+#	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C univalue check
 
 #%.json.h: %.json
 #	@$(MKDIR_P) $(@D)
@@ -7910,65 +8380,61 @@ bench: $(BENCH_BINARY) FORCE
 	$(BENCH_BINARY)
 
 bitcoin_bench_clean : FORCE
-	rm -f $(CLEAN_BITCOIN_BENCH) $(bench_bench_dash_OBJECTS) $(BENCH_BINARY)
-#  qt/forms/sendcoinsdialog.ui \
-#  qt/forms/sendcoinsentry.ui \
-#  qt/forms/signverifymessagedialog.ui \
-#  qt/forms/transactiondescdialog.ui
+	rm -f $(CLEAN_BITCOIN_BENCH) $(bench_bench_folm_OBJECTS) $(BENCH_BINARY)
 
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
-#$(QT_MOC): $(QT_FORMS_H)
-#$(qt_libbitcoinqt_a_OBJECTS) $(qt_folm_qt_OBJECTS) : | $(QT_MOC)
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_folm_qt_OBJECTS) : | $(QT_MOC)
 
 #Generating these with a half-written protobuf header leads to wacky results.
 #This makes sure it's done.
-#$(QT_MOC): $(PROTOBUF_H)
-#$(QT_MOC_CPP): $(PROTOBUF_H)
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
 
-#SECONDARY: $(QT_QM)
+SECONDARY: $(QT_QM)
 
-#qt/folmstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES)
-#	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
-#	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) $(PYTHON) ../share/qt/extract_strings_qt.py $^
+qt/folmstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) ../share/qt/extract_strings_qt.py $^
 
-#translate: qt/folmstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
-#	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
-#	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts qt/locale/folm_en.ts
+translate: qt/folmstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts qt/locale/folm_en.ts
 
-#$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
-#	@test -f $(RCC)
-#	@test -f $(@D)/$(<F) || cp -f $< $(@D)
-#	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name folm_locale $(@D)/$(<F) | \
-#	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@test -f $(@D)/$(<F) || cp -f $< $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name folm_locale $(@D)/$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-#$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
-#	@test -f $(RCC)
-#	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name folm $< | \
-#	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name folm $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-#folm_qt_clean: FORCE
-#	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_folm_qt_OBJECTS) qt/folm-qt$(EXEEXT) $(LIBBITCOINQT)
+folm_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_folm_qt_OBJECTS) qt/folm-qt$(EXEEXT) $(LIBBITCOINQT)
 
-#folm_qt : qt/folm-qt$(EXEEXT)
+folm_qt : qt/folm-qt$(EXEEXT)
 
-#ui_%.h: %.ui
-#	@test -f $(UIC)
-#	@$(MKDIR_P) $(@D)
-#	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
 
-#%.moc: %.cpp
-#	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(QT_INCLUDES) $(MOC_DEFS) $< | \
-#	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-#moc_%.cpp: %.h
-#	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(QT_INCLUDES) $(MOC_DEFS) $< | \
-#	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-#%.qm: %.ts
-#	@test -f $(LRELEASE)
-#	@$(MKDIR_P) $(@D)
-#	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@
 
 #test_folm_qt : qt/test/test_folm-qt$(EXEEXT)
 

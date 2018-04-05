@@ -10,7 +10,7 @@
 #include "script/standard.h"
 #include "serialize.h"
 #include "streams.h"
-#include "univalue.h"
+#include <univalue.h>
 #include "util.h"
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
@@ -54,6 +54,7 @@ string FormatScript(const CScript& script)
     }
     return ret.substr(0, ret.size() - 1);
 }
+
 const map<unsigned char, string> mapSigHashTypes =
     boost::assign::map_list_of
     (static_cast<unsigned char>(SIGHASH_ALL), string("ALL"))
@@ -115,7 +116,6 @@ string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDecode)
     return str;
 }
 
-
 string EncodeHexTx(const CTransaction& tx)
 {
     CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
@@ -124,8 +124,7 @@ string EncodeHexTx(const CTransaction& tx)
 }
 
 void ScriptPubKeyToUniv(const CScript& scriptPubKey,
-    UniValue& out,
-    bool fIncludeHex)
+                        UniValue& out, bool fIncludeHex)
 {
     txnouttype type;
     vector<CTxDestination> addresses;
@@ -144,7 +143,7 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
     out.pushKV("type", GetTxnOutputType(type));
 
     UniValue a(UniValue::VARR);
-    BOOST_FOREACH (const CTxDestination& addr, addresses)
+    BOOST_FOREACH(const CTxDestination& addr, addresses)
         a.push_back(CBitcoinAddress(addr).ToString());
     out.pushKV("addresses", a);
 }
@@ -156,7 +155,7 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry)
     entry.pushKV("locktime", (int64_t)tx.nLockTime);
 
     UniValue vin(UniValue::VARR);
-    BOOST_FOREACH (const CTxIn& txin, tx.vin) {
+    BOOST_FOREACH(const CTxIn& txin, tx.vin) {
         UniValue in(UniValue::VOBJ);
         if (tx.IsCoinBase())
             in.pushKV("coinbase", HexStr(txin.scriptSig.begin(), txin.scriptSig.end()));

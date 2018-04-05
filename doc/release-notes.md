@@ -1,26 +1,91 @@
-Folm Core version 1.2 is now available from:
+Folm Core 0.12
+==================
 
-  <https://github.com/folm-crypto/folm/releases>
+Folm Core tree 0.12.1.x release notes can be found here:
+- [v0.12.1](release-notes/folm/release-notes-0.12.1.md)
 
-This is a new minor version release, including various bug fixes and
-performance improvements, as well as updated translations.
+Folm Core tree 0.12.1.x is a fork of Bitcoin Core tree 0.12
 
-Please report bugs using the issue tracker at github:
 
-  <https://github.com/folm-crypto/folm/issues>
 
-Compatibility
-==============
+Older releases
+--------------
 
-Folm Core is extensively tested on multiple operating systems using
-the Linux kernel, macOS 10.8+, and Windows Vista and later.
+Folm was previously known as Darkcoin.
 
-Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
-No attempt is made to prevent installing or running the software on Windows XP, you
-can still do so at your own risk but be aware that there are known instabilities and issues.
-Please do not report issues about Windows XP to the issue tracker.
+Darkcoin tree 0.8.x was a fork of Litecoin tree 0.8, original name was XCoin
+which was first released on Jan/18/2014.
 
-Folm Core should also work on most other Unix-like systems but is not
-frequently tested on them.
+### Downgrade to a version < 0.12.0
 
-Please see pivx-doc/ for historical PIVX release notes
+Because release 0.12.0 and later will obfuscate the chainstate on every
+fresh sync or reindex, the chainstate is not backwards-compatible with
+pre-0.12 versions of Bitcoin Core or other software.
+
+If you want to downgrade after you have done a reindex with 0.12.0 or later,
+you will need to reindex when you first start Bitcoin Core version 0.11 or
+earlier.
+
+Notable changes
+===============
+
+Example item
+---------------------------------------
+
+Example text.
+
+0.12.1 Change log
+=================
+
+Detailed release notes follow. This overview includes changes that affect
+behavior, not code moves, refactors and string updates. For convenience in locating
+the code changes and accompanying discussion, both the pull request and
+git merge commit are mentioned.
+
+### RPC and REST
+
+### Configuration and command-line options
+
+### Block and transaction handling
+
+### P2P protocol and network code
+
+### Validation
+
+### Build system
+
+### Wallet
+
+### GUI
+
+### Tests and QA
+
+### Miscellaneous
+
+Credits
+=======
+
+Thanks to everyone who directly contributed to this release:
+
+
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).
+
+Darkcoin tree 0.9.x was the open source implementation of masternodes based on
+the 0.8.x tree and was first released on Mar/13/2014.
+
+Darkcoin tree 0.10.x used to be the closed source implementation of Obfuscation
+which was released open source on Sep/25/2014.
+
+Folm Core tree 0.11.x was a fork of Bitcoin Core tree 0.9, Darkcoin was rebranded
+to Folm.
+
+Folm Core tree 0.12.0.x was a fork of Bitcoin Core tree 0.10.
+
+These release are considered obsolete. Old changelogs can be found here:
+
+- [v0.12.0](release-notes/folm/release-notes-0.12.0.md) released ???/??/2015
+- [v0.11.2](release-notes/folm/release-notes-0.11.2.md) released Mar/25/2015
+- [v0.11.1](release-notes/folm/release-notes-0.11.1.md) released Feb/10/2015
+- [v0.11.0](release-notes/folm/release-notes-0.11.0.md) released Jan/15/2015
+- [v0.10.x](release-notes/folm/release-notes-0.10.0.md) released Sep/25/2014
+- [v0.9.x](release-notes/folm/release-notes-0.9.0.md) released Mar/13/2014

@@ -105,14 +105,15 @@ BITCOIN_CORE_H = \
   consensus/params.h \
   consensus/validation.h \
   core_io.h \
-  darksend.h \
-  darksend-relay.h \
+  obfuscation.h \
+  dsnotificationinterface.h \
+  obfuscation-relay.h \
   core_memusage.h \
   hash.h \
   httprpc.h \
   httpserver.h \
   init.h \
-  instantx.h \
+  swifttx.h \
   key.h \
   keepass.h \
   keystore.h \
@@ -248,9 +249,10 @@ libbitcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
-  darksend.cpp \
-  darksend-relay.cpp \
-  instantx.cpp \
+  obfuscation.cpp \
+  dsnotificationinterface.cpp \
+  obfuscation-relay.cpp \
+  swifttx.cpp \
   masternode.cpp \
   masternode-budget.cpp \
   masternode-payments.cpp \
@@ -269,8 +271,8 @@ libbitcoin_wallet_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
-crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES)
-crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_CONFIG_INCLUDES) $(PIC_FLAGS)
+crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(PIC_FLAGS)
 crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/common.h \
   crypto/hmac_sha256.cpp \
@@ -283,6 +285,8 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/bmw.c \
   crypto/cubehash.c \
   crypto/echo.c \
+  crypto/fugue.c \
+  crypto/gost.c \
   crypto/groestl.c \
   crypto/jh.c \
   crypto/keccak.c \
@@ -300,6 +304,8 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_bmw.h \
   crypto/sph_cubehash.h \
   crypto/sph_echo.h \
+  crypto/sph_fugue.h \
+  crypto/sph_gost.h \
   crypto/sph_groestl.h \
   crypto/sph_jh.h \
   crypto/sph_keccak.h \

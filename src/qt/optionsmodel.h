@@ -1,5 +1,5 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_OPTIONSMODEL_H
@@ -24,40 +24,42 @@ class OptionsModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit OptionsModel(QObject* parent = 0);
+    explicit OptionsModel(QObject *parent = 0, bool resetSettings = false);
 
     enum OptionID {
-        StartAtStartup,      // bool
-        MinimizeToTray,      // bool
-        MapPortUPnP,         // bool
-        MinimizeOnClose,     // bool
-        ProxyUse,            // bool
-        ProxyIP,             // QString
-        ProxyPort,           // int
-        DisplayUnit,         // BitcoinUnits::Unit
-        ThirdPartyTxUrls,    // QString
-        Digits,              // QString
-        Theme,               // QString
-        Language,            // QString
-        CoinControlFeatures, // bool
-        ThreadsScriptVerif,  // int
-        DatabaseCache,       // int
-        SpendZeroConfChange, // bool
-        ObfuscationRounds,   // int
-        AnonymizeFolmAmount, //int
-        ShowMasternodesTab,  // bool
-        Listen,              // bool
+        StartAtStartup,         // bool
+        MinimizeToTray,         // bool
+        MapPortUPnP,            // bool
+        MinimizeOnClose,        // bool
+        ProxyUse,               // bool
+        ProxyIP,                // QString
+        ProxyPort,              // int
+        ProxyUseTor,            // bool
+        ProxyIPTor,             // QString
+        ProxyPortTor,           // int
+        DisplayUnit,            // BitcoinUnits::Unit
+        ThirdPartyTxUrls,       // QString
+        Digits,                 // QString
+        Theme,                  // QString
+        Language,               // QString
+        CoinControlFeatures,    // bool
+        ThreadsScriptVerif,     // int
+        DatabaseCache,          // int
+        SpendZeroConfChange,    // bool
+        ObfuscationRounds,         // int
+        AnonymizeFolmAmount,    // int
+        Listen,                 // bool
         OptionIDRowCount,
     };
 
-    void Init();
+    void Init(bool resetSettings = false);
     void Reset();
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const;
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+    int rowCount(const QModelIndex & parent = QModelIndex()) const;
+    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+    bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
     /** Updates current unit in memory, settings and emits displayUnitChanged(newUnit) signal */
-    void setDisplayUnit(const QVariant& value);
+    void setDisplayUnit(const QVariant &value);
 
     /* Explicit getters */
     bool getMinimizeToTray() { return fMinimizeToTray; }
@@ -85,12 +87,12 @@ private:
     QString strOverriddenByCommandLine;
 
     /// Add option to list of GUI options overridden through command line/config file
-    void addOverriddenOption(const std::string& option);
+    void addOverriddenOption(const std::string &option);
 
-signals:
+Q_SIGNALS:
     void displayUnitChanged(int unit);
-    void obfuscationRoundsChanged(int);
-    void anonymizeFolmAmountChanged(int);
+    void obfuscationRoundsChanged();
+    void anonymizeFolmAmountChanged();
     void coinControlFeaturesChanged(bool);
 };
 

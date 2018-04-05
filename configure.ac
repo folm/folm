@@ -1,8 +1,8 @@
 dnl require autoconf 2.60 (AS_ECHO/AS_ECHO_N)
 AC_PREREQ([2.60])
-define(_CLIENT_VERSION_MAJOR, 0)
-define(_CLIENT_VERSION_MINOR, 12)
-define(_CLIENT_VERSION_REVISION, 1)
+define(_CLIENT_VERSION_MAJOR, 4)
+define(_CLIENT_VERSION_MINOR, 0)
+define(_CLIENT_VERSION_REVISION, 0)
 define(_CLIENT_VERSION_BUILD, 0)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2016)
@@ -14,9 +14,9 @@ AC_CONFIG_MACRO_DIR([build-aux/m4])
 
 AC_CANONICAL_HOST
 
-AH_TOP([#ifndef FLM_CONFIG_H])
-AH_TOP([#define FLM_CONFIG_H])
-AH_BOTTOM([#endif //FLM_CONFIG_H])
+AH_TOP([#ifndef FOLM_CONFIG_H])
+AH_TOP([#define FOLM_CONFIG_H])
+AH_BOTTOM([#endif //FOLM_CONFIG_H])
 
 dnl faketime breaks configure and is only needed for make. Disable it here.
 unset FAKETIME
@@ -939,6 +939,7 @@ AC_SUBST(MINIUPNPC_CPPFLAGS)
 AC_SUBST(MINIUPNPC_LIBS)
 AC_CONFIG_FILES([Makefile src/Makefile share/setup.nsi share/qt/Info.plist src/test/buildenv.py])
 AC_CONFIG_FILES([qa/pull-tester/run-bitcoind-for-test.sh],[chmod +x qa/pull-tester/run-bitcoind-for-test.sh])
+AC_CONFIG_FILES([qa/pull-tester/tests_config.py],[chmod +x qa/pull-tester/tests_config.py])
 
 dnl boost's m4 checks do something really nasty: they export these vars. As a
 dnl result, they leak into secp256k1's configure and crazy things happen.

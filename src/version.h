@@ -1,7 +1,5 @@
-// Copyright (c) 2012-2014 The Bitcoin developers
-// Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2012-2014 The Bitcoin Core developers
+// Copyright (c) 2014-2016 The Folm Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,8 +19,22 @@ static const int INIT_PROTO_VERSION = 209;
 static const int GETHEADERS_VERSION = 70077;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 70910;
-static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70920;
+static const int MIN_PEER_PROTO_VERSION = 70066;
+
+//! minimum peer version accepted by ObfuscationPool
+static const int MIN_POOL_PEER_PROTO_VERSION = 70910;
+
+//! minimum peer version for masternode budgets
+static const int MIN_BUDGET_PEER_PROTO_VERSION = 70910;
+
+//! minimum peer version for masternode winner broadcasts
+static const int MIN_MNW_PEER_PROTO_VERSION = 70910;
+
+//! minimum peer version that can receive masternode payments
+// V1 - Last protocol version before update
+// V2 - Newest protocol version
+static const int MIN_MASTERNODE_PAYMENT_PROTO_VERSION_1 = 70910;
+static const int MIN_MASTERNODE_PAYMENT_PROTO_VERSION_2 = 70910;
 
 //! nTime field added to CAddress, starting with this version;
 //! if possible, avoid requesting addresses nodes older than this
@@ -41,5 +53,7 @@ static const int MEMPOOL_GD_VERSION = 60002;
 //! "filter*" commands are disabled without NODE_BLOOM after and including this version
 static const int NO_BLOOM_VERSION = 70005;
 
+//! "sendheaders" command and announcing blocks with headers starts with this version
+static const int SENDHEADERS_VERSION = 70910;
 
 #endif // BITCOIN_VERSION_H

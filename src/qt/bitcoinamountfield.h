@@ -1,5 +1,5 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_BITCOINAMOUNTFIELD_H
@@ -17,7 +17,7 @@ QT_END_NAMESPACE
 
 /** Widget for entering bitcoin amounts.
   */
-class BitcoinAmountField : public QWidget
+class BitcoinAmountField: public QWidget
 {
     Q_OBJECT
 
@@ -26,9 +26,9 @@ class BitcoinAmountField : public QWidget
     Q_PROPERTY(qint64 value READ value WRITE setValue NOTIFY valueChanged USER true)
 
 public:
-    explicit BitcoinAmountField(QWidget* parent = 0);
+    explicit BitcoinAmountField(QWidget *parent = 0);
 
-    CAmount value(bool* value = 0) const;
+    CAmount value(bool *value=0) const;
     void setValue(const CAmount& value);
 
     /** Set single step in satoshis **/
@@ -54,21 +54,22 @@ public:
     /** Qt messes up the tab chain by default in some cases (issue https://bugreports.qt-project.org/browse/QTBUG-10907),
         in these cases we have to set it up manually.
     */
-    QWidget* setupTabChain(QWidget* prev);
+    QWidget *setupTabChain(QWidget *prev);
 
-signals:
+Q_SIGNALS:
     void valueChanged();
 
 protected:
     /** Intercept focus-in event and ',' key presses */
-    bool eventFilter(QObject* object, QEvent* event);
+    bool eventFilter(QObject *object, QEvent *event);
 
 private:
-    AmountSpinBox* amount;
-    QValueComboBox* unit;
+    AmountSpinBox *amount;
+    QValueComboBox *unit;
 
-private slots:
+private Q_SLOTS:
     void unitChanged(int idx);
+
 };
 
 #endif // BITCOIN_QT_BITCOINAMOUNTFIELD_H

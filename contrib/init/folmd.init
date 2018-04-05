@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#  folmd The Folm core server.
+#  folmd The folm core server.
 #
 #
 # chkconfig: 345 80 20
@@ -23,14 +23,14 @@ prog=folmd
 lockfile=${BITCOIND_LOCKFILE-/var/lock/subsys/folmd}
 
 # folmd defaults to /usr/bin/folmd, override with BITCOIND_BIN
-bitcoind=${BITCOIND_BIN-/usr/bin/folmd}
+folmd=${BITCOIND_BIN-/usr/bin/folmd}
 
 # folmd opts default to -disablewallet, override with BITCOIND_OPTS
-bitcoind_opts=${BITCOIND_OPTS}
+folmd_opts=${BITCOIND_OPTS--disablewallet}
 
 start() {
     echo -n $"Starting $prog: "
-    daemon $DAEMONOPTS $bitcoind $bitcoind_opts
+    daemon $DAEMONOPTS $folmd $folmd_opts
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $lockfile

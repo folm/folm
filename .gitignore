@@ -1,3 +1,8 @@
+*.sublime-project
+*.sublime-workspace
+todo.txt
+reset-files.bash
+
 *.tar.gz
 
 *.exe
@@ -6,12 +11,11 @@ src/folmd
 src/folm-cli
 src/folm-tx
 src/test/test_folm
-src/test/test_folm_fuzzy
 src/qt/test/test_folm-qt
+src/bench/bench_folm
 
 # autoreconf
 Makefile.in
-Makefile
 aclocal.m4
 autom4te.cache/
 build-aux/config.guess
@@ -57,6 +61,7 @@ src/qt/test/moc*.cpp
 *.o
 *.o-*
 *.patch
+.folm
 *.a
 *.pb.cc
 *.pb.h
@@ -76,12 +81,12 @@ src/qt/test/moc*.cpp
 *.qm
 Makefile
 folm-qt
-folm-Qt.app
-background.tiff*
+Folm-Qt.app
 
 # Unit-tests
 Makefile.test
 folm-qt_test
+src/test/buildenv.py
 
 # Resources cpp
 qrc_*.cpp
@@ -102,14 +107,19 @@ coverage_percent.txt
 linux-coverage-build
 linux-build
 win32-build
-test/config.ini
-test/cache/*
+qa/pull-tester/run-bitcoind-for-test.sh
+qa/pull-tester/tests_config.py
+qa/pull-tester/cache/*
+qa/pull-tester/test.*/*
+qa/tmp
+cache/
+share/BitcoindComparisonTool.jar
 
 !src/leveldb*/Makefile
 
+.cproject
+.project
 /doc/doxygen/
 
-libfolmconsensus.pc
-contrib/devtools/split-debug.sh
-CMakeLists.txt
-/.idea
+libbitcoinconsensus.pc
+src/qt/folm-qt.bash

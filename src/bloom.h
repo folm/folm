@@ -21,7 +21,8 @@ static const unsigned int MAX_HASH_FUNCS = 50;
  * First two bits of nFlags control how much IsRelevantAndUpdate actually updates
  * The remaining bits are reserved
  */
-enum bloomflags {
+enum bloomflags
+{
     BLOOM_UPDATE_NONE = 0,
     BLOOM_UPDATE_ALL = 1,
     // Only adds outpoints to the filter if the output is a pay-to-pubkey/pay-to-multisig script
@@ -36,7 +37,7 @@ enum bloomflags {
  * This allows for significantly more efficient transaction and block downloads.
  * 
  * Because bloom filters are probabilistic, a SPV node can increase the false-
- * positive rate, making us send iy transactions which aren't actually its,
+ * positive rate, making us send it transactions which aren't actually its,
  * allowing clients to trade more bandwidth for more privacy by obfuscating which
  * keys are controlled by them.
  */
@@ -72,8 +73,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(vData);
         READWRITE(nHashFuncs);
         READWRITE(nTweak);

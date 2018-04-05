@@ -1,5 +1,5 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_WALLETMODEL_H
@@ -8,9 +8,9 @@
 #include "paymentrequestplus.h"
 #include "walletmodeltransaction.h"
 
-#include "allocators.h" /* for SecureString */
 #include "swifttx.h"
-#include "wallet.h"
+#include "wallet/wallet.h"
+#include "support/allocators/secure.h"
 
 #include <map>
 #include <vector>
@@ -19,6 +19,7 @@
 
 class AddressTableModel;
 class OptionsModel;
+class PlatformStyle;
 class RecentRequestsTableModel;
 class TransactionTableModel;
 class WalletModelTransaction;
@@ -38,10 +39,11 @@ QT_END_NAMESPACE
 class SendCoinsRecipient
 {
 public:
-    explicit SendCoinsRecipient() : amount(0), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
-    explicit SendCoinsRecipient(const QString& addr, const QString& label, const CAmount& amount, const QString& message) : address(addr), label(label), amount(amount), message(message), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
+    explicit SendCoinsRecipient() : amount(0), fSubtractFeeFromAmount(false), nVersion(SendCoinsRecipient::CURRENT_VERSION) { }
+    explicit SendCoinsRecipient(const QString &addr, const QString &label, const CAmount& amount, const QString &message):
+        address(addr), label(label), amount(amount), message(message), fSubtractFeeFromAmount(false), nVersion(SendCoinsRecipient::CURRENT_VERSION) {}
 
-    // If from an insecure payment request, this is used for storing
+    // If from an unauthenticated payment request, this is used for storing
     // the addresses, e.g. address-A<br />address-B<br />address-C.
     // Info: As we don't need to process addresses in here when using
     // payment requests, we can abuse it for displaying an address list.
@@ -59,14 +61,15 @@ public:
     // Empty if no authentication or invalid signature/cert/etc.
     QString authenticatedMerchant;
 
+    bool fSubtractFeeFromAmount; // memory only
+
     static const int CURRENT_VERSION = 1;
     int nVersion;
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         std::string sAddress = address.toStdString();
         std::string sLabel = label.toStdString();
         std::string sMessage = message.toStdString();
@@ -84,7 +87,8 @@ public:
         READWRITE(sPaymentRequest);
         READWRITE(sAuthenticatedMerchant);
 
-        if (ser_action.ForRead()) {
+        if (ser_action.ForRead())
+        {
             address = QString::fromStdString(sAddress);
             label = QString::fromStdString(sLabel);
             message = QString::fromStdString(sMessage);
@@ -101,7 +105,7 @@ class WalletModel : public QObject
     Q_OBJECT
 
 public:
-    explicit WalletModel(CWallet* wallet, OptionsModel* optionsModel, QObject* parent = 0);
+    explicit WalletModel(const PlatformStyle *platformStyle, CWallet *wallet, OptionsModel *optionsModel, QObject *parent = 0);
     ~WalletModel();
 
     enum StatusCode // Returned by sendCoins
@@ -115,22 +119,24 @@ public:
         TransactionCreationFailed, // Error returned when wallet is still locked
         TransactionCommitFailed,
         AnonymizeOnlyUnlocked,
-        InsaneFee
+        AbsurdFee,
+        PaymentRequestExpired
     };
 
-    enum EncryptionStatus {
-        Unencrypted,                 // !wallet->IsCrypted()
-        Locked,                      // wallet->IsCrypted() && wallet->IsLocked()
-        Unlocked,                    // wallet->IsCrypted() && !wallet->IsLocked()
-        UnlockedForAnonymizationOnly // wallet->IsCrypted() && !wallet->IsLocked() && wallet->fWalletUnlockAnonymizeOnly
+    enum EncryptionStatus
+    {
+        Unencrypted,  // !wallet->IsCrypted()
+        Locked,       // wallet->IsCrypted() && wallet->IsLocked()
+        Unlocked,      // wallet->IsCrypted() && !wallet->IsLocked()
+        UnlockedForAnonymizationOnly     // wallet->IsCrypted() && !wallet->IsLocked() && wallet->fWalletUnlockAnonymizeOnly
     };
 
-    OptionsModel* getOptionsModel();
-    AddressTableModel* getAddressTableModel();
-    TransactionTableModel* getTransactionTableModel();
-    RecentRequestsTableModel* getRecentRequestsTableModel();
+    OptionsModel *getOptionsModel();
+    AddressTableModel *getAddressTableModel();
+    TransactionTableModel *getTransactionTableModel();
+    RecentRequestsTableModel *getRecentRequestsTableModel();
 
-    CAmount getBalance(const CCoinControl* coinControl = NULL) const;
+    CAmount getBalance(const CCoinControl *coinControl = NULL) const;
     CAmount getUnconfirmedBalance() const;
     CAmount getImmatureBalance() const;
     CAmount getAnonymizedBalance() const;
@@ -139,65 +145,58 @@ public:
     CAmount getWatchUnconfirmedBalance() const;
     CAmount getWatchImmatureBalance() const;
     EncryptionStatus getEncryptionStatus() const;
-    CKey generateNewKey() const; //for temporary paper wallet key generation
-    bool setAddressBook(const CTxDestination& address, const string& strName, const string& strPurpose);
-    void encryptKey(const CKey key, const std::string& pwd, const std::string& slt, std::vector<unsigned char>& crypted);
-    void decryptKey(const std::vector<unsigned char>& crypted, const std::string& slt, const std::string& pwd, CKey& key);
 
     // Check address for validity
-    bool validateAddress(const QString& address);
+    bool validateAddress(const QString &address);
 
     // Return status record for SendCoins, contains error id + information
-    struct SendCoinsReturn {
-        SendCoinsReturn(StatusCode status = OK) : status(status) {}
+    struct SendCoinsReturn
+    {
+        SendCoinsReturn(StatusCode status = OK):
+            status(status) {}
         StatusCode status;
     };
 
     // prepare transaction for getting txfee before sending coins
-    SendCoinsReturn prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl = NULL);
+    SendCoinsReturn prepareTransaction(WalletModelTransaction &transaction, const CCoinControl *coinControl = NULL);
 
     // Send coins to a list of recipients
-    SendCoinsReturn sendCoins(WalletModelTransaction& transaction);
+    SendCoinsReturn sendCoins(WalletModelTransaction &transaction);
 
     // Wallet encryption
-    bool setWalletEncrypted(bool encrypted, const SecureString& passphrase);
+    bool setWalletEncrypted(bool encrypted, const SecureString &passphrase);
     // Passphrase only needed when unlocking
-    bool setWalletLocked(bool locked, const SecureString& passPhrase = SecureString(), bool anonymizeOnly = false);
-    bool changePassphrase(const SecureString& oldPass, const SecureString& newPass);
+    bool setWalletLocked(bool locked, const SecureString &passPhrase=SecureString(), bool anonymizeOnly=false);
+    bool changePassphrase(const SecureString &oldPass, const SecureString &newPass);
     // Is wallet unlocked for anonymization only?
     bool isAnonymizeOnlyUnlocked();
     // Wallet backup
-    bool backupWallet(const QString& filename);
+    bool backupWallet(const QString &filename);
 
     // RAI object for unlocking wallet, returned by requestUnlock()
     class UnlockContext
     {
     public:
-        UnlockContext(WalletModel* wallet, bool valid, bool relock);
+        UnlockContext(WalletModel *wallet, bool valid, bool relock);
         ~UnlockContext();
 
         bool isValid() const { return valid; }
 
         // Copy operator and constructor transfer the context
         UnlockContext(const UnlockContext& obj) { CopyFrom(obj); }
-        UnlockContext& operator=(const UnlockContext& rhs)
-        {
-            CopyFrom(rhs);
-            return *this;
-        }
-
+        UnlockContext& operator=(const UnlockContext& rhs) { CopyFrom(rhs); return *this; }
     private:
-        WalletModel* wallet;
+        WalletModel *wallet;
         bool valid;
         mutable bool relock; // mutable, as it can be set to false by copying
 
         void CopyFrom(const UnlockContext& rhs);
     };
 
-    UnlockContext requestUnlock(bool relock = false);
+    UnlockContext requestUnlock(bool relock);
 
-    bool getPubKey(const CKeyID& address, CPubKey& vchPubKeyOut) const;
-    bool isMine(CBitcoinAddress address);
+    bool getPubKey(const CKeyID &address, CPubKey& vchPubKeyOut) const;
+    bool havePrivKey(const CKeyID &address) const;
     void getOutputs(const std::vector<COutPoint>& vOutpoints, std::vector<COutput>& vOutputs);
     bool isSpent(const COutPoint& outpoint) const;
     void listCoins(std::map<QString, std::vector<COutput> >& mapCoins) const;
@@ -208,21 +207,20 @@ public:
     void listLockedCoins(std::vector<COutPoint>& vOutpts);
 
     void loadReceiveRequests(std::vector<std::string>& vReceiveRequests);
-    bool saveReceiveRequest(const std::string& sAddress, const int64_t nId, const std::string& sRequest);
+    bool saveReceiveRequest(const std::string &sAddress, const int64_t nId, const std::string &sRequest);
 
 private:
-    CWallet* wallet;
+    CWallet *wallet;
     bool fHaveWatchOnly;
-    bool fHaveMultiSig;
     bool fForceCheckBalanceChanged;
 
     // Wallet has an options model for wallet-specific options
     // (transaction fee, for example)
-    OptionsModel* optionsModel;
+    OptionsModel *optionsModel;
 
-    AddressTableModel* addressTableModel;
-    TransactionTableModel* transactionTableModel;
-    RecentRequestsTableModel* recentRequestsTableModel;
+    AddressTableModel *addressTableModel;
+    TransactionTableModel *transactionTableModel;
+    RecentRequestsTableModel *recentRequestsTableModel;
 
     // Cache some values to be able to detect changes
     CAmount cachedBalance;
@@ -237,15 +235,16 @@ private:
     int cachedTxLocks;
     int cachedObfuscationRounds;
 
-    QTimer* pollTimer;
+    QTimer *pollTimer;
 
     void subscribeToCoreSignals();
     void unsubscribeFromCoreSignals();
     void checkBalanceChanged();
 
-signals:
+Q_SIGNALS:
     // Signal that balance in wallet changed
-    void balanceChanged(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, const CAmount& anonymizedBalance, const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
+    void balanceChanged(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance, const CAmount& anonymizedBalance,
+                        const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance);
 
     // Encryption status of wallet changed
     void encryptionStatusChanged(int status);
@@ -256,31 +255,26 @@ signals:
     void requireUnlock();
 
     // Fired when a message should be reported to the user
-    void message(const QString& title, const QString& message, unsigned int style);
+    void message(const QString &title, const QString &message, unsigned int style);
 
     // Coins sent: from wallet, to recipient, in (serialized) transaction:
     void coinsSent(CWallet* wallet, SendCoinsRecipient recipient, QByteArray transaction);
 
     // Show progress dialog e.g. for rescan
-    void showProgress(const QString& title, int nProgress);
+    void showProgress(const QString &title, int nProgress);
 
     // Watch-only address added
     void notifyWatchonlyChanged(bool fHaveWatchonly);
 
-    // MultiSig address added
-    void notifyMultiSigChanged(bool fHaveMultiSig);
-
-public slots:
+public Q_SLOTS:
     /* Wallet status might have changed */
     void updateStatus();
     /* New transaction, or transaction changed status */
     void updateTransaction();
     /* New, updated or removed address book entry */
-    void updateAddressBook(const QString& address, const QString& label, bool isMine, const QString& purpose, int status);
+    void updateAddressBook(const QString &address, const QString &label, bool isMine, const QString &purpose, int status);
     /* Watch-only added */
     void updateWatchOnlyFlag(bool fHaveWatchonly);
-    /* MultiSig added */
-    void updateMultiSigFlag(bool fHaveMultiSig);
     /* Current, immature or unconfirmed balance might have changed - emit 'balanceChanged' if so */
     void pollBalanceChanged();
 };

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2013 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,9 +12,9 @@
 #include "arith_uint256.h"
 #include <string>
 #include "version.h"
+#include "test/test_folm.h"
 
-BOOST_AUTO_TEST_SUITE(arith_uint256_tests)
-///BOOST_FIXTURE_TEST_SUITE(arith_uint256_tests, BasicTestingSetup)
+BOOST_FIXTURE_TEST_SUITE(arith_uint256_tests, BasicTestingSetup)
 
 /// Convert vector to arith_uint256, via uint256 blob
 inline arith_uint256 arith_uint256V(const std::vector<unsigned char>& vch)
@@ -112,7 +112,7 @@ BOOST_AUTO_TEST_CASE( basics ) // constructors, equality, inequality
     BOOST_CHECK( (R1L & arith_uint256("0xffffffffffffffff")) == arith_uint256(R1LLow64));
     BOOST_CHECK(ZeroL == arith_uint256(0));
     BOOST_CHECK(OneL == arith_uint256(1));
-    BOOST_CHECK(arith_uint256("0xffffffffffffffff") == arith_uint256(0xffffffffffffffffULL));
+    BOOST_CHECK(arith_uint256("0xffffffffffffffff") = arith_uint256(0xffffffffffffffffULL));
 
     // Assignment (from base_uint)
     arith_uint256 tmpL = ~ZeroL; BOOST_CHECK(tmpL == ~ZeroL);

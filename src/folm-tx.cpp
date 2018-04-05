@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "base58.h"
@@ -8,11 +8,11 @@
 #include "consensus/consensus.h"
 #include "core_io.h"
 #include "keystore.h"
-#include "primitives/block.h" // for MAX_BLOCK_SIZE
+#include "policy/policy.h"
 #include "primitives/transaction.h"
 #include "script/script.h"
 #include "script/sign.h"
-#include "univalue.h"
+#include <univalue.h>
 #include "util.h"
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
@@ -25,7 +25,7 @@
 using namespace std;
 
 static bool fCreateBlank;
-static map<string, UniValue> registers;
+static map<string,UniValue> registers;
 
 static bool AppInitRawTx(int argc, char* argv[])
 {
@@ -44,13 +44,14 @@ static bool AppInitRawTx(int argc, char* argv[])
 
     fCreateBlank = GetBoolArg("-create", false);
 
-    if (argc<2 || mapArgs.count("-?") || mapArgs.count("-h") || mapArgs.count("-help")) {
+    if (argc<2 || mapArgs.count("-?") || mapArgs.count("-h") || mapArgs.count("-help"))
+    {
         // First part of help message is specific to this utility
         std::string strUsage = _("Folm Core folm-tx utility version") + " " + FormatFullVersion() + "\n\n" +
-                               _("Usage:") + "\n" +
-                               "  folm-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded folm transaction") + "\n" +
-                               "  folm-tx [options] -create [commands]   " + _("Create hex-encoded folm transaction") + "\n" +
-                               "\n";
+            _("Usage:") + "\n" +
+              "  folm-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded folm transaction") + "\n" +
+              "  folm-tx [options] -create [commands]   " + _("Create hex-encoded folm transaction") + "\n" +
+              "\n";
 
         fprintf(stdout, "%s", strUsage.c_str());
 
@@ -62,7 +63,6 @@ static bool AppInitRawTx(int argc, char* argv[])
         AppendParamsHelpMessages(strUsage);
 
         fprintf(stdout, "%s", strUsage.c_str());
-
 
         strUsage = HelpMessageGroup(_("Commands:"));
         strUsage += HelpMessageOpt("delin=N", _("Delete input N from TX"));
@@ -128,7 +128,7 @@ static void RegisterLoad(const string& strInput)
     string key = strInput.substr(0, pos);
     string filename = strInput.substr(pos + 1, string::npos);
 
-    FILE* f = fopen(filename.c_str(), "r");
+    FILE *f = fopen(filename.c_str(), "r");
     if (!f) {
         string strErr = "Cannot open file " + filename;
         throw runtime_error(strErr);
@@ -145,12 +145,13 @@ static void RegisterLoad(const string& strInput)
         valStr.insert(valStr.size(), buf, bread);
     }
 
-    if (ferror(f)) {
+    int error = ferror(f);
+    fclose(f);
+
+    if (error) {
         string strErr = "Error reading file " + filename;
         throw runtime_error(strErr);
     }
-
-    fclose(f);
 
     // evaluate as JSON buffer register
     RegisterSetJson(key, valStr);
@@ -162,7 +163,7 @@ static void MutateTxVersion(CMutableTransaction& tx, const string& cmdVal)
     if (newVersion < 1 || newVersion > CTransaction::CURRENT_VERSION)
         throw runtime_error("Invalid TX version requested");
 
-    tx.nVersion = (int)newVersion;
+    tx.nVersion = (int) newVersion;
 }
 
 static void MutateTxLocktime(CMutableTransaction& tx, const string& cmdVal)
@@ -171,7 +172,7 @@ static void MutateTxLocktime(CMutableTransaction& tx, const string& cmdVal)
     if (newLocktime < 0LL || newLocktime > 0xffffffffLL)
         throw runtime_error("Invalid TX locktime requested");
 
-    tx.nLockTime = (unsigned int)newLocktime;
+    tx.nLockTime = (unsigned int) newLocktime;
 }
 
 static void MutateTxAddInput(CMutableTransaction& tx, const string& strInput)
@@ -231,6 +232,7 @@ static void MutateTxAddOutAddr(CMutableTransaction& tx, const string& strInput)
     CTxOut txout(value, scriptPubKey);
     tx.vout.push_back(txout);
 }
+
 static void MutateTxAddOutData(CMutableTransaction& tx, const string& strInput)
 {
     CAmount value = 0;
@@ -311,15 +313,15 @@ static void MutateTxDelOutput(CMutableTransaction& tx, const string& strOutIdx)
 
 static const unsigned int N_SIGHASH_OPTS = 6;
 static const struct {
-    const char* flagStr;
+    const char *flagStr;
     int flags;
 } sighashOptions[N_SIGHASH_OPTS] = {
     {"ALL", SIGHASH_ALL},
     {"NONE", SIGHASH_NONE},
     {"SINGLE", SIGHASH_SINGLE},
-    {"ALL|ANYONECANPAY", SIGHASH_ALL | SIGHASH_ANYONECANPAY},
-    {"NONE|ANYONECANPAY", SIGHASH_NONE | SIGHASH_ANYONECANPAY},
-    {"SINGLE|ANYONECANPAY", SIGHASH_SINGLE | SIGHASH_ANYONECANPAY},
+    {"ALL|ANYONECANPAY", SIGHASH_ALL|SIGHASH_ANYONECANPAY},
+    {"NONE|ANYONECANPAY", SIGHASH_NONE|SIGHASH_ANYONECANPAY},
+    {"SINGLE|ANYONECANPAY", SIGHASH_SINGLE|SIGHASH_ANYONECANPAY},
 };
 
 static bool findSighashFlags(int& flags, const string& flagStr)
@@ -336,14 +338,14 @@ static bool findSighashFlags(int& flags, const string& flagStr)
     return false;
 }
 
-uint256 ParseHashUO(map<string, UniValue>& o, string strKey)
+uint256 ParseHashUO(map<string,UniValue>& o, string strKey)
 {
     if (!o.count(strKey))
         return uint256();
     return ParseHashUV(o[strKey], strKey);
 }
 
-vector<unsigned char> ParseHexUO(map<string, UniValue>& o, string strKey)
+vector<unsigned char> ParseHexUO(map<string,UniValue>& o, string strKey)
 {
     if (!o.count(strKey)) {
         vector<unsigned char> emptyVec;
@@ -399,7 +401,7 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
             if (!prevOut.isObject())
                 throw runtime_error("expected prevtxs internal object");
 
-            map<string, UniValue::VType> types = boost::assign::map_list_of("txid", UniValue::VSTR)("vout", UniValue::VNUM)("scriptPubKey", UniValue::VSTR);
+            map<string,UniValue::VType> types = boost::assign::map_list_of("txid", UniValue::VSTR)("vout",UniValue::VNUM)("scriptPubKey",UniValue::VSTR);
             if (!prevOut.checkObject(types))
                 throw runtime_error("prevtxs internal object typecheck fail");
 
@@ -416,12 +418,12 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
                 CCoinsModifier coins = view.ModifyCoins(txid);
                 if (coins->IsAvailable(nOut) && coins->vout[nOut].scriptPubKey != scriptPubKey) {
                     string err("Previous output scriptPubKey mismatch:\n");
-                    err = err + ScriptToAsmStr(coins->vout[nOut].scriptPubKey) + "\nvs:\n" +
-                            ScriptToAsmStr(scriptPubKey);
+                    err = err + ScriptToAsmStr(coins->vout[nOut].scriptPubKey) + "\nvs:\n"+
+                        ScriptToAsmStr(scriptPubKey);
                     throw runtime_error(err);
                 }
                 if ((unsigned int)nOut >= coins->vout.size())
-                    coins->vout.resize(nOut + 1);
+                    coins->vout.resize(nOut+1);
                 coins->vout[nOut].scriptPubKey = scriptPubKey;
                 coins->vout[nOut].nValue = 0; // we don't know the actual output value
             }
@@ -458,7 +460,7 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
             SignSignature(keystore, prevPubKey, mergedTx, i, nHashType);
 
         // ... and merge in other signatures:
-        BOOST_FOREACH (const CTransaction& txv, txVariants) {
+        BOOST_FOREACH(const CTransaction& txv, txVariants) {
             txin.scriptSig = CombineSignatures(prevPubKey, mergedTx, i, txin.scriptSig, txv.vin[i].scriptSig);
         }
         if (!VerifyScript(txin.scriptSig, prevPubKey, STANDARD_SCRIPT_VERIFY_FLAGS, MutableTransactionSignatureChecker(&mergedTx, i)))
@@ -472,6 +474,7 @@ static void MutateTxSign(CMutableTransaction& tx, const string& flagStr)
 
     tx = mergedTx;
 }
+
 class Secp256k1Init
 {
     ECCVerifyHandle globalVerifyHandle;
@@ -485,8 +488,8 @@ public:
     }
 };
 
-
-static void MutateTx(CMutableTransaction& tx, const string& command, const string& commandVal)
+static void MutateTx(CMutableTransaction& tx, const string& command,
+                     const string& commandVal)
 {
     boost::scoped_ptr<Secp256k1Init> ecc;
 
@@ -510,11 +513,10 @@ static void MutateTx(CMutableTransaction& tx, const string& command, const strin
         MutateTxAddOutScript(tx, commandVal);
 
     else if (command == "sign") {
-        if (!ecc) {
-            ecc.reset(new Secp256k1Init());
-        }
+        if (!ecc) { ecc.reset(new Secp256k1Init()); }
         MutateTxSign(tx, commandVal);
     }
+
     else if (command == "load")
         RegisterLoad(commandVal);
 
@@ -600,7 +602,7 @@ static int CommandLineRawTx(int argc, char* argv[])
 
             // param: hex-encoded folm transaction
             string strHexTx(argv[1]);
-            if (strHexTx == "-") // "-" implies standard input
+            if (strHexTx == "-")                 // "-" implies standard input
                 strHexTx = readStdin();
 
             if (!DecodeHexTx(txDecodeTmp, strHexTx))
@@ -631,10 +633,12 @@ static int CommandLineRawTx(int argc, char* argv[])
 
     catch (const boost::thread_interrupted&) {
         throw;
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         strPrint = string("error: ") + e.what();
         nRet = EXIT_FAILURE;
-    } catch (...) {
+    }
+    catch (...) {
         PrintExceptionContinue(NULL, "CommandLineRawTx()");
         throw;
     }
@@ -650,9 +654,10 @@ int main(int argc, char* argv[])
     SetupEnvironment();
 
     try {
-        if (!AppInitRawTx(argc, argv))
+        if(!AppInitRawTx(argc, argv))
             return EXIT_FAILURE;
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         PrintExceptionContinue(&e, "AppInitRawTx()");
         return EXIT_FAILURE;
     } catch (...) {
@@ -663,7 +668,8 @@ int main(int argc, char* argv[])
     int ret = EXIT_FAILURE;
     try {
         ret = CommandLineRawTx(argc, argv);
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         PrintExceptionContinue(&e, "CommandLineRawTx()");
     } catch (...) {
         PrintExceptionContinue(NULL, "CommandLineRawTx()");

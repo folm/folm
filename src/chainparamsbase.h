@@ -28,14 +28,12 @@ protected:
 
     int nRPCPort;
     std::string strDataDir;
-    Network networkID;
 };
 
 /**
  * Append the help messages for the chainparams options to the
  * parameter string.
  */
-
 void AppendParamsHelpMessages(std::string& strUsage, bool debugHelp=true);
 
 /**

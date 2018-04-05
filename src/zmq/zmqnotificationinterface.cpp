@@ -37,10 +37,8 @@ CZMQNotificationInterface* CZMQNotificationInterface::CreateWithArguments(const 
 
     factories["pubhashblock"] = CZMQAbstractNotifier::Create<CZMQPublishHashBlockNotifier>;
     factories["pubhashtx"] = CZMQAbstractNotifier::Create<CZMQPublishHashTransactionNotifier>;
-    factories["pubhashtxlock"] = CZMQAbstractNotifier::Create<CZMQPublishHashTransactionLockNotifier>;
     factories["pubrawblock"] = CZMQAbstractNotifier::Create<CZMQPublishRawBlockNotifier>;
     factories["pubrawtx"] = CZMQAbstractNotifier::Create<CZMQPublishRawTransactionNotifier>;
-    factories["pubrawtxlock"] = CZMQAbstractNotifier::Create<CZMQPublishRawTransactionLockNotifier>;
 
     for (std::map<std::string, CZMQNotifierFactory>::const_iterator i=factories.begin(); i!=factories.end(); ++i)
     {
@@ -102,6 +100,7 @@ bool CZMQNotificationInterface::Initialize()
 
     if (i!=notifiers.end())
     {
+        Shutdown();
         return false;
     }
 
@@ -149,23 +148,6 @@ void CZMQNotificationInterface::SyncTransaction(const CTransaction &tx, const CB
     {
         CZMQAbstractNotifier *notifier = *i;
         if (notifier->NotifyTransaction(tx))
-        {
-            i++;
-        }
-        else
-        {
-            notifier->Shutdown();
-            i = notifiers.erase(i);
-        }
-    }
-}
-
-void CZMQNotificationInterface::NotifyTransactionLock(const CTransaction &tx)
-{
-    for (std::list<CZMQAbstractNotifier*>::iterator i = notifiers.begin(); i!=notifiers.end(); )
-    {
-        CZMQAbstractNotifier *notifier = *i;
-        if (notifier->NotifyTransactionLock(tx))
         {
             i++;
         }

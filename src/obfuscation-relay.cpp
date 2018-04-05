@@ -25,9 +25,13 @@ std::string CObfuScationRelay::ToString()
 {
     std::ostringstream info;
 
-    info << "vin: " << vinMasternode.ToString() << " nBlockHeight: " << (int)nBlockHeight << " nRelayType: " << (int)nRelayType << " in " << in.ToString() << " out " << out.ToString();
-
-    return info.str();
+    info << "vin: " << vinMasternode.ToString() <<
+        " nBlockHeight: " << (int)nBlockHeight <<
+        " nRelayType: "  << (int)nRelayType <<
+        " in " << in.ToString() <<
+        " out " << out.ToString();
+        
+    return info.str();   
 }
 
 bool CObfuScationRelay::Sign(std::string strSharedKey)
@@ -38,17 +42,18 @@ bool CObfuScationRelay::Sign(std::string strSharedKey)
     CPubKey pubkey2;
     std::string errorMessage = "";
 
-    if (!obfuScationSigner.SetKey(strSharedKey, errorMessage, key2, pubkey2)) {
-        LogPrintf("CObfuScationRelay():Sign - ERROR: Invalid shared key: '%s'\n", errorMessage.c_str());
+    if(!obfuScationSigner.SetKey(strSharedKey, errorMessage, key2, pubkey2))
+    {
+        LogPrintf("CObfuScationRelay():Sign - ERROR: Invalid shared key: '%s'\n", errorMessage);
         return false;
     }
 
-    if (!obfuScationSigner.SignMessage(strMessage, errorMessage, vchSig2, key2)) {
+    if(!obfuScationSigner.SignMessage(strMessage, errorMessage, vchSig2, key2)) {
         LogPrintf("CObfuScationRelay():Sign - Sign message failed\n");
         return false;
     }
 
-    if (!obfuScationSigner.VerifyMessage(pubkey2, vchSig2, strMessage, errorMessage)) {
+    if(!obfuScationSigner.VerifyMessage(pubkey2, vchSig2, strMessage, errorMessage)) {
         LogPrintf("CObfuScationRelay():Sign - Verify message failed\n");
         return false;
     }
@@ -64,12 +69,13 @@ bool CObfuScationRelay::VerifyMessage(std::string strSharedKey)
     CPubKey pubkey2;
     std::string errorMessage = "";
 
-    if (!obfuScationSigner.SetKey(strSharedKey, errorMessage, key2, pubkey2)) {
-        LogPrintf("CObfuScationRelay()::VerifyMessage - ERROR: Invalid shared key: '%s'\n", errorMessage.c_str());
+    if(!obfuScationSigner.SetKey(strSharedKey, errorMessage, key2, pubkey2))
+    {
+        LogPrintf("CObfuScationRelay()::VerifyMessage - ERROR: Invalid shared key: '%s'\n", errorMessage);
         return false;
     }
 
-    if (!obfuScationSigner.VerifyMessage(pubkey2, vchSig2, strMessage, errorMessage)) {
+    if(!obfuScationSigner.VerifyMessage(pubkey2, vchSig2, strMessage, errorMessage)) {
         LogPrintf("CObfuScationRelay()::VerifyMessage - Verify message failed\n");
         return false;
     }
@@ -79,13 +85,12 @@ bool CObfuScationRelay::VerifyMessage(std::string strSharedKey)
 
 void CObfuScationRelay::Relay()
 {
-    int nCount = std::min(mnodeman.CountEnabled(ActiveProtocol()), 20);
-    int nRank1 = (rand() % nCount) + 1;
-    int nRank2 = (rand() % nCount) + 1;
+    int nCount = std::min(mnodeman.CountEnabled(MIN_POOL_PEER_PROTO_VERSION), 20);
+    int nRank1 = (rand() % nCount)+1; 
+    int nRank2 = (rand() % nCount)+1; 
 
     //keep picking another second number till we get one that doesn't match
-    while (nRank1 == nRank2)
-        nRank2 = (rand() % nCount) + 1;
+    while(nRank1 == nRank2) nRank2 = (rand() % nCount)+1;
 
     //printf("rank 1 - rank2 %d %d \n", nRank1, nRank2);
 
@@ -96,12 +101,12 @@ void CObfuScationRelay::Relay()
 
 void CObfuScationRelay::RelayThroughNode(int nRank)
 {
-    CMasternode* pmn = mnodeman.GetMasternodeByRank(nRank, nBlockHeight, ActiveProtocol());
+    CMasternode* pmn = mnodeman.GetMasternodeByRank(nRank, nBlockHeight, MIN_POOL_PEER_PROTO_VERSION);
 
-    if (pmn != NULL) {
+    if(pmn != NULL){
         //printf("RelayThroughNode %s\n", pmn->addr.ToString().c_str());
         CNode* pnode = ConnectNode((CAddress)pmn->addr, NULL, false);
-        if (pnode) {
+        if(pnode){
             //printf("Connected\n");
             pnode->PushMessage("dsr", (*this));
             pnode->Release();

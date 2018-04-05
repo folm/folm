@@ -3,10 +3,10 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "hash.h"
-#include "crypto/hmac_sha512.h"
-#include "crypto/scrypt.h"
 #include "crypto/common.h"
+#include "crypto/hmac_sha512.h"
 #include "pubkey.h"
+
 
 inline uint32_t ROTL32(uint32_t x, int8_t r)
 {
@@ -17,7 +17,8 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 {
     // The following is MurmurHash3 (x86_32), see http://code.google.com/p/smhasher/source/browse/trunk/MurmurHash3.cpp
     uint32_t h1 = nHashSeed;
-    if (vDataToHash.size() > 0) {
+    if (vDataToHash.size() > 0)
+    {
         const uint32_t c1 = 0xcc9e2d51;
         const uint32_t c2 = 0x1b873593;
 
@@ -46,16 +47,16 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
         uint32_t k1 = 0;
 
         switch (vDataToHash.size() & 3) {
-            case 3:
-                k1 ^= tail[2] << 16;
-            case 2:
-                k1 ^= tail[1] << 8;
-            case 1:
-                k1 ^= tail[0];
-                k1 *= c1;
-                k1 = ROTL32(k1, 15);
-                k1 *= c2;
-                h1 ^= k1;
+        case 3:
+            k1 ^= tail[2] << 16;
+        case 2:
+            k1 ^= tail[1] << 8;
+        case 1:
+            k1 ^= tail[0];
+            k1 *= c1;
+            k1 = ROTL32(k1, 15);
+            k1 *= c2;
+            h1 ^= k1;
         };
     }
 
@@ -76,12 +77,7 @@ void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char he
     unsigned char num[4];
     num[0] = (nChild >> 24) & 0xFF;
     num[1] = (nChild >> 16) & 0xFF;
-    num[2] = (nChild >> 8) & 0xFF;
-    num[3] = (nChild >> 0) & 0xFF;
+    num[2] = (nChild >>  8) & 0xFF;
+    num[3] = (nChild >>  0) & 0xFF;
     CHMAC_SHA512(chainCode.begin(), chainCode.size()).Write(&header, 1).Write(data, 32).Write(num, 4).Finalize(output);
-}
-
-void scrypt_hash(const char* pass, unsigned int pLen, const char* salt, unsigned int sLen, char* output, unsigned int N, unsigned int r, unsigned int p, unsigned int dkLen)
-{
-    scrypt(pass, pLen, salt, sLen, output, N, r, p, dkLen);
 }

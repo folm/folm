@@ -14,7 +14,7 @@ To install:
 	sudo update-desktop-database
 
 If you build yourself, you will either need to modify the paths in
-the .desktop file or copy or symlink your folmqt binary to `/usr/bin`
+the .desktop file or copy or symlink your folm-qt binary to `/usr/bin`
 and the `../../share/pixmaps/folm128.png` to `/usr/share/pixmaps`
 
 folm-qt.protocol (KDE)

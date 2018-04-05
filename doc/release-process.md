@@ -1,265 +1,203 @@
 Release Process
 ====================
 
-Before every release candidate:
+* Update translations, see [translation_process.md](https://github.com/folmpay/folm/blob/master/doc/translation_process.md#syncing-with-transifex)
+* Update hardcoded [seeds](/contrib/seeds)
 
-* Update translations (ping Fuzzbawls on Slack) see [translation_process.md](https://github.com/folm-crypto/Folm/blob/master/doc/translation_process.md#synchronising-translations).
+* * *
 
-Before every minor and major release:
-
-* Update version in `configure.ac` (don't forget to set `CLIENT_VERSION_IS_RELEASE` to `true`)
-* Write release notes (see below)
-
-Before every major release:
-
-* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/bitcoin/bitcoin/pull/7415) for an example.
-* Update [`BLOCK_CHAIN_SIZE`](/src/qt/intro.cpp) to the current size plus some overhead.
-* Update `src/chainparams.cpp` with statistics about the transaction count and rate.
-* Update version of `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
-
-### First time / New builders
-
-If you're using the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)), then at this point you should run it with the "--setup" command. Otherwise ignore this.
-
+###First time / New builders
 Check out the source code in the following directory hierarchy.
 
-    cd /path/to/your/toplevel/build
-    git clone https://github.com/folm-crypto/gitian.sigs.git
-    git clone https://github.com/folm-crypto/folm-detached-sigs.git
-    git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/folm-crypto/folm.git
+	cd /path/to/your/toplevel/build
+	git clone https://github.com/folmpay/gitian.sigs.git
+	git clone https://github.com/folmpay/folm-detached-sigs.git
+	git clone https://github.com/devrandom/gitian-builder.git
+	git clone https://github.com/folmpay/folm.git
 
-### Folm maintainers/release engineers, suggestion for writing release notes
+###Folm maintainers/release engineers, update (commit) version in sources
 
-Write release notes. git shortlog helps a lot, for example:
+	pushd ./folm
+	contrib/verifysfbinaries/verify.sh
+	configure.ac
+	doc/README*
+	doc/Doxyfile
+	contrib/gitian-descriptors/*.yml
+	src/clientversion.h (change CLIENT_VERSION_IS_RELEASE to true)
 
-    git shortlog --no-merges v(current version, e.g. 0.7.2)..v(new version, e.g. 0.8.0)
+	# tag version in git
 
+	git tag -s v(new version, e.g. 0.8.0)
 
-Generate list of authors:
+	# write release notes. git shortlog helps a lot, for example:
 
-    git log --format='%aN' "$*" | sort -ui | sed -e 's/^/- /'
+	git shortlog --no-merges v(current version, e.g. 0.7.2)..v(new version, e.g. 0.8.0)
+	popd
 
-Tag version (or release candidate) in git
+* * *
 
-    git tag -s v(new version, e.g. 0.8.0)
+###Setup and perform Gitian builds
 
-### Setup and perform Gitian builds
+ Setup Gitian descriptors:
 
-If you're using the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)), then at this point you should run it with the "--build" command. Otherwise ignore this.
+	pushd ./folm
+	export SIGNER=(your Gitian key, ie bluematt, sipa, etc)
+	export VERSION=(new version, e.g. 0.8.0)
+	git fetch
+	git checkout v${VERSION}
+	popd
 
-Setup Gitian descriptors:
+  Ensure your gitian.sigs are up-to-date if you wish to gverify your builds against other Gitian signatures.
 
-    pushd ./folm
-    export SIGNER=(your Gitian key, ie bluematt, sipa, etc)
-    export VERSION=(new version, e.g. 0.8.0)
-    git fetch
-    git checkout v${VERSION}
-    popd
+	pushd ./gitian.sigs
+	git pull
+	popd
 
-Ensure your gitian.sigs are up-to-date if you wish to gverify your builds against other Gitian signatures.
+  Ensure gitian-builder is up-to-date to take advantage of new caching features (`e9741525c` or later is recommended).
 
-    pushd ./gitian.sigs
-    git pull
-    popd
+	pushd ./gitian-builder
+	git pull
 
-Ensure gitian-builder is up-to-date:
+###Fetch and create inputs: (first time, or when dependency versions change)
 
-    pushd ./gitian-builder
-    git pull
-    popd
+	mkdir -p inputs
+	wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+	wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 
-### Fetch and create inputs: (first time, or when dependency versions change)
+ Register and download the Apple SDK: see [OS X readme](README_osx.txt) for details.
 
-    pushd ./gitian-builder
-    mkdir -p inputs
-    wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
-    wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
-    popd
+ https://developer.apple.com/devcenter/download.action?path=/Developer_Tools/xcode_6.1.1/xcode_6.1.1.dmg
 
-Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, and copy it into the inputs directory.
+ Using a Mac, create a tarball for the 10.9 SDK and copy it to the inputs directory:
 
-### Optional: Seed the Gitian sources cache and offline git repositories
+	tar -C /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/ -czf MacOSX10.9.sdk.tar.gz MacOSX10.9.sdk
+
+###Optional: Seed the Gitian sources cache and offline git repositories
 
 By default, Gitian will fetch source files as needed. To cache them ahead of time:
 
-    pushd ./gitian-builder
-    make -C ../folm/depends download SOURCES_PATH=`pwd`/cache/common
-    popd
+	make -C ../folm/depends download SOURCES_PATH=`pwd`/cache/common
 
 Only missing files will be fetched, so this is safe to re-run for each build.
 
 NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from local URLs. For example:
-
-    pushd ./gitian-builder
-    ./bin/gbuild --url folm=/path/to/folm,signature=/path/to/sigs {rest of arguments}
-    popd
-
+```
+./bin/gbuild --url folm=/path/to/folm,signature=/path/to/sigs {rest of arguments}
+```
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign Folm Core for Linux, Windows, and OS X:
+###Build and sign Folm Core for Linux, Windows, and OS X:
 
-    pushd ./gitian-builder
-    ./bin/gbuild --memory 3000 --commit folm=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-linux.yml
-    mv build/out/folm-*.tar.gz build/out/src/folm-*.tar.gz ../
+	./bin/gbuild --commit folm=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-linux.yml
+	mv build/out/folm-*.tar.gz build/out/src/folm-*.tar.gz ../
 
-    ./bin/gbuild --memory 3000 --commit folm=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-win.yml
-    mv build/out/folm-*-win-unsigned.tar.gz inputs/folm-win-unsigned.tar.gz
-    mv build/out/folm-*.zip build/out/folm-*.exe ../
+	./bin/gbuild --commit folm=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-win.yml
+	mv build/out/folm-*-win-unsigned.tar.gz inputs/folm-win-unsigned.tar.gz
+	mv build/out/folm-*.zip build/out/folm-*.exe ../
 
-    ./bin/gbuild --memory 3000 --commit folm=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-osx.yml
-    mv build/out/folm-*-osx-unsigned.tar.gz inputs/folm-osx-unsigned.tar.gz
-    mv build/out/folm-*.tar.gz build/out/folm-*.dmg ../
-    popd
+	./bin/gbuild --commit folm=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-osx.yml
+	mv build/out/folm-*-osx-unsigned.tar.gz inputs/folm-osx-unsigned.tar.gz
+	mv build/out/folm-*.tar.gz build/out/folm-*.dmg ../
+	popd
 
-Build output expected:
+  Build output expected:
 
-  1. source tarball (`folm-${VERSION}.tar.gz`)
-  2. linux 32-bit and 64-bit dist tarballs (`folm-${VERSION}-linux[32|64].tar.gz`)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (`folm-${VERSION}-win[32|64]-setup-unsigned.exe`, `folm-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`folm-${VERSION}-osx-unsigned.dmg`, `folm-${VERSION}-osx64.tar.gz`)
-  5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
+  1. source tarball (folm-${VERSION}.tar.gz)
+  2. linux 32-bit and 64-bit dist tarballs (folm-${VERSION}-linux[32|64].tar.gz)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (folm-${VERSION}-win[32|64]-setup-unsigned.exe, folm-${VERSION}-win[32|64].zip)
+  4. OS X unsigned installer and dist tarball (folm-${VERSION}-osx-unsigned.dmg, folm-${VERSION}-osx64.tar.gz)
+  5. Gitian signatures (in gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/
 
-### Verify other gitian builders signatures to your own. (Optional)
+###Verify other gitian builders signatures to your own. (Optional)
 
-Add other gitian builders keys to your gpg keyring, and/or refresh keys.
+  Add other gitian builders keys to your gpg keyring
 
-    gpg --import folm/contrib/gitian-keys/*.pgp
-    gpg --refresh-keys
+	gpg --import ../folm/contrib/gitian-downloader/*.pgp
 
-Verify the signatures
+  Verify the signatures
 
-    pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../folm/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../folm/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../folm/contrib/gitian-descriptors/gitian-osx.yml
-    popd
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../folm/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../folm/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../folm/contrib/gitian-descriptors/gitian-osx.yml
 
-### Next steps:
+	popd
+
+###Next steps:
 
 Commit your signature to gitian.sigs:
 
-    pushd gitian.sigs
-    git add ${VERSION}-linux/${SIGNER}
-    git add ${VERSION}-win-unsigned/${SIGNER}
-    git add ${VERSION}-osx-unsigned/${SIGNER}
-    git commit -a
-    git push  # Assuming you can push to the gitian.sigs tree
-    popd
+	pushd gitian.sigs
+	git add ${VERSION}-linux/${SIGNER}
+	git add ${VERSION}-win-unsigned/${SIGNER}
+	git add ${VERSION}-osx-unsigned/${SIGNER}
+	git commit -a
+	git push  # Assuming you can push to the gitian.sigs tree
+	popd
 
-Codesigner only: Create Windows/OS X detached signatures:
-- Only one person handles codesigning. Everyone else should skip to the next step.
-- Only once the Windows/OS X builds each have 3 matching signatures may they be signed with their respective release keys.
+  Wait for Windows/OS X detached signatures:
+	Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
+	Detached signatures will then be committed to the [folm-detached-sigs](https://github.com/folmpay/folm-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
-Codesigner only: Sign the osx binary:
+  Create (and optionally verify) the signed OS X binary:
 
-    transfer folm-osx-unsigned.tar.gz to osx for signing
-    tar xf folm-osx-unsigned.tar.gz
-    ./detached-sig-create.sh -s "Key ID"
-    Enter the keychain password and authorize the signature
-    Move signature-osx.tar.gz back to the gitian host
+	pushd ./gitian-builder
+	./bin/gbuild -i --commit signature=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../folm/contrib/gitian-descriptors/gitian-osx-signer.yml
+	mv build/out/folm-osx-signed.dmg ../folm-${VERSION}-osx.dmg
+	popd
 
-Codesigner only: Sign the windows binaries:
+  Create (and optionally verify) the signed Windows binaries:
 
-    tar xf folm-win-unsigned.tar.gz
-    ./detached-sig-create.sh -key /path/to/codesign.key
-    Enter the passphrase for the key when prompted
-    signature-win.tar.gz will be created
-
-Codesigner only: Commit the detached codesign payloads:
-
-    cd ~/folm-detached-sigs
-    checkout the appropriate branch for this release series
-    rm -rf *
-    tar xf signature-osx.tar.gz
-    tar xf signature-win.tar.gz
-    git add -a
-    git commit -m "point to ${VERSION}"
-    git tag -s v${VERSION} HEAD
-    git push the current branch and new tag
-
-Non-codesigners: wait for Windows/OS X detached signatures:
-
-- Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [folm-detached-sigs](https://github.com/folm-crypto/folm-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
-
-Create (and optionally verify) the signed OS X binary:
-
-    pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../folm/contrib/gitian-descriptors/gitian-osx-signer.yml
-    mv build/out/folm-osx-signed.dmg ../folm-${VERSION}-osx.dmg
-    popd
-
-Create (and optionally verify) the signed Windows binaries:
-
-    pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../folm/contrib/gitian-descriptors/gitian-win-signer.yml
-    mv build/out/folm-*win64-setup.exe ../folm-${VERSION}-win64-setup.exe
-    mv build/out/folm-*win32-setup.exe ../folm-${VERSION}-win32-setup.exe
-    popd
+	pushd ./gitian-builder
+	./bin/gbuild -i --commit signature=v${VERSION} ../folm/contrib/gitian-descriptors/gitian-win-signer.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../folm/contrib/gitian-descriptors/gitian-win-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../folm/contrib/gitian-descriptors/gitian-win-signer.yml
+	mv build/out/folm-*win64-setup.exe ../folm-${VERSION}-win64-setup.exe
+	mv build/out/folm-*win32-setup.exe ../folm-${VERSION}-win32-setup.exe
+	popd
 
 Commit your signature for the signed OS X/Windows binaries:
 
-    pushd gitian.sigs
-    git add ${VERSION}-osx-signed/${SIGNER}
-    git add ${VERSION}-win-signed/${SIGNER}
-    git commit -a
-    git push  # Assuming you can push to the gitian.sigs tree
-    popd
+	pushd gitian.sigs
+	git add ${VERSION}-osx-signed/${SIGNER}
+	git add ${VERSION}-win-signed/${SIGNER}
+	git commit -a
+	git push  # Assuming you can push to the gitian.sigs tree
+	popd
+
+-------------------------------------------------------------------------
 
 ### After 3 or more people have gitian-built and their results match:
 
 - Create `SHA256SUMS.asc` for the builds, and GPG-sign it:
-
 ```bash
 sha256sum * > SHA256SUMS
-```
-
-The list of files should be:
-```
-folm-${VERSION}-aarch64-linux-gnu.tar.gz
-folm-${VERSION}-arm-linux-gnueabihf.tar.gz
-folm-${VERSION}-i686-pc-linux-gnu.tar.gz
-folm-${VERSION}-x86_64-linux-gnu.tar.gz
-folm-${VERSION}-osx64.tar.gz
-folm-${VERSION}-osx.dmg
-folm-${VERSION}.tar.gz
-folm-${VERSION}-win32-setup.exe
-folm-${VERSION}-win32.zip
-folm-${VERSION}-win64-setup.exe
-folm-${VERSION}-win64.zip
-```
-The `*-debug*` files generated by the gitian build contain debug symbols
-for troubleshooting by developers. It is assumed that anyone that is interested
-in debugging can run gitian to generate the files for themselves. To avoid
-end-user confusion about which file to pick, as well as save storage
-space *do not upload these to the folm.org server*.
-
-- GPG-sign it, delete the unsigned file:
-```
 gpg --digest-algo sha256 --clearsign SHA256SUMS # outputs SHA256SUMS.asc
 rm SHA256SUMS
 ```
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spurious/nonsensical entry.
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the GitHub release (see below)
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the folm.org server
+
+- Update folm.org
 
 - Announce the release:
 
-  - bitcointalk announcement thread
+  - Release sticky on folmtalk: https://folmtalk.org/index.php?board=1.0 ***TODO***
 
-  - Optionally twitter, reddit /r/folmcoin, ... but this will usually sort out itself
+  - Folm-development mailing list
 
-  - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
+  - Update title of #folmpay on Freenode IRC
 
-  - Create a [new GitHub release](https://github.com/folm-crypto/Folm/releases/new) with a link to the archived release notes.
+  - Optionally reddit /r/Folmpay, ... but this will usually sort out itself
 
-  - Celebrate
+- Notify Flare (?) ***TODO*** so that he can start building [https://launchpad.net/~folmpay/+archive/ubuntu/folm](the PPAs) ***TODO***
+
+- Add release notes for the new version to the directory `doc/release-notes` in git master
+
+- Celebrate

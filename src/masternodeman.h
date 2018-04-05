@@ -1,21 +1,20 @@
-// Copyright (c) 2014-2016 The Dash Core developers
-// Copyright (c) 2015-2017 The PIVX developers
+// Copyright (c) 2014-2016 The Folm Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef MASTERNODEMAN_H
 #define MASTERNODEMAN_H
 
-#include "base58.h"
+#include "sync.h"
+#include "net.h"
 #include "key.h"
+#include "util.h"
+#include "base58.h"
 #include "main.h"
 #include "masternode.h"
-#include "net.h"
-#include "sync.h"
-#include "util.h"
 
-#define MASTERNODES_DUMP_SECONDS (15 * 60)
-#define MASTERNODES_DSEG_SECONDS (3 * 60 * 60)
+#define MASTERNODES_DUMP_SECONDS               (15*60)
+#define MASTERNODES_DSEG_SECONDS               (3*60*60)
 
 using namespace std;
 
@@ -31,7 +30,6 @@ class CMasternodeDB
 private:
     boost::filesystem::path pathMN;
     std::string strMagicMessage;
-
 public:
     enum ReadResult {
         Ok,
@@ -44,7 +42,7 @@ public:
     };
 
     CMasternodeDB();
-    bool Write(const CMasternodeMan& mnodemanToSave);
+    bool Write(const CMasternodeMan &mnodemanToSave);
     ReadResult Read(CMasternodeMan& mnodemanToLoad, bool fDryRun = false);
 };
 
@@ -71,15 +69,14 @@ public:
     map<uint256, CMasternodeBroadcast> mapSeenMasternodeBroadcast;
     // Keep track of all pings I've seen
     map<uint256, CMasternodePing> mapSeenMasternodePing;
-
+    
     // keep track of dsq count to prevent masternodes from gaming obfuscation queue
     int64_t nDsqCount;
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         LOCK(cs);
         READWRITE(vMasternodes);
         READWRITE(mAskedUsForMasternodeList);
@@ -95,10 +92,10 @@ public:
     CMasternodeMan(CMasternodeMan& other);
 
     /// Add an entry
-    bool Add(CMasternode& mn);
+    bool Add(CMasternode &mn);
 
     /// Ask (source) node for mnb
-    void AskForMN(CNode* pnode, CTxIn& vin);
+    void AskForMN(CNode *pnode, CTxIn &vin);
 
     /// Check all Masternodes
     void Check();
@@ -111,12 +108,10 @@ public:
 
     int CountEnabled(int protocolVersion = -1);
 
-    void CountNetworks(int protocolVersion, int& ipv4, int& ipv6, int& onion);
-
     void DsegUpdate(CNode* pnode);
 
     /// Find an entry
-    CMasternode* Find(const CScript& payee);
+    CMasternode* Find(const CScript &payee);
     CMasternode* Find(const CTxIn& vin);
     CMasternode* Find(const CPubKey& pubKeyMasternode);
 
@@ -124,20 +119,16 @@ public:
     CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount);
 
     /// Find a random entry
-    CMasternode* FindRandomNotInVec(std::vector<CTxIn>& vecToExclude, int protocolVersion = -1);
+    CMasternode* FindRandomNotInVec(std::vector<CTxIn> &vecToExclude, int protocolVersion = -1);
 
     /// Get the current winner for this block
-    CMasternode* GetCurrentMasterNode(int mod = 1, int64_t nBlockHeight = 0, int minProtocol = 0);
+    CMasternode* GetCurrentMasterNode(int mod=1, int64_t nBlockHeight=0, int minProtocol=0);
 
-    std::vector<CMasternode> GetFullMasternodeVector()
-    {
-        Check();
-        return vMasternodes;
-    }
+    std::vector<CMasternode> GetFullMasternodeVector() { Check(); return vMasternodes; }
 
-    std::vector<pair<int, CMasternode> > GetMasternodeRanks(int64_t nBlockHeight, int minProtocol = 0);
-    int GetMasternodeRank(const CTxIn& vin, int64_t nBlockHeight, int minProtocol = 0, bool fOnlyActive = true);
-    CMasternode* GetMasternodeByRank(int nRank, int64_t nBlockHeight, int minProtocol = 0, bool fOnlyActive = true);
+    std::vector<pair<int, CMasternode> > GetMasternodeRanks(int64_t nBlockHeight, int minProtocol=0);
+    int GetMasternodeRank(const CTxIn &vin, int64_t nBlockHeight, int minProtocol=0, bool fOnlyActive=true);
+    CMasternode* GetMasternodeByRank(int nRank, int64_t nBlockHeight, int minProtocol=0, bool fOnlyActive=true);
 
     void ProcessMasternodeConnections();
 
@@ -146,14 +137,12 @@ public:
     /// Return the number of (unique) Masternodes
     int size() { return vMasternodes.size(); }
 
-    int stable_size ();
-
     std::string ToString() const;
 
     void Remove(CTxIn vin);
 
-    /// Update masternode list and maps using provided CMasternodeBroadcast
-    void UpdateMasternodeList(CMasternodeBroadcast mnb);
+    int GetEstimatedMasternodes(int nBlock);
+
 };
 
 #endif

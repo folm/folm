@@ -1,4 +1,4 @@
-Format:  http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Bitcoin
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
  irc://#bitcoin@freenode.net
@@ -9,7 +9,6 @@ Copyright: 2009-2016, Bitcoin Core Developers
 License: Expat
 Comment: The Bitcoin Core Developers encompasses the current developers listed on bitcoin.org,
          as well as the numerous contributors to the project.
-
 
 Files: debian/*
 Copyright: 2010-2011, Jonas Smedegaard <dr@jones.dk>
@@ -44,7 +43,42 @@ Files: src/qt/res/icons/add.png
        src/qt/res/icons/transaction*.png
        src/qt/res/icons/tx_output.png
        src/qt/res/icons/warning.png
-Copyright: Folm Developers (and more)
+Copyright: Stephen Hutchings (and more)
+           http://typicons.com
+License: Expat
+Comment: Site: https://github.com/stephenhutchings/typicons.font
+
+Files: src/qt/res/icons/connect*.png
+       src/qt/res/src/connect-*.svg
+Copyright: Marco Falke
+License: Expat
+Comment: Inspired by Stephan Hutchings Typicons
+
+Files: src/qt/res/icons/tx_mined.png
+       src/qt/res/src/mine.svg
+Copyright: Jonas Schnelli
+License: Expat
+Comment:
+
+Files: src/qt/res/icons/clock*.png
+       src/qt/res/icons/eye_*.png
+       src/qt/res/icons/verify.png
+       src/qt/res/icons/tx_in*.png
+       src/qt/res/src/clock_*.svg
+       src/qt/res/src/tx_*.svg
+       src/qt/res/src/verify.svg
+Copyright: Stephan Hutching, Jonas Schnelli
+License: Expat
+Comment: Modifications of Stephan Hutchings Typicons
+
+Files: src/qt/res/icons/about.png
+       src/qt/res/icons/bitcoin.*
+       share/pixmaps/bitcoin*
+       src/qt/res/src/bitcoin.svg
+Copyright: Bitboy, Jonas Schnelli
+License: public-domain
+Comment: Site: https://bitcointalk.org/?topic=1756.0
+
 
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a

@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[folm.qt-translation-012x]
+file_filter = src/qt/locale/folm_<lang>.ts
+source_file = src/qt/locale/folm_en.ts
+source_lang = en

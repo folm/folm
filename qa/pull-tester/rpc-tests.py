@@ -62,10 +62,10 @@ for arg in sys.argv[1:]:
 
 #Set env vars
 buildDir = BUILDDIR
-if "BITCOIND" not in os.environ:
-    os.environ["BITCOIND"] = buildDir + '/src/bitcoind' + EXEEXT
-if "BITCOINCLI" not in os.environ:
-    os.environ["BITCOINCLI"] = buildDir + '/src/bitcoin-cli' + EXEEXT
+if "FOLMD" not in os.environ:
+    os.environ["FOLMD"] = buildDir + '/src/folmd' + EXEEXT
+if "FOLMCLI" not in os.environ:
+    os.environ["FOLMCLI"] = buildDir + '/src/folm-cli' + EXEEXT
 
 #Disable Windows tests by default
 if EXEEXT == ".exe" and "-win" not in opts:
@@ -97,35 +97,35 @@ testScripts = [
     'nodehandling.py',
     'reindex.py',
     'decodescript.py',
-    'p2p-fullblocktest.py',
+    'p2p-fullblocktest.py', # TODO: works, needs folm_hash
     'blockchain.py',
     'disablewallet.py',
-    'sendheaders.py',
+    'sendheaders.py', # TODO: works, needs folm_hash
     'keypool.py',
     'prioritise_transaction.py',
-    'invalidblockrequest.py',
-    'invalidtxrequest.py',
+    'invalidblockrequest.py', # TODO: works, needs folm_hash
+    'invalidtxrequest.py', # TODO: works, needs folm_hash
     'abandonconflict.py',
 ]
 testScriptsExt = [
     'bip65-cltv.py',
-    'bip65-cltv-p2p.py',
-    'bipdersig-p2p.py',
+    'bip65-cltv-p2p.py', # TODO: works, needs folm_hash
+    'bipdersig-p2p.py', # TODO: works, needs folm_hash
     'bipdersig.py',
-    'getblocktemplate_longpoll.py',
+    'getblocktemplate_longpoll.py', # FIXME: "socket.error: [Errno 54] Connection reset by peer" on my Mac, same as  https://github.com/bitcoin/bitcoin/issues/6651
     'getblocktemplate_proposals.py',
     'txn_doublespend.py',
     'txn_clone.py --mineblock',
-    'pruning.py',
+    # 'pruning.py', # Prune mode is incompatible with -txindex.
     'forknotify.py',
     'invalidateblock.py',
-    #    'rpcbind_test.py', #temporary, bug in libevent, see #6655
+#    'rpcbind_test.py', #temporary, bug in libevent, see #6655
     'smartfees.py',
     'maxblocksinflight.py',
-    'p2p-acceptblock.py',
+    'p2p-acceptblock.py', # TODO: works, needs folm_hash
     'mempool_packages.py',
     'maxuploadtarget.py',
-    'replace-by-fee.py',
+    # 'replace-by-fee.py', # RBF is disabled in Folm
 ]
 
 #Enable ZMQ tests
@@ -172,8 +172,8 @@ def runtests():
                     or re.sub(".py$", "", testScriptsExt[i]) in opts):
 
                 print(
-                        "Running 2nd level testscript "
-                        + "%s%s%s ..." % (bold[1], testScriptsExt[i], bold[0]))
+                    "Running 2nd level testscript "
+                    + "%s%s%s ..." % (bold[1], testScriptsExt[i], bold[0]))
                 time0 = time.time()
                 subprocess.check_call(
                     rpcTestDir + testScriptsExt[i] + flags, shell=True)

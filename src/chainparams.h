@@ -9,16 +9,13 @@
 #include "chainparamsbase.h"
 #include "consensus/params.h"
 #include "primitives/block.h"
-#include "consensus/params.h"
 #include "protocol.h"
 
 #include <vector>
 
-
-
 struct CDNSSeedData {
     std::string name, host;
-    CDNSSeedData(const std::string& strName, const std::string& strHost) : name(strName), host(strHost) {}
+    CDNSSeedData(const std::string &strName, const std::string &strHost) : name(strName), host(strHost) {}
 };
 
 struct SeedSpec6 {
@@ -58,33 +55,20 @@ public:
 
     const Consensus::Params& GetConsensus() const { return consensus; }
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
-    const MessageStartChars& MessageStart() const { return pchMessageStart; }
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
-    /** Used to check majorities for block version upgrade */
-    int MaxReorganizationDepth() const { return nMaxReorganizationDepth; }
+
     const CBlock& GenesisBlock() const { return genesis; }
-    bool RequireRPCPassword() const { return fRequireRPCPassword; }
     /** Make miner wait to have peers to avoid wasting work */
     bool MiningRequiresPeers() const { return fMiningRequiresPeers; }
-    /** Headers first syncing is disabled */
-    bool HeadersFirstSyncingActive() const { return fHeadersFirstSyncingActive; };
     /** Default value for -checkmempool and -checkblockindex argument */
     bool DefaultConsistencyChecks() const { return fDefaultConsistencyChecks; }
     /** Policy: Filter transactions that do not match well-defined patterns */
     bool RequireStandard() const { return fRequireStandard; }
     int64_t MaxTipAge() const { return nMaxTipAge; }
     uint64_t PruneAfterHeight() const { return nPruneAfterHeight; }
-
-    int LAST_POW_BLOCK() const { return nLastPOWBlock; }
-    /** Slow Start, Ramp up linearly to block **/
-    int RAMP_TO_BLOCK() const { return nRampToBlock; }
-    int COINBASE_MATURITY() const { return nMaturity; }
-    int ModifierUpgradeBlock() const { return nModifierUpdateBlock; }
-    CAmount MaxMoneyOut() const { return nMaxMoneyOut; }
-
-    /** The masternode count that we will allow the see-saw reward payments to be off by */
-    int MasternodeCountDrift() const { return nMasternodeCountDrift; }
+    /** Skip proof-of-work check: allow mining of any difficulty block */
+    bool SkipProofOfWorkCheck() const { return false; }
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
     /** In the future use NetworkIDString() for RPC fields */
@@ -98,8 +82,7 @@ public:
     int PoolMaxTransactions() const { return nPoolMaxTransactions; }
     std::string SporkKey() const { return strSporkKey; }
     std::string ObfuscationPoolDummyAddress() const { return strObfuscationPoolDummyAddress; }
-    int64_t StartMasternodePayments() const { return nStartMasternodePayments; }
-
+    std::string MasternodePaymentPubKey() const { return strMasternodePaymentsPubKey; }
 protected:
     CChainParams() {}
 
@@ -119,23 +102,20 @@ protected:
     bool fDefaultConsistencyChecks;
     bool fRequireStandard;
     bool fMineBlocksOnDemand;
-    bool fSkipProofOfWorkCheck;
     bool fTestnetToBeDeprecatedFieldRPC;
     CCheckpointData checkpointData;
-    bool fHeadersFirstSyncingActive;
     int nPoolMaxTransactions;
     std::string strSporkKey;
+    std::string strMasternodePaymentsPubKey;
     std::string strObfuscationPoolDummyAddress;
-    int64_t nStartMasternodePayments;
 };
-
-
 
 /**
  * Return the currently selected parameters. This won't change after app
- * startup outside of the unit tests.
+ * startup, except for unit tests.
  */
-const CChainParams& Params();
+const CChainParams &Params();
+
 /**
  * @returns CChainParams for the given BIP70 chain name.
  */

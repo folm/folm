@@ -1,5 +1,5 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Copyright (c) 2011-2013 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_TRANSACTIONFILTERPROXY_H
@@ -16,7 +16,7 @@ class TransactionFilterProxy : public QSortFilterProxyModel
     Q_OBJECT
 
 public:
-    explicit TransactionFilterProxy(QObject* parent = 0);
+    explicit TransactionFilterProxy(QObject *parent = 0);
 
     /** Earliest date that can be represented (far in the past) */
     static const QDateTime MIN_DATE;
@@ -25,18 +25,19 @@ public:
     /** Type filter bit field (all types) */
     static const quint32 ALL_TYPES = 0xFFFFFFFF;
     /** Type filter bit field (all types but Obfuscation-SPAM) */
-    static const quint32 COMMON_TYPES = 4479;
+    static const quint32 COMMON_TYPES = 4223;
 
-    static quint32 TYPE(int type) { return 1 << type; }
+    static quint32 TYPE(int type) { return 1<<type; }
 
-    enum WatchOnlyFilter {
+    enum WatchOnlyFilter
+    {
         WatchOnlyFilter_All,
         WatchOnlyFilter_Yes,
         WatchOnlyFilter_No
     };
 
-    void setDateRange(const QDateTime& from, const QDateTime& to);
-    void setAddressPrefix(const QString& addrPrefix);
+    void setDateRange(const QDateTime &from, const QDateTime &to);
+    void setAddressPrefix(const QString &addrPrefix);
     /**
       @note Type filter takes a bit field created with TYPE() or ALL_TYPES
      */
@@ -50,10 +51,10 @@ public:
     /** Set whether to show conflicted transactions. */
     void setShowInactive(bool showInactive);
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
 protected:
-    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const;
+    bool filterAcceptsRow(int source_row, const QModelIndex & source_parent) const;
 
 private:
     QDateTime dateFrom;

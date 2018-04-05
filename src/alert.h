@@ -1,7 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
-// Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_ALERT_H
@@ -32,14 +31,14 @@ class CUnsignedAlert
 {
 public:
     int nVersion;
-    int64_t nRelayUntil; // when newer nodes stop relaying to newer nodes
+    int64_t nRelayUntil;      // when newer nodes stop relaying to newer nodes
     int64_t nExpiration;
     int nID;
     int nCancel;
     std::set<int> setCancel;
-    int nMinVer;                     // lowest version inclusive
-    int nMaxVer;                     // highest version inclusive
-    std::set<std::string> setSubVer; // empty matches all
+    int nMinVer;            // lowest version inclusive
+    int nMaxVer;            // highest version inclusive
+    std::set<std::string> setSubVer;  // empty matches all
     int nPriority;
 
     // Actions
@@ -50,8 +49,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(this->nVersion);
         nVersion = this->nVersion;
         READWRITE(nRelayUntil);
@@ -89,8 +87,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(vchMsg);
         READWRITE(vchSig);
     }
@@ -110,7 +107,7 @@ public:
     /*
      * Get copy of (active) alert object by hash. Returns a null alert if it is not found.
      */
-    static CAlert getAlertByHash(const uint256& hash);
+    static CAlert getAlertByHash(const uint256 &hash);
 };
 
 #endif // BITCOIN_ALERT_H

@@ -1,8 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2016 The Dash Core developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
+// Copyright (c) 2014-2016 The Folm Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -49,8 +47,11 @@ static const bool DEFAULT_ALERTS = true;
 static const bool DEFAULT_WHITELISTRELAY = true;
 /** Default for DEFAULT_WHITELISTFORCERELAY. */
 static const bool DEFAULT_WHITELISTFORCERELAY = true;
-/** Default for -minrelaytxfee, minimum relay fee for transactions */
-static const unsigned int DEFAULT_MIN_RELAY_TX_FEE = 10000;
+/** Default for -minrelaytxfee, minimum relay fee for transactions
+ * We are ~100 times smaller then bitcoin now (2016-03-01), set minRelayTxFee only 10 times higher
+ * so it's still 10 times lower comparing to bitcoin.
+ */
+static const unsigned int DEFAULT_MIN_RELAY_TX_FEE = 10000; // was 1000
 /** Default for -maxorphantx, maximum number of orphan transactions kept in memory */
 static const unsigned int DEFAULT_MAX_ORPHAN_TRANSACTIONS = 100;
 /** Default for -limitancestorcount, max number of in-mempool ancestors */
@@ -111,13 +112,14 @@ static const bool DEFAULT_TXINDEX = true;
 static const unsigned int DEFAULT_BANSCORE_THRESHOLD = 100;
 
 static const bool DEFAULT_TESTSAFEMODE = false;
-/** Default for -permitrbf */
-static const bool DEFAULT_PERMIT_REPLACEMENT = false;
+/** Default for -mempoolreplacement */
+static const bool DEFAULT_ENABLE_REPLACEMENT = false;
 
 /** Maximum number of headers to announce when relaying blocks with headers message.*/
 static const unsigned int MAX_BLOCKS_TO_ANNOUNCE = 8;
 
-struct BlockHasher {
+struct BlockHasher
+{
     size_t operator()(const uint256& hash) const { return hash.GetCheapHash(); }
 };
 
@@ -143,20 +145,12 @@ extern bool fCheckpointsEnabled;
 extern size_t nCoinCacheUsage;
 extern CFeeRate minRelayTxFee;
 extern bool fAlerts;
-
-extern bool fPermitReplacement;
-
-extern unsigned int nStakeMinAge;
-extern int64_t nLastCoinStakeSearchInterval;
-extern int64_t nLastCoinStakeSearchTime;
-extern int64_t nReserveBalance;
+extern bool fEnableReplacement;
 
 extern std::map<uint256, int64_t> mapRejectedBlocks;
-extern std::map<unsigned int, unsigned int> mapHashedBlocks;
-extern std::set<std::pair<COutPoint, unsigned int> > setStakeSeen;
 
 /** Best header we've seen so far (used for getheaders queries' starting points). */
-extern CBlockIndex* pindexBestHeader;
+extern CBlockIndex *pindexBestHeader;
 
 /** Minimum disk space required - used in CheckDiskSpace() */
 static const uint64_t nMinDiskSpace = 52428800;
@@ -205,11 +199,11 @@ bool ProcessNewBlock(CValidationState& state, const CChainParams& chainparams, c
 /** Check whether enough disk space is available for an incoming block */
 bool CheckDiskSpace(uint64_t nAdditionalBytes = 0);
 /** Open a block file (blk?????.dat) */
-FILE* OpenBlockFile(const CDiskBlockPos& pos, bool fReadOnly = false);
+FILE* OpenBlockFile(const CDiskBlockPos &pos, bool fReadOnly = false);
 /** Open an undo file (rev?????.dat) */
-FILE* OpenUndoFile(const CDiskBlockPos& pos, bool fReadOnly = false);
+FILE* OpenUndoFile(const CDiskBlockPos &pos, bool fReadOnly = false);
 /** Translation to a filesystem path */
-boost::filesystem::path GetBlockPosFilename(const CDiskBlockPos& pos, const char* prefix);
+boost::filesystem::path GetBlockPosFilename(const CDiskBlockPos &pos, const char *prefix);
 /** Import blocks from an external file */
 bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskBlockPos *dbp = NULL);
 /** Initialize a new block tree database + block data on disk */
@@ -218,21 +212,18 @@ bool InitBlockIndex(const CChainParams& chainparams);
 bool LoadBlockIndex();
 /** Unload database information */
 void UnloadBlockIndex();
-/** See whether the protocol update is enforced for connected nodes */
-int ActiveProtocol();
 /** Process protocol messages received from a given node */
 bool ProcessMessages(CNode* pfrom);
 /**
  * Send queued protocol messages to be sent to a give node.
  *
  * @param[in]   pto             The node which we are sending messages to.
- * @param[in]   fSendTrickle    When true send the trickled data, otherwise trickle the data until true.
  */
 bool SendMessages(CNode* pto);
 /** Run an instance of the script checking thread */
 void ThreadScriptCheck();
 
-// ***TODO*** probably not the right place for these 2
+// ***TODO*** probably not the right place
 /** Check whether a block hash satisfies the proof-of-work requirement specified by nBits */
 bool CheckProofOfWork(uint256 hash, unsigned int nBits);
 
@@ -252,27 +243,28 @@ std::string GetWarnings(const std::string& strFor);
 bool GetTransaction(const uint256 &hash, CTransaction &tx, const Consensus::Params& params, uint256 &hashBlock, bool fAllowSlow = false);
 /** Find the best known block, and make it the tip of the block chain */
 bool ActivateBestChain(CValidationState& state, const CChainParams& chainparams, const CBlock* pblock = NULL);
+int64_t GetTotalCoinEstimate(int nHeight);
 CAmount GetBlockSubsidy(int nBits, int nHeight, const Consensus::Params& consensusParams);
 
 // ***TODO***
 double ConvertBitsToDouble(unsigned int nBits);
-int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount = 0);
+CAmount GetMasternodePayment(int nHeight, CAmount blockValue, const Consensus::Params& consensusParams);
 
 /**
-* Prune block and undo files (blk???.dat and undo???.dat) so that the disk space used is less than a user-defined target.
-* The user sets the target (in MB) on the command line or in config file.  This will be run on startup and whenever new
-* space is allocated in a block or undo file, staying below the target. Changing back to unpruned requires a reindex
-        * (which in this case means the blockchain must be re-downloaded.)
-*
-* Pruning functions are called from FlushStateToDisk when the global fCheckForPruning flag has been set.
-* Block and undo files are deleted in lock-step (when blk00003.dat is deleted, so is rev00003.dat.)
-* Pruning cannot take place until the longest chain is at least a certain length (100000 on mainnet, 1000 on testnet, 1000 on regtest).
-* Pruning will never delete a block within a defined distance (currently 288) from the active chain's tip.
-* The block index is updated by unsetting HAVE_DATA and HAVE_UNDO for any blocks that were stored in the deleted files.
-* A db flag records the fact that at least some block files have been pruned.
-*
-* @param[out]   setFilesToPrune   The set of file indices that can be unlinked will be returned
-*/
+ * Prune block and undo files (blk???.dat and undo???.dat) so that the disk space used is less than a user-defined target.
+ * The user sets the target (in MB) on the command line or in config file.  This will be run on startup and whenever new
+ * space is allocated in a block or undo file, staying below the target. Changing back to unpruned requires a reindex
+ * (which in this case means the blockchain must be re-downloaded.)
+ *
+ * Pruning functions are called from FlushStateToDisk when the global fCheckForPruning flag has been set.
+ * Block and undo files are deleted in lock-step (when blk00003.dat is deleted, so is rev00003.dat.)
+ * Pruning cannot take place until the longest chain is at least a certain length (100000 on mainnet, 1000 on testnet, 1000 on regtest).
+ * Pruning will never delete a block within a defined distance (currently 288) from the active chain's tip.
+ * The block index is updated by unsetting HAVE_DATA and HAVE_UNDO for any blocks that were stored in the deleted files.
+ * A db flag records the fact that at least some block files have been pruned.
+ *
+ * @param[out]   setFilesToPrune   The set of file indices that can be unlinked will be returned
+ */
 void FindFilesToPrune(std::set<int>& setFilesToPrune, uint64_t nPruneAfterHeight);
 
 /**
@@ -281,25 +273,19 @@ void FindFilesToPrune(std::set<int>& setFilesToPrune, uint64_t nPruneAfterHeight
 void UnlinkPrunedFiles(std::set<int>& setFilesToPrune);
 
 /** Create a new block index entry for a given block hash */
-CBlockIndex* InsertBlockIndex(uint256 hash);
+CBlockIndex * InsertBlockIndex(uint256 hash);
 /** Get statistics from node state */
-bool GetNodeStateStats(NodeId nodeid, CNodeStateStats& stats);
+bool GetNodeStateStats(NodeId nodeid, CNodeStateStats &stats);
 /** Increase a node's misbehavior score. */
 void Misbehaving(NodeId nodeid, int howmuch);
 /** Flush all state, indexes and buffers to disk. */
 void FlushStateToDisk();
-
 /** Prune block files and flush state to disk. */
 void PruneAndFlush();
-
 
 /** (try to) add transaction to memory pool **/
 bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState &state, const CTransaction &tx, bool fLimitFree,
                         bool* pfMissingInputs, bool fOverrideMempoolLimit=false, bool fRejectAbsurdFee=false, bool fDryRun=false);
-// TODO:
-//                        bool* pfMissingInputs, bool fRejectInsaneFee=false, bool ignoreFees=false);
-//bool AcceptableInputs(CTxMemPool& pool, CValidationState &state, const CTransaction &tx, bool fLimitFree,
-//                        bool* pfMissingInputs, bool fRejectInsaneFee=false, bool isDSTX=false);
 
 int GetInputAge(CTxIn& vin);
 int GetInputAgeIX(uint256 nTXHash, CTxIn& vin);
@@ -315,35 +301,30 @@ struct CNodeStateStats {
     std::vector<int> vHeightInFlight;
 };
 
-struct CDiskTxPos : public CDiskBlockPos {
+struct CDiskTxPos : public CDiskBlockPos
+{
     unsigned int nTxOffset; // after header
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(*(CDiskBlockPos*)this);
         READWRITE(VARINT(nTxOffset));
     }
 
-    CDiskTxPos(const CDiskBlockPos& blockIn, unsigned int nTxOffsetIn) : CDiskBlockPos(blockIn.nFile, blockIn.nPos), nTxOffset(nTxOffsetIn)
-    {
+    CDiskTxPos(const CDiskBlockPos &blockIn, unsigned int nTxOffsetIn) : CDiskBlockPos(blockIn.nFile, blockIn.nPos), nTxOffset(nTxOffsetIn) {
     }
 
-    CDiskTxPos()
-    {
+    CDiskTxPos() {
         SetNull();
     }
 
-    void SetNull()
-    {
+    void SetNull() {
         CDiskBlockPos::SetNull();
         nTxOffset = 0;
     }
 };
-
-bool MoneyRange(CAmount nValueOut);
 
 
 /** 
@@ -368,7 +349,8 @@ unsigned int GetP2SHSigOpCount(const CTransaction& tx, const CCoinsViewCache& ma
  * This does not modify the UTXO set. If pvChecks is not NULL, script checks are pushed onto it
  * instead of being performed inline.
  */
-bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& view, bool fScriptChecks, unsigned int flags, bool cacheStore, std::vector<CScriptCheck>* pvChecks = NULL);
+bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsViewCache &view, bool fScriptChecks,
+                 unsigned int flags, bool cacheStore, std::vector<CScriptCheck> *pvChecks = NULL);
 
 /** Apply the effects of this transaction on the UTXO set represented by view */
 void UpdateCoins(const CTransaction& tx, CValidationState &state, CCoinsViewCache &inputs, int nHeight);
@@ -391,8 +373,7 @@ bool IsFinalTx(const CTransaction &tx, int nBlockHeight, int64_t nBlockTime);
  */
 bool CheckFinalTx(const CTransaction &tx, int flags = -1);
 
-
-/**
+/** 
  * Closure representing one script verification
  * Note that this stores references to the spending transaction 
  */
@@ -400,21 +381,21 @@ class CScriptCheck
 {
 private:
     CScript scriptPubKey;
-    const CTransaction* ptxTo;
+    const CTransaction *ptxTo;
     unsigned int nIn;
     unsigned int nFlags;
     bool cacheStore;
     ScriptError error;
 
 public:
-    CScriptCheck() : ptxTo(0), nIn(0), nFlags(0), cacheStore(false), error(SCRIPT_ERR_UNKNOWN_ERROR) {}
-    CScriptCheck(const CCoins& txFromIn, const CTransaction& txToIn, unsigned int nInIn, unsigned int nFlagsIn, bool cacheIn) : scriptPubKey(txFromIn.vout[txToIn.vin[nInIn].prevout.n].scriptPubKey),
-                                                                                                                                ptxTo(&txToIn), nIn(nInIn), nFlags(nFlagsIn), cacheStore(cacheIn), error(SCRIPT_ERR_UNKNOWN_ERROR) {}
+    CScriptCheck(): ptxTo(0), nIn(0), nFlags(0), cacheStore(false), error(SCRIPT_ERR_UNKNOWN_ERROR) {}
+    CScriptCheck(const CCoins& txFromIn, const CTransaction& txToIn, unsigned int nInIn, unsigned int nFlagsIn, bool cacheIn) :
+        scriptPubKey(txFromIn.vout[txToIn.vin[nInIn].prevout.n].scriptPubKey),
+        ptxTo(&txToIn), nIn(nInIn), nFlags(nFlagsIn), cacheStore(cacheIn), error(SCRIPT_ERR_UNKNOWN_ERROR) { }
 
     bool operator()();
 
-    void swap(CScriptCheck& check)
-    {
+    void swap(CScriptCheck &check) {
         scriptPubKey.swap(check.scriptPubKey);
         std::swap(ptxTo, check.ptxTo);
         std::swap(nIn, check.nIn);
@@ -432,7 +413,6 @@ bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos, const CMessageHea
 bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus::Params& consensusParams);
 bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus::Params& consensusParams);
 
-
 /** Functions for validating blocks and updating the block tree */
 
 /** Undo the effects of this block (with given index) on the UTXO set represented by coins.
@@ -449,12 +429,11 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
 /** Context-independent validity checks */
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool fCheckPOW = true);
-bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
-bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev);
+bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW = true, bool fCheckMerkleRoot = true);
 
 /** Context-dependent validity checks */
-bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex* pindexPrev);
-bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIndex* pindexPrev);
+bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex *pindexPrev);
+bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIndex *pindexPrev);
 
 /** Check a block is completely valid from start to finish (only works on top of our current best block, with cs_main held) */
 bool TestBlockValidity(CValidationState& state, const CChainParams& chainparams, const CBlock& block, CBlockIndex* pindexPrev, bool fCheckPOW = true, bool fCheckMerkleRoot = true);
@@ -468,14 +447,13 @@ public:
     unsigned int nUndoSize;    //! number of used bytes in the undo file
     unsigned int nHeightFirst; //! lowest height of block in file
     unsigned int nHeightLast;  //! highest height of block in file
-    uint64_t nTimeFirst;       //! earliest time of block in file
-    uint64_t nTimeLast;        //! latest time of block in file
+    uint64_t nTimeFirst;         //! earliest time of block in file
+    uint64_t nTimeLast;          //! latest time of block in file
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(VARINT(nBlocks));
         READWRITE(VARINT(nSize));
         READWRITE(VARINT(nUndoSize));
@@ -485,43 +463,38 @@ public:
         READWRITE(VARINT(nTimeLast));
     }
 
-    void SetNull()
-    {
-        nBlocks = 0;
-        nSize = 0;
-        nUndoSize = 0;
-        nHeightFirst = 0;
-        nHeightLast = 0;
-        nTimeFirst = 0;
-        nTimeLast = 0;
-    }
+     void SetNull() {
+         nBlocks = 0;
+         nSize = 0;
+         nUndoSize = 0;
+         nHeightFirst = 0;
+         nHeightLast = 0;
+         nTimeFirst = 0;
+         nTimeLast = 0;
+     }
 
-    CBlockFileInfo()
-    {
-        SetNull();
-    }
+     CBlockFileInfo() {
+         SetNull();
+     }
 
-    std::string ToString() const;
+     std::string ToString() const;
 
-    /** update statistics (does not update nSize) */
-    void AddBlock(unsigned int nHeightIn, uint64_t nTimeIn)
-    {
-        if (nBlocks == 0 || nHeightFirst > nHeightIn)
-            nHeightFirst = nHeightIn;
-        if (nBlocks == 0 || nTimeFirst > nTimeIn)
-            nTimeFirst = nTimeIn;
-        nBlocks++;
-        if (nHeightIn > nHeightLast)
-            nHeightLast = nHeightIn;
-        if (nTimeIn > nTimeLast)
-            nTimeLast = nTimeIn;
-    }
+     /** update statistics (does not update nSize) */
+     void AddBlock(unsigned int nHeightIn, uint64_t nTimeIn) {
+         if (nBlocks==0 || nHeightFirst > nHeightIn)
+             nHeightFirst = nHeightIn;
+         if (nBlocks==0 || nTimeFirst > nTimeIn)
+             nTimeFirst = nTimeIn;
+         nBlocks++;
+         if (nHeightIn > nHeightLast)
+             nHeightLast = nHeightIn;
+         if (nTimeIn > nTimeLast)
+             nTimeLast = nTimeIn;
+     }
 };
 
-
 /** RAII wrapper for VerifyDB: Verify consistency of the block and coin databases */
-class CVerifyDB
-{
+class CVerifyDB {
 public:
     CVerifyDB();
     ~CVerifyDB();
@@ -535,16 +508,16 @@ CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& loc
 bool InvalidateBlock(CValidationState& state, const Consensus::Params& consensusParams, CBlockIndex *pindex);
 
 /** Remove invalidity status from a block and its descendants. */
-bool ReconsiderBlock(CValidationState& state, CBlockIndex* pindex);
+bool ReconsiderBlock(CValidationState& state, CBlockIndex *pindex);
 
-/** The currently-connected chain of blocks. (protected by cs_main) */
+/** The currently-connected chain of blocks (protected by cs_main). */
 extern CChain chainActive;
 
 /** Global variable that points to the active CCoinsView (protected by cs_main) */
-extern CCoinsViewCache* pcoinsTip;
+extern CCoinsViewCache *pcoinsTip;
 
 /** Global variable that points to the active block tree (protected by cs_main) */
-extern CBlockTreeDB* pblocktree;
+extern CBlockTreeDB *pblocktree;
 
 /**
  * Return the spend height, which is one more than the inputs.GetBestBlock().

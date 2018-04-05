@@ -119,7 +119,7 @@ void CScheduler::scheduleEvery(CScheduler::Function f, int64_t deltaSeconds)
 }
 
 size_t CScheduler::getQueueInfo(boost::chrono::system_clock::time_point &first,
-                                boost::chrono::system_clock::time_point &last) const
+                             boost::chrono::system_clock::time_point &last) const
 {
     boost::unique_lock<boost::mutex> lock(newTaskMutex);
     size_t result = taskQueue.size();

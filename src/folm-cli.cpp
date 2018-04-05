@@ -1,8 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2015 The Bitcoin developers
-// Copyright (c) 2009-2015 The Dash Core developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm Core developers
+// Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2014-2016 The Dash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -58,9 +56,11 @@ std::string HelpMessageCli()
 class CConnectionFailed : public std::runtime_error
 {
 public:
-    explicit inline CConnectionFailed(const std::string& msg) : std::runtime_error(msg)
-    {
-    }
+
+    explicit inline CConnectionFailed(const std::string& msg) :
+        std::runtime_error(msg)
+    {}
+
 };
 
 static bool AppInitRPC(int argc, char* argv[])
@@ -73,9 +73,9 @@ static bool AppInitRPC(int argc, char* argv[])
         std::string strUsage = _("Folm Core RPC client version") + " " + FormatFullVersion() + "\n";
         if (!mapArgs.count("-version")) {
             strUsage += "\n" + _("Usage:") + "\n" +
-                        "  folm-cli [options] <command> [params]  " + _("Send command to Folm Core") + "\n" +
-                        "  folm-cli [options] help                " + _("List commands") + "\n" +
-                        "  folm-cli [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  folm-cli [options] <command> [params]  " + _("Send command to Folm Core") + "\n" +
+                  "  folm-cli [options] help                " + _("List commands") + "\n" +
+                  "  folm-cli [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessageCli();
         }
@@ -89,20 +89,20 @@ static bool AppInitRPC(int argc, char* argv[])
     }
     try {
         ReadConfigFile(mapArgs, mapMultiArgs);
-    } catch (const std::exception& e) {{
-        fprintf(stderr, "Error reading configuration file: %s\n", e.what());
+    } catch (const std::exception& e) {
+        fprintf(stderr,"Error reading configuration file: %s\n", e.what());
         return false;
     }
     // Check for -testnet or -regtest parameter (BaseParams() calls are only valid after this clause)
     try {
-    SelectBaseParams(ChainNameFromCommandLine());
+        SelectBaseParams(ChainNameFromCommandLine());
     } catch (const std::exception& e) {
         fprintf(stderr, "Error: %s\n", e.what());
         return false;
     }
     if (GetBoolArg("-rpcssl", false))
     {
-           fprintf(stderr, "Error: SSL mode for RPC (-rpcssl) is no longer supported.\n");
+        fprintf(stderr, "Error: SSL mode for RPC (-rpcssl) is no longer supported.\n");
         return false;
     }
     return true;
@@ -115,18 +115,21 @@ struct HTTPReply
     int status;
     std::string body;
 };
+
 static void http_request_done(struct evhttp_request *req, void *ctx)
 {
     HTTPReply *reply = static_cast<HTTPReply*>(ctx);
 
     if (req == NULL) {
-     /* If req is NULL, it means an error occurred while connecting, but
-     * I'm not sure how to find out which one. We also don't really care.
-     */
-              reply->status = 0;
-      return;
+        /* If req is NULL, it means an error occurred while connecting, but
+         * I'm not sure how to find out which one. We also don't really care.
+         */
+        reply->status = 0;
+        return;
     }
+
     reply->status = evhttp_request_get_response_code(req);
+
     struct evbuffer *buf = evhttp_request_get_input_buffer(req);
     if (buf)
     {
@@ -165,12 +168,12 @@ UniValue CallRPC(const string& strMethod, const UniValue& params)
         // Try fall back to cookie-based authentication if no password is provided
         if (!GetAuthCookie(&strRPCUserColonPass)) {
             throw runtime_error(strprintf(
-                    _("Could not locate RPC credentials. No authentication cookie could be found, and no rpcpassword is set in the configuration file (%s)"),
+                _("Could not locate RPC credentials. No authentication cookie could be found, and no rpcpassword is set in the configuration file (%s)"),
                     GetConfigFile().string().c_str()));
 
         }
     } else {
-     strRPCUserColonPass = mapArgs["-rpcuser"] + ":" + mapArgs["-rpcpassword"];
+        strRPCUserColonPass = mapArgs["-rpcuser"] + ":" + mapArgs["-rpcpassword"];
     }
 
     struct evkeyvalq *output_headers = evhttp_request_get_output_headers(req);
@@ -216,7 +219,7 @@ UniValue CallRPC(const string& strMethod, const UniValue& params)
     return reply;
 }
 
-int CommandLineRPC(int argc, char* argv[])
+int CommandLineRPC(int argc, char *argv[])
 {
     string strPrint;
     int nRet = 0;
@@ -244,7 +247,7 @@ int CommandLineRPC(int argc, char* argv[])
 
                 // Parse reply
                 const UniValue& result = find_value(reply, "result");
-                const UniValue& error = find_value(reply, "error");
+                const UniValue& error  = find_value(reply, "error");
 
                 if (!error.isNull()) {
                     // Error
@@ -261,7 +264,7 @@ int CommandLineRPC(int argc, char* argv[])
 
                         if (errMsg.isStr())
                             strPrint += "error message:\n"+errMsg.get_str();
-                     }
+                    }
                 } else {
                     // Result
                     if (result.isNull())
@@ -271,22 +274,25 @@ int CommandLineRPC(int argc, char* argv[])
                     else
                         strPrint = result.write(2);
                 }
-
                 // Connection succeeded, no need to retry.
                 break;
-            } catch (const CConnectionFailed& e) {
+            }
+            catch (const CConnectionFailed&) {
                 if (fWait)
                     MilliSleep(1000);
                 else
                     throw;
             }
         } while (fWait);
-    } catch (const boost::thread_interrupted&) {
+    }
+    catch (const boost::thread_interrupted&) {
         throw;
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         strPrint = string("error: ") + e.what();
         nRet = EXIT_FAILURE;
-    } catch (...) {
+    }
+    catch (...) {
         PrintExceptionContinue(NULL, "CommandLineRPC()");
         throw;
     }
@@ -304,10 +310,12 @@ int main(int argc, char* argv[])
         fprintf(stderr, "Error: Initializing networking failed\n");
         exit(1);
     }
+
     try {
-        if (!AppInitRPC(argc, argv))
+        if(!AppInitRPC(argc, argv))
             return EXIT_FAILURE;
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         PrintExceptionContinue(&e, "AppInitRPC()");
         return EXIT_FAILURE;
     } catch (...) {
@@ -318,7 +326,8 @@ int main(int argc, char* argv[])
     int ret = EXIT_FAILURE;
     try {
         ret = CommandLineRPC(argc, argv);
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         PrintExceptionContinue(&e, "CommandLineRPC()");
     } catch (...) {
         PrintExceptionContinue(NULL, "CommandLineRPC()");

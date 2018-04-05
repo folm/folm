@@ -1,8 +1,6 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
-// Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2014-2016 The Folm Core developers
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "overviewpage.h"
@@ -10,46 +8,53 @@
 
 #include "bitcoinunits.h"
 #include "clientmodel.h"
-#include "guiconstants.h"
-#include "guiutil.h"
-#include "init.h"
 #include "obfuscation.h"
 #include "obfuscationconfig.h"
+#include "guiconstants.h"
+#include "guiutil.h"
 #include "optionsmodel.h"
+#include "platformstyle.h"
 #include "transactionfilterproxy.h"
 #include "transactiontablemodel.h"
 #include "walletmodel.h"
+#include "init.h"
+#include "masternode-sync.h"
 
 #include <QAbstractItemDelegate>
 #include <QPainter>
 #include <QSettings>
 #include <QTimer>
 
-#define DECORATION_SIZE 48
 #define ICON_OFFSET 16
+#define DECORATION_SIZE 54
 #define NUM_ITEMS 5
 
 class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::FLM)
+    TxViewDelegate(const PlatformStyle *platformStyle):
+        QAbstractItemDelegate(), unit(BitcoinUnits::FOLM),
+        platformStyle(platformStyle)
     {
+
     }
 
-    inline void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+    inline void paint(QPainter *painter, const QStyleOptionViewItem &option,
+                      const QModelIndex &index ) const
     {
         painter->save();
 
-        QIcon icon = qvariant_cast<QIcon>(index.data(Qt::DecorationRole));
+        QIcon icon = qvariant_cast<QIcon>(index.data(TransactionTableModel::RawDecorationRole));
         QRect mainRect = option.rect;
         mainRect.moveLeft(ICON_OFFSET);
         QRect decorationRect(mainRect.topLeft(), QSize(DECORATION_SIZE, DECORATION_SIZE));
         int xspace = DECORATION_SIZE + 8;
         int ypad = 6;
-        int halfheight = (mainRect.height() - 2 * ypad) / 2;
-        QRect amountRect(mainRect.left() + xspace, mainRect.top() + ypad, mainRect.width() - xspace - ICON_OFFSET, halfheight);
-        QRect addressRect(mainRect.left() + xspace, mainRect.top() + ypad + halfheight, mainRect.width() - xspace, halfheight);
+        int halfheight = (mainRect.height() - 2*ypad)/2;
+        QRect amountRect(mainRect.left() + xspace, mainRect.top()+ypad, mainRect.width() - xspace - ICON_OFFSET, halfheight);
+        QRect addressRect(mainRect.left() + xspace, mainRect.top()+ypad+halfheight, mainRect.width() - xspace, halfheight);
+        icon = platformStyle->SingleColorIcon(icon);
         icon.paint(painter, decorationRect);
 
         QDateTime date = index.data(TransactionTableModel::DateRole).toDateTime();
@@ -57,70 +62,77 @@ public:
         qint64 amount = index.data(TransactionTableModel::AmountRole).toLongLong();
         bool confirmed = index.data(TransactionTableModel::ConfirmedRole).toBool();
         QVariant value = index.data(Qt::ForegroundRole);
-        QColor foreground = COLOR_BLACK;
-        if (value.canConvert<QBrush>()) {
+        QColor foreground = option.palette.color(QPalette::Text);
+        if(value.canConvert<QBrush>())
+        {
             QBrush brush = qvariant_cast<QBrush>(value);
             foreground = brush.color();
         }
 
         painter->setPen(foreground);
         QRect boundingRect;
-        painter->drawText(addressRect, Qt::AlignLeft | Qt::AlignVCenter, address, &boundingRect);
+        painter->drawText(addressRect, Qt::AlignLeft|Qt::AlignVCenter, address, &boundingRect);
 
-        if (index.data(TransactionTableModel::WatchonlyRole).toBool()) {
+        if (index.data(TransactionTableModel::WatchonlyRole).toBool())
+        {
             QIcon iconWatchonly = qvariant_cast<QIcon>(index.data(TransactionTableModel::WatchonlyDecorationRole));
-            QRect watchonlyRect(boundingRect.right() + 5, mainRect.top() + ypad + halfheight, 16, halfheight);
+            QRect watchonlyRect(boundingRect.right() + 5, mainRect.top()+ypad+halfheight, 16, halfheight);
             iconWatchonly.paint(painter, watchonlyRect);
         }
 
-        if (amount < 0) {
+        if(amount < 0)
+        {
             foreground = COLOR_NEGATIVE;
-        } else if (!confirmed) {
+        }
+        else if(!confirmed)
+        {
             foreground = COLOR_UNCONFIRMED;
-        } else {
-            foreground = COLOR_BLACK;
+        }
+        else
+        {
+            foreground = option.palette.color(QPalette::Text);
         }
         painter->setPen(foreground);
         QString amountText = BitcoinUnits::formatWithUnit(unit, amount, true, BitcoinUnits::separatorAlways);
-        if (!confirmed) {
+        if(!confirmed)
+        {
             amountText = QString("[") + amountText + QString("]");
         }
-        painter->drawText(amountRect, Qt::AlignRight | Qt::AlignVCenter, amountText);
+        painter->drawText(amountRect, Qt::AlignRight|Qt::AlignVCenter, amountText);
 
-        painter->setPen(COLOR_BLACK);
-        painter->drawText(amountRect, Qt::AlignLeft | Qt::AlignVCenter, GUIUtil::dateTimeStr(date));
+        painter->setPen(option.palette.color(QPalette::Text));
+        painter->drawText(amountRect, Qt::AlignLeft|Qt::AlignVCenter, GUIUtil::dateTimeStr(date));
 
         painter->restore();
     }
 
-    inline QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+    inline QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
     {
         return QSize(DECORATION_SIZE, DECORATION_SIZE);
     }
 
     int unit;
+    const PlatformStyle *platformStyle;
+
 };
 #include "overviewpage.moc"
 
-OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
-                                              ui(new Ui::OverviewPage),
-                                              clientModel(0),
-                                              walletModel(0),
-                                              currentBalance(-1),
-                                              currentUnconfirmedBalance(-1),
-                                              currentImmatureBalance(-1),
-                                              currentWatchOnlyBalance(-1),
-                                              currentWatchUnconfBalance(-1),
-                                              currentWatchImmatureBalance(-1),
-                                              txdelegate(new TxViewDelegate()),
-                                              filter(0)
+OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::OverviewPage),
+    clientModel(0),
+    walletModel(0),
+    currentBalance(-1),
+    currentUnconfirmedBalance(-1),
+    currentImmatureBalance(-1),
+    currentWatchOnlyBalance(-1),
+    currentWatchUnconfBalance(-1),
+    currentWatchImmatureBalance(-1),
+    txdelegate(new TxViewDelegate(platformStyle)),
+    filter(0)
 {
-    nDisplayUnit = 0; // just make sure it's not unitialized
     ui->setupUi(this);
-
-    #ifdef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
-        ui->toggleObfuscation->setIcon(QIcon());
-    #endif
+    QString theme = GUIUtil::getThemeName();
 
     // Recent transactions
     ui->listTransactions->setItemDelegate(txdelegate);
@@ -132,23 +144,23 @@ OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
 
 
     // init "out of sync" warning labels
-    ui->labelWalletStatus->setText("(" + tr("out of sync") + ")");
-    ui->labelObfuscationSyncStatus->setText("(" + tr("out of sync") + ")");
-    ui->labelTransactionsStatus->setText("(" + tr("out of sync") + ")");
+   ui->labelWalletStatus->setText("(" + tr("out of sync") + ")");
+   ui->labelObfuscationSyncStatus->setText("(" + tr("out of sync") + ")");
+   ui->labelTransactionsStatus->setText("(" + tr("out of sync") + ")");
 
-    if (fLiteMode) {
+    if(fLiteMode){
         ui->frameObfuscation->setVisible(false);
     } else {
-        if (fMasterNode) {
+        if(fMasterNode){
             ui->toggleObfuscation->setText("(" + tr("Disabled") + ")");
             ui->obfuscationAuto->setText("(" + tr("Disabled") + ")");
             ui->obfuscationReset->setText("(" + tr("Disabled") + ")");
             ui->frameObfuscation->setEnabled(false);
         } else {
-            if (!fEnableObfuscation) {
-                ui->toggleObfuscation->setText(tr("Start Obfuscation"));
+            if(!fEnableObfuscation){
+                ui->toggleObfuscation->setText(tr("Start Obfuscation Mixing"));
             } else {
-                ui->toggleObfuscation->setText(tr("Stop Obfuscation"));
+                ui->toggleObfuscation->setText(tr("Stop Obfuscation Mixing"));
             }
             timer = new QTimer(this);
             connect(timer, SIGNAL(timeout()), this, SLOT(obfuScationStatus()));
@@ -160,15 +172,15 @@ OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
     showOutOfSyncWarning(true);
 }
 
-void OverviewPage::handleTransactionClicked(const QModelIndex& index)
+void OverviewPage::handleTransactionClicked(const QModelIndex &index)
 {
-    if (filter)
-        emit transactionClicked(filter->mapToSource(index));
+    if(filter)
+        Q_EMIT transactionClicked(filter->mapToSource(index));
 }
 
 OverviewPage::~OverviewPage()
 {
-    if (!fLiteMode && !fMasterNode) disconnect(timer, SIGNAL(timeout()), this, SLOT(obfuScationStatus()));
+    if(!fLiteMode && !fMasterNode) disconnect(timer, SIGNAL(timeout()), this, SLOT(obfuScationStatus()));
     delete ui;
 }
 
@@ -181,15 +193,11 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-
-
-    ui->labelBalance->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance - immatureBalance, false, BitcoinUnits::separatorAlways));
+    ui->labelBalance->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance, false, BitcoinUnits::separatorAlways));
     ui->labelUnconfirmed->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, BitcoinUnits::separatorAlways));
     ui->labelImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, BitcoinUnits::separatorAlways));
     ui->labelAnonymized->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, anonymizedBalance, false, BitcoinUnits::separatorAlways));
-    ui->labelTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance + unconfirmedBalance, false, BitcoinUnits::separatorAlways));
-
-
+    ui->labelTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, balance + unconfirmedBalance + immatureBalance, false, BitcoinUnits::separatorAlways));
     ui->labelWatchAvailable->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchOnlyBalance, false, BitcoinUnits::separatorAlways));
     ui->labelWatchPending->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchUnconfBalance, false, BitcoinUnits::separatorAlways));
     ui->labelWatchImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchImmatureBalance, false, BitcoinUnits::separatorAlways));
@@ -209,7 +217,7 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
 
     static int cachedTxLocks = 0;
 
-    if (cachedTxLocks != nCompleteTXLocks) {
+    if(cachedTxLocks != nCompleteTXLocks){
         cachedTxLocks = nCompleteTXLocks;
         ui->listTransactions->update();
     }
@@ -225,9 +233,10 @@ void OverviewPage::updateWatchOnlyLabels(bool showWatchOnly)
     ui->labelWatchPending->setVisible(showWatchOnly);   // show watch-only pending balance
     ui->labelWatchTotal->setVisible(showWatchOnly);     // show watch-only total balance
 
-    if (!showWatchOnly) {
+    if (!showWatchOnly){
         ui->labelWatchImmature->hide();
-    } else {
+    }
+    else{
         ui->labelBalance->setIndent(20);
         ui->labelUnconfirmed->setIndent(20);
         ui->labelImmature->setIndent(20);
@@ -235,20 +244,22 @@ void OverviewPage::updateWatchOnlyLabels(bool showWatchOnly)
     }
 }
 
-void OverviewPage::setClientModel(ClientModel* model)
+void OverviewPage::setClientModel(ClientModel *model)
 {
     this->clientModel = model;
-    if (model) {
+    if(model)
+    {
         // Show warning if this is a prerelease version
         connect(model, SIGNAL(alertsChanged(QString)), this, SLOT(updateAlerts(QString)));
         updateAlerts(model->getStatusBarWarnings());
     }
 }
 
-void OverviewPage::setWalletModel(WalletModel* model)
+void OverviewPage::setWalletModel(WalletModel *model)
 {
     this->walletModel = model;
-    if (model && model->getOptionsModel()) {
+    if(model && model->getOptionsModel())
+    {
         // Set up transaction list
         filter = new TransactionFilterProxy();
         filter->setSourceModel(model->getTransactionTableModel());
@@ -256,17 +267,19 @@ void OverviewPage::setWalletModel(WalletModel* model)
         filter->setDynamicSortFilter(true);
         filter->setSortRole(Qt::EditRole);
         filter->setShowInactive(false);
-        filter->sort(TransactionTableModel::Date, Qt::DescendingOrder);
+        filter->sort(TransactionTableModel::Status, Qt::DescendingOrder);
 
         ui->listTransactions->setModel(filter);
         ui->listTransactions->setModelColumn(TransactionTableModel::ToAddress);
 
         // Keep up to date with wallet
         setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(), model->getAnonymizedBalance(),
-            model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance());
-        connect(model, SIGNAL(balanceChanged(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount)), this, SLOT(setBalance(CAmount, CAmount, CAmount, CAmount, CAmount, CAmount, CAmount)));
+                   model->getWatchBalance(), model->getWatchUnconfirmedBalance(), model->getWatchImmatureBalance());
+        connect(model, SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)), this, SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
 
         connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
+        connect(model->getOptionsModel(), SIGNAL(obfuscationRoundsChanged()), this, SLOT(updateObfuscationProgress()));
+        connect(model->getOptionsModel(), SIGNAL(anonymizeFolmAmountChanged()), this, SLOT(updateObfuscationProgress()));
 
         connect(ui->obfuscationAuto, SIGNAL(clicked()), this, SLOT(obfuscationAuto()));
         connect(ui->obfuscationReset, SIGNAL(clicked()), this, SLOT(obfuscationReset()));
@@ -275,17 +288,18 @@ void OverviewPage::setWalletModel(WalletModel* model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("FLM")
+    // update the display unit, to not use the default ("FOLM")
     updateDisplayUnit();
 }
 
 void OverviewPage::updateDisplayUnit()
 {
-    if (walletModel && walletModel->getOptionsModel()) {
+    if(walletModel && walletModel->getOptionsModel())
+    {
         nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
-        if (currentBalance != -1)
+        if(currentBalance != -1)
             setBalance(currentBalance, currentUnconfirmedBalance, currentImmatureBalance, currentAnonymizedBalance,
-                currentWatchOnlyBalance, currentWatchUnconfBalance, currentWatchImmatureBalance);
+                       currentWatchOnlyBalance, currentWatchUnconfBalance, currentWatchImmatureBalance);
 
         // Update txdelegate->unit with the current unit
         txdelegate->unit = nDisplayUnit;
@@ -294,7 +308,7 @@ void OverviewPage::updateDisplayUnit()
     }
 }
 
-void OverviewPage::updateAlerts(const QString& warnings)
+void OverviewPage::updateAlerts(const QString &warnings)
 {
     this->ui->labelAlerts->setVisible(!warnings.isEmpty());
     this->ui->labelAlerts->setText(warnings);
@@ -309,14 +323,15 @@ void OverviewPage::showOutOfSyncWarning(bool fShow)
 
 void OverviewPage::updateObfuscationProgress()
 {
-    if (!masternodeSync.IsBlockchainSynced() || ShutdownRequested()) return;
+    if(!masternodeSync.IsBlockchainSynced() || ShutdownRequested()) return;
 
-    if (!pwalletMain) return;
+    if(!pwalletMain) return;
 
     QString strAmountAndRounds;
     QString strAnonymizeFolmAmount = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit, nAnonymizeFolmAmount * COIN, false, BitcoinUnits::separatorAlways);
 
-    if (currentBalance == 0) {
+    if(currentBalance == 0)
+    {
         ui->obfuscationProgress->setValue(0);
         ui->obfuscationProgress->setToolTip(tr("No inputs detected"));
 
@@ -336,9 +351,6 @@ void OverviewPage::updateObfuscationProgress()
     double nAverageAnonymizedRounds;
 
     {
-        TRY_LOCK(cs_main, lockMain);
-        if (!lockMain) return;
-
         nDenominatedConfirmedBalance = pwalletMain->GetDenominatedBalance();
         nDenominatedUnconfirmedBalance = pwalletMain->GetDenominatedBalance(true);
         nAnonymizableBalance = pwalletMain->GetAnonymizableBalance();
@@ -349,25 +361,25 @@ void OverviewPage::updateObfuscationProgress()
     CAmount nMaxToAnonymize = nAnonymizableBalance + currentAnonymizedBalance + nDenominatedUnconfirmedBalance;
 
     // If it's more than the anon threshold, limit to that.
-    if (nMaxToAnonymize > nAnonymizeFolmAmount * COIN) nMaxToAnonymize = nAnonymizeFolmAmount * COIN;
+    if(nMaxToAnonymize > nAnonymizeFolmAmount*COIN) nMaxToAnonymize = nAnonymizeFolmAmount*COIN;
 
-    if (nMaxToAnonymize == 0) return;
+    if(nMaxToAnonymize == 0) return;
 
-    if (nMaxToAnonymize >= nAnonymizeFolmAmount * COIN) {
+    if(nMaxToAnonymize >= nAnonymizeFolmAmount * COIN) {
         ui->labelAmountRounds->setToolTip(tr("Found enough compatible inputs to anonymize %1")
-                                              .arg(strAnonymizeFolmAmount));
+                                          .arg(strAnonymizeFolmAmount));
         strAnonymizeFolmAmount = strAnonymizeFolmAmount.remove(strAnonymizeFolmAmount.indexOf("."), BitcoinUnits::decimals(nDisplayUnit) + 1);
         strAmountAndRounds = strAnonymizeFolmAmount + " / " + tr("%n Rounds", "", nObfuscationRounds);
     } else {
         QString strMaxToAnonymize = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit, nMaxToAnonymize, false, BitcoinUnits::separatorAlways);
         ui->labelAmountRounds->setToolTip(tr("Not enough compatible inputs to anonymize <span style='color:red;'>%1</span>,<br>"
                                              "will anonymize <span style='color:red;'>%2</span> instead")
-                                              .arg(strAnonymizeFolmAmount)
-                                              .arg(strMaxToAnonymize));
+                                          .arg(strAnonymizeFolmAmount)
+                                          .arg(strMaxToAnonymize));
         strMaxToAnonymize = strMaxToAnonymize.remove(strMaxToAnonymize.indexOf("."), BitcoinUnits::decimals(nDisplayUnit) + 1);
         strAmountAndRounds = "<span style='color:red;'>" +
-                             QString(BitcoinUnits::factor(nDisplayUnit) == 1 ? "" : "~") + strMaxToAnonymize +
-                             " / " + tr("%n Rounds", "", nObfuscationRounds) + "</span>";
+                QString(BitcoinUnits::factor(nDisplayUnit) == 1 ? "" : "~") + strMaxToAnonymize +
+                " / " + tr("%n Rounds", "", nObfuscationRounds) + "</span>";
     }
     ui->labelAmountRounds->setText(strAmountAndRounds);
 
@@ -402,7 +414,7 @@ void OverviewPage::updateObfuscationProgress()
     float anonNormPartCalc = ceilf((anonNormPart * anonNormWeight / fullWeight) * 100) / 100;
     float anonFullPartCalc = ceilf((anonFullPart * anonFullWeight / fullWeight) * 100) / 100;
     float progress = denomPartCalc + anonNormPartCalc + anonFullPartCalc;
-    if (progress >= 100) progress = 100;
+    if(progress >= 100) progress = 100;
 
     ui->obfuscationProgress->setValue(progress);
 
@@ -411,40 +423,40 @@ void OverviewPage::updateObfuscationProgress()
                           tr("Mixed") + ": %3%<br/>" +
                           tr("Anonymized") + ": %4%<br/>" +
                           tr("Denominated inputs have %5 of %n rounds on average", "", nObfuscationRounds))
-                             .arg(progress)
-                             .arg(denomPart)
-                             .arg(anonNormPart)
-                             .arg(anonFullPart)
-                             .arg(nAverageAnonymizedRounds);
+            .arg(progress).arg(denomPart).arg(anonNormPart).arg(anonFullPart)
+            .arg(nAverageAnonymizedRounds);
     ui->obfuscationProgress->setToolTip(strToolPip);
 }
 
 
 void OverviewPage::obfuScationStatus()
 {
-    static int64_t nLastDSProgressBlockTime = 0;
+    if(!masternodeSync.IsBlockchainSynced() || ShutdownRequested()) return;
 
-    int nBestHeight = chainActive.Tip()->nHeight;
+    static int64_t nLastDSProgressBlockTime = 0;
+    int nBestHeight = clientModel->getNumBlocks();
 
     // we we're processing more then 1 block per second, we'll just leave
-    if (((nBestHeight - obfuScationPool.cachedNumBlocks) / (GetTimeMillis() - nLastDSProgressBlockTime + 1) > 1)) return;
+    if(((nBestHeight - obfuScationPool.cachedNumBlocks) / (GetTimeMillis() - nLastDSProgressBlockTime + 1) > 1)) return;
     nLastDSProgressBlockTime = GetTimeMillis();
 
-    if (!fEnableObfuscation) {
-        if (nBestHeight != obfuScationPool.cachedNumBlocks) {
+    if(!fEnableObfuscation) {
+        if(nBestHeight != obfuScationPool.cachedNumBlocks)
+        {
             obfuScationPool.cachedNumBlocks = nBestHeight;
             updateObfuscationProgress();
 
             ui->obfuscationEnabled->setText(tr("Disabled"));
             ui->obfuscationStatus->setText("");
-            ui->toggleObfuscation->setText(tr("Start Obfuscation"));
+            ui->toggleObfuscation->setText(tr("Start Obfuscation Mixing"));
         }
 
         return;
     }
 
     // check obfuscation status and unlock if needed
-    if (nBestHeight != obfuScationPool.cachedNumBlocks) {
+    if(nBestHeight != obfuScationPool.cachedNumBlocks)
+    {
         // Balance and number of transactions might have changed
         obfuScationPool.cachedNumBlocks = nBestHeight;
         updateObfuscationProgress();
@@ -456,12 +468,12 @@ void OverviewPage::obfuScationStatus()
 
     QString s = tr("Last Obfuscation message:\n") + strStatus;
 
-    if (s != ui->obfuscationStatus->text())
+    if(s != ui->obfuscationStatus->text())
         LogPrintf("Last Obfuscation message: %s\n", strStatus.toStdString());
 
     ui->obfuscationStatus->setText(s);
 
-    if (obfuScationPool.sessionDenom == 0) {
+    if(obfuScationPool.sessionDenom == 0){
         ui->labelSubmittedDenom->setText(tr("N/A"));
     } else {
         std::string out;
@@ -469,15 +481,14 @@ void OverviewPage::obfuScationStatus()
         QString s2(out.c_str());
         ui->labelSubmittedDenom->setText(s2);
     }
+
 }
 
-void OverviewPage::obfuscationAuto()
-{
+void OverviewPage::obfuscationAuto(){
     obfuScationPool.DoAutomaticDenominating();
 }
 
-void OverviewPage::obfuscationReset()
-{
+void OverviewPage::obfuscationReset(){
     obfuScationPool.Reset();
 
     QMessageBox::warning(this, tr("Obfuscation"),
@@ -485,21 +496,20 @@ void OverviewPage::obfuscationReset()
         QMessageBox::Ok, QMessageBox::Ok);
 }
 
-void OverviewPage::toggleObfuscation()
-{
+void OverviewPage::toggleObfuscation(){
     QSettings settings;
     // Popup some information on first mixing
     QString hasMixed = settings.value("hasMixed").toString();
-    if (hasMixed.isEmpty()) {
+    if(hasMixed.isEmpty()){
         QMessageBox::information(this, tr("Obfuscation"),
-            tr("If you don't want to see internal Obfuscation fees/transactions select \"Most Common\" as Type on the \"Transactions\" tab."),
-            QMessageBox::Ok, QMessageBox::Ok);
+                tr("If you don't want to see internal Obfuscation fees/transactions select \"Most Common\" as Type on the \"Transactions\" tab."),
+                QMessageBox::Ok, QMessageBox::Ok);
         settings.setValue("hasMixed", "hasMixed");
     }
-    if (!fEnableObfuscation) {
+    if(!fEnableObfuscation){
         int64_t balance = currentBalance;
-        float minAmount = 14.90 * COIN;
-        if (balance < minAmount) {
+        float minAmount = 1.49 * COIN;
+        if(balance < minAmount){
             QString strMinAmount(BitcoinUnits::formatWithUnit(nDisplayUnit, minAmount));
             QMessageBox::warning(this, tr("Obfuscation"),
                 tr("Obfuscation requires at least %1 to use.").arg(strMinAmount),
@@ -508,9 +518,11 @@ void OverviewPage::toggleObfuscation()
         }
 
         // if wallet is locked, ask for a passphrase
-        if (walletModel->getEncryptionStatus() == WalletModel::Locked) {
+        if (walletModel->getEncryptionStatus() == WalletModel::Locked)
+        {
             WalletModel::UnlockContext ctx(walletModel->requestUnlock(false));
-            if (!ctx.isValid()) {
+            if(!ctx.isValid())
+            {
                 //unlock was cancelled
                 obfuScationPool.cachedNumBlocks = std::numeric_limits<int>::max();
                 QMessageBox::warning(this, tr("Obfuscation"),
@@ -520,23 +532,25 @@ void OverviewPage::toggleObfuscation()
                 return;
             }
         }
+
     }
 
     fEnableObfuscation = !fEnableObfuscation;
     obfuScationPool.cachedNumBlocks = std::numeric_limits<int>::max();
 
-    if (!fEnableObfuscation) {
-        ui->toggleObfuscation->setText(tr("Start Obfuscation"));
+    if(!fEnableObfuscation){
+        ui->toggleObfuscation->setText(tr("Start Obfuscation Mixing"));
         obfuScationPool.UnlockCoins();
     } else {
-        ui->toggleObfuscation->setText(tr("Stop Obfuscation"));
+        ui->toggleObfuscation->setText(tr("Stop Obfuscation Mixing"));
 
         /* show obfuscation configuration if client has defaults set */
 
-        if (nAnonymizeFolmAmount == 0) {
+        if(nAnonymizeFolmAmount == 0){
             ObfuscationConfig dlg(this);
             dlg.setModel(walletModel);
             dlg.exec();
         }
+
     }
 }

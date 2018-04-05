@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="vi" version="2.0">
+<TS language="vi" version="2.0">
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -136,7 +136,7 @@
         <translation>Phục vụ để tắt tính năng chuyển tiền vô giá trị khi tài khoản của hệ điều hành bị xâm nhập. Không cung cấp đủ an ninh thực sự.</translation>
     </message>
     <message>
-        <source>For anonymization and staking only</source>
+        <source>For anonymization only</source>
         <translation>Chỉ dùng cho mục đích vô danh</translation>
     </message>
     <message>
@@ -176,8 +176,8 @@
         <translation>Xác nhận mã hoá ví</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DNET&lt;/b&gt;!</source>
-        <translation>Chú ý: Nếu bạn mã hoá ví và mất mật khẩu, bạn sẽ &lt;b&gt;MẤT TẤT CẢ DNET CỦA BẠN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR FOLM&lt;/b&gt;!</source>
+        <translation>Chú ý: Nếu bạn mã hoá ví và mất mật khẩu, bạn sẽ &lt;b&gt;MẤT TẤT CẢ FOLM CỦA BẠN&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -594,8 +594,8 @@ Kiểu: %3
 <context>
     <name>ClientModel</name>
     <message>
-        <source>Total: %1 (OBF compatible: %2 / Enabled: %3)</source>
-        <translation>Tổng số: %1 (Tương thích với OBF: %2 / Sẵn sàng: %3)</translation>
+        <source>Total: %1 (DS compatible: %2 / Enabled: %3)</source>
+        <translation>Tổng số: %1 (Tương thích với DS: %2 / Sẵn sàng: %3)</translation>
     </message>
     <message>
         <source>Network Alert</source>
@@ -669,8 +669,8 @@ Kiểu: %3
         <translation>Nhận được với địa chỉ</translation>
     </message>
     <message>
-        <source>OBF Rounds</source>
-        <translation>Số vòng OBF</translation>
+        <source>DS Rounds</source>
+        <translation>Số vòng DS</translation>
     </message>
     <message>
         <source>Date</source>
@@ -741,8 +741,8 @@ Kiểu: %3
         <translation>Sao chép tiền trả lại</translation>
     </message>
     <message>
-        <source>Non-anonymized input selected. &lt;b&gt;Obfuscate will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscate, please deselect all non-nonymized inputs first and then check Obfuscate checkbox again.</source>
-        <translation>Đầu vào không ẩn danh được chọn. &lt;b&gt;Obfuscate sẽ bị tắt.&lt;/b&gt;&lt;br&gt;&lt;br&gt;Nếu bạn vẫn muốn sử dụng Obfuscate, hãy bỏ chọn tata cả các đầu vào không ẩn danh trước và đánh dấu vào hộp Obfuscate lần nữa.</translation>
+        <source>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</source>
+        <translation>Đầu vào không ẩn danh được chọn. &lt;b&gt;Obfuscation sẽ bị tắt.&lt;/b&gt;&lt;br&gt;&lt;br&gt;Nếu bạn vẫn muốn sử dụng Obfuscation, hãy bỏ chọn tata cả các đầu vào không ẩn danh trước và đánh dấu vào hộp Obfuscation lần nữa.</translation>
     </message>
     <message>
         <source>highest</source>
@@ -842,10 +842,10 @@ Kiểu: %3
     </message>
 </context>
 <context>
-    <name>ObfuscateConfig</name>
+    <name>ObfuscationConfig</name>
     <message>
-        <source>Configure Obfuscate</source>
-        <translation>Cấu hình Obfuscate</translation>
+        <source>Configure Obfuscation</source>
+        <translation>Cấu hình Obfuscation</translation>
     </message>
     <message>
         <source>Basic Privacy</source>
@@ -864,48 +864,48 @@ Kiểu: %3
         <translation>Hãy chọn mức độ riêng tư.</translation>
     </message>
     <message>
-        <source>Use 2 separate masternodes to mix funds up to 1000 DNET</source>
-        <translation>Sử dụng 2 masternode khác nhau để trộn số tiền lên đến 1000 DNET</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 FOLM</source>
+        <translation>Sử dụng 2 masternode khác nhau để trộn số tiền lên đến 1000 FOLM</translation>
     </message>
     <message>
-        <source>Use 8 separate masternodes to mix funds up to 1000 DNET</source>
-        <translation>Sử dụng 8 masternode khác nhau để trộn số tiền lên đến 1000 DNET</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 FOLM</source>
+        <translation>Sử dụng 8 masternode khác nhau để trộn số tiền lên đến 1000 FOLM</translation>
     </message>
     <message>
         <source>Use 16 separate masternodes</source>
         <translation>Sử dụng 16 masternode khác nhau</translation>
     </message>
     <message>
-        <source>This option is the quickest and will cost about ~0.025 DNET to anonymize 1000 DNET</source>
-        <translation>Tuỳ chọn này là nhanh nhất và sẽ mất chi phí khoảng ~0.025 DNET để ẩn danh 1000 DNET</translation>
+        <source>This option is the quickest and will cost about ~0.025 FOLM to anonymize 1000 FOLM</source>
+        <translation>Tuỳ chọn này là nhanh nhất và sẽ mất chi phí khoảng ~0.025 FOLM để ẩn danh 1000 FOLM</translation>
     </message>
     <message>
-        <source>This option is moderately fast and will cost about 0.05 DNET to anonymize 1000 DNET</source>
-        <translation>Tuỳ chọn này là tương đối nhanh và sẽ mất chi phí khoảng ~0.05 DNET để ẩn danh 1000 DNET</translation>
+        <source>This option is moderately fast and will cost about 0.05 FOLM to anonymize 1000 FOLM</source>
+        <translation>Tuỳ chọn này là tương đối nhanh và sẽ mất chi phí khoảng ~0.05 FOLM để ẩn danh 1000 FOLM</translation>
     </message>
     <message>
-        <source>0.1 DNET per 1000 DNET you anonymize.</source>
-        <translation>0.1 DNET cho mỗi 1000 DNET bạn muốn ẩn danh.</translation>
+        <source>0.1 FOLM per 1000 FOLM you anonymize.</source>
+        <translation>0.1 FOLM cho mỗi 1000 FOLM bạn muốn ẩn danh.</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
         <translation>Đây là tuỳ chọn chậm nhất và an toàn nhất. Sử dụng mức vô danh cao nhất sẽ tốn kém</translation>
     </message>
     <message>
-        <source>Obfuscate Configuration</source>
-        <translation>Cấu hình Obfuscate</translation>
+        <source>Obfuscation Configuration</source>
+        <translation>Cấu hình Obfuscation</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Folm's configuration screen.</source>
-        <translation>Obfuscate được thiết lập thành công về mức cơ bản (%1 và 2 vòng). Bạn có thể thay đổi nó bất cứ thời gian nào bằng cách mở màn hình cấu hình Folm.</translation>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Folm's configuration screen.</source>
+        <translation>Obfuscation được thiết lập thành công về mức cơ bản (%1 và 2 vòng). Bạn có thể thay đổi nó bất cứ thời gian nào bằng cách mở màn hình cấu hình Folm.</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Folm's configuration screen.</source>
-        <translation>Obfuscate được thiết lập thành công về mức cao (%1 và 8 vòng). Bạn có thể thay đổi nó bất cứ thời gian nào bằng cách mở màn hình cấu hình Folm.</translation>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Folm's configuration screen.</source>
+        <translation>Obfuscation được thiết lập thành công về mức cao (%1 và 8 vòng). Bạn có thể thay đổi nó bất cứ thời gian nào bằng cách mở màn hình cấu hình Folm.</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Folm's configuration screen.</source>
-        <translation>Obfuscate được thiết lập thành công về mức tối đa (%1 và 16 vòng). Bạn có thể thay đổi nó bất cứ thời gian nào bằng cách mở màn hình cấu hình Folm.</translation>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Folm's configuration screen.</source>
+        <translation>Obfuscation được thiết lập thành công về mức tối đa (%1 và 16 vòng). Bạn có thể thay đổi nó bất cứ thời gian nào bằng cách mở màn hình cấu hình Folm.</translation>
     </message>
 </context>
 <context>
@@ -1146,12 +1146,12 @@ Kiểu: %3
         <translation>(0 = tự động, &lt;0 = để đó rất nhiều lõi miễn phí)</translation>
     </message>
     <message>
-        <source>Obfuscate rounds to use</source>
-        <translation>Số vòng Obfuscate sử dụng</translation>
+        <source>Obfuscation rounds to use</source>
+        <translation>Số vòng Obfuscation sử dụng</translation>
     </message>
     <message>
-        <source>This amount acts as a threshold to turn off Obfuscate once it's reached.</source>
-        <translation>Số lượng này hoạt động như là một ngưỡng để tắt Obfuscate một khi nó đạt đến.</translation>
+        <source>This amount acts as a threshold to turn off Obfuscation once it's reached.</source>
+        <translation>Số lượng này hoạt động như là một ngưỡng để tắt Obfuscation một khi nó đạt đến.</translation>
     </message>
     <message>
         <source>Amount of Folm to keep anonymized</source>
@@ -1263,9 +1263,9 @@ Kiểu: %3
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/folm-crypto/folm-wallet-translations/</source>
+https://www.transifex.com/projects/p/folm/</source>
         <translation>Ngôn ngữ ị thiếu hoặc việc dịch chưa hoàn tất? Tham gia dịch giúp tại đây:
-https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
+https://www.transifex.com/projects/p/folm/</translation>
     </message>
     <message>
         <source>User Interface Theme:</source>
@@ -1371,7 +1371,7 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Chưa chín muồi:</translation>
     </message>
     <message>
-        <source>Staked or masternode rewards that has not yet matured</source>
+        <source>Mined balance that has not yet matured</source>
         <translation>Số dư khai thác được chưa được xác nhận đủ</translation>
     </message>
     <message>
@@ -1383,7 +1383,7 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Các giao dịch chưa được xác nhận cho các địa chỉ chỉ để theo dõi</translation>
     </message>
     <message>
-        <source>Staked or masternode rewards in watch-only addresses that has not yet matured</source>
+        <source>Mined balance in watch-only addresses that has not yet matured</source>
         <translation>Số dư đào được trong các địa chỉ chỉ theo dõi nhưng chưa sẵn sàng để tiêu được</translation>
     </message>
     <message>
@@ -1423,16 +1423,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Hoàn thành:</translation>
     </message>
     <message>
-        <source>Obfuscate Balance:</source>
-        <translation>Số dư cho Obfuscate:</translation>
+        <source>Obfuscation Balance:</source>
+        <translation>Số dư cho Obfuscation:</translation>
     </message>
     <message>
         <source>Amount and Rounds:</source>
         <translation>Số tiền và số vòng:</translation>
     </message>
     <message>
-        <source>0 DNET / 0 Rounds</source>
-        <translation>0 DNET / 0 Vòng</translation>
+        <source>0 FOLM / 0 Rounds</source>
+        <translation>0 FOLM / 0 Vòng</translation>
     </message>
     <message>
         <source>Submitted Denom:</source>
@@ -1443,8 +1443,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>không áp dụng</translation>
     </message>
     <message>
-        <source>Obfuscate</source>
-        <translation>Obfuscate</translation>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
     </message>
     <message>
         <source>Recent transactions</source>
@@ -1463,16 +1463,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>(Thông điệp cuối)</translation>
     </message>
     <message>
-        <source>Try to manually submit a Obfuscate request.</source>
-        <translation>Thử gửi yêu cầu Obfuscate bằng tay.</translation>
+        <source>Try to manually submit a Obfuscation request.</source>
+        <translation>Thử gửi yêu cầu Obfuscation bằng tay.</translation>
     </message>
     <message>
         <source>Try Mix</source>
         <translation>Thử Trộn</translation>
     </message>
     <message>
-        <source>Reset the current status of Obfuscate (can interrupt Obfuscate if it's in the process of Mixing, which can cost you money!)</source>
-        <translation>Tái lập lại trạng thái hiện tại của Obfuscate (có thể gián đoạn Obfuscate nếu nó đang trong quá trình trộn, điều đó có thể làm bạn bị mất tiền!)</translation>
+        <source>Reset the current status of Obfuscation (can interrupt Obfuscation if it's in the process of Mixing, which can cost you money!)</source>
+        <translation>Tái lập lại trạng thái hiện tại của Obfuscation (có thể gián đoạn Obfuscation nếu nó đang trong quá trình trộn, điều đó có thể làm bạn bị mất tiền!)</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -1487,12 +1487,12 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Đã tắt</translation>
     </message>
     <message>
-        <source>Start Obfuscate Mixing</source>
-        <translation>Bắt đầu trộn Obfuscate</translation>
+        <source>Start Obfuscation Mixing</source>
+        <translation>Bắt đầu trộn Obfuscation</translation>
     </message>
     <message>
-        <source>Stop Obfuscate Mixing</source>
-        <translation>Tắt trộn Obfuscate</translation>
+        <source>Stop Obfuscation Mixing</source>
+        <translation>Tắt trộn Obfuscation</translation>
     </message>
     <message>
         <source>No inputs detected</source>
@@ -1535,9 +1535,9 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Đã bật</translation>
     </message>
     <message>
-        <source>Last Obfuscate message:
+        <source>Last Obfuscation message:
 </source>
-        <translation>Thông điệp Obfuscate cuối cùng:
+        <translation>Thông điệp Obfuscation cuối cùng:
 </translation>
     </message>
     <message>
@@ -1545,20 +1545,20 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Không áp dụng</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully reset.</source>
-        <translation>Obfuscate vừa được tái lập thành công.</translation>
+        <source>Obfuscation was successfully reset.</source>
+        <translation>Obfuscation vừa được tái lập thành công.</translation>
     </message>
     <message>
-        <source>If you don't want to see internal Obfuscate fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
-        <translation>Nếu bạn không muốn thấy các thông tin bên trong về Obfuscate phí/giao dịch thì hãy chọn "Thông dụng nhất" làm Kiểu trong trang "Giao dịch".</translation>
+        <source>If you don't want to see internal Obfuscation fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
+        <translation>Nếu bạn không muốn thấy các thông tin bên trong về Obfuscation phí/giao dịch thì hãy chọn "Thông dụng nhất" làm Kiểu trong trang "Giao dịch".</translation>
     </message>
     <message>
-        <source>Obfuscate requires at least %1 to use.</source>
-        <translation>Obfuscate cần ít nhất %1 để sử dụng.</translation>
+        <source>Obfuscation requires at least %1 to use.</source>
+        <translation>Obfuscation cần ít nhất %1 để sử dụng.</translation>
     </message>
     <message>
-        <source>Wallet is locked and user declined to unlock. Disabling Obfuscate.</source>
-        <translation>Ví đã được khoá và người dùng từ chối mở khoá. Đang tắt Obfuscate.</translation>
+        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
+        <translation>Ví đã được khoá và người dùng từ chối mở khoá. Đang tắt Obfuscation.</translation>
     </message>
 </context>
 <context>
@@ -1659,8 +1659,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Địa chỉ/Máy trạm</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>User Agent</source>
+        <translation>User Agent</translation>
     </message>
     <message>
         <source>Ping Time</source>
@@ -1860,8 +1860,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Phiên bản</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>User Agent</source>
+        <translation>User Agent</translation>
     </message>
     <message>
         <source>Services</source>
@@ -2364,12 +2364,12 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Thêm &amp;Người nhận</translation>
     </message>
     <message>
-        <source>Obfuscate</source>
-        <translation>Obfuscate</translation>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
     </message>
     <message>
-        <source>quickTX</source>
-        <translation>quickTX</translation>
+        <source>SwiftTX</source>
+        <translation>SwiftTX</translation>
     </message>
     <message>
         <source>Balance:</source>
@@ -2416,16 +2416,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>các khoản tiền ẩn danh</translation>
     </message>
     <message>
-        <source>(obfuscate requires this amount to be rounded up to the nearest %1).</source>
-        <translation>(obfuscate yêu cầu số tiền này sẽ được làm tròn đến gần %1)</translation>
+        <source>(obfuscation requires this amount to be rounded up to the nearest %1).</source>
+        <translation>(obfuscation yêu cầu số tiền này sẽ được làm tròn đến gần %1)</translation>
     </message>
     <message>
         <source>any available funds (not recommended)</source>
         <translation>bất kỳ khoản tiền sẵn nào (gợi ý không nên)</translation>
     </message>
     <message>
-        <source>and quickTX</source>
-        <translation>và quickTX</translation>
+        <source>and SwiftTX</source>
+        <translation>và SwiftTX</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2778,16 +2778,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>xung đột</translation>
     </message>
     <message>
-        <source>%1/offline (verified via quicktx)</source>
-        <translation>%1/ngắt kết nối (đã được kiểm tra qua quicktx)</translation>
+        <source>%1/offline (verified via swifttx)</source>
+        <translation>%1/ngắt kết nối (đã được kiểm tra qua swifttx)</translation>
     </message>
     <message>
-        <source>%1/confirmed (verified via quicktx)</source>
-        <translation>%1/đã được xác nhận (đã được kiểm tra qua quicktx)</translation>
+        <source>%1/confirmed (verified via swifttx)</source>
+        <translation>%1/đã được xác nhận (đã được kiểm tra qua swifttx)</translation>
     </message>
     <message>
-        <source>%1 confirmations (verified via quicktx)</source>
-        <translation>%1 xác nhận (đã được kiểm tra qua quicktx)</translation>
+        <source>%1 confirmations (verified via swifttx)</source>
+        <translation>%1 xác nhận (đã được kiểm tra qua swifttx)</translation>
     </message>
     <message>
         <source>%1/offline</source>
@@ -2802,24 +2802,24 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>%1 xác nhận</translation>
     </message>
     <message>
-        <source>%1/offline (quickTX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1/mất kết nối (Đang trong tiến trình kiểm tra quickTX - %2 trên %3 các chữ ký)</translation>
+        <source>%1/offline (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <translation>%1/mất kết nối (Đang trong tiến trình kiểm tra SwiftTX - %2 trên %3 các chữ ký)</translation>
     </message>
     <message>
-        <source>%1/confirmed (quickTX verification in progress - %2 of %3 signatures )</source>
-        <translation>%1/được xác nhận (Đang trong tiến trình kiểm tra quickTX - %2 trên %3 các chữ ký)</translation>
+        <source>%1/confirmed (SwiftTX verification in progress - %2 of %3 signatures )</source>
+        <translation>%1/được xác nhận (Đang trong tiến trình kiểm tra SwiftTX - %2 trên %3 các chữ ký)</translation>
     </message>
     <message>
-        <source>%1 confirmations (quickTX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 xác nhận (Đang trong tiến trình kiểm tra quickTX - %2 trên %3 các chữ ký)</translation>
+        <source>%1 confirmations (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <translation>%1 xác nhận (Đang trong tiến trình kiểm tra SwiftTX - %2 trên %3 các chữ ký)</translation>
     </message>
     <message>
-        <source>%1/offline (quickTX verification failed)</source>
-        <translation>%1/mất kết nối (Thất bại trong việc kiểm tra quickTX)</translation>
+        <source>%1/offline (SwiftTX verification failed)</source>
+        <translation>%1/mất kết nối (Thất bại trong việc kiểm tra SwiftTX)</translation>
     </message>
     <message>
-        <source>%1/confirmed (quickTX verification failed)</source>
-        <translation>%1/đã được xác nhận (Thất bại trong việc kiểm tra quickTX)</translation>
+        <source>%1/confirmed (SwiftTX verification failed)</source>
+        <translation>%1/đã được xác nhận (Thất bại trong việc kiểm tra SwiftTX)</translation>
     </message>
     <message>
         <source>Status</source>
@@ -3020,8 +3020,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Nhận từ</translation>
     </message>
     <message>
-        <source>Received via Obfuscate</source>
-        <translation>Nhận qua Obfuscate</translation>
+        <source>Received via Obfuscation</source>
+        <translation>Nhận qua Obfuscation</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -3036,24 +3036,24 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Được đào</translation>
     </message>
     <message>
-        <source>Obfuscate Denominate</source>
-        <translation>Obfuscate Denominate</translation>
+        <source>Obfuscation Denominate</source>
+        <translation>Obfuscation Denominate</translation>
     </message>
     <message>
-        <source>Obfuscate Collateral Payment</source>
-        <translation>Thanh toán Obfuscate Collateral</translation>
+        <source>Obfuscation Collateral Payment</source>
+        <translation>Thanh toán Obfuscation Collateral</translation>
     </message>
     <message>
-        <source>Obfuscate Make Collateral Inputs</source>
-        <translation>Obfuscate tạo đầu vào Collateral</translation>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation>Obfuscation tạo đầu vào Collateral</translation>
     </message>
     <message>
-        <source>Obfuscate Create Denominations</source>
-        <translation>Obfuscate tạo các mệnh giá</translation>
+        <source>Obfuscation Create Denominations</source>
+        <translation>Obfuscation tạo các mệnh giá</translation>
     </message>
     <message>
-        <source>Obfuscated</source>
-        <translation>Obfuscated</translation>
+        <source>Darksent</source>
+        <translation>Darksent</translation>
     </message>
     <message>
         <source>watch-only</source>
@@ -3131,24 +3131,24 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Gửi đến</translation>
     </message>
     <message>
-        <source>Obfuscated</source>
-        <translation>Obfuscated</translation>
+        <source>Darksent</source>
+        <translation>Darksent</translation>
     </message>
     <message>
-        <source>Obfuscate Make Collateral Inputs</source>
-        <translation>Obfuscate tạo đầu vào Collateral</translation>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation>Obfuscation tạo đầu vào Collateral</translation>
     </message>
     <message>
-        <source>Obfuscate Create Denominations</source>
-        <translation>Obfuscate tạo các mệnh giá</translation>
+        <source>Obfuscation Create Denominations</source>
+        <translation>Obfuscation tạo các mệnh giá</translation>
     </message>
     <message>
-        <source>Obfuscate Denominate</source>
-        <translation>Obfuscate Denominate</translation>
+        <source>Obfuscation Denominate</source>
+        <translation>Obfuscation Denominate</translation>
     </message>
     <message>
-        <source>Obfuscate Collateral Payment</source>
-        <translation>Thanh toán Obfuscate Collateral</translation>
+        <source>Obfuscation Collateral Payment</source>
+        <translation>Thanh toán Obfuscation Collateral</translation>
     </message>
     <message>
         <source>To yourself</source>
@@ -3276,8 +3276,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Gửi tiền</translation>
     </message>
     <message>
-        <source>quickTX doesn't support sending values that high yet. Transactions are currently limited to %1 DNET.</source>
-        <translation>quickTX không hỗ trợ để gửi giá trị lớn đến như vậy. Giới hạn giao dịch hiện tại đến %1 DNET.</translation>
+        <source>SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 FOLM.</source>
+        <translation>SwiftTX không hỗ trợ để gửi giá trị lớn đến như vậy. Giới hạn giao dịch hiện tại đến %1 FOLM.</translation>
     </message>
 </context>
 <context>
@@ -3330,8 +3330,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Không nhận được một khoá trong thư mục %s. Folm Core có thể đã đang chạy.</translation>
     </message>
     <message>
-        <source>Obfuscate uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
-        <translation>Obfuscate sử dụng số lượng mệnh giá nhất định để gửi tiền, bạn có thể chỉ cần đơn giản ẩn danh vài coin nữa.</translation>
+        <source>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
+        <translation>Obfuscation sử dụng số lượng mệnh giá nhất định để gửi tiền, bạn có thể chỉ cần đơn giản ẩn danh vài coin nữa.</translation>
     </message>
     <message>
         <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
@@ -3358,8 +3358,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Chế độ này -genproclimit kiểm soát bao nhiêu khối được sinh tức thời.</translation>
     </message>
     <message>
-        <source>quickTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>quickTX cần đầu vào với ít nhất 6 xác nhận, bạn có thể cần phải đợi vài phút và thử lại.</translation>
+        <source>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
+        <translation>SwiftTX cần đầu vào với ít nhất 6 xác nhận, bạn có thể cần phải đợi vài phút và thử lại.</translation>
     </message>
     <message>
         <source>Name to construct url for KeePass entry that stores the wallet passphrase</source>
@@ -3386,12 +3386,12 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Không thể để ràng buộc vào %s trên máy tính này. Folm Core có thể đã chạy.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscate denominated funds for this transaction.</source>
-        <translation>Không tìm đủ ngân sách Obfuscate denominated cho giao dịch này.</translation>
+        <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
+        <translation>Không tìm đủ ngân sách Obfuscation denominated cho giao dịch này.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscate non-denominated funds for this transaction that are not equal 1000 DNET.</source>
-        <translation>Không tìm đủ ngân sách Obfuscate denominated cho giao dịch mà nó không bằng 1000 DNET</translation>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 1000 FOLM.</source>
+        <translation>Không tìm đủ ngân sách Obfuscation denominated cho giao dịch mà nó không bằng 1000 FOLM</translation>
     </message>
     <message>
         <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
@@ -3490,8 +3490,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Phát hiện ra dữ liệu khối bị hỏng</translation>
     </message>
     <message>
-        <source>Obfuscate options:</source>
-        <translation>Tuỳ chọn Obfuscate:</translation>
+        <source>Obfuscation options:</source>
+        <translation>Tuỳ chọn Obfuscation:</translation>
     </message>
     <message>
         <source>Debugging/Testing options:</source>
@@ -3562,8 +3562,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Lỗi: Ví đã bị khoá, không thể tạo giao dịch!</translation>
     </message>
     <message>
-        <source>Error: You already have pending entries in the Obfuscate pool</source>
-        <translation>Lỗi: Bạn đã có các thành phần đang chờ trong Obfuscate pool</translation>
+        <source>Error: You already have pending entries in the Obfuscation pool</source>
+        <translation>Lỗi: Bạn đã có các thành phần đang chờ trong Obfuscation pool</translation>
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
@@ -3614,32 +3614,32 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Xoá hết tất cả các giao dịch ví và chỉ phục hồi những phần đó của blockchain qua -rescan khi khởi động</translation>
     </message>
     <message>
-        <source>Disable all Folm specific functionality (Masternodes, Obfuscate, quickTX, Budgeting) (0-1, default: %u)</source>
-        <translation>Tắt tất cả các chức năng đặc trưng của Folm (Masternode, Obfuscate, quickTX, Lập ngân sách) (0-1, ngầm định: %u)</translation>
+        <source>Disable all Folm specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
+        <translation>Tắt tất cả các chức năng đặc trưng của Folm (Masternode, Obfuscation, SwiftTX, Lập ngân sách) (0-1, ngầm định: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
         <translation>Phân phối dưới giấy phép phần mềm MIT, hãy xem file COPYING đi kèm hoặc &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</translation>
     </message>
     <message>
-        <source>Enable quicktx, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>Bật quickTX, hiển thị các xác thực cho các giao dịch bị khoá (bool, ngầm định: %s)</translation>
+        <source>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</source>
+        <translation>Bật SwiftTX, hiển thị các xác thực cho các giao dịch bị khoá (bool, ngầm định: %s)</translation>
     </message>
     <message>
-        <source>Enable use of automated obfuscate for funds stored in this wallet (0-1, default: %u)</source>
-        <translation>Cho phép sử dụng tự động obfuscate cho những ngân sách được lưu trong ví (0-1, ngầm định: %u)</translation>
+        <source>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</source>
+        <translation>Cho phép sử dụng tự động obfuscation cho những ngân sách được lưu trong ví (0-1, ngầm định: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -socks found. Setting SOCKS version isn't possible anymore, only SOCKS5 proxies are supported.</source>
         <translation>Lỗi: Thấy tham số không được hỗ trợ -socks. Thiết lập phiên bản SOCKS là không thể được nữa, chỉ hỗ trợ proxy SOCKS5.</translation>
     </message>
     <message>
-        <source>Fees (in DNET/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation>Phí (tính theo DNET/Kb) nhỏ hơn số này được coi là không mất phí cho việc chuyển tiền (ngầm định: %s)</translation>
+        <source>Fees (in FOLM/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Phí (tính theo FOLM/Kb) nhỏ hơn số này được coi là không mất phí cho việc chuyển tiền (ngầm định: %s)</translation>
     </message>
     <message>
-        <source>Fees (in DNET/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Phí (theo DNET/Kb) nhỏ hơn số này được coi không mất phí cho việc khởi tạo giao dịch (ngầm định: %s)</translation>
+        <source>Fees (in FOLM/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Phí (theo FOLM/Kb) nhỏ hơn số này được coi không mất phí cho việc khởi tạo giao dịch (ngầm định: %s)</translation>
     </message>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
@@ -3686,8 +3686,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Thông tin gỡ rối đầu ra (ngầm định: %u, cung cấp &lt;category&gt;  là một tuỳ chọn)</translation>
     </message>
     <message>
-        <source>Provide liquidity to Obfuscate by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
-        <translation>Cung cấp thanh khoản cho Obfuscate bằng việc thường xuyên trộn tiền một cách liên tục (0-100, ngầm định: %u, 1=rất thường xuyên, phí cao, 100=rất ít thường xuyên, phí thấp)</translation>
+        <source>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
+        <translation>Cung cấp thanh khoản cho Obfuscation bằng việc thường xuyên trộn tiền một cách liên tục (0-100, ngầm định: %u, 1=rất thường xuyên, phí cao, 100=rất ít thường xuyên, phí thấp)</translation>
     </message>
     <message>
         <source>Require high priority for relaying free or low-fee transactions (default:%u)</source>
@@ -3734,8 +3734,8 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
 </translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 1000 DNET.</source>
-        <translation>Không tìm được đủ ngân sách cho giao dịch mà nó không đủ 1000 DNET.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 1000 FOLM.</source>
+        <translation>Không tìm được đủ ngân sách cho giao dịch mà nó không đủ 1000 FOLM.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -3758,8 +3758,8 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Cái điểm ngang hàng trong danh sách trắng không thể bị cấm DoS và các giao dịch của nó luôn được chuyển tiếp, thậm chí cả khi nó đã có trong mempool, hữu ích ví dụ như cho một cửa ngõ</translation>
     </message>
     <message>
-        <source>(53656 could be used only on mainnet)</source>
-        <translation>(53656 chỉ được sử dụng trên mạng chính thức)</translation>
+        <source>(9999 could be used only on mainnet)</source>
+        <translation>(9999 chỉ được sử dụng trên mạng chính thức)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3807,16 +3807,16 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Không thể phân tích giá trị -rpcbind %s như là địa chỉ mạng</translation>
     </message>
     <message>
-        <source>Obfuscate is idle.</source>
-        <translation>Obfuscate đang nghỉ.</translation>
+        <source>Obfuscation is idle.</source>
+        <translation>Obfuscation đang nghỉ.</translation>
     </message>
     <message>
-        <source>Obfuscate request complete:</source>
-        <translation>Yêu cầu Obfuscate hoàn thành:</translation>
+        <source>Obfuscation request complete:</source>
+        <translation>Yêu cầu Obfuscation hoàn thành:</translation>
     </message>
     <message>
-        <source>Obfuscate request incomplete:</source>
-        <translation>Yêu cầu Obfuscate chưa hoàn thành:</translation>
+        <source>Obfuscation request incomplete:</source>
+        <translation>Yêu cầu Obfuscation chưa hoàn thành:</translation>
     </message>
     <message>
         <source>Disable safemode, override a real safe mode event (default: %u)</source>
@@ -3847,8 +3847,8 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Lỗi: Tìm thấy tham số không được hỗ trợ -tor, thay vào đó hãy sử dụng -onion</translation>
     </message>
     <message>
-        <source>Fee (in DNET/kB) to add to transactions you send (default: %s)</source>
-        <translation>Phí (theo DNET/Kb) sẽ thêm vào các giao dịch mà bạn gửi (ngầm định: %s)</translation>
+        <source>Fee (in FOLM/kB) to add to transactions you send (default: %s)</source>
+        <translation>Phí (theo FOLM/Kb) sẽ thêm vào các giao dịch mà bạn gửi (ngầm định: %s)</translation>
     </message>
     <message>
         <source>Finalizing transaction.</source>
@@ -3911,8 +3911,8 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Đầu vào không hợp lệ.</translation>
     </message>
     <message>
-        <source>quickTX options:</source>
-        <translation>Tuỳ chọn quickTX:</translation>
+        <source>SwiftTX options:</source>
+        <translation>Tuỳ chọn SwiftTX:</translation>
     </message>
     <message>
         <source>Insufficient funds.</source>
@@ -3947,8 +3947,8 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Số tiền không hợp lệ cho -paytxfee =&lt;số tiền&gt;: '%s'</translation>
     </message>
     <message>
-        <source>Last successful Obfuscate action was too recent.</source>
-        <translation>Phiên giao dịch Obfuscate thành công cuối cùng quá gần đây.</translation>
+        <source>Last successful Obfuscation action was too recent.</source>
+        <translation>Phiên giao dịch Obfuscation thành công cuối cùng quá gần đây.</translation>
     </message>
     <message>
         <source>Limit size of signature cache to &lt;n&gt; entries (default: %u)</source>
@@ -4175,8 +4175,8 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Masternodeprivkey không hợp lệ. Hãy xem lại tài liệu.</translation>
     </message>
     <message>
-        <source>(must be53656 for mainnet)</source>
-        <translation>(phải là53656 cho mạng chính thức)</translation>
+        <source>(must be 9999 for mainnet)</source>
+        <translation>(phải là 9999 cho mạng chính thức)</translation>
     </message>
     <message>
         <source>Can't find random Masternode.</source>
@@ -4215,16 +4215,16 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Khoá KeePassHttp cho liên lạc mã hoá AES với KeePass</translation>
     </message>
     <message>
-        <source>Keep N DNET anonymized (default: %u)</source>
-        <translation>Giữ N DNET đã được ẩn danh (ngầm định: %u)</translation>
+        <source>Keep N FOLM anonymized (default: %u)</source>
+        <translation>Giữ N FOLM đã được ẩn danh (ngầm định: %u)</translation>
     </message>
     <message>
         <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
         <translation>Giữ nhiều nhất &lt;n&gt; các giao dịch không kết nối được trong bộ nhớ (ngầm định: %u)</translation>
     </message>
     <message>
-        <source>Last Obfuscate was too recent.</source>
-        <translation>Obfuscate cuối cùng quá gần.</translation>
+        <source>Last Obfuscation was too recent.</source>
+        <translation>Obfuscation cuối cùng quá gần.</translation>
     </message>
     <message>
         <source>Line: %d</source>
@@ -4475,8 +4475,8 @@ ví dụ: alertnotify=echo %%s | mail -s "Folm Alert" admin@foo.com
         <translation>Username cho kết nối JSON-RPC</translation>
     </message>
     <message>
-        <source>Value more than Obfuscate pool maximum allows.</source>
-        <translation>Giá tri trị lớn hơn giá trị tối đa mà bể Obfuscate cho phép.</translation>
+        <source>Value more than Obfuscation pool maximum allows.</source>
+        <translation>Giá tri trị lớn hơn giá trị tối đa mà bể Obfuscation cho phép.</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>

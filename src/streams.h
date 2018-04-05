@@ -345,8 +345,8 @@ private:
 
     int nType;
     int nVersion;
-
-    FILE* file;
+	
+    FILE* file;	
 
 public:
     CAutoFile(FILE* filenew, int nTypeIn, int nVersionIn)
@@ -485,7 +485,7 @@ protected:
 
 public:
     CBufferedFile(FILE *fileIn, uint64_t nBufSize, uint64_t nRewindIn, int nTypeIn, int nVersionIn) :
-            nSrcPos(0), nReadPos(0), nReadLimit((uint64_t)(-1)), nRewind(nRewindIn), vchBuf(nBufSize, 0)
+        nSrcPos(0), nReadPos(0), nReadLimit((uint64_t)(-1)), nRewind(nRewindIn), vchBuf(nBufSize, 0)
     {
         src = fileIn;
         nType = nTypeIn;

@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="en">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="en" version="2.0">
 <context>
     <name>AddressBookPage</name>
     <message>
-        <location filename="../forms/addressbookpage.ui" line="+67"/>
+        <location filename="../forms/addressbookpage.ui" line="+30"/>
         <source>Right-click to edit address or label</source>
         <translation>Right-click to edit address or label</translation>
     </message>
@@ -54,17 +52,17 @@
         <translation>C&amp;lose</translation>
     </message>
     <message>
-        <location filename="../addressbookpage.cpp" line="+44"/>
+        <location filename="../addressbookpage.cpp" line="+45"/>
         <source>Choose the address to send coins to</source>
         <translation>Choose the address to send coins to</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+1"/>
         <source>Choose the address to receive coins with</source>
         <translation>Choose the address to receive coins with</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+5"/>
         <source>C&amp;hoose</source>
         <translation>C&amp;hoose</translation>
     </message>
@@ -74,19 +72,19 @@
         <translation>Sending addresses</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+1"/>
         <source>Receiving addresses</source>
         <translation>Receiving addresses</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>These are your Folm addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished"></translation>
+        <translation>These are your Folm addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>These are your Folm addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>These are your Folm addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -104,7 +102,7 @@
         <translation>&amp;Edit</translation>
     </message>
     <message>
-        <location line="+187"/>
+        <location line="+194"/>
         <source>Export Address List</source>
         <translation>Export Address List</translation>
     </message>
@@ -127,7 +125,7 @@
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+157"/>
+        <location filename="../addresstablemodel.cpp" line="+169"/>
         <source>Label</source>
         <translation>Label</translation>
     </message>
@@ -137,7 +135,7 @@
         <translation>Address</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+36"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
     </message>
@@ -171,11 +169,11 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>For anonymization and staking only</source>
-        <translation>For anonymization and staking only</translation>
+        <source>For anonymization only</source>
+        <translation>For anonymization only</translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+44"/>
+        <location filename="../askpassphrasedialog.cpp" line="+43"/>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</translation>
     </message>
@@ -215,297 +213,94 @@
         <translation>Enter the old and new passphrase to the wallet.</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+46"/>
         <source>Confirm wallet encryption</source>
         <translation>Confirm wallet encryption</translation>
     </message>
     <message>
-        <location line="+9"/>
-        <source>Folm will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your FLMs from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR FOLM&lt;/b&gt;!</source>
+        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR FOLM&lt;/b&gt;!</translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="+0"/>
         <source>Are you sure you wish to encrypt your wallet?</source>
         <translation>Are you sure you wish to encrypt your wallet?</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR FLM&lt;/b&gt;!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+45"/>
+        <location line="+9"/>
+        <location line="+59"/>
         <source>Wallet encrypted</source>
         <translation>Wallet encrypted</translation>
     </message>
     <message>
-        <location line="-39"/>
+        <location line="-57"/>
+        <source>Folm will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your folms from being stolen by malware infecting your computer.</source>
+        <translation>Folm will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your folms from being stolen by malware infecting your computer.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</translation>
     </message>
     <message>
+        <location line="+9"/>
         <location line="+7"/>
-        <location line="+5"/>
-        <location line="+31"/>
-        <location line="+4"/>
+        <location line="+43"/>
+        <location line="+6"/>
         <source>Wallet encryption failed</source>
         <translation>Wallet encryption failed</translation>
     </message>
     <message>
-        <location line="-39"/>
+        <location line="-55"/>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
         <translation>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+35"/>
+        <location line="+7"/>
+        <location line="+49"/>
         <source>The supplied passphrases do not match.</source>
         <translation>The supplied passphrases do not match.</translation>
     </message>
     <message>
-        <location line="-26"/>
+        <location line="-37"/>
         <source>Wallet unlock failed</source>
         <translation>Wallet unlock failed</translation>
     </message>
     <message>
         <location line="+1"/>
-        <location line="+8"/>
-        <location line="+13"/>
+        <location line="+11"/>
+        <location line="+19"/>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>The passphrase entered for the wallet decryption was incorrect.</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-20"/>
         <source>Wallet decryption failed</source>
         <translation>Wallet decryption failed</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+14"/>
         <source>Wallet passphrase was successfully changed.</source>
         <translation>Wallet passphrase was successfully changed.</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+48"/>
         <location line="+24"/>
         <source>Warning: The Caps Lock key is on!</source>
         <translation>Warning: The Caps Lock key is on!</translation>
     </message>
 </context>
 <context>
-    <name>Bip38ToolDialog</name>
-    <message>
-        <location filename="../forms/bip38tooldialog.ui" line="+14"/>
-        <source>BIP 38 Tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>&amp;BIP 38 Encrypt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Enter a Pivx Address that you would like to encrypt using BIP 38. Enter a passphrase in the middle box. Press encrypt to compute the encrypted private key.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <location line="+362"/>
-        <source>Address:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-355"/>
-        <source>The Folm address to sign the message with</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Choose previously used address</source>
-        <translation type="unfinished">Choose previously used address</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Alt+A</source>
-        <translation type="unfinished">Alt+A</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Paste address from clipboard</source>
-        <translation type="unfinished">Paste address from clipboard</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Alt+P</source>
-        <translation type="unfinished">Alt+P</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <location line="+185"/>
-        <source>Passphrase: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-164"/>
-        <location line="+146"/>
-        <source>Encrypted Key:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-124"/>
-        <source>Copy the current signature to the system clipboard</source>
-        <translation type="unfinished">Copy the current signature to the system clipboard</translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Sign the message to prove you own this Folm address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Encrypt &amp;Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Reset all sign message fields</source>
-        <translation type="unfinished">Reset all sign message fields</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+139"/>
-        <source>Clear &amp;All</source>
-        <translation type="unfinished">Clear &amp;All</translation>
-    </message>
-    <message>
-        <location line="-80"/>
-        <source>&amp;BIP 38 Decrypt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Enter the BIP 38 encrypted private key. Enter the passphrase in the middle box. Click Decrypt Key to compute the private key. After the key is decrypted, clicking &apos;Import Address&apos; will add this private key to the wallet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>The Folm address the message was signed with</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Verify the message to ensure it was signed with the specified Folm address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Decrypt &amp;Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Reset all verify message fields</source>
-        <translation type="unfinished">Reset all verify message fields</translation>
-    </message>
-    <message>
-        <location line="+63"/>
-        <source>Decrypted Key:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Import Address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../bip38tooldialog.cpp" line="+31"/>
-        <source>Click &quot;Decrypt Key&quot; to compute key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+90"/>
-        <source>The entered passphrase is invalid. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Allowed: 0-9,a-z,A-Z,</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>The entered address is invalid.</source>
-        <translation type="unfinished">The entered address is invalid.</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <location line="+8"/>
-        <source>Please check the address and try again.</source>
-        <translation type="unfinished">Please check the address and try again.</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>The entered address does not refer to a key.</source>
-        <translation type="unfinished">The entered address does not refer to a key.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+57"/>
-        <source>Wallet unlock was cancelled.</source>
-        <translation type="unfinished">Wallet unlock was cancelled.</translation>
-    </message>
-    <message>
-        <location line="-50"/>
-        <source>Private key for the entered address is not available.</source>
-        <translation type="unfinished">Private key for the entered address is not available.</translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Failed to decrypt.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Please check the key and passphrase and try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Data Not Valid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Please try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Please wait while key is imported</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Key Already Held By Wallet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Error Adding Key To Wallet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Successfully Added Private Key To Wallet</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>BitcoinGUI</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+123"/>
+        <location filename="../bitcoingui.cpp" line="+108"/>
+        <location line="+752"/>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
+    </message>
+    <message>
+        <location line="-743"/>
         <source>Wallet</source>
         <translation>Wallet</translation>
     </message>
@@ -515,7 +310,7 @@
         <translation>Node</translation>
     </message>
     <message>
-        <location line="+157"/>
+        <location line="+144"/>
         <source>&amp;Overview</source>
         <translation>&amp;Overview</translation>
     </message>
@@ -530,12 +325,22 @@
         <translation>&amp;Send</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+1"/>
+        <source>Send coins to a Folm address</source>
+        <translation>Send coins to a Folm address</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>&amp;Receive</source>
         <translation>&amp;Receive</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+1"/>
+        <source>Request payments (generates QR codes and folm: URIs)</source>
+        <translation>Request payments (generates QR codes and folm: URIs)</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>&amp;Transactions</source>
         <translation>&amp;Transactions</translation>
     </message>
@@ -545,7 +350,7 @@
         <translation>Browse transaction history</translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+23"/>
         <source>E&amp;xit</source>
         <translation>E&amp;xit</translation>
     </message>
@@ -555,7 +360,17 @@
         <translation>Quit application</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+3"/>
+        <source>&amp;About Folm Core</source>
+        <translation>&amp;About Folm Core</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show information about Folm Core</source>
+        <translation>Show information about Folm Core</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <location line="+2"/>
         <source>About &amp;Qt</source>
         <translation>About &amp;Qt</translation>
@@ -571,7 +386,12 @@
         <translation>&amp;Options...</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+1"/>
+        <source>Modify configuration options for Folm</source>
+        <translation>Modify configuration options for Folm</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>&amp;Show / Hide</source>
         <translation>&amp;Show / Hide</translation>
     </message>
@@ -631,12 +451,22 @@
         <translation>Sign &amp;message...</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
+        <source>Sign messages with your Folm addresses to prove you own them</source>
+        <translation>Sign messages with your Folm addresses to prove you own them</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>&amp;Verify message...</source>
         <translation>&amp;Verify message...</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+1"/>
+        <source>Verify messages to ensure they were signed with specified Folm addresses</source>
+        <translation>Verify messages to ensure they were signed with specified Folm addresses</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>&amp;Information</source>
         <translation>&amp;Information</translation>
     </message>
@@ -686,12 +516,17 @@
         <translation>Show wallet repair options</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
+        <source>Open &amp;Configuration File</source>
+        <translation>Open &amp;Configuration File</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Open configuration file</source>
         <translation>Open configuration file</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+1"/>
         <source>Show Automatic &amp;Backups</source>
         <translation>Show Automatic &amp;Backups</translation>
     </message>
@@ -726,30 +561,42 @@
         <translation>Open &amp;URI...</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+1"/>
+        <source>Open a folm: URI or payment request</source>
+        <translation>Open a folm: URI or payment request</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>&amp;Command-line options</source>
         <translation>&amp;Command-line options</translation>
     </message>
+    <message>
+        <location line="+196"/>
+        <source>Folm Core client</source>
+        <translation>Folm Core client</translation>
+    </message>
     <message numerus="yes">
-        <location line="+428"/>
+        <location line="+182"/>
         <source>Processed %n blocks of transaction history.</source>
-        <translation>
-            <numerusform>Processed %n block of transaction history.</numerusform>
-            <numerusform>Processed %n blocks of transaction history.</numerusform>
-        </translation>
+        <translation><numerusform>Processed %n block of transaction history.</numerusform><numerusform>Processed %n blocks of transaction history.</numerusform></translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+31"/>
         <source>Synchronizing additional data: %p%</source>
         <translation>Synchronizing additional data: %p%</translation>
     </message>
     <message>
-        <location line="-421"/>
+        <location line="-407"/>
+        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
+        <translation>Show the Folm Core help message to get a list with possible Folm command-line options</translation>
+    </message>
+    <message>
+        <location line="+36"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>&amp;Settings</source>
         <translation>&amp;Settings</translation>
     </message>
@@ -759,133 +606,19 @@
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+11"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>Tabs toolbar</source>
         <translation>Tabs toolbar</translation>
     </message>
-    <message>
-        <location line="-396"/>
-        <location line="+831"/>
-        <source>Folm Core</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-652"/>
-        <source>Send coins to a Folm address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Request payments (generates QR codes and pivx: URIs)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>&amp;Masternodes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Browse masternodes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>&amp;About Folm Core</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show information about Folm Core</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Modify configuration options for Folm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Sign messages with your Folm addresses to prove you own them</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Folm addresses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;BIP38 tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Encrypt and decrypt private keys using a passphrase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;MultiSend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MultiSend Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Open Wallet &amp;Configuration File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Open &amp;Masternode Configuration File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Open Masternode configuration file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Open a Folm: URI or payment request</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Blockchain explorer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Block explorer window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Show the Folm Core help message to get a list with possible Folm command-line options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+201"/>
-        <source>Folm Core client</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message numerus="yes">
-        <location line="+190"/>
+        <location line="+256"/>
         <source>%n active connection(s) to Folm network</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
+        <translation><numerusform>%n active connection to Folm network</numerusform><numerusform>%n active connections to Folm network</numerusform></translation>
     </message>
     <message>
         <location line="+15"/>
@@ -908,34 +641,25 @@
         <translation>No block source available...</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+18"/>
         <source>Up to date</source>
         <translation>Up to date</translation>
     </message>
     <message numerus="yes">
-        <location line="+41"/>
+        <location line="+42"/>
         <source>%n hour(s)</source>
-        <translation>
-            <numerusform>%n hour</numerusform>
-            <numerusform>%n hours</numerusform>
-        </translation>
+        <translation><numerusform>%n hour</numerusform><numerusform>%n hours</numerusform></translation>
     </message>
     <message numerus="yes">
-        <location line="+2"/>
-        <source>%n day(s)</source>
-        <translation>
-            <numerusform>%n day</numerusform>
-            <numerusform>%n days</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location line="+2"/>
         <location line="+4"/>
+        <source>%n day(s)</source>
+        <translation><numerusform>%n day</numerusform><numerusform>%n days</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location line="+4"/>
+        <location line="+6"/>
         <source>%n week(s)</source>
-        <translation>
-            <numerusform>%n week</numerusform>
-            <numerusform>%n weeks</numerusform>
-        </translation>
+        <translation><numerusform>%n week</numerusform><numerusform>%n weeks</numerusform></translation>
     </message>
     <message>
         <location line="+0"/>
@@ -945,10 +669,7 @@
     <message numerus="yes">
         <location line="+0"/>
         <source>%n year(s)</source>
-        <translation>
-            <numerusform>%n year</numerusform>
-            <numerusform>%n years</numerusform>
-        </translation>
+        <translation><numerusform>%n year</numerusform><numerusform>%n years</numerusform></translation>
     </message>
     <message>
         <location line="+4"/>
@@ -971,7 +692,7 @@
         <translation>Transactions after this will not yet be visible.</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -986,7 +707,7 @@
         <translation>Information</translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="+74"/>
         <source>Sent transaction</source>
         <translation>Sent transaction</translation>
     </message>
@@ -994,11 +715,6 @@
         <location line="+0"/>
         <source>Incoming transaction</source>
         <translation>Incoming transaction</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Sent MultiSend transaction</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1014,38 +730,14 @@ Address: %4
 </translation>
     </message>
     <message>
-        <location line="+50"/>
-        <source>Staking is active
- MultiSend: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <location line="+4"/>
-        <source>Active</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-4"/>
-        <location line="+4"/>
-        <source>Not Active</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Staking is not active
- MultiSend: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
+        <location line="+70"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
         <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization and staking only</source>
-        <translation type="unfinished"></translation>
+        <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization only</source>
+        <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt; for anonimization only</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1054,42 +746,14 @@ Address: %4
     </message>
 </context>
 <context>
-    <name>BlockExplorer</name>
-    <message>
-        <location filename="../forms/blockexplorer.ui" line="+14"/>
-        <source>Blockchain Explorer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+55"/>
-        <source>Address / Block / Transaction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../blockexplorer.cpp" line="+473"/>
-        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (pivx.conf).</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ClientModel</name>
     <message>
         <location filename="../clientmodel.cpp" line="+73"/>
-        <source>Total: %1 (OBF compatible: %2 / Enabled: %3)</source>
-        <translation>Total: %1 (OBF compatible: %2 / Enabled: %3)</translation>
+        <source>Total: %1 (DS compatible: %2 / Enabled: %3)</source>
+        <translation>Total: %1 (DS compatible: %2 / Enabled: %3)</translation>
     </message>
     <message>
-        <location line="+101"/>
+        <location line="+107"/>
         <source>Network Alert</source>
         <translation>Network Alert</translation>
     </message>
@@ -1148,11 +812,6 @@ Address: %4
     </message>
     <message>
         <location line="+16"/>
-        <source>toggle lock state</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
         <source>Tree mode</source>
         <translation>Tree mode</translation>
     </message>
@@ -1184,7 +843,7 @@ Address: %4
     <message>
         <location line="+5"/>
         <source>DS Rounds</source>
-        <translation type="unfinished"></translation>
+        <translation>DS Rounds</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1207,7 +866,7 @@ Address: %4
         <translation>Priority</translation>
     </message>
     <message>
-        <location filename="../coincontroldialog.cpp" line="+50"/>
+        <location filename="../coincontroldialog.cpp" line="+49"/>
         <source>Copy address</source>
         <translation>Copy address</translation>
     </message>
@@ -1273,83 +932,78 @@ Address: %4
         <translation>Copy change</translation>
     </message>
     <message>
-        <location line="+157"/>
-        <source>Please switch to &quot;List mode&quot; to use this function.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+196"/>
+        <location line="+329"/>
         <source>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+32"/>
         <source>highest</source>
         <translation>highest</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>higher</source>
         <translation>higher</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>high</source>
         <translation>high</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>medium-high</source>
         <translation>medium-high</translation>
     </message>
     <message>
-        <location line="+207"/>
+        <location line="+216"/>
         <source>Can vary +/- %1 duff(s) per input.</source>
         <translation>Can vary +/- %1 duff(s) per input.</translation>
     </message>
     <message>
-        <location line="+130"/>
+        <location line="+132"/>
         <source>n/a</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location filename="../forms/coincontroldialog.ui" line="-334"/>
-        <location filename="../coincontroldialog.cpp" line="-335"/>
+        <location filename="../forms/coincontroldialog.ui" line="-318"/>
+        <location filename="../coincontroldialog.cpp" line="-347"/>
         <source>medium</source>
         <translation>medium</translation>
     </message>
     <message>
-        <location filename="../coincontroldialog.cpp" line="+2"/>
+        <location filename="../coincontroldialog.cpp" line="+1"/>
         <source>low-medium</source>
         <translation>low-medium</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>low</source>
         <translation>low</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>lower</source>
         <translation>lower</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>lowest</source>
         <translation>lowest</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>(%1 locked)</source>
         <translation>(%1 locked)</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+28"/>
         <source>none</source>
         <translation>none</translation>
     </message>
     <message>
-        <location line="+131"/>
+        <location line="+141"/>
         <source>yes</source>
         <translation>yes</translation>
     </message>
@@ -1360,7 +1014,7 @@ Address: %4
         <translation>no</translation>
     </message>
     <message>
-        <location filename="../coincontroldialog.cpp" line="+15"/>
+        <location filename="../coincontroldialog.cpp" line="+16"/>
         <source>This label turns red, if the transaction size is greater than 1000 bytes.</source>
         <translation>This label turns red, if the transaction size is greater than 1000 bytes.</translation>
     </message>
@@ -1391,13 +1045,13 @@ Address: %4
         <translation>This label turns red, if any recipient receives an amount smaller than %1.</translation>
     </message>
     <message>
-        <location line="+54"/>
-        <location line="+62"/>
+        <location line="+55"/>
+        <location line="+65"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
     </message>
     <message>
-        <location line="-5"/>
+        <location line="-7"/>
         <source>change from %1 (%2)</source>
         <translation>change from %1 (%2)</translation>
     </message>
@@ -1405,6 +1059,91 @@ Address: %4
         <location line="+1"/>
         <source>(change)</source>
         <translation>(change)</translation>
+    </message>
+</context>
+<context>
+    <name>ObfuscationConfig</name>
+    <message>
+        <location filename="../forms/obfuscationconfig.ui" line="+14"/>
+        <source>Configure Obfuscation</source>
+        <translation>Configure Obfuscation</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Basic Privacy</source>
+        <translation>Basic Privacy</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>High Privacy</source>
+        <translation>High Privacy</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Maximum Privacy</source>
+        <translation>Maximum Privacy</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Please select a privacy level.</source>
+        <translation>Please select a privacy level.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Use 2 separate masternodes to mix funds up to 1000 FOLM</source>
+        <translation>Use 2 separate masternodes to mix funds up to 1000 FOLM</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Use 8 separate masternodes to mix funds up to 1000 FOLM</source>
+        <translation>Use 8 separate masternodes to mix funds up to 1000 FOLM</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Use 16 separate masternodes</source>
+        <translation>Use 16 separate masternodes</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>This option is the quickest and will cost about ~0.025 FOLM to anonymize 1000 FOLM</source>
+        <translation>This option is the quickest and will cost about ~0.025 FOLM to anonymize 1000 FOLM</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>This option is moderately fast and will cost about 0.05 FOLM to anonymize 1000 FOLM</source>
+        <translation>This option is moderately fast and will cost about 0.05 FOLM to anonymize 1000 FOLM</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>0.1 FOLM per 1000 FOLM you anonymize.</source>
+        <translation>0.1 FOLM per 1000 FOLM you anonymize.</translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
+        <translation>This is the slowest and most secure option. Using maximum anonymity will cost</translation>
+    </message>
+    <message>
+        <location filename="../obfuscationconfig.cpp" line="+43"/>
+        <location line="+15"/>
+        <location line="+15"/>
+        <source>Obfuscation Configuration</source>
+        <translation>Obfuscation Configuration</translation>
+    </message>
+    <message>
+        <location line="-29"/>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</source>
+        <translation>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</source>
+        <translation>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</source>
+        <translation>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</translation>
     </message>
 </context>
 <context>
@@ -1435,7 +1174,7 @@ Address: %4
         <translation>The address associated with this address list entry. This can only be modified for sending addresses.</translation>
     </message>
     <message>
-        <location filename="../editaddressdialog.cpp" line="+28"/>
+        <location filename="../editaddressdialog.cpp" line="+29"/>
         <source>New receiving address</source>
         <translation>New receiving address</translation>
     </message>
@@ -1455,9 +1194,9 @@ Address: %4
         <translation>Edit sending address</translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="+71"/>
         <source>The entered address &quot;%1&quot; is not a valid Folm address.</source>
-        <translation type="unfinished"></translation>
+        <translation>The entered address &quot;%1&quot; is not a valid Folm address.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1478,12 +1217,12 @@ Address: %4
 <context>
     <name>FreespaceChecker</name>
     <message>
-        <location filename="../intro.cpp" line="+70"/>
+        <location filename="../intro.cpp" line="+69"/>
         <source>A new data directory will be created.</source>
         <translation>A new data directory will be created.</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+22"/>
         <source>name</source>
         <translation>name</translation>
     </message>
@@ -1498,7 +1237,7 @@ Address: %4
         <translation>Path already exists, and is not a directory.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Cannot create data directory here.</source>
         <translation>Cannot create data directory here.</translation>
     </message>
@@ -1506,14 +1245,14 @@ Address: %4
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <location filename="../utilitydialog.cpp" line="+37"/>
-        <source>version</source>
-        <translation>version</translation>
+        <location filename="../utilitydialog.cpp" line="+32"/>
+        <source>Folm Core</source>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Folm Core</source>
-        <translation type="unfinished"></translation>
+        <source>version</source>
+        <translation>version</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1522,12 +1261,12 @@ Address: %4
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>About Folm Core</source>
-        <translation type="unfinished"></translation>
+        <translation>About Folm Core</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+19"/>
         <source>Command-line options</source>
         <translation>Command-line options</translation>
     </message>
@@ -1542,22 +1281,17 @@ Address: %4
         <translation>command-line options</translation>
     </message>
     <message>
-        <location line="+8"/>
-        <source>UI Options:</source>
-        <translation type="unfinished"></translation>
+        <location line="+4"/>
+        <source>UI options</source>
+        <translation>UI options</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Choose data directory on startup (default: %u)</source>
-        <translation type="unfinished"></translation>
+        <source>Choose data directory on startup (default: 0)</source>
+        <translation>Choose data directory on startup (default: 0)</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Show splash screen on startup (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-3"/>
+        <location line="+1"/>
         <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
         <translation>Set language, for example &quot;de_DE&quot; (default: system locale)</translation>
     </message>
@@ -1571,6 +1305,11 @@ Address: %4
         <source>Set SSL root certificates for payment request (default: -system-)</source>
         <translation>Set SSL root certificates for payment request (default: -system-)</translation>
     </message>
+    <message>
+        <location line="+1"/>
+        <source>Show splash screen on startup (default: 1)</source>
+        <translation>Show splash screen on startup (default: 1)</translation>
+    </message>
 </context>
 <context>
     <name>Intro</name>
@@ -1582,17 +1321,17 @@ Address: %4
     <message>
         <location line="+9"/>
         <source>Welcome to Folm Core.</source>
-        <translation type="unfinished"></translation>
+        <translation>Welcome to Folm Core.</translation>
     </message>
     <message>
         <location line="+26"/>
         <source>As this is the first time the program is launched, you can choose where Folm Core will store its data.</source>
-        <translation type="unfinished"></translation>
+        <translation>As this is the first time the program is launched, you can choose where Folm Core will store its data.</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Folm Core will download and store a copy of the Folm block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1605,9 +1344,9 @@ Address: %4
         <translation>Use a custom data directory:</translation>
     </message>
     <message>
-        <location filename="../intro.cpp" line="+77"/>
+        <location filename="../intro.cpp" line="+82"/>
         <source>Folm Core</source>
-        <translation type="unfinished"></translation>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1620,388 +1359,14 @@ Address: %4
         <translation>Error</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+9"/>
         <source>%1 GB of free space available</source>
         <translation>%1 GB of free space available</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>(of %1 GB needed)</source>
         <translation>(of %1 GB needed)</translation>
-    </message>
-</context>
-<context>
-    <name>MasternodeList</name>
-    <message>
-        <location filename="../forms/masternodelist.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Form</translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>My Masternodes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Note: Status of your masternodes in local wallet can potentially be slightly incorrect.&lt;br /&gt;Always wait for wallet to sync additional data and then double check from another node&lt;br /&gt;if your node should be running but you still see &quot;MISSING&quot; in &quot;Status&quot; field.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+74"/>
-        <source>Alias</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Address</source>
-        <translation type="unfinished">Address</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Protocol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Status</source>
-        <translation type="unfinished">Status</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Active</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Last Seen (UTC)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Pubkey</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>S&amp;tart alias</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Start &amp;all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Start &amp;MISSING</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>&amp;Update status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Status will be updated automatically in (sec):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../masternodelist.cpp" line="+45"/>
-        <source>Start alias</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+190"/>
-        <source>Confirm masternode start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Are you sure you want to start masternode %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Confirm all masternodes start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Are you sure you want to start ALL masternodes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Command is not available right now</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>You can&apos;t use this command until masternode list is synced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Confirm missing masternodes start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Are you sure you want to start MISSING masternodes?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MultiSendDialog</name>
-    <message>
-        <location filename="../forms/multisenddialog.ui" line="+17"/>
-        <source>MultiSend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Enter whole numbers 1 - 100</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Enter % to Give (1-100)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Enter Address to Send to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other Folm addresses after it matures.
-To Add: enter percentage to give and Folm address to add to the MultiSend vector.
-To Delete: Enter address to delete and press delete.
-MultiSend will not be activated unless you have clicked Activate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Add to MultiSend Vector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Deactivate MultiSend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Deactivate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Choose an address from the address book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Alt+A</source>
-        <translation type="unfinished">Alt+A</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Percentage of stake to send</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Percentage:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Address to send portion of stake to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Address:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Delete Address From MultiSend Vector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Activate MultiSend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Activate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>View MultiSend Vector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>View MultiSend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Send For Stakes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Send For Masternode Rewards</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../multisenddialog.cpp" line="+92"/>
-        <source>The entered address:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source> is invalid.
-Please check the address and try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>The total amount of your MultiSend vector is over 100% of your stake reward
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Please Enter 1 - 100 for percent.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>MultiSend Vector
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Removed </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Could not locate address
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ObfuscationConfig</name>
-    <message>
-        <location filename="../forms/obfuscationconfig.ui" line="+14"/>
-        <source>Configure Obfuscation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Basic Privacy</source>
-        <translation type="unfinished">Basic Privacy</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>High Privacy</source>
-        <translation type="unfinished">High Privacy</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Maximum Privacy</source>
-        <translation type="unfinished">Maximum Privacy</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Please select a privacy level.</source>
-        <translation type="unfinished">Please select a privacy level.</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Use 2 separate masternodes to mix funds up to 5000 FLM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Use 8 separate masternodes to mix funds up to 5000 FLM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Use 16 separate masternodes</source>
-        <translation type="unfinished">Use 16 separate masternodes</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>This option is the quickest and will cost about ~0.025 FLM to anonymize 5000 FLM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>This option is moderately fast and will cost about 0.05 FLM to anonymize 5000 FLM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
-        <translation type="unfinished">This is the slowest and most secure option. Using maximum anonymity will cost</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>0.1 FLM per 5000 FLM you anonymize.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../obfuscationconfig.cpp" line="+42"/>
-        <location line="+14"/>
-        <location line="+14"/>
-        <source>Obfuscation Configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-27"/>
-        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Folm&apos;s configuration screen.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2027,7 +1392,7 @@ Please check the address and try again.</source>
         <translation>Select payment request file</translation>
     </message>
     <message>
-        <location filename="../openuridialog.cpp" line="+47"/>
+        <location filename="../openuridialog.cpp" line="+48"/>
         <source>Select payment request file to open</source>
         <translation>Select payment request file to open</translation>
     </message>
@@ -2045,7 +1410,17 @@ Please check the address and try again.</source>
         <translation>&amp;Main</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+6"/>
+        <source>Automatically start Folm after logging in to the system.</source>
+        <translation>Automatically start Folm after logging in to the system.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Start Folm on system login</source>
+        <translation>&amp;Start Folm on system login</translation>
+    </message>
+    <message>
+        <location line="+9"/>
         <source>Size of &amp;database cache</source>
         <translation>Size of &amp;database cache</translation>
     </message>
@@ -2065,22 +1440,32 @@ Please check the address and try again.</source>
         <translation>(0 = auto, &lt;0 = leave that many cores free)</translation>
     </message>
     <message>
-        <location line="+105"/>
+        <location line="+40"/>
+        <source>Obfuscation rounds to use</source>
+        <translation>Obfuscation rounds to use</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>This amount acts as a threshold to turn off Obfuscation once it&apos;s reached.</source>
+        <translation>This amount acts as a threshold to turn off Obfuscation once it&apos;s reached.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Amount of Folm to keep anonymized</source>
+        <translation>Amount of Folm to keep anonymized</translation>
+    </message>
+    <message>
+        <location line="+26"/>
         <source>W&amp;allet</source>
         <translation>W&amp;allet</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+22"/>
         <source>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</source>
         <translation>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</translation>
     </message>
     <message>
-        <location line="+33"/>
-        <source>Automatically open the Folm client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
+        <location line="+43"/>
         <source>Accept connections from outside</source>
         <translation>Accept connections from outside</translation>
     </message>
@@ -2090,47 +1475,27 @@ Please check the address and try again.</source>
         <translation>Allow incoming connections</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+7"/>
+        <source>Connect to the Folm network through a SOCKS5 proxy.</source>
+        <translation>Connect to the Folm network through a SOCKS5 proxy.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
         <translation>&amp;Connect through SOCKS5 proxy (default proxy):</translation>
     </message>
     <message>
-        <location line="-82"/>
+        <location line="-72"/>
         <source>Expert</source>
         <translation>Expert</translation>
     </message>
     <message>
-        <location line="-179"/>
-        <source>Automatically start Folm after logging in to the system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Start Folm on system login</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+102"/>
+        <location line="-74"/>
         <source>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</source>
         <translation>This setting determines the amount of individual masternodes that an input will be anonymized through.&lt;br/&gt;More rounds of anonymization gives a higher degree of privacy, but also costs more in fees.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Obfuscation rounds to use</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>This amount acts as a threshold to turn off Obfuscation once it&apos;s reached.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Amount of Folm to keep anonymized</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
+        <location line="+80"/>
         <source>Whether to show coin control features or not.</source>
         <translation>Whether to show coin control features or not.</translation>
     </message>
@@ -2138,16 +1503,6 @@ Please check the address and try again.</source>
         <location line="+3"/>
         <source>Enable coin &amp;control features</source>
         <translation>Enable coin &amp;control features</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Show Masternodes Tab</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
@@ -2160,28 +1515,17 @@ Please check the address and try again.</source>
         <translation>&amp;Network</translation>
     </message>
     <message>
-        <location line="+192"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Folm.</source>
-        <translation type="unfinished"></translation>
+        <location line="+6"/>
+        <source>Automatically open the Folm client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatically open the Folm client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
-        <location line="+21"/>
-        <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-204"/>
+        <location line="+3"/>
         <source>Map port using &amp;UPnP</source>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <location line="+17"/>
-        <source>Connect to the Folm network through a SOCKS5 proxy.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
+        <location line="+29"/>
         <source>Proxy &amp;IP:</source>
         <translation>Proxy &amp;IP:</translation>
     </message>
@@ -2236,7 +1580,19 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>User Interface &amp;language:</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+13"/>
+        <source>The user interface language can be set here. This setting will take effect after restarting Folm.</source>
+        <translation>The user interface language can be set here. This setting will take effect after restarting Folm.</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Language missing or translation incomplete? Help contributing translations here:
+https://www.transifex.com/projects/p/folm/</source>
+        <translation>Language missing or translation incomplete? Help contributing translations here:
+https://www.transifex.com/projects/p/folm/</translation>
+    </message>
+    <message>
+        <location line="+19"/>
         <source>User Interface Theme:</source>
         <translation>User Interface Theme:</translation>
     </message>
@@ -2292,12 +1648,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>&amp;Cancel</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="+99"/>
+        <location filename="../optionsdialog.cpp" line="+91"/>
         <source>default</source>
         <translation>default</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+60"/>
         <source>none</source>
         <translation>none</translation>
     </message>
@@ -2308,22 +1664,22 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     </message>
     <message>
         <location line="+1"/>
-        <location line="+30"/>
+        <location line="+31"/>
         <source>Client restart required to activate changes.</source>
         <translation>Client restart required to activate changes.</translation>
     </message>
     <message>
-        <location line="-30"/>
+        <location line="-31"/>
         <source>Client will be shutdown, do you want to proceed?</source>
         <translation>Client will be shutdown, do you want to proceed?</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+35"/>
         <source>This change would require a client restart.</source>
         <translation>This change would require a client restart.</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+25"/>
         <source>The supplied proxy address is invalid.</source>
         <translation>The supplied proxy address is invalid.</translation>
     </message>
@@ -2336,7 +1692,14 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Form</translation>
     </message>
     <message>
-        <location line="+302"/>
+        <location line="+53"/>
+        <location line="+1015"/>
+        <location line="+77"/>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Folm network after a connection is established, but this process has not completed yet.</source>
+        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the Folm network after a connection is established, but this process has not completed yet.</translation>
+    </message>
+    <message>
+        <location line="-843"/>
         <source>Available:</source>
         <translation>Available:</translation>
     </message>
@@ -2362,8 +1725,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     </message>
     <message>
         <location line="-29"/>
-        <source>Staked or masternode rewards that has not yet matured</source>
-        <translation>Staked or masternode rewards that has not yet matured</translation>
+        <source>Mined balance that has not yet matured</source>
+        <translation>Mined balance that has not yet matured</translation>
     </message>
     <message>
         <location line="-163"/>
@@ -2371,21 +1734,14 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Balances</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <location line="+1015"/>
-        <location line="+93"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Folm network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1063"/>
+        <location line="+55"/>
         <source>Unconfirmed transactions to watch-only addresses</source>
         <translation>Unconfirmed transactions to watch-only addresses</translation>
     </message>
     <message>
         <location line="+50"/>
-        <source>Staked or masternode rewards in watch-only addresses that has not yet matured</source>
-        <translation>Staked or masternode rewards in watch-only addresses that has not yet matured</translation>
+        <source>Mined balance in watch-only addresses that has not yet matured</source>
+        <translation>Mined balance in watch-only addresses that has not yet matured</translation>
     </message>
     <message>
         <location line="+42"/>
@@ -2423,51 +1779,32 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <source>Obfuscation Balance:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>0 FLM / 0 Rounds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
+        <location line="+78"/>
         <source>Enabled/Disabled</source>
         <translation>Enabled/Disabled</translation>
     </message>
     <message>
-        <location line="+516"/>
-        <source>Try to manually submit a Obfuscation request.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Reset the current status of Obfuscation (can interrupt Obfuscation if it&apos;s in the process of Mixing, which can cost you money!)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <location filename="../overviewpage.cpp" line="+478"/>
-        <location line="+11"/>
-        <location line="+10"/>
-        <location line="+12"/>
-        <source>Obfuscation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-637"/>
+        <location line="-71"/>
         <source>Completion:</source>
         <translation>Completion:</translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+20"/>
+        <source>Obfuscation Balance:</source>
+        <translation>Obfuscation Balance:</translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>Amount and Rounds:</source>
         <translation>Amount and Rounds:</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+7"/>
+        <source>0 FOLM / 0 Rounds</source>
+        <translation>0 FOLM / 0 Rounds</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Submitted Denom:</source>
         <translation>Submitted Denom:</translation>
     </message>
@@ -2477,12 +1814,21 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>n/a</translation>
     </message>
     <message>
-        <location line="+663"/>
+        <location line="+573"/>
+        <location filename="../overviewpage.cpp" line="+488"/>
+        <location line="+10"/>
+        <location line="+10"/>
+        <location line="+14"/>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
+    </message>
+    <message>
+        <location line="+74"/>
         <source>Recent transactions</source>
         <translation>Recent transactions</translation>
     </message>
     <message>
-        <location line="-197"/>
+        <location line="-181"/>
         <source>Start/Stop Mixing</source>
         <translation>Start/Stop Mixing</translation>
     </message>
@@ -2497,12 +1843,22 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>(Last Message)</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+25"/>
+        <source>Try to manually submit a Obfuscation request.</source>
+        <translation>Try to manually submit a Obfuscation request.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Try Mix</source>
         <translation>Try Mix</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+19"/>
+        <source>Reset the current status of Obfuscation (can interrupt Obfuscation if it&apos;s in the process of Mixing, which can cost you money!)</source>
+        <translation>Reset the current status of Obfuscation (can interrupt Obfuscation if it&apos;s in the process of Mixing, which can cost you money!)</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
@@ -2517,12 +1873,25 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <location line="+6"/>
         <location line="+1"/>
         <location line="+1"/>
-        <location line="+293"/>
+        <location line="+292"/>
         <source>Disabled</source>
         <translation>Disabled</translation>
     </message>
     <message>
-        <location line="-117"/>
+        <location line="-288"/>
+        <location line="+290"/>
+        <location line="+91"/>
+        <source>Start Obfuscation Mixing</source>
+        <translation>Start Obfuscation Mixing</translation>
+    </message>
+    <message>
+        <location line="-379"/>
+        <location line="+382"/>
+        <source>Stop Obfuscation Mixing</source>
+        <translation>Stop Obfuscation Mixing</translation>
+    </message>
+    <message>
+        <location line="-211"/>
         <location line="+6"/>
         <source>No inputs detected</source>
         <translation>No inputs detected</translation>
@@ -2532,10 +1901,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <location line="+35"/>
         <location line="+10"/>
         <source>%n Rounds</source>
-        <translation>
-            <numerusform>%n Round</numerusform>
-            <numerusform>%n Rounds</numerusform>
-        </translation>
+        <translation><numerusform>%n Round</numerusform><numerusform>%n Rounds</numerusform></translation>
     </message>
     <message>
         <location line="-7"/>
@@ -2560,144 +1926,129 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <message numerus="yes">
         <location line="+1"/>
         <source>Denominated inputs have %5 of %n rounds on average</source>
-        <translation>
-            <numerusform>Denominated inputs have %5 of %n rounds on average</numerusform>
-            <numerusform>Denominated inputs have %5 of %n rounds on average</numerusform>
-        </translation>
+        <translation><numerusform>Denominated inputs have %5 of %n rounds on average</numerusform><numerusform>Denominated inputs have %5 of %n rounds on average</numerusform></translation>
     </message>
     <message>
-        <location line="+44"/>
-        <source>Last Obfuscation message:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Obfuscation was successfully reset.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>If you don&apos;t want to see internal Obfuscation fees/transactions select &quot;Most Common&quot; as Type on the &quot;Transactions&quot; tab.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Obfuscation requires at least %1 to use.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-160"/>
+        <location line="-56"/>
         <source>Found enough compatible inputs to anonymize %1</source>
         <translation>Found enough compatible inputs to anonymize %1</translation>
     </message>
     <message>
-        <location line="-208"/>
-        <location line="+291"/>
-        <location line="+89"/>
-        <source>Start Obfuscation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-378"/>
-        <location line="+381"/>
-        <source>Stop Obfuscation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-121"/>
+        <location line="+54"/>
         <source>Mixed</source>
         <translation>Mixed</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+40"/>
         <source>Enabled</source>
         <translation>Enabled</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+5"/>
+        <source>Last Obfuscation message:
+</source>
+        <translation>Last Obfuscation message:
+</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>N/A</source>
         <translation>N/A</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Obfuscation was successfully reset.</source>
+        <translation>Obfuscation was successfully reset.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>If you don&apos;t want to see internal Obfuscation fees/transactions select &quot;Most Common&quot; as Type on the &quot;Transactions&quot; tab.</source>
+        <translation>If you don&apos;t want to see internal Obfuscation fees/transactions select &quot;Most Common&quot; as Type on the &quot;Transactions&quot; tab.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Obfuscation requires at least %1 to use.</source>
+        <translation>Obfuscation requires at least %1 to use.</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
+        <translation>Wallet is locked and user declined to unlock. Disabling Obfuscation.</translation>
     </message>
 </context>
 <context>
     <name>PaymentServer</name>
     <message>
-        <location filename="../paymentserver.cpp" line="+297"/>
-        <location line="+209"/>
-        <location line="+33"/>
-        <location line="+104"/>
-        <location line="+12"/>
+        <location filename="../paymentserver.cpp" line="+318"/>
+        <location line="+226"/>
+        <location line="+34"/>
+        <location line="+109"/>
         <location line="+14"/>
+        <location line="+18"/>
         <source>Payment request error</source>
         <translation>Payment request error</translation>
     </message>
     <message>
-        <location line="-275"/>
-        <location line="+12"/>
-        <location line="+5"/>
+        <location line="-400"/>
+        <source>Cannot start folm: click-to-pay handler</source>
+        <translation>Cannot start folm: click-to-pay handler</translation>
+    </message>
+    <message>
+        <location line="+104"/>
+        <location line="+14"/>
+        <location line="+7"/>
         <source>URI handling</source>
         <translation>URI handling</translation>
     </message>
     <message>
-        <location line="-16"/>
+        <location line="-20"/>
         <source>Payment request fetch URL is invalid: %1</source>
         <translation>Payment request fetch URL is invalid: %1</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+34"/>
         <source>Payment request file handling</source>
         <translation>Payment request file handling</translation>
     </message>
     <message>
-        <location line="-18"/>
+        <location line="-21"/>
         <source>Invalid payment address %1</source>
         <translation>Invalid payment address %1</translation>
     </message>
     <message>
-        <location line="-108"/>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+114"/>
+        <location line="+8"/>
         <source>URI cannot be parsed! This can be caused by an invalid Folm address or malformed URI parameters.</source>
-        <translation type="unfinished"></translation>
+        <translation>URI cannot be parsed! This can be caused by an invalid Folm address or malformed URI parameters.</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
         <translation>Payment request file cannot be read! This can be caused by an invalid payment request file.</translation>
     </message>
     <message>
-        <location line="+67"/>
-        <location line="+8"/>
-        <location line="+30"/>
+        <location line="+69"/>
+        <location line="+9"/>
+        <location line="+32"/>
         <source>Payment request rejected</source>
         <translation>Payment request rejected</translation>
     </message>
     <message>
-        <location line="-38"/>
+        <location line="-41"/>
         <source>Payment request network doesn&apos;t match client network.</source>
         <translation>Payment request network doesn&apos;t match client network.</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+9"/>
         <source>Payment request has expired.</source>
         <translation>Payment request has expired.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Payment request is not initialized.</source>
         <translation>Payment request is not initialized.</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+26"/>
         <source>Unverified payment requests to custom payment scripts are unsupported.</source>
         <translation>Unverified payment requests to custom payment scripts are unsupported.</translation>
     </message>
@@ -2707,12 +2058,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Requested payment amount of %1 is too small (considered dust).</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+50"/>
         <source>Refund from %1</source>
         <translation>Refund from %1</translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+43"/>
         <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
         <translation>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</translation>
     </message>
@@ -2727,17 +2078,17 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Error communicating with %1: %2</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+20"/>
         <source>Payment request cannot be parsed!</source>
         <translation>Payment request cannot be parsed!</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+13"/>
         <source>Bad response from server %1</source>
         <translation>Bad response from server %1</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+22"/>
         <source>Network request error</source>
         <translation>Network request error</translation>
     </message>
@@ -2750,14 +2101,14 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>PeerTableModel</name>
     <message>
-        <location filename="../peertablemodel.cpp" line="+113"/>
+        <location filename="../peertablemodel.cpp" line="+118"/>
         <source>Address/Hostname</source>
         <translation>Address/Hostname</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>User Agent</source>
+        <translation>User Agent</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -2773,12 +2124,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Amount</translation>
     </message>
     <message>
-        <location filename="../guiutil.cpp" line="+113"/>
+        <location filename="../guiutil.cpp" line="+110"/>
         <source>Enter a Folm address (e.g. %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter a Folm address (e.g. %1)</translation>
     </message>
     <message>
-        <location line="+762"/>
+        <location line="+760"/>
         <source>%1 d</source>
         <translation>%1 d</translation>
     </message>
@@ -2798,14 +2149,9 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>%1 s</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+17"/>
         <source>NETWORK</source>
         <translation>NETWORK</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>BLOOM</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2831,7 +2177,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>QRImageWidget</name>
     <message>
-        <location filename="../receiverequestdialog.cpp" line="+35"/>
+        <location filename="../receiverequestdialog.cpp" line="+36"/>
         <source>&amp;Save Image...</source>
         <translation>&amp;Save Image...</translation>
     </message>
@@ -2841,7 +2187,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>&amp;Copy Image</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+32"/>
         <source>Save QR Code</source>
         <translation>Save QR Code</translation>
     </message>
@@ -2864,33 +2210,33 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>&amp;Information</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+51"/>
         <source>General</source>
         <translation>General</translation>
     </message>
     <message>
-        <location line="+164"/>
+        <location line="+204"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location line="-157"/>
+        <location line="-197"/>
         <source>Client name</source>
         <translation>Client name</translation>
     </message>
     <message>
+        <location line="-36"/>
         <location line="+10"/>
-        <location line="+23"/>
-        <location line="+26"/>
-        <location line="+26"/>
-        <location line="+23"/>
-        <location line="+23"/>
         <location line="+36"/>
-        <location line="+23"/>
-        <location line="+20"/>
         <location line="+30"/>
         <location line="+23"/>
-        <location line="+454"/>
+        <location line="+23"/>
+        <location line="+62"/>
+        <location line="+23"/>
+        <location line="+36"/>
+        <location line="+26"/>
+        <location line="+23"/>
+        <location line="+425"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
@@ -2903,82 +2249,81 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
-        <location line="+78"/>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
     <message>
-        <location line="-891"/>
+        <location line="-927"/>
         <source>Number of connections</source>
         <translation>Number of connections</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+76"/>
+        <source>Open the Folm debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Open the Folm debug log file from the current data directory. This can take a few seconds for large log files.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>&amp;Open</source>
         <translation>&amp;Open</translation>
     </message>
     <message>
-        <location line="-184"/>
+        <location line="-56"/>
         <source>Startup time</source>
         <translation>Startup time</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+137"/>
         <source>Network</source>
         <translation>Network</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="-91"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+26"/>
         <source>Debug log file</source>
         <translation>Debug log file</translation>
     </message>
     <message>
-        <location line="-249"/>
+        <location line="+95"/>
         <source>Using OpenSSL version</source>
         <translation>Using OpenSSL version</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="-197"/>
         <source>Build date</source>
         <translation>Build date</translation>
     </message>
     <message>
-        <location line="+132"/>
+        <location line="+53"/>
         <source>Current number of blocks</source>
         <translation>Current number of blocks</translation>
     </message>
     <message>
-        <location line="-207"/>
+        <location line="+85"/>
         <source>Client version</source>
         <translation>Client version</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+108"/>
         <source>Using BerkeleyDB version</source>
         <translation>Using BerkeleyDB version</translation>
     </message>
     <message>
-        <location line="+151"/>
+        <location line="-312"/>
         <source>Block chain</source>
         <translation>Block chain</translation>
     </message>
     <message>
-        <location line="+79"/>
-        <source>Open the Folm debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-99"/>
+        <location line="+289"/>
         <source>Number of Masternodes</source>
         <translation>Number of Masternodes</translation>
     </message>
     <message>
-        <location line="+113"/>
+        <location line="+34"/>
         <source>&amp;Console</source>
         <translation>&amp;Console</translation>
     </message>
@@ -3019,8 +2364,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     </message>
     <message>
         <location line="+41"/>
-        <location filename="../rpcconsole.cpp" line="+261"/>
-        <location line="+460"/>
+        <location filename="../rpcconsole.cpp" line="+252"/>
+        <location line="+426"/>
         <source>Select a peer to view detailed information.</source>
         <translation>Select a peer to view detailed information.</translation>
     </message>
@@ -3031,13 +2376,13 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     </message>
     <message>
         <location line="+23"/>
-        <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <source>Version</source>
+        <translation>Version</translation>
     </message>
     <message>
         <location line="+23"/>
-        <source>Version</source>
-        <translation>Version</translation>
+        <source>User Agent</source>
+        <translation>User Agent</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -3095,74 +2440,64 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>&amp;Wallet Repair</translation>
     </message>
     <message>
-        <location line="+38"/>
-        <source>Wallet In Use:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+42"/>
+        <location line="+18"/>
         <source>Salvage wallet</source>
         <translation>Salvage wallet</translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>Attempt to recover private keys from a corrupt wallet.dat.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+19"/>
         <source>Rescan blockchain files</source>
         <translation>Rescan blockchain files</translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>Rescan the block chain for missing wallet transactions.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+19"/>
         <source>Recover transactions 1</source>
         <translation>Recover transactions 1</translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>Recover transactions from blockchain (keep meta-data, e.g. account owner).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+19"/>
         <source>Recover transactions 2</source>
         <translation>Recover transactions 2</translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>Recover transactions from blockchain (drop meta-data).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+19"/>
         <source>Upgrade wallet format</source>
         <translation>Upgrade wallet format</translation>
     </message>
     <message>
-        <location line="+44"/>
-        <source>Rebuild block chain index from current blk000??.dat files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-216"/>
+        <location line="+19"/>
         <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</source>
         <translation>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</translation>
     </message>
     <message>
-        <location line="-13"/>
-        <source>Wallet repair options.</source>
-        <translation>Wallet repair options.</translation>
+        <location line="+16"/>
+        <source>-salvagewallet: Attempt to recover private keys from a corrupt wallet.dat.</source>
+        <translation>-salvagewallet: Attempt to recover private keys from a corrupt wallet.dat.</translation>
     </message>
     <message>
-        <location line="+199"/>
-        <source>Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</source>
-        <translation type="unfinished"></translation>
+        <location line="+16"/>
+        <source>-rescan: Rescan the block chain for missing wallet transactions.</source>
+        <translation>-rescan: Rescan the block chain for missing wallet transactions.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>-zapwallettxes=1: Recover transactions from blockchain (keep meta-data, e.g. account owner).</source>
+        <translation>-zapwallettxes=1: Recover transactions from blockchain (keep meta-data, e.g. account owner).</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>-zapwallettxes=2: Recover transactions from blockchain (drop meta-data).</source>
+        <translation>-zapwallettxes=2: Recover transactions from blockchain (drop meta-data).</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>-upgradewallet: Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</source>
+        <translation>-upgradewallet: Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Wallet repair options.</source>
+        <translation>Wallet repair options.</translation>
     </message>
     <message>
         <location line="+16"/>
@@ -3170,7 +2505,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Rebuild index</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-206"/>
+        <location line="+13"/>
+        <source>-reindex: Rebuild block chain index from current blk000??.dat files.</source>
+        <translation>-reindex: Rebuild block chain index from current blk000??.dat files.</translation>
+    </message>
+    <message>
+        <location filename="../rpcconsole.cpp" line="-203"/>
         <source>In:</source>
         <translation>In:</translation>
     </message>
@@ -3180,9 +2520,9 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Out:</translation>
     </message>
     <message>
-        <location line="-36"/>
+        <location line="-35"/>
         <source>Welcome to the Folm RPC console.</source>
-        <translation type="unfinished"></translation>
+        <translation>Welcome to the Folm RPC console.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3195,7 +2535,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Type &lt;b&gt;help&lt;/b&gt; for an overview of available commands.</translation>
     </message>
     <message>
-        <location line="+138"/>
+        <location line="+139"/>
         <source>%1 B</source>
         <translation>%1 B</translation>
     </message>
@@ -3260,7 +2600,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>R&amp;euse an existing receiving address (not recommended)</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+14"/>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Folm network.</source>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Folm network.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>&amp;Message:</source>
         <translation>&amp;Message:</translation>
     </message>
@@ -3271,14 +2616,9 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>An optional label to associate with the new receiving address.</translation>
     </message>
     <message>
-        <location line="-37"/>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Folm network.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
+        <location line="-14"/>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Folm network.</source>
-        <translation type="unfinished"></translation>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Folm network.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -3322,7 +2662,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Requested payments history</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+25"/>
         <source>Show the selected request (does the same as double clicking an entry)</source>
         <translation>Show the selected request (does the same as double clicking an entry)</translation>
     </message>
@@ -3342,7 +2682,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../receivecoinsdialog.cpp" line="+38"/>
+        <location filename="../receivecoinsdialog.cpp" line="+39"/>
         <source>Copy label</source>
         <translation>Copy label</translation>
     </message>
@@ -3380,7 +2720,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>&amp;Save Image...</translation>
     </message>
     <message>
-        <location filename="../receiverequestdialog.cpp" line="+63"/>
+        <location filename="../receiverequestdialog.cpp" line="+65"/>
         <source>Request payment to %1</source>
         <translation>Request payment to %1</translation>
     </message>
@@ -3415,12 +2755,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Message</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+10"/>
         <source>Resulting URI too long, try to reduce the text for label / message.</source>
         <translation>Resulting URI too long, try to reduce the text for label / message.</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>Error encoding URI into QR Code.</source>
         <translation>Error encoding URI into QR Code.</translation>
     </message>
@@ -3428,7 +2768,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
-        <location filename="../recentrequeststablemodel.cpp" line="+27"/>
+        <location filename="../recentrequeststablemodel.cpp" line="+28"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -3443,22 +2783,22 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Message</translation>
     </message>
     <message>
-        <location line="+87"/>
+        <location line="+99"/>
         <source>Amount</source>
         <translation>Amount</translation>
     </message>
     <message>
-        <location line="-50"/>
+        <location line="-59"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+9"/>
         <source>(no message)</source>
         <translation>(no message)</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+8"/>
         <source>(no amount)</source>
         <translation>(no amount)</translation>
     </message>
@@ -3467,9 +2807,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <name>SendCoinsDialog</name>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+234"/>
-        <location line="+25"/>
-        <location line="+413"/>
+        <location filename="../sendcoinsdialog.cpp" line="+638"/>
+        <location line="+12"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
@@ -3554,27 +2893,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Custom change address</translation>
     </message>
     <message>
-        <location line="+20"/>
-        <source>Split UTXO</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source># of outputs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>UTXO Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>0 FLM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+193"/>
+        <location line="+206"/>
         <source>Transaction Fee:</source>
         <translation>Transaction Fee:</translation>
     </message>
@@ -3594,12 +2913,23 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Minimize</translation>
     </message>
     <message>
-        <location line="+582"/>
-        <source>Obfuscation</source>
-        <translation type="unfinished"></translation>
+        <location line="+78"/>
+        <source>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 duffs in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 duffs in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</translation>
     </message>
     <message>
-        <location line="-501"/>
+        <location line="+16"/>
+        <source>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 duffs in fee,&lt;br /&gt;while &quot;total at least&quot; pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 duffs in fee,&lt;br /&gt;while &quot;total at least&quot; pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <location line="+13"/>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for folm transactions than the network can process.</source>
+        <translation>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for folm transactions than the network can process.</translation>
+    </message>
+    <message>
+        <location line="-59"/>
         <source>per kilobyte</source>
         <translation>per kilobyte</translation>
     </message>
@@ -3614,38 +2944,27 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>(read the tooltip)</translation>
     </message>
     <message>
-        <location line="+228"/>
+        <location line="+29"/>
+        <source>Recommended:</source>
+        <translation>Recommended:</translation>
+    </message>
+    <message>
+        <location line="+30"/>
         <source>Custom:</source>
         <translation>Custom:</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+55"/>
         <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
         <translation>(Smart fee not initialized yet. This usually takes a few blocks...)</translation>
     </message>
     <message>
-        <location line="-155"/>
+        <location line="+29"/>
         <source>Confirmation time:</source>
         <translation>Confirmation time:</translation>
     </message>
     <message>
-        <location line="-165"/>
-        <source>If the custom fee is set to 1000 uFLMs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 uFLMs in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 uFLMs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>If the custom fee is set to 1000 uFLMs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 uFLMs in fee,&lt;br /&gt;while &quot;total at least&quot; pays 1000 uFLMs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <location line="+13"/>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for Folm transactions than the network can process.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+163"/>
+        <location line="+60"/>
         <source>normal</source>
         <translation>normal</translation>
     </message>
@@ -3655,12 +2974,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>fast</translation>
     </message>
     <message>
-        <location line="+28"/>
-        <source>Recommended</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+73"/>
+        <location line="+38"/>
         <source>Send as zero-fee transaction if possible</source>
         <translation>Send as zero-fee transaction if possible</translation>
     </message>
@@ -3700,7 +3014,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Add &amp;Recipient</translation>
     </message>
     <message>
-        <location line="+57"/>
+        <location line="+38"/>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
+    </message>
+    <message>
+        <location line="+19"/>
         <source>SwiftTX</source>
         <translation>SwiftTX</translation>
     </message>
@@ -3710,7 +3029,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Balance:</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-584"/>
+        <location filename="../sendcoinsdialog.cpp" line="-567"/>
         <source>Copy quantity</source>
         <translation>Copy quantity</translation>
     </message>
@@ -3750,17 +3069,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Copy change</translation>
     </message>
     <message>
-        <location line="+140"/>
-        <source>The split block tool does not work when sending to outside addresses. Try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>The split block tool does not work with multiple addresses. Try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
+        <location line="+155"/>
         <location line="+6"/>
         <location line="+9"/>
         <source>using</source>
@@ -3773,12 +3082,12 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>anonymous funds</translation>
     </message>
     <message>
-        <location line="+632"/>
-        <source>Warning: Invalid Folm address</source>
-        <translation type="unfinished"></translation>
+        <location line="+4"/>
+        <source>(obfuscation requires this amount to be rounded up to the nearest %1).</source>
+        <translation>(obfuscation requires this amount to be rounded up to the nearest %1).</translation>
     </message>
     <message>
-        <location line="-623"/>
+        <location line="+5"/>
         <source>any available funds (not recommended)</source>
         <translation>any available funds (not recommended)</translation>
     </message>
@@ -3788,68 +3097,55 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>and SwiftTX</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+24"/>
+        <location line="+5"/>
+        <location line="+5"/>
         <location line="+4"/>
-        <location line="+4"/>
-        <location line="+3"/>
         <source>%1 to %2</source>
         <translation>%1 to %2</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+49"/>
         <source>Are you sure you want to send?</source>
         <translation>Are you sure you want to send?</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+9"/>
         <source>are added as transaction fee</source>
         <translation>are added as transaction fee</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+19"/>
         <source>Total Amount = &lt;b&gt;%1&lt;/b&gt;&lt;br /&gt;= %2</source>
         <translation>Total Amount = &lt;b&gt;%1&lt;/b&gt;&lt;br /&gt;= %2</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+20"/>
         <source>Confirm send coins</source>
         <translation>Confirm send coins</translation>
     </message>
     <message>
-        <location line="+233"/>
+        <location line="+241"/>
         <source>A fee %1 times higher than %2 per kB is considered an insanely high fee.</source>
         <translation>A fee %1 times higher than %2 per kB is considered an insanely high fee.</translation>
     </message>
     <message numerus="yes">
-        <location line="+114"/>
+        <location line="+109"/>
         <source>Estimated to begin confirmation within %n block(s).</source>
-        <translation>
-            <numerusform>Estimated to begin confirmation within %n block.</numerusform>
-            <numerusform>Estimated to begin confirmation within %n blocks.</numerusform>
-        </translation>
+        <translation><numerusform>Estimated to begin confirmation within %n block.</numerusform><numerusform>Estimated to begin confirmation within %n blocks.</numerusform></translation>
     </message>
     <message>
-        <location line="-145"/>
+        <location line="-136"/>
         <source>The recipient address is not valid, please recheck.</source>
         <translation>The recipient address is not valid, please recheck.</translation>
     </message>
     <message>
-        <location line="-343"/>
-        <source>(obfuscation requires this amount to be rounded up to the nearest %1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <source> split into %1 outputs using the UTXO splitter.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+89"/>
+        <location line="-217"/>
         <source>&lt;b&gt;(%1 of %2 entries displayed)&lt;/b&gt;</source>
         <translation>&lt;b&gt;(%1 of %2 entries displayed)&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+208"/>
+        <location line="+220"/>
         <source>The amount to pay must be larger than 0.</source>
         <translation>The amount to pay must be larger than 0.</translation>
     </message>
@@ -3879,27 +3175,27 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+5"/>
         <source>Error: The wallet was unlocked only to anonymize coins.</source>
         <translation>Error: The wallet was unlocked only to anonymize coins.</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <source>Error: The wallet was unlocked only to anonymize coins. Unlock canceled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+84"/>
+        <location line="+90"/>
         <source>Pay only the minimum fee of %1</source>
         <translation>Pay only the minimum fee of %1</translation>
     </message>
     <message>
-        <location line="+166"/>
+        <location line="+129"/>
+        <source>Warning: Invalid Folm address</source>
+        <translation>Warning: Invalid Folm address</translation>
+    </message>
+    <message>
+        <location line="+9"/>
         <source>Warning: Unknown change address</source>
         <translation>Warning: Unknown change address</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
     </message>
@@ -3919,7 +3215,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <message>
         <location line="+18"/>
         <source>The Folm address to send the payment to</source>
-        <translation type="unfinished"></translation>
+        <translation>The Folm address to send the payment to</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -3972,8 +3268,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     </message>
     <message>
         <location line="+10"/>
-        <source>A message that was attached to the Folm: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Folm network.</source>
-        <translation type="unfinished"></translation>
+        <source>A message that was attached to the folm: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Folm network.</source>
+        <translation>A message that was attached to the folm: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Folm network.</translation>
     </message>
     <message>
         <location line="+426"/>
@@ -4006,9 +3302,9 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <location filename="../utilitydialog.cpp" line="+75"/>
+        <location filename="../utilitydialog.cpp" line="+43"/>
         <source>Folm Core is shutting down...</source>
-        <translation type="unfinished"></translation>
+        <translation>Folm Core is shutting down...</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4036,7 +3332,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <message>
         <location line="+18"/>
         <source>The Folm address to sign the message with</source>
-        <translation type="unfinished"></translation>
+        <translation>The Folm address to sign the message with</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -4078,20 +3374,10 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <message>
         <location line="+21"/>
         <source>Sign the message to prove you own this Folm address</source>
-        <translation type="unfinished"></translation>
+        <translation>Sign the message to prove you own this Folm address</translation>
     </message>
     <message>
-        <location line="+106"/>
-        <source>The Folm address the message was signed with</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <source>Verify the message to ensure it was signed with the specified Folm address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-140"/>
+        <location line="+3"/>
         <source>Sign &amp;Message</source>
         <translation>Sign &amp;Message</translation>
     </message>
@@ -4117,7 +3403,17 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</translation>
     </message>
     <message>
-        <location line="+61"/>
+        <location line="+21"/>
+        <source>The Folm address the message was signed with</source>
+        <translation>The Folm address the message was signed with</translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Verify the message to ensure it was signed with the specified Folm address</source>
+        <translation>Verify the message to ensure it was signed with the specified Folm address</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Verify &amp;Message</source>
         <translation>Verify &amp;Message</translation>
     </message>
@@ -4132,37 +3428,37 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Click &quot;Sign Message&quot; to generate signature</translation>
     </message>
     <message>
+        <location line="+83"/>
         <location line="+80"/>
-        <location line="+73"/>
         <source>The entered address is invalid.</source>
         <translation>The entered address is invalid.</translation>
     </message>
     <message>
-        <location line="-73"/>
-        <location line="+7"/>
-        <location line="+66"/>
-        <location line="+7"/>
+        <location line="-80"/>
+        <location line="+8"/>
+        <location line="+72"/>
+        <location line="+8"/>
         <source>Please check the address and try again.</source>
         <translation>Please check the address and try again.</translation>
     </message>
     <message>
-        <location line="-73"/>
-        <location line="+73"/>
+        <location line="-80"/>
+        <location line="+80"/>
         <source>The entered address does not refer to a key.</source>
         <translation>The entered address does not refer to a key.</translation>
     </message>
     <message>
-        <location line="-66"/>
+        <location line="-72"/>
         <source>Wallet unlock was cancelled.</source>
         <translation>Wallet unlock was cancelled.</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>Private key for the entered address is not available.</source>
         <translation>Private key for the entered address is not available.</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>Message signing failed.</source>
         <translation>Message signing failed.</translation>
     </message>
@@ -4172,13 +3468,13 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Message signed.</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+58"/>
         <source>The signature could not be decoded.</source>
         <translation>The signature could not be decoded.</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+12"/>
+        <location line="+13"/>
         <source>Please check the signature and try again.</source>
         <translation>Please check the signature and try again.</translation>
     </message>
@@ -4188,7 +3484,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>The signature did not match the message digest.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Message verification failed.</source>
         <translation>Message verification failed.</translation>
     </message>
@@ -4203,7 +3499,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <message>
         <location filename="../splashscreen.cpp" line="+36"/>
         <source>Folm Core</source>
-        <translation type="unfinished"></translation>
+        <translation>Folm Core</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4217,13 +3513,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>The Dash Core developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>The Folm Core developers</source>
-        <translation type="unfinished"></translation>
+        <translation>The Folm Core developers</translation>
     </message>
     <message>
         <location filename="../networkstyle.cpp" line="+19"/>
@@ -4234,7 +3525,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>TrafficGraphWidget</name>
     <message>
-        <location filename="../trafficgraphwidget.cpp" line="+78"/>
+        <location filename="../trafficgraphwidget.cpp" line="+79"/>
         <source>KB/s</source>
         <translation>KB/s</translation>
     </message>
@@ -4244,10 +3535,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <message numerus="yes">
         <location filename="../transactiondesc.cpp" line="+33"/>
         <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform>Open for %n more block</numerusform>
-            <numerusform>Open for %n more blocks</numerusform>
-        </translation>
+        <translation><numerusform>Open for %n more block</numerusform><numerusform>Open for %n more blocks</numerusform></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4255,7 +3543,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Open until %1</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+11"/>
         <location line="+11"/>
         <location line="+10"/>
         <location line="+12"/>
@@ -4324,17 +3612,14 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>, has not been successfully broadcast yet</source>
         <translation>, has not been successfully broadcast yet</translation>
     </message>
     <message numerus="yes">
         <location line="+2"/>
         <source>, broadcast through %n node(s)</source>
-        <translation>
-            <numerusform>, broadcast through %n node</numerusform>
-            <numerusform>, broadcast through %n nodes</numerusform>
-        </translation>
+        <translation><numerusform>, broadcast through %n node</numerusform><numerusform>, broadcast through %n nodes</numerusform></translation>
     </message>
     <message>
         <location line="+4"/>
@@ -4342,7 +3627,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Date</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
@@ -4352,56 +3637,53 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Generated</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+8"/>
-        <location line="+63"/>
+        <location line="+5"/>
+        <location line="+13"/>
+        <location line="+72"/>
         <source>From</source>
         <translation>From</translation>
     </message>
     <message>
-        <location line="-63"/>
+        <location line="-72"/>
         <source>unknown</source>
         <translation>unknown</translation>
     </message>
     <message>
         <location line="+1"/>
-        <location line="+19"/>
-        <location line="+58"/>
+        <location line="+20"/>
+        <location line="+69"/>
         <source>To</source>
         <translation>To</translation>
     </message>
     <message>
-        <location line="-75"/>
+        <location line="-87"/>
         <source>own address</source>
         <translation>own address</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+60"/>
+        <location line="+69"/>
         <source>watch-only</source>
         <translation>watch-only</translation>
     </message>
     <message>
-        <location line="-58"/>
+        <location line="-67"/>
         <source>label</source>
         <translation>label</translation>
     </message>
     <message>
-        <location line="+32"/>
-        <location line="+10"/>
-        <location line="+45"/>
-        <location line="+23"/>
-        <location line="+50"/>
+        <location line="+34"/>
+        <location line="+12"/>
+        <location line="+53"/>
+        <location line="+26"/>
+        <location line="+53"/>
         <source>Credit</source>
         <translation>Credit</translation>
     </message>
     <message numerus="yes">
-        <location line="-126"/>
+        <location line="-142"/>
         <source>matures in %n more block(s)</source>
-        <translation>
-            <numerusform>matures in %n more block</numerusform>
-            <numerusform>matures in %n more blocks</numerusform>
-        </translation>
+        <translation><numerusform>matures in %n more block</numerusform><numerusform>matures in %n more blocks</numerusform></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4409,14 +3691,14 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>not accepted</translation>
     </message>
     <message>
-        <location line="+49"/>
-        <location line="+22"/>
-        <location line="+50"/>
+        <location line="+59"/>
+        <location line="+25"/>
+        <location line="+53"/>
         <source>Debit</source>
         <translation>Debit</translation>
     </message>
     <message>
-        <location line="-63"/>
+        <location line="-68"/>
         <source>Total debit</source>
         <translation>Total debit</translation>
     </message>
@@ -4431,18 +3713,18 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Transaction fee</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+16"/>
         <source>Net amount</source>
         <translation>Net amount</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+10"/>
+        <location line="+9"/>
         <source>Message</source>
         <translation>Message</translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="-7"/>
         <source>Comment</source>
         <translation>Comment</translation>
     </message>
@@ -4452,22 +3734,17 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Transaction ID</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Output index</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+18"/>
         <source>Merchant</source>
         <translation>Merchant</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>Debug information</source>
         <translation>Debug information</translation>
     </message>
@@ -4482,7 +3759,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Inputs</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+21"/>
         <source>Amount</source>
         <translation>Amount</translation>
     </message>
@@ -4515,7 +3792,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+213"/>
+        <location filename="../transactiontablemodel.cpp" line="+229"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -4530,12 +3807,9 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Address</translation>
     </message>
     <message numerus="yes">
-        <location line="+57"/>
+        <location line="+58"/>
         <source>Open for %n more block(s)</source>
-        <translation>
-            <numerusform>Open for %n more block</numerusform>
-            <numerusform>Open for %n more blocks</numerusform>
-        </translation>
+        <translation><numerusform>Open for %n more block</numerusform><numerusform>Open for %n more blocks</numerusform></translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4578,14 +3852,14 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>This block was not received by any other nodes and will probably not be accepted!</translation>
     </message>
     <message>
-        <location line="+38"/>
-        <source>Received with</source>
-        <translation>Received with</translation>
+        <location line="+3"/>
+        <source>Generated but not accepted</source>
+        <translation>Generated but not accepted</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Masternode Reward</source>
-        <translation type="unfinished"></translation>
+        <location line="+39"/>
+        <source>Received with</source>
+        <translation>Received with</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4595,47 +3869,17 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     <message>
         <location line="+2"/>
         <source>Received via Obfuscation</source>
-        <translation type="unfinished"></translation>
+        <translation>Received via Obfuscation</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>Obfuscation Denominate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Obfuscation Collateral Payment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Obfuscation Make Collateral Inputs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Obfuscation Create Denominations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-14"/>
+        <location line="+3"/>
         <source>Sent to</source>
         <translation>Sent to</translation>
     </message>
     <message>
-        <location line="-44"/>
-        <source>Orphan Block - Generated but not accepted. This does not impact your holdings.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+46"/>
+        <location line="+2"/>
         <source>Payment to yourself</source>
         <translation>Payment to yourself</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Minted</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -4643,22 +3887,42 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Mined</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>Obfuscated</source>
-        <translation>Obfuscated</translation>
+        <location line="+3"/>
+        <source>Obfuscation Denominate</source>
+        <translation>Obfuscation Denominate</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+2"/>
+        <source>Obfuscation Collateral Payment</source>
+        <translation>Obfuscation Collateral Payment</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation>Obfuscation Make Collateral Inputs</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Obfuscation Create Denominations</source>
+        <translation>Obfuscation Create Denominations</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Darksent</source>
+        <translation>Darksent</translation>
+    </message>
+    <message>
+        <location line="+30"/>
         <source>watch-only</source>
         <translation>watch-only</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+17"/>
         <source>(n/a)</source>
         <translation>(n/a)</translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+210"/>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
         <translation>Transaction status. Hover over this field to show number of confirmations.</translation>
     </message>
@@ -4691,7 +3955,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>TransactionView</name>
     <message>
-        <location filename="../transactionview.cpp" line="+68"/>
+        <location filename="../transactionview.cpp" line="+69"/>
         <location line="+17"/>
         <source>All</source>
         <translation>All</translation>
@@ -4737,34 +4001,34 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Received with</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Sent to</source>
         <translation>Sent to</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Obfuscated</source>
-        <translation>Obfuscated</translation>
+        <location line="+2"/>
+        <source>Darksent</source>
+        <translation>Darksent</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Obfuscation Make Collateral Inputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Obfuscation Make Collateral Inputs</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Obfuscation Create Denominations</source>
-        <translation type="unfinished"></translation>
+        <translation>Obfuscation Create Denominations</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Obfuscation Denominate</source>
-        <translation type="unfinished"></translation>
+        <translation>Obfuscation Denominate</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Obfuscation Collateral Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Obfuscation Collateral Payment</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4775,16 +4039,6 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <location line="+1"/>
         <source>Mined</source>
         <translation>Mined</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Minted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Masternode Reward</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4832,7 +4086,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Show transaction details</translation>
     </message>
     <message>
-        <location line="+193"/>
+        <location line="+201"/>
         <source>Export Transaction History</source>
         <translation>Export Transaction History</translation>
     </message>
@@ -4887,7 +4141,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>There was an error trying to save the transaction history to %1.</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>Exporting Successful</source>
         <translation>Exporting Successful</translation>
     </message>
@@ -4897,7 +4151,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>The transaction history was successfully saved to %1.</translation>
     </message>
     <message>
-        <location line="+117"/>
+        <location line="+126"/>
         <source>Range:</source>
         <translation>Range:</translation>
     </message>
@@ -4910,7 +4164,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+102"/>
+        <location filename="../bitcoingui.cpp" line="+115"/>
         <source>Unit to show amounts in. Click to select another unit.</source>
         <translation>Unit to show amounts in. Click to select another unit.</translation>
     </message>
@@ -4918,7 +4172,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>WalletFrame</name>
     <message>
-        <location filename="../walletframe.cpp" line="+25"/>
+        <location filename="../walletframe.cpp" line="+26"/>
         <source>No wallet has been loaded.</source>
         <translation>No wallet has been loaded.</translation>
     </message>
@@ -4926,23 +4180,23 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>WalletModel</name>
     <message>
-        <location filename="../walletmodel.cpp" line="+274"/>
+        <location filename="../walletmodel.cpp" line="+292"/>
         <location line="+9"/>
-        <location line="+9"/>
+        <location line="+11"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
     <message>
-        <location line="-18"/>
+        <location line="-20"/>
         <location line="+9"/>
-        <source>SwiftTX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 FLM.</source>
-        <translation type="unfinished"></translation>
+        <source>SwiftTX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 FOLM.</source>
+        <translation>SwiftTX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 FOLM.</translation>
     </message>
 </context>
 <context>
     <name>WalletView</name>
     <message>
-        <location filename="../walletview.cpp" line="+49"/>
+        <location filename="../walletview.cpp" line="+45"/>
         <source>&amp;Export</source>
         <translation>&amp;Export</translation>
     </message>
@@ -4957,7 +4211,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>Selected amount:</translation>
     </message>
     <message>
-        <location line="+236"/>
+        <location line="+194"/>
         <source>Backup Wallet</source>
         <translation>Backup Wallet</translation>
     </message>
@@ -4977,7 +4231,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
         <translation>There was an error trying to save the wallet data to %1.</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>Backup Successful</source>
         <translation>Backup Successful</translation>
     </message>
@@ -4988,258 +4242,498 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>folm-core</name>
     <message>
-        <location filename="../pivxstrings.cpp" line="+12"/>
-        <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
-        <translation type="unfinished">(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Allow JSON-RPC connections from specified source. Valid for &lt;ip&gt; are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times</source>
-        <translation type="unfinished">Allow JSON-RPC connections from specified source. Valid for &lt;ip&gt; are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>An error occurred while setting up the RPC address %s port %u for listening: %s</source>
-        <translation type="unfinished">An error occurred while setting up the RPC address %s port %u for listening: %s</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location filename="../folmstrings.cpp" line="+22"/>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
-        <translation type="unfinished">Bind to given address and always listen on it. Use [host]:port notation for IPv6</translation>
+        <translation>Bind to given address and always listen on it. Use [host]:port notation for IPv6</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6</source>
-        <translation type="unfinished">Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</source>
-        <translation type="unfinished">Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</translation>
-    </message>
-    <message>
-        <location line="+4"/>
+        <location line="+10"/>
         <source>Cannot obtain a lock on data directory %s. Folm Core is probably already running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cannot obtain a lock on data directory %s. Folm Core is probably already running.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
-        <translation type="unfinished">Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</translation>
+        <location line="+12"/>
+        <source>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
+        <translation>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</source>
-        <translation type="unfinished">Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
-        <translation type="unfinished">Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
-        <translation type="unfinished">Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Disable all Folm specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
-        <translation type="unfinished">Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Enable spork administration functionality with the appropriate private key.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation type="unfinished">Enable swifttx, show confirmations for locked transactions (bool, default: %s)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+18"/>
         <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
-        <translation type="unfinished">Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</translation>
+        <translation>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
-        <translation type="unfinished">Error: Listening for incoming connections failed (listen returned error %s)</translation>
+        <translation>Error: Listening for incoming connections failed (listen returned error %s)</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Error: Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</source>
-        <translation type="unfinished">Error: Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+5"/>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
-        <translation type="unfinished">Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</translation>
+        <translation>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>
-        <translation type="unfinished">Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</translation>
+        <translation>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
-        <translation type="unfinished">Execute command when the best block changes (%s in cmd is replaced by block hash)</translation>
+        <translation>Execute command when the best block changes (%s in cmd is replaced by block hash)</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Fees (in FLM/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Fees (in FLM/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
-        <translation type="unfinished">Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Found unconfirmed denominated outputs, will wait till they confirm to continue.</source>
-        <translation type="unfinished">Found unconfirmed denominated outputs, will wait till they confirm to continue.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>
-        <translation type="unfinished">How thorough the block verification of -checkblocks is (0-4, default: %u)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
-        <translation type="unfinished">If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+20"/>
         <source>In this mode -genproclimit controls how many blocks are generated immediately.</source>
-        <translation type="unfinished">In this mode -genproclimit controls how many blocks are generated immediately.</translation>
+        <translation>In this mode -genproclimit controls how many blocks are generated immediately.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation type="unfinished">Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</translation>
+        <source>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
+        <translation>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Keep the specified amount available for spending at all times (default: 0)</source>
-        <translation type="unfinished"></translation>
+        <location line="+17"/>
+        <source>Name to construct url for KeePass entry that stores the wallet passphrase</source>
+        <translation>Name to construct url for KeePass entry that stores the wallet passphrase</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Log transaction priority and fee per kB when mining blocks (default: %u)</source>
-        <translation type="unfinished">Log transaction priority and fee per kB when mining blocks (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Maintain a full transaction index, used by the getrawtransaction rpc call (default: %u)</source>
-        <translation type="unfinished">Maintain a full transaction index, used by the getrawtransaction rpc call (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
-        <translation type="unfinished">Maximum size of data in data carrier transactions we relay and mine (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Maximum total fees to use in a single wallet transaction, setting too low may abort large transactions (default: %s)</source>
-        <translation type="unfinished">Maximum total fees to use in a single wallet transaction, setting too low may abort large transactions (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Number of seconds to keep misbehaving peers from reconnecting (default: %u)</source>
-        <translation type="unfinished">Number of seconds to keep misbehaving peers from reconnecting (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Output debugging information (default: %u, supplying &lt;category&gt; is optional)</source>
-        <translation type="unfinished">Output debugging information (default: %u, supplying &lt;category&gt; is optional)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
+        <location line="+10"/>
         <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</source>
-        <translation type="unfinished">Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</translation>
+        <translation>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect)</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Require high priority for relaying free or low-fee transactions (default:%u)</source>
-        <translation type="unfinished">Require high priority for relaying free or low-fee transactions (default:%u)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Send trace/debug info to console instead of debug.log file (default: %u)</source>
-        <translation type="unfinished">Send trace/debug info to console instead of debug.log file (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+7"/>
         <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
-        <translation type="unfinished">Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</translation>
+        <translation>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</source>
-        <translation type="unfinished">Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</translation>
+        <translation>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
+        <translation>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Unable to bind to %s on this computer. Folm Core is probably already running.</source>
+        <translation>Unable to bind to %s on this computer. Folm Core is probably already running.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
+        <translation>Unable to locate enough Obfuscation denominated funds for this transaction.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 1000 FOLM.</source>
+        <translation>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 1000 FOLM.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
+        <translation>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
+        <translation>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</translation>
     </message>
     <message>
         <location line="+3"/>
+        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
+        <translation>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
+        <translation>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
+        <translation>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>You must specify a masternodeprivkey in the configuration. Please see documentation for help.</source>
+        <translation>You must specify a masternodeprivkey in the configuration. Please see documentation for help.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>(default: 1)</source>
+        <translation>(default: 1)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Accept command line and JSON-RPC commands</source>
+        <translation>Accept command line and JSON-RPC commands</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
+        <translation>Accept connections from outside (default: 1 if no -proxy or -connect)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add a node to connect to and attempt to keep the connection open</source>
+        <translation>Add a node to connect to and attempt to keep the connection open</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
+        <translation>Allow DNS lookups for -addnode, -seednode and -connect</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Already have that input.</source>
+        <translation>Already have that input.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Attempt to recover private keys from a corrupt wallet.dat</source>
+        <translation>Attempt to recover private keys from a corrupt wallet.dat</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Block creation options:</source>
+        <translation>Block creation options:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Can&apos;t denominate: no compatible inputs left.</source>
+        <translation>Can&apos;t denominate: no compatible inputs left.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot downgrade wallet</source>
+        <translation>Cannot downgrade wallet</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cannot resolve -bind address: &apos;%s&apos;</source>
+        <translation>Cannot resolve -bind address: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cannot resolve -externalip address: &apos;%s&apos;</source>
+        <translation>Cannot resolve -externalip address: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Cannot write default address</source>
+        <translation>Cannot write default address</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Collateral not valid.</source>
+        <translation>Collateral not valid.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Connect only to the specified node(s)</source>
+        <translation>Connect only to the specified node(s)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Connect to a node to retrieve peer addresses, and disconnect</source>
+        <translation>Connect to a node to retrieve peer addresses, and disconnect</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Connection options:</source>
+        <translation>Connection options:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Corrupted block database detected</source>
+        <translation>Corrupted block database detected</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Obfuscation options:</source>
+        <translation>Obfuscation options:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Debugging/Testing options:</source>
+        <translation>Debugging/Testing options:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
+        <translation>Discover own IP address (default: 1 when listening and no -externalip)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Do not load the wallet and disable wallet RPC calls</source>
+        <translation>Do not load the wallet and disable wallet RPC calls</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Do you want to rebuild the block database now?</source>
+        <translation>Do you want to rebuild the block database now?</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Done loading</source>
+        <translation>Done loading</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Entries are full.</source>
+        <translation>Entries are full.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error initializing block database</source>
+        <translation>Error initializing block database</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error initializing wallet database environment %s!</source>
+        <translation>Error initializing wallet database environment %s!</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error loading block database</source>
+        <translation>Error loading block database</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error loading wallet.dat</source>
+        <translation>Error loading wallet.dat</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error loading wallet.dat: Wallet corrupted</source>
+        <translation>Error loading wallet.dat: Wallet corrupted</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error opening block database</source>
+        <translation>Error opening block database</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error reading from database, shutting down.</source>
+        <translation>Error reading from database, shutting down.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error recovering public key.</source>
+        <translation>Error recovering public key.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Error: Disk space is low!</source>
+        <translation>Error: Disk space is low!</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error: Wallet locked, unable to create transaction!</source>
+        <translation>Error: Wallet locked, unable to create transaction!</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error: You already have pending entries in the Obfuscation pool</source>
+        <translation>Error: You already have pending entries in the Obfuscation pool</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
+        <translation>Failed to listen on any port. Use -listen=0 if you want this.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to read block</source>
+        <translation>Failed to read block</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>If &lt;category&gt; is not supplied, output all debugging information.</source>
+        <translation>If &lt;category&gt; is not supplied, output all debugging information.</translation>
+    </message>
+    <message>
+        <location line="-268"/>
+        <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
+        <translation>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Allow JSON-RPC connections from specified source. Valid for &lt;ip&gt; are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times</source>
+        <translation>Allow JSON-RPC connections from specified source. Valid for &lt;ip&gt; are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>An error occurred while setting up the RPC address %s port %u for listening: %s</source>
+        <translation>An error occurred while setting up the RPC address %s port %u for listening: %s</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6</source>
+        <translation>Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</source>
+        <translation>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
+        <translation>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</source>
+        <translation>Continuously rate-limit free transactions to &lt;n&gt;*1000 bytes per minute (default:%u)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
+        <translation>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
+        <translation>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Disable all Folm specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
+        <translation>Disable all Folm specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
+        <translation>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</source>
+        <translation>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</source>
+        <translation>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Error: Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</source>
+        <translation>Error: Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Fees (in FOLM/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Fees (in FOLM/Kb) smaller than this are considered zero fee for relaying (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Fees (in FOLM/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Fees (in FOLM/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
+        <translation>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Found unconfirmed denominated outputs, will wait till they confirm to continue.</source>
+        <translation>Found unconfirmed denominated outputs, will wait till they confirm to continue.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>How thorough the block verification of -checkblocks is (0-4, default: %u)</source>
+        <translation>How thorough the block verification of -checkblocks is (0-4, default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
+        <translation>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
+        <translation>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Log transaction priority and fee per kB when mining blocks (default: %u)</source>
+        <translation>Log transaction priority and fee per kB when mining blocks (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Maintain a full transaction index, used by the getrawtransaction rpc call (default: %u)</source>
+        <translation>Maintain a full transaction index, used by the getrawtransaction rpc call (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
+        <translation>Maximum size of data in data carrier transactions we relay and mine (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Maximum total fees to use in a single wallet transaction, setting too low may abort large transactions (default: %s)</source>
+        <translation>Maximum total fees to use in a single wallet transaction, setting too low may abort large transactions (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Number of seconds to keep misbehaving peers from reconnecting (default: %u)</source>
+        <translation>Number of seconds to keep misbehaving peers from reconnecting (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Output debugging information (default: %u, supplying &lt;category&gt; is optional)</source>
+        <translation>Output debugging information (default: %u, supplying &lt;category&gt; is optional)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
+        <translation>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Require high priority for relaying free or low-fee transactions (default:%u)</source>
+        <translation>Require high priority for relaying free or low-fee transactions (default:%u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Send trace/debug info to console instead of debug.log file (default: %u)</source>
+        <translation>Send trace/debug info to console instead of debug.log file (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Set the number of threads for coin generation if enabled (-1 = all cores, default: %d)</source>
-        <translation type="unfinished">Set the number of threads for coin generation if enabled (-1 = all cores, default: %d)</translation>
+        <translation>Set the number of threads for coin generation if enabled (-1 = all cores, default: %d)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Show N confirmations for a successfully locked transaction (0-9999, default: %u)</source>
-        <translation type="unfinished">Show N confirmations for a successfully locked transaction (0-9999, default: %u)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Support filtering of blocks and transaction with bloom filters (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation type="unfinished">SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</translation>
+        <translation>Show N confirmations for a successfully locked transaction (0-9999, default: %u)</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit &lt;https://www.openssl.org/&gt; and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
-        <translation type="unfinished">This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit &lt;https://www.openssl.org/&gt; and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</translation>
+        <translation>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit &lt;https://www.openssl.org/&gt; and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>To use pivxd, or the -server option to pivx-qt, you must set an rpcpassword in the configuration file:
+        <source>To use folmd, or the -server option to folm-qt, you must set an rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=pivxrpc
+rpcuser=folmrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
@@ -5247,1312 +4741,1019 @@ If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
 for example: alertnotify=echo %%s | mail -s &quot;Folm Alert&quot; admin@foo.com
 </source>
-        <translation type="unfinished"></translation>
+        <translation>To use folmd, or the -server option to folm-qt, you must set an rpcpassword in the configuration file:
+%s
+It is recommended you use the following random password:
+rpcuser=folmrpc
+rpcpassword=%s
+(you do not need to remember this password)
+The username and password MUST NOT be the same.
+If the file does not exist, create it with owner-readable-only file permissions.
+It is also recommended to set alertnotify so you are notified of problems;
+for example: alertnotify=echo %%s | mail -s &quot;Folm Alert&quot; admin@foo.com
+</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>Unable to bind to %s on this computer. Folm Core is probably already running.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 5000 FLM.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unable to locate enough funds for this transaction that are not equal 5000 FLM.</source>
-        <translation type="unfinished"></translation>
+        <location line="+20"/>
+        <source>Unable to locate enough funds for this transaction that are not equal 1000 FOLM.</source>
+        <translation>Unable to locate enough funds for this transaction that are not equal 1000 FOLM.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
-        <translation type="unfinished">Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</translation>
+        <translation>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Warning: -maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
-        <translation type="unfinished">Warning: -maxtxfee is set very high! Fees this large could be paid on a single transaction.</translation>
+        <translation>Warning: -maxtxfee is set very high! Fees this large could be paid on a single transaction.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
-        <translation type="unfinished">Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Folm Core will not work properly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Folm Core will not work properly.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation type="unfinished">Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation type="unfinished">Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation type="unfinished">Warning: error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation type="unfinished">Warning: wallet.dat corrupt, data salvaged! Original wallet.dat saved as wallet.{timestamp}.bak in %s; if your balance or transactions are incorrect you should restore from a backup.</translation>
-    </message>
-    <message>
-        <location line="+4"/>
+        <location line="+16"/>
         <source>Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</source>
-        <translation type="unfinished">Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</translation>
+        <translation>Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
-        <translation type="unfinished">Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</translation>
+        <translation>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>You must specify a masternodeprivkey in the configuration. Please see documentation for help.</source>
-        <translation type="unfinished">You must specify a masternodeprivkey in the configuration. Please see documentation for help.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>(51472 could be used only on mainnet)</source>
-        <translation type="unfinished">(51472 could be used only on mainnet)</translation>
+        <location line="+6"/>
+        <source>(9999 could be used only on mainnet)</source>
+        <translation>(9999 could be used only on mainnet)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>(default: %s)</source>
-        <translation type="unfinished">(default: %s)</translation>
+        <translation>(default: %s)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>(default: 1)</source>
-        <translation type="unfinished">(default: 1)</translation>
+        <location line="+3"/>
+        <source>&lt;category&gt; can be:
+</source>
+        <translation>&lt;category&gt; can be:
+</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>(must be 51472 for mainnet)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Accept command line and JSON-RPC commands</source>
-        <translation type="unfinished">Accept command line and JSON-RPC commands</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
-        <translation type="unfinished">Accept connections from outside (default: 1 if no -proxy or -connect)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Accept public REST requests (default: %u)</source>
-        <translation type="unfinished">Accept public REST requests (default: %u)</translation>
+        <translation>Accept public REST requests (default: %u)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Acceptable ciphers (default: %s)</source>
-        <translation type="unfinished">Acceptable ciphers (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add a node to connect to and attempt to keep the connection open</source>
-        <translation type="unfinished">Add a node to connect to and attempt to keep the connection open</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
-        <translation type="unfinished">Allow DNS lookups for -addnode, -seednode and -connect</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Already have that input.</source>
-        <translation type="unfinished">Already have that input.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Always query for peer addresses via DNS lookup (default: %u)</source>
-        <translation type="unfinished">Always query for peer addresses via DNS lookup (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Attempt to recover private keys from a corrupt wallet.dat</source>
-        <translation type="unfinished">Attempt to recover private keys from a corrupt wallet.dat</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Block creation options:</source>
-        <translation type="unfinished">Block creation options:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Can&apos;t denominate: no compatible inputs left.</source>
-        <translation type="unfinished">Can&apos;t denominate: no compatible inputs left.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Can&apos;t find random Masternode.</source>
-        <translation type="unfinished">Can&apos;t find random Masternode.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Can&apos;t mix while sync in progress.</source>
-        <translation type="unfinished">Can&apos;t mix while sync in progress.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cannot downgrade wallet</source>
-        <translation type="unfinished">Cannot downgrade wallet</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cannot resolve -bind address: &apos;%s&apos;</source>
-        <translation type="unfinished">Cannot resolve -bind address: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cannot resolve -externalip address: &apos;%s&apos;</source>
-        <translation type="unfinished">Cannot resolve -externalip address: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cannot resolve -whitebind address: &apos;%s&apos;</source>
-        <translation type="unfinished">Cannot resolve -whitebind address: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cannot write default address</source>
-        <translation type="unfinished">Cannot write default address</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Collateral not valid.</source>
-        <translation type="unfinished">Collateral not valid.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Connect only to the specified node(s)</source>
-        <translation type="unfinished">Connect only to the specified node(s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Connect through SOCKS5 proxy</source>
-        <translation type="unfinished">Connect through SOCKS5 proxy</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Connect to a node to retrieve peer addresses, and disconnect</source>
-        <translation type="unfinished">Connect to a node to retrieve peer addresses, and disconnect</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Connection options:</source>
-        <translation type="unfinished">Connection options:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation type="unfinished">Copyright (C) 2009-%i The Bitcoin Core Developers</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copyright (C) 2014-%i The Dash Core Developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copyright (C) 2015-%i The Folm Core Developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Copyright (C) 2017-%i The Folm Core Developers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Corrupted block database detected</source>
-        <translation type="unfinished">Corrupted block database detected</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Could not parse -rpcbind value %s as network address</source>
-        <translation type="unfinished">Could not parse -rpcbind value %s as network address</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Could not parse masternode.conf</source>
-        <translation type="unfinished">Could not parse masternode.conf</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Debugging/Testing options:</source>
-        <translation type="unfinished">Debugging/Testing options:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Disable safemode, override a real safe mode event (default: %u)</source>
-        <translation type="unfinished">Disable safemode, override a real safe mode event (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Discover own IP address (default: 1 when listening and no -externalip)</source>
-        <translation type="unfinished">Discover own IP address (default: 1 when listening and no -externalip)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Do not load the wallet and disable wallet RPC calls</source>
-        <translation type="unfinished">Do not load the wallet and disable wallet RPC calls</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Do you want to rebuild the block database now?</source>
-        <translation type="unfinished">Do you want to rebuild the block database now?</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Done loading</source>
-        <translation type="unfinished">Done loading</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Enable the client to act as a masternode (0-1, default: %u)</source>
-        <translation type="unfinished">Enable the client to act as a masternode (0-1, default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Entries are full.</source>
-        <translation type="unfinished">Entries are full.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error connecting to Masternode.</source>
-        <translation type="unfinished">Error connecting to Masternode.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error initializing block database</source>
-        <translation type="unfinished">Error initializing block database</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error initializing wallet database environment %s!</source>
-        <translation type="unfinished">Error initializing wallet database environment %s!</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error loading block database</source>
-        <translation type="unfinished">Error loading block database</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error loading wallet.dat</source>
-        <translation type="unfinished">Error loading wallet.dat</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet corrupted</source>
-        <translation type="unfinished">Error loading wallet.dat: Wallet corrupted</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Folm Core</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error opening block database</source>
-        <translation type="unfinished">Error opening block database</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error reading from database, shutting down.</source>
-        <translation type="unfinished">Error reading from database, shutting down.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error recovering public key.</source>
-        <translation type="unfinished">Error recovering public key.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error</source>
-        <translation type="unfinished">Error</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error: A fatal internal error occured, see debug.log for details</source>
-        <translation type="unfinished">Error: A fatal internal error occured, see debug.log for details</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error: Can&apos;t select current denominated inputs</source>
-        <translation type="unfinished">Error: Can&apos;t select current denominated inputs</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error: Disk space is low!</source>
-        <translation type="unfinished">Error: Disk space is low!</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error: Unsupported argument -tor found, use -onion.</source>
-        <translation type="unfinished">Error: Unsupported argument -tor found, use -onion.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error: Wallet locked, unable to create transaction!</source>
-        <translation type="unfinished">Error: Wallet locked, unable to create transaction!</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Error: You already have pending entries in the Obfuscation pool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
-        <translation type="unfinished">Failed to listen on any port. Use -listen=0 if you want this.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to read block</source>
-        <translation type="unfinished">Failed to read block</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Fee (in FLM/kB) to add to transactions you send (default: %s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Finalizing transaction.</source>
-        <translation type="unfinished">Finalizing transaction.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Force safe mode (default: %u)</source>
-        <translation type="unfinished">Force safe mode (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Found enough users, signing ( waiting %s )</source>
-        <translation type="unfinished">Found enough users, signing ( waiting %s )</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Found enough users, signing ...</source>
-        <translation type="unfinished">Found enough users, signing ...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Generate coins (default: %u)</source>
-        <translation type="unfinished">Generate coins (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>How many blocks to check at startup (default: %u, 0 = all)</source>
-        <translation type="unfinished">How many blocks to check at startup (default: %u, 0 = all)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>If &lt;category&gt; is not supplied, output all debugging information.</source>
-        <translation type="unfinished">If &lt;category&gt; is not supplied, output all debugging information.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Importing...</source>
-        <translation type="unfinished">Importing...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Imports blocks from external blk000??.dat file</source>
-        <translation type="unfinished">Imports blocks from external blk000??.dat file</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Include IP addresses in debug output (default: %u)</source>
-        <translation type="unfinished">Include IP addresses in debug output (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Incompatible mode.</source>
-        <translation type="unfinished">Incompatible mode.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Incompatible version.</source>
-        <translation type="unfinished">Incompatible version.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
-        <translation type="unfinished">Incorrect or no genesis block found. Wrong datadir for network?</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Information</source>
-        <translation type="unfinished">Information</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Initialization sanity check failed. Folm Core is shutting down.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Input is not valid.</source>
-        <translation type="unfinished">Input is not valid.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Insufficient funds.</source>
-        <translation type="unfinished">Insufficient funds.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid -onion address: &apos;%s&apos;</source>
-        <translation type="unfinished">Invalid -onion address: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid -proxy address: &apos;%s&apos;</source>
-        <translation type="unfinished">Invalid -proxy address: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished">Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid amount for -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished">Invalid amount for -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid amount for -mintxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished">Invalid amount for -mintxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</source>
-        <translation type="unfinished">Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished">Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid amount for -reservebalance=&lt;amount&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid masternodeprivkey. Please see documenation.</source>
-        <translation type="unfinished">Invalid masternodeprivkey. Please see documenation.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid netmask specified in -whitelist: &apos;%s&apos;</source>
-        <translation type="unfinished">Invalid netmask specified in -whitelist: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid port detected in masternode.conf</source>
-        <translation type="unfinished">Invalid port detected in masternode.conf</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid private key.</source>
-        <translation type="unfinished">Invalid private key.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Invalid script detected.</source>
-        <translation type="unfinished">Invalid script detected.</translation>
-    </message>
-    <message>
-        <location line="-165"/>
-        <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+68"/>
-        <source>&lt;category&gt; can be:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Attempt to force blockchain corruption recovery</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Display the stake modifier calculations in the debug.log file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Display verbose coin stake messages in the debug.log file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Acceptable ciphers (default: %s)</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>Enable publish hash block in &lt;address&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>Always query for peer addresses via DNS lookup (default: %u)</source>
+        <translation>Always query for peer addresses via DNS lookup (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Cannot resolve -whitebind address: &apos;%s&apos;</source>
+        <translation>Cannot resolve -whitebind address: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Connect through SOCKS5 proxy</source>
+        <translation>Connect through SOCKS5 proxy</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Enable publish hash transaction (locked via SwiftTX) in &lt;address&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>Connect to KeePassHttp on port &lt;port&gt; (default: %u)</source>
+        <translation>Connect to KeePassHttp on port &lt;port&gt; (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
+        <translation>Copyright (C) 2009-%i The Bitcoin Core Developers</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Enable publish hash transaction in &lt;address&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>Copyright (C) 2014-%i The Folm Core Developers</source>
+        <translation>Copyright (C) 2014-%i The Folm Core Developers</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Enable publish raw block in &lt;address&gt;</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>Could not parse -rpcbind value %s as network address</source>
+        <translation>Could not parse -rpcbind value %s as network address</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Enable publish raw transaction (locked via SwiftTX) in &lt;address&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Enable publish raw transaction in &lt;address&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Enable staking functionality (0-1, default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+53"/>
-        <source>Keep N FLM anonymized (default: %u)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
-        <translation type="unfinished">Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Last Obfuscation was too recent.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Last successful Obfuscation action was too recent.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Limit size of signature cache to &lt;n&gt; entries (default: %u)</source>
-        <translation type="unfinished">Limit size of signature cache to &lt;n&gt; entries (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Line: %d</source>
-        <translation type="unfinished">Line: %d</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>
-        <translation type="unfinished">Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Listen for connections on &lt;port&gt; (default: %u or testnet: %u)</source>
-        <translation type="unfinished">Listen for connections on &lt;port&gt; (default: %u or testnet: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading addresses...</source>
-        <translation type="unfinished">Loading addresses...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading block index...</source>
-        <translation type="unfinished">Loading block index...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading budget cache...</source>
-        <translation type="unfinished">Loading budget cache...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading masternode cache...</source>
-        <translation type="unfinished">Loading masternode cache...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading masternode payment cache...</source>
-        <translation type="unfinished">Loading masternode payment cache...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading wallet... (%3.2f %%)</source>
-        <translation type="unfinished">Loading wallet... (%3.2f %%)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Loading wallet...</source>
-        <translation type="unfinished">Loading wallet...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Lock is already in place.</source>
-        <translation type="unfinished">Lock is already in place.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Lock masternodes from masternode configuration file (default: %u)</source>
-        <translation type="unfinished">Lock masternodes from masternode configuration file (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Maintain at most &lt;n&gt; connections to peers (default: %u)</source>
-        <translation type="unfinished">Maintain at most &lt;n&gt; connections to peers (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Masternode options:</source>
-        <translation type="unfinished">Masternode options:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Masternode queue is full.</source>
-        <translation type="unfinished">Masternode queue is full.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Masternode:</source>
-        <translation type="unfinished">Masternode:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Maximum per-connection receive buffer, &lt;n&gt;*1000 bytes (default: %u)</source>
-        <translation type="unfinished">Maximum per-connection receive buffer, &lt;n&gt;*1000 bytes (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Maximum per-connection send buffer, &lt;n&gt;*1000 bytes (default: %u)</source>
-        <translation type="unfinished">Maximum per-connection send buffer, &lt;n&gt;*1000 bytes (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Missing input transaction information.</source>
-        <translation type="unfinished">Missing input transaction information.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Mixing in progress...</source>
-        <translation type="unfinished">Mixing in progress...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Need to specify a port with -whitebind: &apos;%s&apos;</source>
-        <translation type="unfinished">Need to specify a port with -whitebind: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>No Masternodes detected.</source>
-        <translation type="unfinished">No Masternodes detected.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>No compatible Masternode found.</source>
-        <translation type="unfinished">No compatible Masternode found.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>No funds detected in need of denominating.</source>
-        <translation type="unfinished">No funds detected in need of denominating.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>No matching denominations found for mixing.</source>
-        <translation type="unfinished">No matching denominations found for mixing.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Node relay options:</source>
-        <translation type="unfinished">Node relay options:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Non-standard public key detected.</source>
-        <translation type="unfinished">Non-standard public key detected.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Not compatible with existing transactions.</source>
-        <translation type="unfinished">Not compatible with existing transactions.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Not enough file descriptors available.</source>
-        <translation type="unfinished">Not enough file descriptors available.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Not in the Masternode list.</source>
-        <translation type="unfinished">Not in the Masternode list.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Number of automatic wallet backups (default: 10)</source>
-        <translation type="unfinished">Number of automatic wallet backups (default: 10)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Obfuscation is idle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obfuscation is idle.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Obfuscation options:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Obfuscation request complete:</source>
-        <translation type="unfinished"></translation>
+        <translation>Obfuscation request complete:</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Obfuscation request incomplete:</source>
-        <translation type="unfinished"></translation>
+        <translation>Obfuscation request incomplete:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Disable safemode, override a real safe mode event (default: %u)</source>
+        <translation>Disable safemode, override a real safe mode event (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Enable the client to act as a masternode (0-1, default: %u)</source>
+        <translation>Enable the client to act as a masternode (0-1, default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error connecting to Masternode.</source>
+        <translation>Error connecting to Masternode.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Error loading wallet.dat: Wallet requires newer version of Folm Core</source>
+        <translation>Error loading wallet.dat: Wallet requires newer version of Folm Core</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Error: A fatal internal error occured, see debug.log for details</source>
+        <translation>Error: A fatal internal error occured, see debug.log for details</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Only accept block chain matching built-in checkpoints (default: %u)</source>
-        <translation type="unfinished">Only accept block chain matching built-in checkpoints (default: %u)</translation>
+        <source>Error: Can&apos;t select current denominated inputs</source>
+        <translation>Error: Can&apos;t select current denominated inputs</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error: Unsupported argument -tor found, use -onion.</source>
+        <translation>Error: Unsupported argument -tor found, use -onion.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Fee (in FOLM/kB) to add to transactions you send (default: %s)</source>
+        <translation>Fee (in FOLM/kB) to add to transactions you send (default: %s)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Only connect to nodes in network &lt;net&gt; (ipv4, ipv6 or onion)</source>
-        <translation type="unfinished">Only connect to nodes in network &lt;net&gt; (ipv4, ipv6 or onion)</translation>
+        <source>Finalizing transaction.</source>
+        <translation>Finalizing transaction.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Options:</source>
-        <translation type="unfinished">Options:</translation>
+        <source>Force safe mode (default: %u)</source>
+        <translation>Force safe mode (default: %u)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Password for JSON-RPC connections</source>
-        <translation type="unfinished">Password for JSON-RPC connections</translation>
+        <source>Found enough users, signing ( waiting %s )</source>
+        <translation>Found enough users, signing ( waiting %s )</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Prepend debug output with timestamp (default: %u)</source>
-        <translation type="unfinished">Prepend debug output with timestamp (default: %u)</translation>
+        <source>Found enough users, signing ...</source>
+        <translation>Found enough users, signing ...</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Print version and exit</source>
-        <translation type="unfinished"></translation>
+        <source>Generate coins (default: %u)</source>
+        <translation>Generate coins (default: %u)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
-        <translation type="unfinished">RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</translation>
+        <source>How many blocks to check at startup (default: %u, 0 = all)</source>
+        <translation>How many blocks to check at startup (default: %u, 0 = all)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Importing...</source>
+        <translation>Importing...</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>RPC server options:</source>
-        <translation type="unfinished">RPC server options:</translation>
+        <source>Imports blocks from external blk000??.dat file</source>
+        <translation>Imports blocks from external blk000??.dat file</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>RPC support for HTTP persistent connections (default: %d)</source>
-        <translation type="unfinished">RPC support for HTTP persistent connections (default: %d)</translation>
+        <source>Include IP addresses in debug output (default: %u)</source>
+        <translation>Include IP addresses in debug output (default: %u)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Randomly drop 1 of every &lt;n&gt; network messages</source>
-        <translation type="unfinished">Randomly drop 1 of every &lt;n&gt; network messages</translation>
+        <source>Incompatible mode.</source>
+        <translation>Incompatible mode.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Randomly fuzz 1 of every &lt;n&gt; network messages</source>
-        <translation type="unfinished">Randomly fuzz 1 of every &lt;n&gt; network messages</translation>
+        <source>Incompatible version.</source>
+        <translation>Incompatible version.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Rebuild block chain index from current blk000??.dat files</source>
-        <translation type="unfinished">Rebuild block chain index from current blk000??.dat files</translation>
+        <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
+        <translation>Incorrect or no genesis block found. Wrong datadir for network?</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Receive and display P2P network alerts (default: %u)</source>
-        <translation type="unfinished">Receive and display P2P network alerts (default: %u)</translation>
+        <source>Information</source>
+        <translation>Information</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Relay and mine data carrier transactions (default: %u)</source>
-        <translation type="unfinished">Relay and mine data carrier transactions (default: %u)</translation>
+        <source>Initialization sanity check failed. Folm Core is shutting down.</source>
+        <translation>Initialization sanity check failed. Folm Core is shutting down.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Relay non-P2SH multisig (default: %u)</source>
-        <translation type="unfinished">Relay non-P2SH multisig (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Rescan the block chain for missing wallet transactions</source>
-        <translation type="unfinished">Rescan the block chain for missing wallet transactions</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Rescanning...</source>
-        <translation type="unfinished">Rescanning...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Run a thread to flush wallet periodically (default: %u)</source>
-        <translation type="unfinished">Run a thread to flush wallet periodically (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Run in the background as a daemon and accept commands</source>
-        <translation type="unfinished">Run in the background as a daemon and accept commands</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
-        <translation type="unfinished">Send transactions as zero-fee transactions if possible (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Server certificate file (default: %s)</source>
-        <translation type="unfinished">Server certificate file (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Server private key (default: %s)</source>
-        <translation type="unfinished">Server private key (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Session not complete!</source>
-        <translation type="unfinished">Session not complete!</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Session timed out.</source>
-        <translation type="unfinished">Session timed out.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set database cache size in megabytes (%d to %d, default: %d)</source>
-        <translation type="unfinished">Set database cache size in megabytes (%d to %d, default: %d)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set external address:port to get to this masternode (example: %s)</source>
-        <translation type="unfinished">Set external address:port to get to this masternode (example: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set key pool size to &lt;n&gt; (default: %u)</source>
-        <translation type="unfinished">Set key pool size to &lt;n&gt; (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set maximum block size in bytes (default: %d)</source>
-        <translation type="unfinished">Set maximum block size in bytes (default: %d)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set minimum block size in bytes (default: %u)</source>
-        <translation type="unfinished">Set minimum block size in bytes (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set the masternode private key</source>
-        <translation type="unfinished">Set the masternode private key</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Set the number of threads to service RPC calls (default: %d)</source>
-        <translation type="unfinished">Set the number of threads to service RPC calls (default: %d)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Sets the DB_PRIVATE flag in the wallet db environment (default: %u)</source>
-        <translation type="unfinished">Sets the DB_PRIVATE flag in the wallet db environment (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show all debugging options (usage: --help -help-debug)</source>
-        <translation type="unfinished">Show all debugging options (usage: --help -help-debug)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation type="unfinished">Shrink debug.log file on client startup (default: 1 when no -debug)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Signing failed.</source>
-        <translation type="unfinished">Signing failed.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Signing timed out.</source>
-        <translation type="unfinished">Signing timed out.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Signing transaction failed</source>
-        <translation type="unfinished">Signing transaction failed</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify configuration file (default: %s)</source>
-        <translation type="unfinished">Specify configuration file (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify connection timeout in milliseconds (minimum: 1, default: %d)</source>
-        <translation type="unfinished">Specify connection timeout in milliseconds (minimum: 1, default: %d)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify data directory</source>
-        <translation type="unfinished">Specify data directory</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify masternode configuration file (default: %s)</source>
-        <translation type="unfinished">Specify masternode configuration file (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify pid file (default: %s)</source>
-        <translation type="unfinished">Specify pid file (default: %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify wallet file (within data directory)</source>
-        <translation type="unfinished">Specify wallet file (within data directory)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Specify your own public address</source>
-        <translation type="unfinished">Specify your own public address</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Spend unconfirmed change when sending transactions (default: %u)</source>
-        <translation type="unfinished">Spend unconfirmed change when sending transactions (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Staking options:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Stop running after importing blocks from disk (default: %u)</source>
-        <translation type="unfinished">Stop running after importing blocks from disk (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Submitted following entries to masternode: %u / %d</source>
-        <translation type="unfinished">Submitted following entries to masternode: %u / %d</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Submitted to masternode, waiting for more entries ( %u / %d ) %s</source>
-        <translation type="unfinished">Submitted to masternode, waiting for more entries ( %u / %d ) %s</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Submitted to masternode, waiting in queue %s</source>
-        <translation type="unfinished">Submitted to masternode, waiting in queue %s</translation>
+        <source>Input is not valid.</source>
+        <translation>Input is not valid.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>SwiftTX options:</source>
-        <translation type="unfinished">SwiftTX options:</translation>
+        <translation>SwiftTX options:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Insufficient funds.</source>
+        <translation>Insufficient funds.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid -onion address: &apos;%s&apos;</source>
+        <translation>Invalid -onion address: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid -proxy address: &apos;%s&apos;</source>
+        <translation>Invalid -proxy address: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid amount for -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation>Invalid amount for -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid amount for -mintxfee=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation>Invalid amount for -mintxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</source>
+        <translation>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
+        <translation>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Last successful Obfuscation action was too recent.</source>
+        <translation>Last successful Obfuscation action was too recent.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Limit size of signature cache to &lt;n&gt; entries (default: %u)</source>
+        <translation>Limit size of signature cache to &lt;n&gt; entries (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>
+        <translation>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Listen for connections on &lt;port&gt; (default: %u or testnet: %u)</source>
+        <translation>Listen for connections on &lt;port&gt; (default: %u or testnet: %u)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Loading budget cache...</source>
+        <translation>Loading budget cache...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Loading masternode cache...</source>
+        <translation>Loading masternode cache...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Loading masternode payment cache...</source>
+        <translation>Loading masternode payment cache...</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Lock is already in place.</source>
+        <translation>Lock is already in place.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lock masternodes from masternode configuration file (default: %u)</source>
+        <translation>Lock masternodes from masternode configuration file (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Maintain at most &lt;n&gt; connections to peers (default: %u)</source>
+        <translation>Maintain at most &lt;n&gt; connections to peers (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Maximum per-connection receive buffer, &lt;n&gt;*1000 bytes (default: %u)</source>
+        <translation>Maximum per-connection receive buffer, &lt;n&gt;*1000 bytes (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Maximum per-connection send buffer, &lt;n&gt;*1000 bytes (default: %u)</source>
+        <translation>Maximum per-connection send buffer, &lt;n&gt;*1000 bytes (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Mixing in progress...</source>
+        <translation>Mixing in progress...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Need to specify a port with -whitebind: &apos;%s&apos;</source>
+        <translation>Need to specify a port with -whitebind: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No Masternodes detected.</source>
+        <translation>No Masternodes detected.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No compatible Masternode found.</source>
+        <translation>No compatible Masternode found.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Not in the Masternode list.</source>
+        <translation>Not in the Masternode list.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Number of automatic wallet backups (default: 10)</source>
+        <translation>Number of automatic wallet backups (default: 10)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Only accept block chain matching built-in checkpoints (default: %u)</source>
+        <translation>Only accept block chain matching built-in checkpoints (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Only connect to nodes in network &lt;net&gt; (ipv4, ipv6 or onion)</source>
+        <translation>Only connect to nodes in network &lt;net&gt; (ipv4, ipv6 or onion)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Prepend debug output with timestamp (default: %u)</source>
+        <translation>Prepend debug output with timestamp (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Run a thread to flush wallet periodically (default: %u)</source>
+        <translation>Run a thread to flush wallet periodically (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Send trace/debug info to debug.log file (default: %u)</source>
+        <translation>Send trace/debug info to debug.log file (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
+        <translation>Send transactions as zero-fee transactions if possible (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Server certificate file (default: %s)</source>
+        <translation>Server certificate file (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Server private key (default: %s)</source>
+        <translation>Server private key (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Set external address:port to get to this masternode (example: %s)</source>
+        <translation>Set external address:port to get to this masternode (example: %s)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set key pool size to &lt;n&gt; (default: %u)</source>
+        <translation>Set key pool size to &lt;n&gt; (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set minimum block size in bytes (default: %u)</source>
+        <translation>Set minimum block size in bytes (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set the number of threads to service RPC calls (default: %d)</source>
+        <translation>Set the number of threads to service RPC calls (default: %d)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sets the DB_PRIVATE flag in the wallet db environment (default: %u)</source>
+        <translation>Sets the DB_PRIVATE flag in the wallet db environment (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Signing timed out.</source>
+        <translation>Signing timed out.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Specify configuration file (default: %s)</source>
+        <translation>Specify configuration file (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Specify connection timeout in milliseconds (minimum: 1, default: %d)</source>
+        <translation>Specify connection timeout in milliseconds (minimum: 1, default: %d)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Specify masternode configuration file (default: %s)</source>
+        <translation>Specify masternode configuration file (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Specify pid file (default: %s)</source>
+        <translation>Specify pid file (default: %s)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Spend unconfirmed change when sending transactions (default: %u)</source>
+        <translation>Spend unconfirmed change when sending transactions (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Stop running after importing blocks from disk (default: %u)</source>
+        <translation>Stop running after importing blocks from disk (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Submitted following entries to masternode: %u / %d</source>
+        <translation>Submitted following entries to masternode: %u / %d</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Submitted to masternode, waiting for more entries ( %u / %d ) %s</source>
+        <translation>Submitted to masternode, waiting for more entries ( %u / %d ) %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Submitted to masternode, waiting in queue %s</source>
+        <translation>Submitted to masternode, waiting in queue %s</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Synchronization failed</source>
-        <translation type="unfinished">Synchronization failed</translation>
+        <translation>Synchronization failed</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Synchronization finished</source>
-        <translation type="unfinished">Synchronization finished</translation>
+        <translation>Synchronization finished</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Synchronization pending...</source>
-        <translation type="unfinished">Synchronization pending...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Synchronizing budgets...</source>
-        <translation type="unfinished">Synchronizing budgets...</translation>
+        <translation>Synchronizing budgets...</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Synchronizing masternode winners...</source>
-        <translation type="unfinished">Synchronizing masternode winners...</translation>
+        <translation>Synchronizing masternode winners...</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Synchronizing masternodes...</source>
-        <translation type="unfinished">Synchronizing masternodes...</translation>
+        <translation>Synchronizing masternodes...</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Synchronizing sporks...</source>
-        <translation type="unfinished">Synchronizing sporks...</translation>
+        <translation>Synchronizing sporks...</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>This help message</source>
-        <translation type="unfinished">This help message</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>This is experimental software.</source>
-        <translation type="unfinished">This is experimental software.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>This is intended for regression testing tools and app development.</source>
-        <translation type="unfinished">This is intended for regression testing tools and app development.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>This is not a Masternode.</source>
-        <translation type="unfinished">This is not a Masternode.</translation>
+        <translation>This is not a Masternode.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Threshold for disconnecting misbehaving peers (default: %u)</source>
-        <translation type="unfinished">Threshold for disconnecting misbehaving peers (default: %u)</translation>
+        <translation>Threshold for disconnecting misbehaving peers (default: %u)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Transaction amount too small</source>
-        <translation type="unfinished">Transaction amount too small</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transaction amounts must be positive</source>
-        <translation type="unfinished">Transaction amounts must be positive</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transaction created successfully.</source>
-        <translation type="unfinished">Transaction created successfully.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transaction fees are too high.</source>
-        <translation type="unfinished">Transaction fees are too high.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transaction not valid.</source>
-        <translation type="unfinished">Transaction not valid.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transaction too large for fee policy</source>
-        <translation type="unfinished">Transaction too large for fee policy</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transaction too large</source>
-        <translation type="unfinished">Transaction too large</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Transmitting final transaction.</source>
-        <translation type="unfinished">Transmitting final transaction.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Unable to bind to %s on this computer (bind returned error %s)</source>
-        <translation type="unfinished">Unable to bind to %s on this computer (bind returned error %s)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Unable to sign spork message, wrong key?</source>
-        <translation type="unfinished">Unable to sign spork message, wrong key?</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
-        <translation type="unfinished">Unknown network specified in -onlynet: &apos;%s&apos;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Unknown state: id = %u</source>
-        <translation type="unfinished">Unknown state: id = %u</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Upgrade wallet to latest format</source>
-        <translation type="unfinished">Upgrade wallet to latest format</translation>
+        <location line="+14"/>
+        <source>Use KeePass 2 integration using KeePassHttp plugin (default: %u)</source>
+        <translation>Use KeePass 2 integration using KeePassHttp plugin (default: %u)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Use N separate masternodes to anonymize funds  (2-8, default: %u)</source>
-        <translation type="unfinished">Use N separate masternodes to anonymize funds  (2-8, default: %u)</translation>
+        <translation>Use N separate masternodes to anonymize funds  (2-8, default: %u)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Use OpenSSL (https) for JSON-RPC connections</source>
-        <translation type="unfinished">Use OpenSSL (https) for JSON-RPC connections</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Use UPnP to map the listening port (default: %u)</source>
-        <translation type="unfinished">Use UPnP to map the listening port (default: %u)</translation>
+        <translation>Use UPnP to map the listening port (default: %u)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
-        <translation type="unfinished">Use UPnP to map the listening port (default: 1 when listening)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Use the test network</source>
-        <translation type="unfinished">Use the test network</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Username for JSON-RPC connections</source>
-        <translation type="unfinished">Username for JSON-RPC connections</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Value more than Obfuscation pool maximum allows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Verifying blocks...</source>
-        <translation type="unfinished">Verifying blocks...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Verifying wallet...</source>
-        <translation type="unfinished">Verifying wallet...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Wallet %s resides outside data directory %s</source>
-        <translation type="unfinished">Wallet %s resides outside data directory %s</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Wallet is locked.</source>
-        <translation type="unfinished">Wallet is locked.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+9"/>
         <source>Wallet needed to be rewritten: restart Folm Core to complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Wallet needed to be rewritten: restart Folm Core to complete</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Wallet options:</source>
-        <translation type="unfinished">Wallet options:</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Wallet window title</source>
-        <translation type="unfinished">Wallet window title</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Warning</source>
-        <translation type="unfinished">Warning</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Warning: This version is obsolete, upgrade required!</source>
-        <translation type="unfinished">Warning: This version is obsolete, upgrade required!</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+5"/>
         <source>Warning: Unsupported argument -benchmark ignored, use -debug=bench.</source>
-        <translation type="unfinished">Warning: Unsupported argument -benchmark ignored, use -debug=bench.</translation>
+        <translation>Warning: Unsupported argument -benchmark ignored, use -debug=bench.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Warning: Unsupported argument -debugnet ignored, use -debug=net.</source>
-        <translation type="unfinished">Warning: Unsupported argument -debugnet ignored, use -debug=net.</translation>
+        <translation>Warning: Unsupported argument -debugnet ignored, use -debug=net.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Will retry...</source>
-        <translation type="unfinished">Will retry...</translation>
+        <translation>Will retry...</translation>
+    </message>
+    <message>
+        <location line="-136"/>
+        <source>Invalid masternodeprivkey. Please see documenation.</source>
+        <translation>Invalid masternodeprivkey. Please see documenation.</translation>
+    </message>
+    <message>
+        <location line="-88"/>
+        <source>(must be 9999 for mainnet)</source>
+        <translation>(must be 9999 for mainnet)</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Can&apos;t find random Masternode.</source>
+        <translation>Can&apos;t find random Masternode.</translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Can&apos;t mix while sync in progress.</source>
+        <translation>Can&apos;t mix while sync in progress.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Could not parse masternode.conf</source>
+        <translation>Could not parse masternode.conf</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Invalid netmask specified in -whitelist: &apos;%s&apos;</source>
+        <translation>Invalid netmask specified in -whitelist: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid port detected in masternode.conf</source>
+        <translation>Invalid port detected in masternode.conf</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid private key.</source>
+        <translation>Invalid private key.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Invalid script detected.</source>
+        <translation>Invalid script detected.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>KeePassHttp id for the established association</source>
+        <translation>KeePassHttp id for the established association</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>KeePassHttp key for AES encrypted communication with KeePass</source>
+        <translation>KeePassHttp key for AES encrypted communication with KeePass</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keep N FOLM anonymized (default: %u)</source>
+        <translation>Keep N FOLM anonymized (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
+        <translation>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Last Obfuscation was too recent.</source>
+        <translation>Last Obfuscation was too recent.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Line: %d</source>
+        <translation>Line: %d</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Loading addresses...</source>
+        <translation>Loading addresses...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Loading block index...</source>
+        <translation>Loading block index...</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Loading wallet... (%3.2f %%)</source>
+        <translation>Loading wallet... (%3.2f %%)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Loading wallet...</source>
+        <translation>Loading wallet...</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Masternode options:</source>
+        <translation>Masternode options:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Masternode queue is full.</source>
+        <translation>Masternode queue is full.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Masternode:</source>
+        <translation>Masternode:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Missing input transaction information.</source>
+        <translation>Missing input transaction information.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No funds detected in need of denominating.</source>
+        <translation>No funds detected in need of denominating.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No matching denominations found for mixing.</source>
+        <translation>No matching denominations found for mixing.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Node relay options:</source>
+        <translation>Node relay options:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Non-standard public key detected.</source>
+        <translation>Non-standard public key detected.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Not compatible with existing transactions.</source>
+        <translation>Not compatible with existing transactions.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Not enough file descriptors available.</source>
+        <translation>Not enough file descriptors available.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Options:</source>
+        <translation>Options:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Password for JSON-RPC connections</source>
+        <translation>Password for JSON-RPC connections</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
+        <translation>RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RPC server options:</source>
+        <translation>RPC server options:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RPC support for HTTP persistent connections (default: %d)</source>
+        <translation>RPC support for HTTP persistent connections (default: %d)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Randomly drop 1 of every &lt;n&gt; network messages</source>
+        <translation>Randomly drop 1 of every &lt;n&gt; network messages</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Randomly fuzz 1 of every &lt;n&gt; network messages</source>
+        <translation>Randomly fuzz 1 of every &lt;n&gt; network messages</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rebuild block chain index from current blk000??.dat files</source>
+        <translation>Rebuild block chain index from current blk000??.dat files</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Receive and display P2P network alerts (default: %u)</source>
+        <translation>Receive and display P2P network alerts (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Relay and mine data carrier transactions (default: %u)</source>
+        <translation>Relay and mine data carrier transactions (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Relay non-P2SH multisig (default: %u)</source>
+        <translation>Relay non-P2SH multisig (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rescan the block chain for missing wallet transactions</source>
+        <translation>Rescan the block chain for missing wallet transactions</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rescanning...</source>
+        <translation>Rescanning...</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Run in the background as a daemon and accept commands</source>
+        <translation>Run in the background as a daemon and accept commands</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Session not complete!</source>
+        <translation>Session not complete!</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Session timed out.</source>
+        <translation>Session timed out.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Set database cache size in megabytes (%d to %d, default: %d)</source>
+        <translation>Set database cache size in megabytes (%d to %d, default: %d)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Set maximum block size in bytes (default: %d)</source>
+        <translation>Set maximum block size in bytes (default: %d)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set the masternode private key</source>
+        <translation>Set the masternode private key</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Show all debugging options (usage: --help -help-debug)</source>
+        <translation>Show all debugging options (usage: --help -help-debug)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
+        <translation>Shrink debug.log file on client startup (default: 1 when no -debug)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Signing failed.</source>
+        <translation>Signing failed.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Signing transaction failed</source>
+        <translation>Signing transaction failed</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Specify data directory</source>
+        <translation>Specify data directory</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Specify wallet file (within data directory)</source>
+        <translation>Specify wallet file (within data directory)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Specify your own public address</source>
+        <translation>Specify your own public address</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Synchronization pending...</source>
+        <translation>Synchronization pending...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>This help message</source>
+        <translation>This help message</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This is experimental software.</source>
+        <translation>This is experimental software.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This is intended for regression testing tools and app development.</source>
+        <translation>This is intended for regression testing tools and app development.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Transaction amount too small</source>
+        <translation>Transaction amount too small</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction amounts must be positive</source>
+        <translation>Transaction amounts must be positive</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction created successfully.</source>
+        <translation>Transaction created successfully.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction fees are too high.</source>
+        <translation>Transaction fees are too high.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction not valid.</source>
+        <translation>Transaction not valid.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction too large for fee policy</source>
+        <translation>Transaction too large for fee policy</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transaction too large</source>
+        <translation>Transaction too large</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transmitting final transaction.</source>
+        <translation>Transmitting final transaction.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unable to bind to %s on this computer (bind returned error %s)</source>
+        <translation>Unable to bind to %s on this computer (bind returned error %s)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unable to sign spork message, wrong key?</source>
+        <translation>Unable to sign spork message, wrong key?</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
+        <translation>Unknown network specified in -onlynet: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Unknown state: id = %u</source>
+        <translation>Unknown state: id = %u</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Upgrade wallet to latest format</source>
+        <translation>Upgrade wallet to latest format</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Use OpenSSL (https) for JSON-RPC connections</source>
+        <translation>Use OpenSSL (https) for JSON-RPC connections</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
+        <translation>Use UPnP to map the listening port (default: 1 when listening)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Use the test network</source>
+        <translation>Use the test network</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Username for JSON-RPC connections</source>
+        <translation>Username for JSON-RPC connections</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Value more than Obfuscation pool maximum allows.</source>
+        <translation>Value more than Obfuscation pool maximum allows.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Verifying blocks...</source>
+        <translation>Verifying blocks...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Verifying wallet...</source>
+        <translation>Verifying wallet...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wallet %s resides outside data directory %s</source>
+        <translation>Wallet %s resides outside data directory %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wallet is locked.</source>
+        <translation>Wallet is locked.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Wallet options:</source>
+        <translation>Wallet options:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Wallet window title</source>
+        <translation>Wallet window title</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Warning</source>
+        <translation>Warning</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Warning: This version is obsolete, upgrade required!</source>
+        <translation>Warning: This version is obsolete, upgrade required!</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
-        <translation type="unfinished">You need to rebuild the database using -reindex to change -txindex</translation>
+        <translation>You need to rebuild the database using -reindex to change -txindex</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Your entries added successfully.</source>
-        <translation type="unfinished">Your entries added successfully.</translation>
+        <translation>Your entries added successfully.</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Your transaction was accepted into the pool!</source>
-        <translation type="unfinished">Your transaction was accepted into the pool!</translation>
+        <translation>Your transaction was accepted into the pool!</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Zapping all transactions from wallet...</source>
-        <translation type="unfinished">Zapping all transactions from wallet...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ZeroMQ notification options:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapping all transactions from wallet...</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>on startup</source>
-        <translation type="unfinished">on startup</translation>
+        <translation>on startup</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>wallet.dat corrupt, salvage failed</source>
-        <translation type="unfinished">wallet.dat corrupt, salvage failed</translation>
+        <translation>wallet.dat corrupt, salvage failed</translation>
     </message>
 </context>
 </TS>

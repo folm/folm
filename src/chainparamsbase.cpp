@@ -32,7 +32,7 @@ class CBaseMainParams : public CBaseChainParams
 public:
     CBaseMainParams()
     {
-        nRPCPort = 53654;
+        nRPCPort = 9998;
     }
 };
 static CBaseMainParams mainParams;
@@ -45,8 +45,8 @@ class CBaseTestNetParams : public CBaseChainParams
 public:
     CBaseTestNetParams()
     {
-        nRPCPort = 42132;
-        strDataDir = "testnet4";
+        nRPCPort = 19998;
+        strDataDir = "testnet3";
     }
 };
 static CBaseTestNetParams testNetParams;
@@ -59,7 +59,7 @@ class CBaseRegTestParams : public CBaseChainParams
 public:
     CBaseRegTestParams()
     {
-        nRPCPort = 30610;
+        nRPCPort = 18332;
         strDataDir = "regtest";
     }
 };
@@ -83,6 +83,11 @@ CBaseChainParams& BaseParams(const std::string& chain)
         return regTestParams;
     else
         throw std::runtime_error(strprintf("%s: Unknown chain %s.", __func__, chain));
+}
+
+void SelectBaseParams(const std::string& chain)
+{
+    pCurrentBaseParams = &BaseParams(chain);
 }
 
 std::string ChainNameFromCommandLine()

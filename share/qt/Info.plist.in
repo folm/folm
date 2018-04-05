@@ -30,7 +30,7 @@
 
   <key>CFBundleExecutable</key>
   <string>Folm-Qt</string>
-
+  
   <key>CFBundleName</key>
   <string>Folm-Qt</string>
 
@@ -38,7 +38,7 @@
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>io.folm.Folm-Qt</string>
+  <string>io.folmpay.Folm-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -99,7 +99,7 @@
 
   <key>LSAppNapIsDisabled</key>
     <string>True</string>
-
+  
   <key>LSApplicationCategoryType</key>
     <string>public.app-category.finance</string>
 </dict>

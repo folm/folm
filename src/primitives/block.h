@@ -6,12 +6,9 @@
 #ifndef BITCOIN_PRIMITIVES_BLOCK_H
 #define BITCOIN_PRIMITIVES_BLOCK_H
 
-#include "consensus/consensus.h"
 #include "primitives/transaction.h"
-#include "keystore.h"
 #include "serialize.h"
 #include "uint256.h"
-
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -24,7 +21,7 @@ class CBlockHeader
 {
 public:
     // header
-    static const int32_t CURRENT_VERSION=4;
+    static const int32_t CURRENT_VERSION=3;
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
@@ -80,9 +77,6 @@ public:
     // network and disk
     std::vector<CTransaction> vtx;
 
-    // ppcoin: block signature - signed by one of the coin base txout[N]'s owner
-    std::vector<unsigned char> vchBlockSig;
-
     // memory only
     mutable CScript payee;
     mutable bool fChecked;
@@ -104,8 +98,6 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(*(CBlockHeader*)this);
         READWRITE(vtx);
-	if(vtx.size() > 1 && vtx[1].IsCoinStake())
-		READWRITE(vchBlockSig);
     }
 
     void SetNull()
@@ -113,7 +105,6 @@ public:
         CBlockHeader::SetNull();
         vtx.clear();
         payee = CScript();
-        vchBlockSig.clear();
         fChecked = false;
     }
 
@@ -129,27 +120,7 @@ public:
         return block;
     }
 
-    // ppcoin: two types of block: proof-of-work or proof-of-stake
-    bool IsProofOfStake() const
-    {
-        return (vtx.size() > 1 && vtx[1].IsCoinStake());
-    }
-
-    bool IsProofOfWork() const
-    {
-        return !IsProofOfStake();
-    }
-
-    bool SignBlock(const CKeyStore& keystore);
-    bool CheckBlockSignature() const;
-
-    std::pair<COutPoint, unsigned int> GetProofOfStake() const
-    {
-        return IsProofOfStake()? std::make_pair(vtx[1].vin[0].prevout, nTime) : std::make_pair(COutPoint(), (unsigned int)0);
-    }
-
     std::string ToString() const;
-    void print() const;
 };
 
 

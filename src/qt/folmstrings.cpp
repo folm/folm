@@ -42,6 +42,9 @@ QT_TRANSLATE_NOOP("folm-core", ""
 "Create new files with system default permissions, instead of umask 077 (only "
 "effective with disabled wallet functionality)"),
 QT_TRANSLATE_NOOP("folm-core", ""
+"Obfuscation uses exact denominated amounts to send funds, you might simply need "
+"to anonymize some more coins."),
+QT_TRANSLATE_NOOP("folm-core", ""
 "Delete all wallet transactions and only recover those parts of the "
 "blockchain through -rescan on startup"),
 QT_TRANSLATE_NOOP("folm-core", ""
@@ -50,8 +53,6 @@ QT_TRANSLATE_NOOP("folm-core", ""
 QT_TRANSLATE_NOOP("folm-core", ""
 "Distributed under the MIT software license, see the accompanying file "
 "COPYING or <http://www.opensource.org/licenses/mit-license.php>."),
-QT_TRANSLATE_NOOP("folm-core", ""
-"Enable spork administration functionality with the appropriate private key."),
 QT_TRANSLATE_NOOP("folm-core", ""
 "Enable swifttx, show confirmations for locked transactions (bool, default: "
 "%s)"),
@@ -76,10 +77,10 @@ QT_TRANSLATE_NOOP("folm-core", ""
 "Execute command when the best block changes (%s in cmd is replaced by block "
 "hash)"),
 QT_TRANSLATE_NOOP("folm-core", ""
-"Fees (in FLM/Kb) smaller than this are considered zero fee for relaying "
+"Fees (in FOLM/Kb) smaller than this are considered zero fee for relaying "
 "(default: %s)"),
 QT_TRANSLATE_NOOP("folm-core", ""
-"Fees (in FLM/Kb) smaller than this are considered zero fee for transaction "
+"Fees (in FOLM/Kb) smaller than this are considered zero fee for transaction "
 "creation (default: %s)"),
 QT_TRANSLATE_NOOP("folm-core", ""
 "Flush database activity from memory pool to disk log every <n> megabytes "
@@ -96,10 +97,11 @@ QT_TRANSLATE_NOOP("folm-core", ""
 "In this mode -genproclimit controls how many blocks are generated "
 "immediately."),
 QT_TRANSLATE_NOOP("folm-core", ""
+"SwiftTX requires inputs with at least 6 confirmations, you might need to "
+"wait a few minutes and try again."),
+QT_TRANSLATE_NOOP("folm-core", ""
 "Invalid amount for -maxtxfee=<amount>: '%s' (must be at least the minrelay "
 "fee of %s to prevent stuck transactions)"),
-QT_TRANSLATE_NOOP("folm-core", ""
-"Keep the specified amount available for spending at all times (default: 0)"),
 QT_TRANSLATE_NOOP("folm-core", ""
 "Log transaction priority and fee per kB when mining blocks (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", ""
@@ -112,10 +114,9 @@ QT_TRANSLATE_NOOP("folm-core", ""
 "Maximum total fees to use in a single wallet transaction, setting too low "
 "may abort large transactions (default: %s)"),
 QT_TRANSLATE_NOOP("folm-core", ""
-"Number of seconds to keep misbehaving peers from reconnecting (default: %u)"),
+"Name to construct url for KeePass entry that stores the wallet passphrase"),
 QT_TRANSLATE_NOOP("folm-core", ""
-"Obfuscation uses exact denominated amounts to send funds, you might simply "
-"need to anonymize some more coins."),
+"Number of seconds to keep misbehaving peers from reconnecting (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", ""
 "Output debugging information (default: %u, supplying <category> is optional)"),
 QT_TRANSLATE_NOOP("folm-core", ""
@@ -141,13 +142,8 @@ QT_TRANSLATE_NOOP("folm-core", ""
 "Show N confirmations for a successfully locked transaction (0-9999, default: "
 "%u)"),
 QT_TRANSLATE_NOOP("folm-core", ""
-"Support filtering of blocks and transaction with bloom filters (default: %u)"),
-QT_TRANSLATE_NOOP("folm-core", ""
-"SwiftTX requires inputs with at least 6 confirmations, you might need to "
-"wait a few minutes and try again."),
-QT_TRANSLATE_NOOP("folm-core", ""
 "This is a pre-release test build - use at your own risk - do not use for "
-"staking or merchant applications!"),
+"mining or merchant applications"),
 QT_TRANSLATE_NOOP("folm-core", ""
 "This product includes software developed by the OpenSSL Project for use in "
 "the OpenSSL Toolkit <https://www.openssl.org/> and cryptographic software "
@@ -170,11 +166,11 @@ QT_TRANSLATE_NOOP("folm-core", ""
 QT_TRANSLATE_NOOP("folm-core", ""
 "Unable to locate enough Obfuscation denominated funds for this transaction."),
 QT_TRANSLATE_NOOP("folm-core", ""
-"Unable to locate enough Obfuscation non-denominated funds for this "
-"transaction that are not equal 5000 FLM."),
+"Unable to locate enough Obfuscation non-denominated funds for this transaction "
+"that are not equal 1000 FOLM."),
 QT_TRANSLATE_NOOP("folm-core", ""
-"Unable to locate enough funds for this transaction that are not equal 5000 "
-"FLM."),
+"Unable to locate enough funds for this transaction that are not equal 1000 "
+"FOLM."),
 QT_TRANSLATE_NOOP("folm-core", ""
 "Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: "
 "%s)"),
@@ -209,11 +205,11 @@ QT_TRANSLATE_NOOP("folm-core", ""
 QT_TRANSLATE_NOOP("folm-core", ""
 "You must specify a masternodeprivkey in the configuration. Please see "
 "documentation for help."),
-QT_TRANSLATE_NOOP("folm-core", "(51472 could be used only on mainnet)"),
+QT_TRANSLATE_NOOP("folm-core", "(9999 could be used only on mainnet)"),
 QT_TRANSLATE_NOOP("folm-core", "(default: %s)"),
 QT_TRANSLATE_NOOP("folm-core", "(default: 1)"),
-QT_TRANSLATE_NOOP("folm-core", "(must be 51472 for mainnet)"),
-QT_TRANSLATE_NOOP("folm-core", "<category> can be:"),
+QT_TRANSLATE_NOOP("folm-core", "(must be 9999 for mainnet)"),
+QT_TRANSLATE_NOOP("folm-core", "<category> can be:\n"),
 QT_TRANSLATE_NOOP("folm-core", "Accept command line and JSON-RPC commands"),
 QT_TRANSLATE_NOOP("folm-core", "Accept connections from outside (default: 1 if no -proxy or -connect)"),
 QT_TRANSLATE_NOOP("folm-core", "Accept public REST requests (default: %u)"),
@@ -222,7 +218,6 @@ QT_TRANSLATE_NOOP("folm-core", "Add a node to connect to and attempt to keep the
 QT_TRANSLATE_NOOP("folm-core", "Allow DNS lookups for -addnode, -seednode and -connect"),
 QT_TRANSLATE_NOOP("folm-core", "Already have that input."),
 QT_TRANSLATE_NOOP("folm-core", "Always query for peer addresses via DNS lookup (default: %u)"),
-QT_TRANSLATE_NOOP("folm-core", "Attempt to force blockchain corruption recovery"),
 QT_TRANSLATE_NOOP("folm-core", "Attempt to recover private keys from a corrupt wallet.dat"),
 QT_TRANSLATE_NOOP("folm-core", "Block creation options:"),
 QT_TRANSLATE_NOOP("folm-core", "Can't denominate: no compatible inputs left."),
@@ -236,29 +231,24 @@ QT_TRANSLATE_NOOP("folm-core", "Cannot write default address"),
 QT_TRANSLATE_NOOP("folm-core", "Collateral not valid."),
 QT_TRANSLATE_NOOP("folm-core", "Connect only to the specified node(s)"),
 QT_TRANSLATE_NOOP("folm-core", "Connect through SOCKS5 proxy"),
+QT_TRANSLATE_NOOP("folm-core", "Connect to KeePassHttp on port <port> (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Connect to a node to retrieve peer addresses, and disconnect"),
 QT_TRANSLATE_NOOP("folm-core", "Connection options:"),
 QT_TRANSLATE_NOOP("folm-core", "Copyright (C) 2009-%i The Bitcoin Core Developers"),
-QT_TRANSLATE_NOOP("folm-core", "Copyright (C) 2014-%i The Dash Core Developers"),
-QT_TRANSLATE_NOOP("folm-core", "Copyright (C) 2015-%i The Folm Core Developers"),
+QT_TRANSLATE_NOOP("folm-core", "Copyright (C) 2014-%i The Folm Core Developers"),
 QT_TRANSLATE_NOOP("folm-core", "Corrupted block database detected"),
 QT_TRANSLATE_NOOP("folm-core", "Could not parse -rpcbind value %s as network address"),
 QT_TRANSLATE_NOOP("folm-core", "Could not parse masternode.conf"),
+QT_TRANSLATE_NOOP("folm-core", "Obfuscation is idle."),
+QT_TRANSLATE_NOOP("folm-core", "Obfuscation options:"),
+QT_TRANSLATE_NOOP("folm-core", "Obfuscation request complete:"),
+QT_TRANSLATE_NOOP("folm-core", "Obfuscation request incomplete:"),
 QT_TRANSLATE_NOOP("folm-core", "Debugging/Testing options:"),
 QT_TRANSLATE_NOOP("folm-core", "Disable safemode, override a real safe mode event (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Discover own IP address (default: 1 when listening and no -externalip)"),
-QT_TRANSLATE_NOOP("folm-core", "Display the stake modifier calculations in the debug.log file."),
-QT_TRANSLATE_NOOP("folm-core", "Display verbose coin stake messages in the debug.log file."),
 QT_TRANSLATE_NOOP("folm-core", "Do not load the wallet and disable wallet RPC calls"),
 QT_TRANSLATE_NOOP("folm-core", "Do you want to rebuild the block database now?"),
 QT_TRANSLATE_NOOP("folm-core", "Done loading"),
-QT_TRANSLATE_NOOP("folm-core", "Enable publish hash block in <address>"),
-QT_TRANSLATE_NOOP("folm-core", "Enable publish hash transaction (locked via SwiftTX) in <address>"),
-QT_TRANSLATE_NOOP("folm-core", "Enable publish hash transaction in <address>"),
-QT_TRANSLATE_NOOP("folm-core", "Enable publish raw block in <address>"),
-QT_TRANSLATE_NOOP("folm-core", "Enable publish raw transaction (locked via SwiftTX) in <address>"),
-QT_TRANSLATE_NOOP("folm-core", "Enable publish raw transaction in <address>"),
-QT_TRANSLATE_NOOP("folm-core", "Enable staking functionality (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Enable the client to act as a masternode (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Entries are full."),
 QT_TRANSLATE_NOOP("folm-core", "Error connecting to Masternode."),
@@ -280,7 +270,7 @@ QT_TRANSLATE_NOOP("folm-core", "Error: Wallet locked, unable to create transacti
 QT_TRANSLATE_NOOP("folm-core", "Error: You already have pending entries in the Obfuscation pool"),
 QT_TRANSLATE_NOOP("folm-core", "Failed to listen on any port. Use -listen=0 if you want this."),
 QT_TRANSLATE_NOOP("folm-core", "Failed to read block"),
-QT_TRANSLATE_NOOP("folm-core", "Fee (in FLM/kB) to add to transactions you send (default: %s)"),
+QT_TRANSLATE_NOOP("folm-core", "Fee (in FOLM/kB) to add to transactions you send (default: %s)"),
 QT_TRANSLATE_NOOP("folm-core", "Finalizing transaction."),
 QT_TRANSLATE_NOOP("folm-core", "Force safe mode (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Found enough users, signing ( waiting %s )"),
@@ -297,6 +287,7 @@ QT_TRANSLATE_NOOP("folm-core", "Incorrect or no genesis block found. Wrong datad
 QT_TRANSLATE_NOOP("folm-core", "Information"),
 QT_TRANSLATE_NOOP("folm-core", "Initialization sanity check failed. Folm Core is shutting down."),
 QT_TRANSLATE_NOOP("folm-core", "Input is not valid."),
+QT_TRANSLATE_NOOP("folm-core", "SwiftTX options:"),
 QT_TRANSLATE_NOOP("folm-core", "Insufficient funds."),
 QT_TRANSLATE_NOOP("folm-core", "Invalid -onion address: '%s'"),
 QT_TRANSLATE_NOOP("folm-core", "Invalid -proxy address: '%s'"),
@@ -305,13 +296,14 @@ QT_TRANSLATE_NOOP("folm-core", "Invalid amount for -minrelaytxfee=<amount>: '%s'
 QT_TRANSLATE_NOOP("folm-core", "Invalid amount for -mintxfee=<amount>: '%s'"),
 QT_TRANSLATE_NOOP("folm-core", "Invalid amount for -paytxfee=<amount>: '%s' (must be at least %s)"),
 QT_TRANSLATE_NOOP("folm-core", "Invalid amount for -paytxfee=<amount>: '%s'"),
-QT_TRANSLATE_NOOP("folm-core", "Invalid amount for -reservebalance=<amount>"),
 QT_TRANSLATE_NOOP("folm-core", "Invalid masternodeprivkey. Please see documenation."),
 QT_TRANSLATE_NOOP("folm-core", "Invalid netmask specified in -whitelist: '%s'"),
 QT_TRANSLATE_NOOP("folm-core", "Invalid port detected in masternode.conf"),
 QT_TRANSLATE_NOOP("folm-core", "Invalid private key."),
 QT_TRANSLATE_NOOP("folm-core", "Invalid script detected."),
-QT_TRANSLATE_NOOP("folm-core", "Keep N FLM anonymized (default: %u)"),
+QT_TRANSLATE_NOOP("folm-core", "KeePassHttp id for the established association"),
+QT_TRANSLATE_NOOP("folm-core", "KeePassHttp key for AES encrypted communication with KeePass"),
+QT_TRANSLATE_NOOP("folm-core", "Keep N FOLM anonymized (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Keep at most <n> unconnectable transactions in memory (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Last Obfuscation was too recent."),
 QT_TRANSLATE_NOOP("folm-core", "Last successful Obfuscation action was too recent."),
@@ -347,16 +339,11 @@ QT_TRANSLATE_NOOP("folm-core", "Not compatible with existing transactions."),
 QT_TRANSLATE_NOOP("folm-core", "Not enough file descriptors available."),
 QT_TRANSLATE_NOOP("folm-core", "Not in the Masternode list."),
 QT_TRANSLATE_NOOP("folm-core", "Number of automatic wallet backups (default: 10)"),
-QT_TRANSLATE_NOOP("folm-core", "Obfuscation is idle."),
-QT_TRANSLATE_NOOP("folm-core", "Obfuscation options:"),
-QT_TRANSLATE_NOOP("folm-core", "Obfuscation request complete:"),
-QT_TRANSLATE_NOOP("folm-core", "Obfuscation request incomplete:"),
 QT_TRANSLATE_NOOP("folm-core", "Only accept block chain matching built-in checkpoints (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Only connect to nodes in network <net> (ipv4, ipv6 or onion)"),
 QT_TRANSLATE_NOOP("folm-core", "Options:"),
 QT_TRANSLATE_NOOP("folm-core", "Password for JSON-RPC connections"),
 QT_TRANSLATE_NOOP("folm-core", "Prepend debug output with timestamp (default: %u)"),
-QT_TRANSLATE_NOOP("folm-core", "Print version and exit"),
 QT_TRANSLATE_NOOP("folm-core", "RPC SSL options: (see the Bitcoin Wiki for SSL setup instructions)"),
 QT_TRANSLATE_NOOP("folm-core", "RPC server options:"),
 QT_TRANSLATE_NOOP("folm-core", "RPC support for HTTP persistent connections (default: %d)"),
@@ -370,6 +357,7 @@ QT_TRANSLATE_NOOP("folm-core", "Rescan the block chain for missing wallet transa
 QT_TRANSLATE_NOOP("folm-core", "Rescanning..."),
 QT_TRANSLATE_NOOP("folm-core", "Run a thread to flush wallet periodically (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Run in the background as a daemon and accept commands"),
+QT_TRANSLATE_NOOP("folm-core", "Send trace/debug info to debug.log file (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Send transactions as zero-fee transactions if possible (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Server certificate file (default: %s)"),
 QT_TRANSLATE_NOOP("folm-core", "Server private key (default: %s)"),
@@ -396,12 +384,10 @@ QT_TRANSLATE_NOOP("folm-core", "Specify pid file (default: %s)"),
 QT_TRANSLATE_NOOP("folm-core", "Specify wallet file (within data directory)"),
 QT_TRANSLATE_NOOP("folm-core", "Specify your own public address"),
 QT_TRANSLATE_NOOP("folm-core", "Spend unconfirmed change when sending transactions (default: %u)"),
-QT_TRANSLATE_NOOP("folm-core", "Staking options:"),
 QT_TRANSLATE_NOOP("folm-core", "Stop running after importing blocks from disk (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Submitted following entries to masternode: %u / %d"),
 QT_TRANSLATE_NOOP("folm-core", "Submitted to masternode, waiting for more entries ( %u / %d ) %s"),
 QT_TRANSLATE_NOOP("folm-core", "Submitted to masternode, waiting in queue %s"),
-QT_TRANSLATE_NOOP("folm-core", "SwiftTX options:"),
 QT_TRANSLATE_NOOP("folm-core", "Synchronization failed"),
 QT_TRANSLATE_NOOP("folm-core", "Synchronization finished"),
 QT_TRANSLATE_NOOP("folm-core", "Synchronization pending..."),
@@ -427,6 +413,7 @@ QT_TRANSLATE_NOOP("folm-core", "Unable to sign spork message, wrong key?"),
 QT_TRANSLATE_NOOP("folm-core", "Unknown network specified in -onlynet: '%s'"),
 QT_TRANSLATE_NOOP("folm-core", "Unknown state: id = %u"),
 QT_TRANSLATE_NOOP("folm-core", "Upgrade wallet to latest format"),
+QT_TRANSLATE_NOOP("folm-core", "Use KeePass 2 integration using KeePassHttp plugin (default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Use N separate masternodes to anonymize funds  (2-8, default: %u)"),
 QT_TRANSLATE_NOOP("folm-core", "Use OpenSSL (https) for JSON-RPC connections"),
 QT_TRANSLATE_NOOP("folm-core", "Use UPnP to map the listening port (default: %u)"),
@@ -450,7 +437,6 @@ QT_TRANSLATE_NOOP("folm-core", "You need to rebuild the database using -reindex 
 QT_TRANSLATE_NOOP("folm-core", "Your entries added successfully."),
 QT_TRANSLATE_NOOP("folm-core", "Your transaction was accepted into the pool!"),
 QT_TRANSLATE_NOOP("folm-core", "Zapping all transactions from wallet..."),
-QT_TRANSLATE_NOOP("folm-core", "ZeroMQ notification options:"),
 QT_TRANSLATE_NOOP("folm-core", "on startup"),
 QT_TRANSLATE_NOOP("folm-core", "wallet.dat corrupt, salvage failed"),
 };

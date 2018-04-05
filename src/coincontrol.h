@@ -6,7 +6,6 @@
 #define BITCOIN_COINCONTROL_H
 
 #include "primitives/transaction.h"
-#include "script/standard.h"
 
 /** Coin Control Features. */
 class CCoinControl
@@ -15,8 +14,6 @@ public:
     CTxDestination destChange;
     bool useObfuScation;
     bool useSwiftTX;
-    bool fSplitBlock;
-    int nSplitBlock;
     //! If false, allows unselected inputs, but requires all selected inputs be used
     bool fAllowOtherInputs;
     //! Includes watch only addresses which match the ISMINE_WATCH_SOLVABLE criteria
@@ -32,14 +29,12 @@ public:
     void SetNull()
     {
         destChange = CNoDestination();
+        fAllowOtherInputs = false;
+        fAllowWatchOnly = false;
         setSelected.clear();
         useSwiftTX = false;
         useObfuScation = true;
-        fAllowOtherInputs = false;
-        fAllowWatchOnly = true;
         nMinimumTotalFee = 0;
-        fSplitBlock = false;
-        nSplitBlock = 1;
     }
 
     bool HasSelected() const
@@ -71,17 +66,6 @@ public:
     void ListSelected(std::vector<COutPoint>& vOutpoints) const
     {
         vOutpoints.assign(setSelected.begin(), setSelected.end());
-    }
-
-    unsigned int QuantitySelected()
-    {
-        return setSelected.size();
-    }
-
-    void SetSelection(std::set<COutPoint> setSelected)
-    {
-        this->setSelected.clear();
-        this->setSelected = setSelected;
     }
 
 private:

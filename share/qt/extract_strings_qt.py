@@ -1,9 +1,8 @@
 #!/usr/bin/python
 '''
-Extract _("...") strings for translation and convert to Qt stringdefs so that
+Extract _("...") strings for translation and convert to Qt4 stringdefs so that
 they can be picked up by Qt linguist.
 '''
-from __future__ import division,print_function,unicode_literals
 from subprocess import Popen, PIPE
 import glob
 import operator
@@ -53,14 +52,10 @@ files = sys.argv[1:]
 
 # xgettext -n --keyword=_ $FILES
 XGETTEXT=os.getenv('XGETTEXT', 'xgettext')
-if not XGETTEXT:
-    print('Cannot extract strings: xgettext utility is not installed or not configured.',file=sys.stderr)
-    print('Please install package "gettext" and re-run \'./configure\'.',file=sys.stderr)
-    exit(1)
 child = Popen([XGETTEXT,'--output=-','-n','--keyword=_'] + files, stdout=PIPE)
 (out, err) = child.communicate()
 
-messages = parse_po(out.decode('utf-8'))
+messages = parse_po(out)
 
 f = open(OUT_CPP, 'w')
 f.write("""

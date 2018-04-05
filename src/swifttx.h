@@ -1,19 +1,17 @@
 
-// Copyright (c) 2009-2012 The Dash Core developers
-// Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2018 The Folm Core developers
+// Copyright (c) 2009-2012 The Folm Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef SWIFTTX_H
 #define SWIFTTX_H
 
-#include "base58.h"
-#include "key.h"
-#include "main.h"
-#include "net.h"
-#include "spork.h"
 #include "sync.h"
+#include "net.h"
+#include "key.h"
 #include "util.h"
+#include "base58.h"
+#include "main.h"
+#include "spork.h"
 
 /*
     At 15 signatures, 1/2 of the masternode network can be owned by
@@ -24,8 +22,8 @@
     ### getting 5 of 10 signatures w/ 1000 nodes of 2900
     (1000/2900.0)**5 = 0.004875397277841433
 */
-#define SWIFTTX_SIGNATURES_REQUIRED 6
-#define SWIFTTX_SIGNATURES_TOTAL 10
+#define SWIFTTX_SIGNATURES_REQUIRED           6
+#define SWIFTTX_SIGNATURES_TOTAL              10
 
 using namespace std;
 using namespace boost;
@@ -57,7 +55,7 @@ void ProcessMessageSwiftTX(CNode* pfrom, std::string& strCommand, CDataStream& v
 void DoConsensusVote(CTransaction& tx, int64_t nBlockHeight);
 
 //process consensus vote message
-bool ProcessConsensusVote(CNode* pnode, CConsensusVote& ctx);
+bool ProcessConsensusVote(CNode *pnode, CConsensusVote& ctx);
 
 // keep transaction locks in memory for an hour
 void CleanTransactionLocksList();
@@ -80,8 +78,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
-    {
+    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(txHash);
         READWRITE(vinMasternode);
         READWRITE(vchMasterNodeSignature);

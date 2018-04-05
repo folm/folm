@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.0">
+<TS language="fr" version="2.0">
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -136,7 +136,7 @@
         <translation>Utiliser pour désactiver le mode d'envoi trivial de paiement lorsque le compte système est compromis. N'assure pas une sécurité efficace.</translation>
     </message>
     <message>
-        <source>For anonymization and staking only</source>
+        <source>For anonymization only</source>
         <translation>Pour anonymisation uniquement</translation>
     </message>
     <message>
@@ -176,8 +176,8 @@
         <translation>Confirmer le chiffrement du portefeuille</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DNET&lt;/b&gt;!</source>
-        <translation>Attention : Si vous chiffrez votre portefeuille et perdez votre phrase de passe, vous &lt;b&gt;PERDREZ TOUS VOS DNET&lt;/b&gt; !</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR FOLM&lt;/b&gt;!</source>
+        <translation>Attention : Si vous chiffrez votre portefeuille et perdez votre phrase de passe, vous &lt;b&gt;PERDREZ TOUS VOS FOLM&lt;/b&gt; !</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -594,8 +594,8 @@ Adresse : %4
 <context>
     <name>ClientModel</name>
     <message>
-        <source>Total: %1 (OBF compatible: %2 / Enabled: %3)</source>
-        <translation>Total: %1 (Compatible OBF: %2 / Actifs: %3)</translation>
+        <source>Total: %1 (DS compatible: %2 / Enabled: %3)</source>
+        <translation>Total: %1 (Compatible DS: %2 / Actifs: %3)</translation>
     </message>
     <message>
         <source>Network Alert</source>
@@ -669,8 +669,8 @@ Adresse : %4
         <translation>Reçu avec adresse</translation>
     </message>
     <message>
-        <source>OBF Rounds</source>
-        <translation>Cycles OBF</translation>
+        <source>DS Rounds</source>
+        <translation>Cycles DS</translation>
     </message>
     <message>
         <source>Date</source>
@@ -741,8 +741,8 @@ Adresse : %4
         <translation>Copier la monnaie</translation>
     </message>
     <message>
-        <source>Non-anonymized input selected. &lt;b&gt;Obfuscate will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscate, please deselect all non-nonymized inputs first and then check Obfuscate checkbox again.</source>
-        <translation>Entrée non-anonymisées sélectionnée. &lt;b&gt; Obfuscate sera désactivé. &lt;/ b&gt; &lt;br&gt; Si vous voulez continuer à utiliser Obfuscate, veuillez désélectionner toutes les entrées non-anonymisées d'abord, puis vérifier à nouveau la case Obfuscate.</translation>
+        <source>Non-anonymized input selected. &lt;b&gt;Obfuscation will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Obfuscation, please deselect all non-nonymized inputs first and then check Obfuscation checkbox again.</source>
+        <translation>Entrée non-anonymisées sélectionnée. &lt;b&gt; Obfuscation sera désactivé. &lt;/ b&gt; &lt;br&gt; Si vous voulez continuer à utiliser Obfuscation, veuillez désélectionner toutes les entrées non-anonymisées d'abord, puis vérifier à nouveau la case Obfuscation.</translation>
     </message>
     <message>
         <source>highest</source>
@@ -842,10 +842,10 @@ Adresse : %4
     </message>
 </context>
 <context>
-    <name>ObfuscateConfig</name>
+    <name>ObfuscationConfig</name>
     <message>
-        <source>Configure Obfuscate</source>
-        <translation>Configurer Obfuscate</translation>
+        <source>Configure Obfuscation</source>
+        <translation>Configurer Obfuscation</translation>
     </message>
     <message>
         <source>Basic Privacy</source>
@@ -864,48 +864,48 @@ Adresse : %4
         <translation>Veuillez choisir un niveau de confidentialité.</translation>
     </message>
     <message>
-        <source>Use 2 separate masternodes to mix funds up to 1000 DNET</source>
-        <translation>Utiliser 2 masternodes pour mélanger jusqu'à 1000 DNET</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 FOLM</source>
+        <translation>Utiliser 2 masternodes pour mélanger jusqu'à 1000 FOLM</translation>
     </message>
     <message>
-        <source>Use 8 separate masternodes to mix funds up to 1000 DNET</source>
-        <translation>Utiliser 8 masternodes pour mélanger jusqu'à 1000 DNET</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 FOLM</source>
+        <translation>Utiliser 8 masternodes pour mélanger jusqu'à 1000 FOLM</translation>
     </message>
     <message>
         <source>Use 16 separate masternodes</source>
         <translation>Utiliser 16 masternodes</translation>
     </message>
     <message>
-        <source>This option is the quickest and will cost about ~0.025 DNET to anonymize 1000 DNET</source>
-        <translation>Cette option est la plus rapide et coûtera environ 0,025 DNET pour anonymiser 1000 DNET</translation>
+        <source>This option is the quickest and will cost about ~0.025 FOLM to anonymize 1000 FOLM</source>
+        <translation>Cette option est la plus rapide et coûtera environ 0,025 FOLM pour anonymiser 1000 FOLM</translation>
     </message>
     <message>
-        <source>This option is moderately fast and will cost about 0.05 DNET to anonymize 1000 DNET</source>
-        <translation>Cette option est un peu moins rapide et coûtera environ 0,05 DNET pour anonymiser 1000 DNET</translation>
+        <source>This option is moderately fast and will cost about 0.05 FOLM to anonymize 1000 FOLM</source>
+        <translation>Cette option est un peu moins rapide et coûtera environ 0,05 FOLM pour anonymiser 1000 FOLM</translation>
     </message>
     <message>
-        <source>0.1 DNET per 1000 DNET you anonymize.</source>
-        <translation>0,1 DNET par 1000 DNET anonymisés.</translation>
+        <source>0.1 FOLM per 1000 FOLM you anonymize.</source>
+        <translation>0,1 FOLM par 1000 FOLM anonymisés.</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
         <translation>Cette option est le plus lente et la plus sécurisée. Utiliser l'anonymisation maximale coûtera</translation>
     </message>
     <message>
-        <source>Obfuscate Configuration</source>
-        <translation>Configuration de Obfuscate</translation>
+        <source>Obfuscation Configuration</source>
+        <translation>Configuration de Obfuscation</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Folm's configuration screen.</source>
-        <translation>Obfuscate est réglé avec succès sur normal (%1 and 2 rounds). Vous pouvez changer cela à tout moment en ouvrant la fenêtre de configuration du Folm.</translation>
+        <source>Obfuscation was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Folm's configuration screen.</source>
+        <translation>Obfuscation est réglé avec succès sur normal (%1 and 2 rounds). Vous pouvez changer cela à tout moment en ouvrant la fenêtre de configuration du Folm.</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Folm's configuration screen.</source>
-        <translation>Obfuscate est réglé avec succès sur haut (%1 and 8 rounds). Vous pouvez changer cela à tout moment en ouvrant la fenêtre de configuration du Folm.</translation>
+        <source>Obfuscation was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Folm's configuration screen.</source>
+        <translation>Obfuscation est réglé avec succès sur haut (%1 and 8 rounds). Vous pouvez changer cela à tout moment en ouvrant la fenêtre de configuration du Folm.</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Folm's configuration screen.</source>
-        <translation>Obfuscate est réglé avec succès sur maximum (%1 and 16 rounds). Vous pouvez changer cela à tout moment en ouvrant la fenêtre de configuration du Folm.</translation>
+        <source>Obfuscation was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Folm's configuration screen.</source>
+        <translation>Obfuscation est réglé avec succès sur maximum (%1 and 16 rounds). Vous pouvez changer cela à tout moment en ouvrant la fenêtre de configuration du Folm.</translation>
     </message>
 </context>
 <context>
@@ -1146,12 +1146,12 @@ Adresse : %4
         <translation>(0 = auto, &lt; 0 = laisser ce nombre de cœurs inutilisés)</translation>
     </message>
     <message>
-        <source>Obfuscate rounds to use</source>
-        <translation>Nombre de cycles Obfuscate à effectuer</translation>
+        <source>Obfuscation rounds to use</source>
+        <translation>Nombre de cycles Obfuscation à effectuer</translation>
     </message>
     <message>
-        <source>This amount acts as a threshold to turn off Obfuscate once it's reached.</source>
-        <translation>Ce montant est le seuil pour désactiver Obfuscate dès qu'il est atteint.</translation>
+        <source>This amount acts as a threshold to turn off Obfuscation once it's reached.</source>
+        <translation>Ce montant est le seuil pour désactiver Obfuscation dès qu'il est atteint.</translation>
     </message>
     <message>
         <source>Amount of Folm to keep anonymized</source>
@@ -1263,9 +1263,9 @@ Adresse : %4
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/folm-crypto/folm-wallet-translations/</source>
+https://www.transifex.com/projects/p/folm/</source>
         <translation>Langage manquant ou traduction incomplète ? Participez aux traductions ici :
-https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
+https://www.transifex.com/projects/p/folm/</translation>
     </message>
     <message>
         <source>User Interface Theme:</source>
@@ -1371,7 +1371,7 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Immature :</translation>
     </message>
     <message>
-        <source>Staked or masternode rewards that has not yet matured</source>
+        <source>Mined balance that has not yet matured</source>
         <translation>Le solde généré n'est pas encore mûr</translation>
     </message>
     <message>
@@ -1383,7 +1383,7 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Transactions non confirmés d'adresses en lecture seule</translation>
     </message>
     <message>
-        <source>Staked or masternode rewards in watch-only addresses that has not yet matured</source>
+        <source>Mined balance in watch-only addresses that has not yet matured</source>
         <translation>Solde miné pour les adresses en lecture seule qui n'ont pas encore mûri</translation>
     </message>
     <message>
@@ -1423,16 +1423,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Complétude :</translation>
     </message>
     <message>
-        <source>Obfuscate Balance:</source>
-        <translation>Balance Obfuscate :</translation>
+        <source>Obfuscation Balance:</source>
+        <translation>Balance Obfuscation :</translation>
     </message>
     <message>
         <source>Amount and Rounds:</source>
         <translation>Montant et Cycles</translation>
     </message>
     <message>
-        <source>0 DNET / 0 Rounds</source>
-        <translation>0 DNET / 0 Cycles</translation>
+        <source>0 FOLM / 0 Rounds</source>
+        <translation>0 FOLM / 0 Cycles</translation>
     </message>
     <message>
         <source>Submitted Denom:</source>
@@ -1443,8 +1443,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>n/a</translation>
     </message>
     <message>
-        <source>Obfuscate</source>
-        <translation>Obfuscate</translation>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
     </message>
     <message>
         <source>Recent transactions</source>
@@ -1463,16 +1463,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>(Dernier Message)</translation>
     </message>
     <message>
-        <source>Try to manually submit a Obfuscate request.</source>
-        <translation>Essayer de soumettre manuellement une requête Obfuscate.</translation>
+        <source>Try to manually submit a Obfuscation request.</source>
+        <translation>Essayer de soumettre manuellement une requête Obfuscation.</translation>
     </message>
     <message>
         <source>Try Mix</source>
         <translation>Essayer le mélange</translation>
     </message>
     <message>
-        <source>Reset the current status of Obfuscate (can interrupt Obfuscate if it's in the process of Mixing, which can cost you money!)</source>
-        <translation>Réinitialiser le statut de Obfuscate (peut interrompre Obfuscate si le process de mélange est en cours, ce qui peut vous coûter de l'argent !)</translation>
+        <source>Reset the current status of Obfuscation (can interrupt Obfuscation if it's in the process of Mixing, which can cost you money!)</source>
+        <translation>Réinitialiser le statut de Obfuscation (peut interrompre Obfuscation si le process de mélange est en cours, ce qui peut vous coûter de l'argent !)</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -1487,12 +1487,12 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Désactivé</translation>
     </message>
     <message>
-        <source>Start Obfuscate Mixing</source>
-        <translation>Démarrer le mélange Obfuscate</translation>
+        <source>Start Obfuscation Mixing</source>
+        <translation>Démarrer le mélange Obfuscation</translation>
     </message>
     <message>
-        <source>Stop Obfuscate Mixing</source>
-        <translation>Arrêter le mélange Obfuscate</translation>
+        <source>Stop Obfuscation Mixing</source>
+        <translation>Arrêter le mélange Obfuscation</translation>
     </message>
     <message>
         <source>No inputs detected</source>
@@ -1535,9 +1535,9 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Activé</translation>
     </message>
     <message>
-        <source>Last Obfuscate message:
+        <source>Last Obfuscation message:
 </source>
-        <translation>Dernier message de Obfuscate:
+        <translation>Dernier message de Obfuscation:
 </translation>
     </message>
     <message>
@@ -1545,20 +1545,20 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>N.D.</translation>
     </message>
     <message>
-        <source>Obfuscate was successfully reset.</source>
-        <translation>Obfuscate est réinitialisé avec succès</translation>
+        <source>Obfuscation was successfully reset.</source>
+        <translation>Obfuscation est réinitialisé avec succès</translation>
     </message>
     <message>
-        <source>If you don't want to see internal Obfuscate fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
-        <translation>Pour ne pas voir les transactions/frais Obfuscate internes sélectionnez "Les plus Communes" comme Type dans l'onglet "Transactions"</translation>
+        <source>If you don't want to see internal Obfuscation fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
+        <translation>Pour ne pas voir les transactions/frais Obfuscation internes sélectionnez "Les plus Communes" comme Type dans l'onglet "Transactions"</translation>
     </message>
     <message>
-        <source>Obfuscate requires at least %1 to use.</source>
-        <translation>Obfuscate nécessite au moins %1 pour l'utiliser</translation>
+        <source>Obfuscation requires at least %1 to use.</source>
+        <translation>Obfuscation nécessite au moins %1 pour l'utiliser</translation>
     </message>
     <message>
-        <source>Wallet is locked and user declined to unlock. Disabling Obfuscate.</source>
-        <translation>Le portefeuille est vérouillé et l'utilisateur a refusé de le débloquer. Désactivation de Obfuscate.</translation>
+        <source>Wallet is locked and user declined to unlock. Disabling Obfuscation.</source>
+        <translation>Le portefeuille est vérouillé et l'utilisateur a refusé de le débloquer. Désactivation de Obfuscation.</translation>
     </message>
 </context>
 <context>
@@ -1659,7 +1659,7 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Adresse/Nom d'hôte</translation>
     </message>
     <message>
-        <source>Version</source>
+        <source>User Agent</source>
         <translation>Agent de l'utilisateur</translation>
     </message>
     <message>
@@ -1860,7 +1860,7 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Version</translation>
     </message>
     <message>
-        <source>Version</source>
+        <source>User Agent</source>
         <translation>Agent de l'utilisateur</translation>
     </message>
     <message>
@@ -2364,12 +2364,12 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Ajouter un &amp;destinataire</translation>
     </message>
     <message>
-        <source>Obfuscate</source>
-        <translation>Obfuscate</translation>
+        <source>Obfuscation</source>
+        <translation>Obfuscation</translation>
     </message>
     <message>
-        <source>quickTX</source>
-        <translation>quickTX</translation>
+        <source>SwiftTX</source>
+        <translation>SwiftTX</translation>
     </message>
     <message>
         <source>Balance:</source>
@@ -2416,16 +2416,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>fonds anonymisés</translation>
     </message>
     <message>
-        <source>(obfuscate requires this amount to be rounded up to the nearest %1).</source>
-        <translation>(obfuscate nécessite que ce montant soit arrondi au plus proche de %1).</translation>
+        <source>(obfuscation requires this amount to be rounded up to the nearest %1).</source>
+        <translation>(obfuscation nécessite que ce montant soit arrondi au plus proche de %1).</translation>
     </message>
     <message>
         <source>any available funds (not recommended)</source>
         <translation>tout fonds disponible (non recommandé)</translation>
     </message>
     <message>
-        <source>and quickTX</source>
-        <translation>et quickTX</translation>
+        <source>and SwiftTX</source>
+        <translation>et SwiftTX</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2778,16 +2778,16 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>en conflit</translation>
     </message>
     <message>
-        <source>%1/offline (verified via quicktx)</source>
-        <translation>%1/déconnecté (vérifié avec quicktx)</translation>
+        <source>%1/offline (verified via swifttx)</source>
+        <translation>%1/déconnecté (vérifié avec swifttx)</translation>
     </message>
     <message>
-        <source>%1/confirmed (verified via quicktx)</source>
-        <translation>%1/confirmé (verifié avec quicktx)</translation>
+        <source>%1/confirmed (verified via swifttx)</source>
+        <translation>%1/confirmé (verifié avec swifttx)</translation>
     </message>
     <message>
-        <source>%1 confirmations (verified via quicktx)</source>
-        <translation>%1 confirmations (verifié avec quicktx)</translation>
+        <source>%1 confirmations (verified via swifttx)</source>
+        <translation>%1 confirmations (verifié avec swifttx)</translation>
     </message>
     <message>
         <source>%1/offline</source>
@@ -2802,24 +2802,24 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>%1 confirmations</translation>
     </message>
     <message>
-        <source>%1/offline (quickTX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1/déconnecté (vérification d'quickTX en cours - %2 sur %3 signatures)</translation>
+        <source>%1/offline (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <translation>%1/déconnecté (vérification d'SwiftTX en cours - %2 sur %3 signatures)</translation>
     </message>
     <message>
-        <source>%1/confirmed (quickTX verification in progress - %2 of %3 signatures )</source>
-        <translation>%1/confirmé (vérification d'quickTX en cours - %2 sur %3 signatures)</translation>
+        <source>%1/confirmed (SwiftTX verification in progress - %2 of %3 signatures )</source>
+        <translation>%1/confirmé (vérification d'SwiftTX en cours - %2 sur %3 signatures)</translation>
     </message>
     <message>
-        <source>%1 confirmations (quickTX verification in progress - %2 of %3 signatures)</source>
-        <translation>%1 confirmations (vérification d'quickTX en cours - %2 sur %3 signatures)</translation>
+        <source>%1 confirmations (SwiftTX verification in progress - %2 of %3 signatures)</source>
+        <translation>%1 confirmations (vérification d'SwiftTX en cours - %2 sur %3 signatures)</translation>
     </message>
     <message>
-        <source>%1/offline (quickTX verification failed)</source>
-        <translation>%1/déconnecté (La vérification d'quickTX a échoué)</translation>
+        <source>%1/offline (SwiftTX verification failed)</source>
+        <translation>%1/déconnecté (La vérification d'SwiftTX a échoué)</translation>
     </message>
     <message>
-        <source>%1/confirmed (quickTX verification failed)</source>
-        <translation>%1/confirmé (La vérification d'quickTX a échoué)</translation>
+        <source>%1/confirmed (SwiftTX verification failed)</source>
+        <translation>%1/confirmé (La vérification d'SwiftTX a échoué)</translation>
     </message>
     <message>
         <source>Status</source>
@@ -3020,8 +3020,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Reçue de</translation>
     </message>
     <message>
-        <source>Received via Obfuscate</source>
-        <translation>Reçu par Obfuscate</translation>
+        <source>Received via Obfuscation</source>
+        <translation>Reçu par Obfuscation</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -3036,24 +3036,24 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Miné</translation>
     </message>
     <message>
-        <source>Obfuscate Denominate</source>
-        <translation>Dénomination Obfuscate</translation>
+        <source>Obfuscation Denominate</source>
+        <translation>Dénomination Obfuscation</translation>
     </message>
     <message>
-        <source>Obfuscate Collateral Payment</source>
-        <translation>Paiement Obfuscate Collatéral</translation>
+        <source>Obfuscation Collateral Payment</source>
+        <translation>Paiement Obfuscation Collatéral</translation>
     </message>
     <message>
-        <source>Obfuscate Make Collateral Inputs</source>
-        <translation>Obfuscate Création d'Entrées Collatérales</translation>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation>Obfuscation Création d'Entrées Collatérales</translation>
     </message>
     <message>
-        <source>Obfuscate Create Denominations</source>
-        <translation>Obfuscate Création de Dénominations</translation>
+        <source>Obfuscation Create Denominations</source>
+        <translation>Obfuscation Création de Dénominations</translation>
     </message>
     <message>
-        <source>Obfuscated</source>
-        <translation>Obfuscated</translation>
+        <source>Darksent</source>
+        <translation>Darksent</translation>
     </message>
     <message>
         <source>watch-only</source>
@@ -3131,24 +3131,24 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Envoyée à</translation>
     </message>
     <message>
-        <source>Obfuscated</source>
-        <translation>Obfuscated</translation>
+        <source>Darksent</source>
+        <translation>Darksent</translation>
     </message>
     <message>
-        <source>Obfuscate Make Collateral Inputs</source>
-        <translation>Obfuscate Création d'Entrées Collatérales</translation>
+        <source>Obfuscation Make Collateral Inputs</source>
+        <translation>Obfuscation Création d'Entrées Collatérales</translation>
     </message>
     <message>
-        <source>Obfuscate Create Denominations</source>
-        <translation>Obfuscate Création de Dénominations</translation>
+        <source>Obfuscation Create Denominations</source>
+        <translation>Obfuscation Création de Dénominations</translation>
     </message>
     <message>
-        <source>Obfuscate Denominate</source>
-        <translation>Dénomination Obfuscate</translation>
+        <source>Obfuscation Denominate</source>
+        <translation>Dénomination Obfuscation</translation>
     </message>
     <message>
-        <source>Obfuscate Collateral Payment</source>
-        <translation>Paiement Obfuscate Collatéral</translation>
+        <source>Obfuscation Collateral Payment</source>
+        <translation>Paiement Obfuscation Collatéral</translation>
     </message>
     <message>
         <source>To yourself</source>
@@ -3276,8 +3276,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Envoyer des pièces</translation>
     </message>
     <message>
-        <source>quickTX doesn't support sending values that high yet. Transactions are currently limited to %1 DNET.</source>
-        <translation>quickTX ne supporte pas des transferts aussi élevés. Les transactions sont pour le moment limitées à %11 DNET.</translation>
+        <source>SwiftTX doesn't support sending values that high yet. Transactions are currently limited to %1 FOLM.</source>
+        <translation>SwiftTX ne supporte pas des transferts aussi élevés. Les transactions sont pour le moment limitées à %11 FOLM.</translation>
     </message>
 </context>
 <context>
@@ -3330,8 +3330,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Impossible d’obtenir un verrou sur le répertoire de données %s. Folm Core fonctionne probablement déjà.</translation>
     </message>
     <message>
-        <source>Obfuscate uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
-        <translation>Obfuscate utilise les montants dénominés exacts pour envoyer des fonds, vous pourriez simplement avoir besoin d'anonymiser plus de pièces.</translation>
+        <source>Obfuscation uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
+        <translation>Obfuscation utilise les montants dénominés exacts pour envoyer des fonds, vous pourriez simplement avoir besoin d'anonymiser plus de pièces.</translation>
     </message>
     <message>
         <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
@@ -3358,8 +3358,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Dans ce mode -genproclimit contrôle combien de blocs sont générés immédiatement.</translation>
     </message>
     <message>
-        <source>quickTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>quickTX nécessite des entrées avec au moins 6 confirmations, vous devriez attendre quelques minutes avant de réessayer.</translation>
+        <source>SwiftTX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
+        <translation>SwiftTX nécessite des entrées avec au moins 6 confirmations, vous devriez attendre quelques minutes avant de réessayer.</translation>
     </message>
     <message>
         <source>Name to construct url for KeePass entry that stores the wallet passphrase</source>
@@ -3386,12 +3386,12 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Impossible de se lier à %s sur cet ordinateur. Folm Core fonctionne probablement déjà.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscate denominated funds for this transaction.</source>
-        <translation>Impossible de localiser suffisamment de fonds Obfuscate dénominés pour cette transaction.</translation>
+        <source>Unable to locate enough Obfuscation denominated funds for this transaction.</source>
+        <translation>Impossible de localiser suffisamment de fonds Obfuscation dénominés pour cette transaction.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscate non-denominated funds for this transaction that are not equal 1000 DNET.</source>
-        <translation>Impossible de localiser suffisamment de fonds non-dénominés Obfuscate pour cette transaction qui ne sont pas égaux à 1000 DNET.</translation>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 1000 FOLM.</source>
+        <translation>Impossible de localiser suffisamment de fonds non-dénominés Obfuscation pour cette transaction qui ne sont pas égaux à 1000 FOLM.</translation>
     </message>
     <message>
         <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
@@ -3490,8 +3490,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Base corrompue de données des blocs détectée</translation>
     </message>
     <message>
-        <source>Obfuscate options:</source>
-        <translation>Options Obfuscate :</translation>
+        <source>Obfuscation options:</source>
+        <translation>Options Obfuscation :</translation>
     </message>
     <message>
         <source>Debugging/Testing options:</source>
@@ -3562,8 +3562,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Erreur : Portefeuille verrouillé, impossible de créer la transaction !</translation>
     </message>
     <message>
-        <source>Error: You already have pending entries in the Obfuscate pool</source>
-        <translation>Erreur : Vous avez déjà des entrées en attente dans la pool Obfuscate</translation>
+        <source>Error: You already have pending entries in the Obfuscation pool</source>
+        <translation>Erreur : Vous avez déjà des entrées en attente dans la pool Obfuscation</translation>
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
@@ -3614,32 +3614,32 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Effacer toutes les transactions du portefeuille et récupère celle qui font partie de la chaine de blocs via -rescan au démarrage</translation>
     </message>
     <message>
-        <source>Disable all Folm specific functionality (Masternodes, Obfuscate, quickTX, Budgeting) (0-1, default: %u)</source>
-        <translation>Désactivez toutes les fonctionnalités liées à Folm (Masternode, Obfuscate, quickTX, Budgetisation) (0-1, par défaut: %u)</translation>
+        <source>Disable all Folm specific functionality (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, default: %u)</source>
+        <translation>Désactivez toutes les fonctionnalités liées à Folm (Masternode, Obfuscation, SwiftTX, Budgetisation) (0-1, par défaut: %u)</translation>
     </message>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
         <translation>Distribué sous la licence logicielle MIT, voir le fichier joint COPYING ou &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</translation>
     </message>
     <message>
-        <source>Enable quicktx, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>Activer quicktx, montrer les confirmations pour les transactions verrouillées (bool, par defaut: %s)</translation>
+        <source>Enable swifttx, show confirmations for locked transactions (bool, default: %s)</source>
+        <translation>Activer swifttx, montrer les confirmations pour les transactions verrouillées (bool, par defaut: %s)</translation>
     </message>
     <message>
-        <source>Enable use of automated obfuscate for funds stored in this wallet (0-1, default: %u)</source>
-        <translation>Activer l'utilisation automatique de Obfuscate pour les fonds stockés dans ce portefeuille (0-1, défaut: %u)</translation>
+        <source>Enable use of automated obfuscation for funds stored in this wallet (0-1, default: %u)</source>
+        <translation>Activer l'utilisation automatique de Obfuscation pour les fonds stockés dans ce portefeuille (0-1, défaut: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -socks found. Setting SOCKS version isn't possible anymore, only SOCKS5 proxies are supported.</source>
         <translation>Erreur: Paramètre obsolète -socks. Il n'est plus possible d'indiquer la version SOCKS, seul les proxy SOCKS5 sont supportés.</translation>
     </message>
     <message>
-        <source>Fees (in DNET/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation>Les frais (en DNET/ko) inférieurs à ce seuil sont considérés comme nuls pour le relayage (par défaut : %s)</translation>
+        <source>Fees (in FOLM/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Les frais (en FOLM/ko) inférieurs à ce seuil sont considérés comme nuls pour le relayage (par défaut : %s)</translation>
     </message>
     <message>
-        <source>Fees (in DNET/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Les frais (en DNET/ko) inférieurs à ce seuil sont considérés comme nuls pour la création de transactions (par défaut : %s)</translation>
+        <source>Fees (in FOLM/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Les frais (en FOLM/ko) inférieurs à ce seuil sont considérés comme nuls pour la création de transactions (par défaut : %s)</translation>
     </message>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
@@ -3686,8 +3686,8 @@ https://www.transifex.com/folm-crypto/folm-wallet-translations/</translation>
         <translation>Extraire les informations de débogage (par défaut : %u, fournir &lt;category&gt; est optionnel)</translation>
     </message>
     <message>
-        <source>Provide liquidity to Obfuscate by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
-        <translation>Fournir des liquidités à Obfuscate en mélangeant occasionnellement mais régulièrement des pièces (0-100, par défaut : %u, 1=très fréquent, frais élevés, 100=très rare, frais bas)</translation>
+        <source>Provide liquidity to Obfuscation by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
+        <translation>Fournir des liquidités à Obfuscation en mélangeant occasionnellement mais régulièrement des pièces (0-100, par défaut : %u, 1=très fréquent, frais élevés, 100=très rare, frais bas)</translation>
     </message>
     <message>
         <source>Require high priority for relaying free or low-fee transactions (default:%u)</source>
@@ -3734,8 +3734,8 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
 </translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 1000 DNET.</source>
-        <translation>Impossible de localiser suffisamment de fonds pour cette transaction qui ne sont pas égaux à 1000 DNET.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 1000 FOLM.</source>
+        <translation>Impossible de localiser suffisamment de fonds pour cette transaction qui ne sont pas égaux à 1000 FOLM.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -3758,8 +3758,8 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>Pairs en liste blanche ne peuvent être bannis pour DoS et leurs transactions sont toujours relayées, même si elles sont déjà en mémoire, utile par ex. pour une passerelle</translation>
     </message>
     <message>
-        <source>(53656 could be used only on mainnet)</source>
-        <translation>(53656 n'est utilisable que sur mainnet)</translation>
+        <source>(9999 could be used only on mainnet)</source>
+        <translation>(9999 n'est utilisable que sur mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3808,16 +3808,16 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>Impossible d'analyser la valeur -rpcbind %s en tant qu'adresse réseau</translation>
     </message>
     <message>
-        <source>Obfuscate is idle.</source>
-        <translation>Obfuscate est inactif.</translation>
+        <source>Obfuscation is idle.</source>
+        <translation>Obfuscation est inactif.</translation>
     </message>
     <message>
-        <source>Obfuscate request complete:</source>
-        <translation>Requête Obfuscate complète :</translation>
+        <source>Obfuscation request complete:</source>
+        <translation>Requête Obfuscation complète :</translation>
     </message>
     <message>
-        <source>Obfuscate request incomplete:</source>
-        <translation>Requête Obfuscate incomplète.</translation>
+        <source>Obfuscation request incomplete:</source>
+        <translation>Requête Obfuscation incomplète.</translation>
     </message>
     <message>
         <source>Disable safemode, override a real safe mode event (default: %u)</source>
@@ -3848,8 +3848,8 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>Erreur: Paramètre -tor non supporté, utilisez -onion.</translation>
     </message>
     <message>
-        <source>Fee (in DNET/kB) to add to transactions you send (default: %s)</source>
-        <translation>Frais (en DNET/ko) à ajouter aux transactions que vous envoyez (par défaut: %s)</translation>
+        <source>Fee (in FOLM/kB) to add to transactions you send (default: %s)</source>
+        <translation>Frais (en FOLM/ko) à ajouter aux transactions que vous envoyez (par défaut: %s)</translation>
     </message>
     <message>
         <source>Finalizing transaction.</source>
@@ -3912,8 +3912,8 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>L'entrée est invalide.</translation>
     </message>
     <message>
-        <source>quickTX options:</source>
-        <translation>Options quickTX :</translation>
+        <source>SwiftTX options:</source>
+        <translation>Options SwiftTX :</translation>
     </message>
     <message>
         <source>Insufficient funds.</source>
@@ -3948,8 +3948,8 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>Montant invalide pour -paytxfee=&lt;montant&gt; : « %s »</translation>
     </message>
     <message>
-        <source>Last successful Obfuscate action was too recent.</source>
-        <translation>La dernière action Obfuscate réussie est trop récente.</translation>
+        <source>Last successful Obfuscation action was too recent.</source>
+        <translation>La dernière action Obfuscation réussie est trop récente.</translation>
     </message>
     <message>
         <source>Limit size of signature cache to &lt;n&gt; entries (default: %u)</source>
@@ -4176,8 +4176,8 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>masternodeprivkey invalide. Veuillez vous référer à la documentation.</translation>
     </message>
     <message>
-        <source>(must be53656 for mainnet)</source>
-        <translation>(doit être53656 pour mainnet)</translation>
+        <source>(must be 9999 for mainnet)</source>
+        <translation>(doit être 9999 pour mainnet)</translation>
     </message>
     <message>
         <source>Can't find random Masternode.</source>
@@ -4216,7 +4216,7 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>Clé KeePassHttp pour la communication chiffrée AES avec KeePass</translation>
     </message>
     <message>
-        <source>Keep N DNET anonymized (default: %u)</source>
+        <source>Keep N FOLM anonymized (default: %u)</source>
         <translation>Maintenir N folm anonymisé en permanence (défaut: %u)</translation>
     </message>
     <message>
@@ -4224,8 +4224,8 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>Garder au plus &lt;n&gt; transactions sans connexion en mémoire (par défaut : %u)</translation>
     </message>
     <message>
-        <source>Last Obfuscate was too recent.</source>
-        <translation>Le dernier Obfuscate est trop récent.</translation>
+        <source>Last Obfuscation was too recent.</source>
+        <translation>Le dernier Obfuscation est trop récent.</translation>
     </message>
     <message>
         <source>Line: %d</source>
@@ -4476,7 +4476,7 @@ Pour exemple: alertnotify=echo %%s | mail -s "Alerte Folm" admin@foo.com
         <translation>Nom d'utilisateur pour les connexions JSON-RPC</translation>
     </message>
     <message>
-        <source>Value more than Obfuscate pool maximum allows.</source>
+        <source>Value more than Obfuscation pool maximum allows.</source>
         <translation>Valeur supérieure au maximum autorisé par le pool.</translation>
     </message>
     <message>

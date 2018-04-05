@@ -6,7 +6,7 @@
 	<string>org.folm.folmd</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/bin/bitcoind</string>
+		<string>/usr/local/bin/folmd</string>
 		<string>-daemon</string>
 	</array>
 	<key>RunAtLoad</key>

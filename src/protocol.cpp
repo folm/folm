@@ -13,78 +13,130 @@
 #endif
 
 namespace NetMsgType {
-    const char *VERSION="version";
-    const char *VERACK="verack";
-    const char *ADDR="addr";
-    const char *INV="inv";
-    const char *GETDATA="getdata";
-    const char *MERKLEBLOCK="merkleblock";
-    const char *GETBLOCKS="getblocks";
-    const char *GETHEADERS="getheaders";
-    const char *TX="tx";
-    const char *HEADERS="headers";
-    const char *BLOCK="block";
-    const char *GETADDR="getaddr";
-    const char *MEMPOOL="mempool";
-    const char *PING="ping";
-    const char *PONG="pong";
-    const char *ALERT="alert";
-    const char *NOTFOUND="notfound";
-    const char *FILTERLOAD="filterload";
-    const char *FILTERADD="filteradd";
-    const char *FILTERCLEAR="filterclear";
-    const char *REJECT="reject";
-    const char *SENDHEADERS="sendheaders";
+const char *VERSION="version";
+const char *VERACK="verack";
+const char *ADDR="addr";
+const char *INV="inv";
+const char *GETDATA="getdata";
+const char *MERKLEBLOCK="merkleblock";
+const char *GETBLOCKS="getblocks";
+const char *GETHEADERS="getheaders";
+const char *TX="tx";
+const char *HEADERS="headers";
+const char *BLOCK="block";
+const char *GETADDR="getaddr";
+const char *MEMPOOL="mempool";
+const char *PING="ping";
+const char *PONG="pong";
+const char *ALERT="alert";
+const char *NOTFOUND="notfound";
+const char *FILTERLOAD="filterload";
+const char *FILTERADD="filteradd";
+const char *FILTERCLEAR="filterclear";
+const char *REJECT="reject";
+const char *SENDHEADERS="sendheaders";
+// Folm message types
+const char *IX="ix";
+const char *IXLOCKVOTE="txlvote";
+const char *SPORK="spork";
+const char *GETSPORKS="getsporks";
+const char *MNWINNER="mnw";
+const char *MNWINNERSSYNC="mnget";
+const char *MNSCANERROR="mn scan error"; // TODO ???
+const char *MNBUDGETVOTESYNC="mnvs";
+const char *MNBUDGETVOTE="mvote";
+const char *MNBUDGETPROPOSAL="mprop";
+const char *MNBUDGETFINAL="fbs";
+const char *MNBUDGETFINALVOTE="fbvote";
+const char *MNQUORUM="mn quorum"; // TODO ???
+const char *MNANNOUNCE="mnb";
+const char *MNPING="mnp";
+const char *DSACCEPT="dsa";
+const char *DSVIN="dsi";
+const char *DSFINALTX="dsf";
+const char *DSSIGNFINALTX="dss";
+const char *DSCOMPLETE="dsc";
+const char *DSSTATUSUPDATE="dssu";
+const char *DSTX="dstx";
+const char *DSQUEUE="dsq";
+const char *DSEG="dseg";
+const char *SYNCSTATUSCOUNT="ssc";
 };
 
-// TODO: NetMsgType::, allNetMessageTypes[]
 static const char* ppszTypeName[] =
-        {
-                "ERROR", // Should never occur
-                NetMsgType::TX,
-                NetMsgType::BLOCK,
-                "filtered block" // Should never occur
-                        "tx lock request",
-                "tx lock vote",
-                "spork",
-                "mn winner",
-                "mn scan error",
-                "mn budget vote",
-                "mn budget proposal",
-                "mn budget finalized",
-                "mn budget finalized vote",
-                "mn quorum",
-                "mn announce",
-                "mn ping",
-                "dstx"
-        };
+{
+    "ERROR", // Should never occur
+    NetMsgType::TX,
+    NetMsgType::BLOCK,
+    "filtered block", // Should never occur
+// Folm message types
+    NetMsgType::IX,
+    NetMsgType::IXLOCKVOTE,
+    NetMsgType::SPORK,
+    NetMsgType::MNWINNER,
+    NetMsgType::MNSCANERROR,
+    NetMsgType::MNBUDGETVOTE,
+    NetMsgType::MNBUDGETPROPOSAL,
+    NetMsgType::MNBUDGETFINAL,
+    NetMsgType::MNBUDGETFINALVOTE,
+    NetMsgType::MNQUORUM,
+    NetMsgType::MNANNOUNCE,
+    NetMsgType::MNPING,
+    NetMsgType::DSTX
+};
 
 /** All known message types. Keep this in the same order as the list of
  * messages above and in protocol.h.
  */
 const static std::string allNetMessageTypes[] = {
-        NetMsgType::VERSION,
-        NetMsgType::VERACK,
-        NetMsgType::ADDR,
-        NetMsgType::INV,
-        NetMsgType::GETDATA,
-        NetMsgType::MERKLEBLOCK,
-        NetMsgType::GETBLOCKS,
-        NetMsgType::GETHEADERS,
-        NetMsgType::TX,
-        NetMsgType::HEADERS,
-        NetMsgType::BLOCK,
-        NetMsgType::GETADDR,
-        NetMsgType::MEMPOOL,
-        NetMsgType::PING,
-        NetMsgType::PONG,
-        NetMsgType::ALERT,
-        NetMsgType::NOTFOUND,
-        NetMsgType::FILTERLOAD,
-        NetMsgType::FILTERADD,
-        NetMsgType::FILTERCLEAR,
-        NetMsgType::REJECT,
-        NetMsgType::SENDHEADERS
+    NetMsgType::VERSION,
+    NetMsgType::VERACK,
+    NetMsgType::ADDR,
+    NetMsgType::INV,
+    NetMsgType::GETDATA,
+    NetMsgType::MERKLEBLOCK,
+    NetMsgType::GETBLOCKS,
+    NetMsgType::GETHEADERS,
+    NetMsgType::TX,
+    NetMsgType::HEADERS,
+    NetMsgType::BLOCK,
+    NetMsgType::GETADDR,
+    NetMsgType::MEMPOOL,
+    NetMsgType::PING,
+    NetMsgType::PONG,
+    NetMsgType::ALERT,
+    NetMsgType::NOTFOUND,
+    NetMsgType::FILTERLOAD,
+    NetMsgType::FILTERADD,
+    NetMsgType::FILTERCLEAR,
+    NetMsgType::REJECT,
+    NetMsgType::SENDHEADERS,
+// Folm message types
+    NetMsgType::IX,
+    NetMsgType::IXLOCKVOTE,
+    NetMsgType::SPORK,
+    NetMsgType::GETSPORKS,
+    NetMsgType::MNWINNER,
+    NetMsgType::MNWINNERSSYNC,
+    NetMsgType::MNSCANERROR,
+    NetMsgType::MNBUDGETVOTESYNC,
+    NetMsgType::MNBUDGETVOTE,
+    NetMsgType::MNBUDGETPROPOSAL,
+    NetMsgType::MNBUDGETFINAL,
+    NetMsgType::MNBUDGETFINALVOTE,
+    NetMsgType::MNQUORUM,
+    NetMsgType::MNANNOUNCE,
+    NetMsgType::MNPING,
+    NetMsgType::DSACCEPT,
+    NetMsgType::DSVIN,
+    NetMsgType::DSFINALTX,
+    NetMsgType::DSSIGNFINALTX,
+    NetMsgType::DSCOMPLETE,
+    NetMsgType::DSSTATUSUPDATE,
+    NetMsgType::DSTX,
+    NetMsgType::DSQUEUE,
+    NetMsgType::DSEG,
+    NetMsgType::SYNCSTATUSCOUNT
 };
 const static std::vector<std::string> allNetMessageTypesVec(allNetMessageTypes, allNetMessageTypes+ARRAYLEN(allNetMessageTypes));
 

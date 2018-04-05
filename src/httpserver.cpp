@@ -46,7 +46,7 @@ class HTTPWorkItem : public HTTPClosure
 {
 public:
     HTTPWorkItem(HTTPRequest* req, const std::string &path, const HTTPRequestHandler& func):
-            req(req), path(path), func(func)
+        req(req), path(path), func(func)
     {
     }
     void operator()()
@@ -168,7 +168,7 @@ struct HTTPPathHandler
 {
     HTTPPathHandler() {}
     HTTPPathHandler(std::string prefix, bool exactMatch, HTTPRequestHandler handler):
-            prefix(prefix), exactMatch(exactMatch), handler(handler)
+        prefix(prefix), exactMatch(exactMatch), handler(handler)
     {
     }
     std::string prefix;
@@ -197,8 +197,8 @@ static bool ClientAllowed(const CNetAddr& netaddr)
     if (!netaddr.IsValid())
         return false;
     BOOST_FOREACH (const CSubNet& subnet, rpc_allow_subnets)
-    if (subnet.Match(netaddr))
-        return true;
+        if (subnet.Match(netaddr))
+            return true;
     return false;
 }
 
@@ -214,8 +214,8 @@ static bool InitHTTPAllowList()
             CSubNet subnet(strAllow);
             if (!subnet.IsValid()) {
                 uiInterface.ThreadSafeMessageBox(
-                        strprintf("Invalid -rpcallowip subnet specification: %s. Valid are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24).", strAllow),
-                        "", CClientUIInterface::MSG_ERROR);
+                    strprintf("Invalid -rpcallowip subnet specification: %s. Valid are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24).", strAllow),
+                    "", CClientUIInterface::MSG_ERROR);
                 return false;
             }
             rpc_allow_subnets.push_back(subnet);
@@ -223,7 +223,7 @@ static bool InitHTTPAllowList()
     }
     std::string strAllowed;
     BOOST_FOREACH (const CSubNet& subnet, rpc_allow_subnets)
-    strAllowed += subnet.ToString() + " ";
+        strAllowed += subnet.ToString() + " ";
     LogPrint("http", "Allowing HTTP connections from: %s\n", strAllowed);
     return true;
 }
@@ -232,20 +232,20 @@ static bool InitHTTPAllowList()
 static std::string RequestMethodString(HTTPRequest::RequestMethod m)
 {
     switch (m) {
-        case HTTPRequest::GET:
-            return "GET";
-            break;
-        case HTTPRequest::POST:
-            return "POST";
-            break;
-        case HTTPRequest::HEAD:
-            return "HEAD";
-            break;
-        case HTTPRequest::PUT:
-            return "PUT";
-            break;
-        default:
-            return "unknown";
+    case HTTPRequest::GET:
+        return "GET";
+        break;
+    case HTTPRequest::POST:
+        return "POST";
+        break;
+    case HTTPRequest::HEAD:
+        return "HEAD";
+        break;
+    case HTTPRequest::PUT:
+        return "PUT";
+        break;
+    default:
+        return "unknown";
     }
 }
 
@@ -309,7 +309,7 @@ static void http_reject_request_cb(struct evhttp_request* req, void*)
 /** Event dispatcher thread */
 static void ThreadHTTP(struct event_base* base, struct evhttp* http)
 {
-    RenameThread("bitcoin-http");
+    RenameThread("folm-http");
     LogPrint("http", "Entering http event loop\n");
     event_base_dispatch(base);
     // Event loop will be interrupted by InterruptHTTPServer()
@@ -358,7 +358,7 @@ static bool HTTPBindAddresses(struct evhttp* http)
 /** Simple wrapper to set thread name and run work queue */
 static void HTTPWorkQueueRun(WorkQueue<HTTPClosure>* queue)
 {
-    RenameThread("bitcoin-httpworker");
+    RenameThread("folm-httpworker");
     queue->Run();
 }
 
@@ -385,8 +385,8 @@ bool InitHTTPServer()
 
     if (GetBoolArg("-rpcssl", false)) {
         uiInterface.ThreadSafeMessageBox(
-                "SSL mode for RPC (-rpcssl) is no longer supported.",
-                "", CClientUIInterface::MSG_ERROR);
+            "SSL mode for RPC (-rpcssl) is no longer supported.",
+            "", CClientUIInterface::MSG_ERROR);
         return false;
     }
 
@@ -523,7 +523,7 @@ static void httpevent_callback_fn(evutil_socket_t, short, void* data)
 }
 
 HTTPEvent::HTTPEvent(struct event_base* base, bool deleteWhenTriggered, const boost::function<void(void)>& handler):
-        deleteWhenTriggered(deleteWhenTriggered), handler(handler)
+    deleteWhenTriggered(deleteWhenTriggered), handler(handler)
 {
     ev = event_new(base, -1, 0, httpevent_callback_fn, this);
     assert(ev);
@@ -604,7 +604,7 @@ void HTTPRequest::WriteReply(int nStatus, const std::string& strReply)
     assert(evb);
     evbuffer_add(evb, strReply.data(), strReply.size());
     HTTPEvent* ev = new HTTPEvent(eventBase, true,
-                                  boost::bind(evhttp_send_reply, req, nStatus, (const char*)NULL, (struct evbuffer *)NULL));
+        boost::bind(evhttp_send_reply, req, nStatus, (const char*)NULL, (struct evbuffer *)NULL));
     ev->trigger(0);
     replySent = true;
     req = 0; // transferred back to main thread
@@ -632,21 +632,21 @@ std::string HTTPRequest::GetURI()
 HTTPRequest::RequestMethod HTTPRequest::GetRequestMethod()
 {
     switch (evhttp_request_get_command(req)) {
-        case EVHTTP_REQ_GET:
-            return GET;
-            break;
-        case EVHTTP_REQ_POST:
-            return POST;
-            break;
-        case EVHTTP_REQ_HEAD:
-            return HEAD;
-            break;
-        case EVHTTP_REQ_PUT:
-            return PUT;
-            break;
-        default:
-            return UNKNOWN;
-            break;
+    case EVHTTP_REQ_GET:
+        return GET;
+        break;
+    case EVHTTP_REQ_POST:
+        return POST;
+        break;
+    case EVHTTP_REQ_HEAD:
+        return HEAD;
+        break;
+    case EVHTTP_REQ_PUT:
+        return PUT;
+        break;
+    default:
+        return UNKNOWN;
+        break;
     }
 }
 
@@ -669,3 +669,4 @@ void UnregisterHTTPHandler(const std::string &prefix, bool exactMatch)
         pathHandlers.erase(i);
     }
 }
+
