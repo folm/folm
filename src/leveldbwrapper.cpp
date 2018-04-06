@@ -5,13 +5,14 @@
 #include "leveldbwrapper.h"
 
 #include "util.h"
-
+#include "random.h"
 #include <boost/filesystem.hpp>
 
 #include <leveldb/cache.h>
 #include <leveldb/env.h>
 #include <leveldb/filter_policy.h>
 #include <memenv.h>
+#include <stdint.h>
 
 void HandleError(const leveldb::Status& status) throw(leveldb_error)
 {
@@ -43,7 +44,7 @@ static leveldb::Options GetOptions(size_t nCacheSize)
     return options;
 }
 
-CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory, bool fWipe)
+CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory, bool fWipe, bool obfuscate)
 {
     penv = NULL;
     readoptions.verify_checksums = true;
@@ -66,6 +67,25 @@ CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCa
     leveldb::Status status = leveldb::DB::Open(options, path.string(), &pdb);
     HandleError(status);
     LogPrintf("Opened LevelDB successfully\n");
+
+    // The base-case obfuscation key, which is a noop.
+    obfuscate_key = std::vector<unsigned char>(OBFUSCATE_KEY_NUM_BYTES, '\000');
+
+    bool key_exists = Read(OBFUSCATE_KEY_KEY, obfuscate_key);
+
+    if (!key_exists && obfuscate && IsEmpty()) {
+        // Initialize non-degenerate obfuscation if it won't upset
+        // existing, non-obfuscated data.
+        std::vector<unsigned char> new_key = CreateObfuscateKey();
+
+        // Write `new_key` so we don't obfuscate the key with itself
+        Write(OBFUSCATE_KEY_KEY, new_key);
+        obfuscate_key = new_key;
+
+        LogPrintf("Wrote new obfuscate key for %s: %s\n", path.string(), GetObfuscateKeyHex());
+    }
+
+    LogPrintf("Using obfuscation key for %s: %s\n", path.string(), GetObfuscateKeyHex());
 }
 
 CLevelDBWrapper::~CLevelDBWrapper()
@@ -86,3 +106,18 @@ bool CLevelDBWrapper::WriteBatch(CLevelDBBatch& batch, bool fSync) throw(leveldb
     HandleError(status);
     return true;
 }
+
+
+const std::vector<unsigned char>& CLevelDBWrapper::GetObfuscateKey() const
+{
+    return obfuscate_key;
+}
+
+std::string CLevelDBWrapper::GetObfuscateKeyHex() const
+{
+    return HexStr(obfuscate_key);
+}
+CLevelDBIterator::~CLevelDBIterator() { delete piter; }
+bool CLevelDBIterator::Valid() { return piter->Valid(); }
+void CLevelDBIterator::SeekToFirst() { piter->SeekToFirst(); }
+void CLevelDBIterator::Next() { piter->Next(); }

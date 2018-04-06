@@ -9,6 +9,7 @@
 #include "serialize.h"
 #include "streams.h"
 #include "util.h"
+#include "utilstrencodings.h"
 #include "version.h"
 
 #include <boost/filesystem/path.hpp>
@@ -61,6 +62,70 @@ public:
     }
 };
 
+
+class CLevelDBIterator
+{
+private:
+    leveldb::Iterator *piter;
+    const std::vector<unsigned char> *obfuscate_key;
+
+public:
+
+    /**
+     * @param[in] piterIn          The original leveldb iterator.
+     //* @param[in] obfuscate_key    If passed, XOR data with this key.
+     */
+    CLevelDBIterator(leveldb::Iterator *piterIn, const std::vector<unsigned char>* obfuscate_key) :
+            piter(piterIn), obfuscate_key(obfuscate_key) { };
+    ~CLevelDBIterator();
+
+    bool Valid();
+
+    void SeekToFirst();
+
+    template<typename K> void Seek(const K& key) {
+        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        ssKey.reserve(ssKey.GetSerializeSize(key));
+        ssKey << key;
+        leveldb::Slice slKey(&ssKey[0], ssKey.size());
+        piter->Seek(slKey);
+    }
+
+    void Next();
+
+    template<typename K> bool GetKey(K& key) {
+        leveldb::Slice slKey = piter->key();
+        try {
+            CDataStream ssKey(slKey.data(), slKey.data() + slKey.size(), SER_DISK, CLIENT_VERSION);
+            ssKey >> key;
+        } catch (const std::exception&) {
+            return false;
+        }
+        return true;
+    }
+
+    unsigned int GetKeySize() {
+        return piter->key().size();
+    }
+
+    template<typename V> bool GetValue(V& value) {
+        leveldb::Slice slValue = piter->value();
+        try {
+            CDataStream ssValue(slValue.data(), slValue.data() + slValue.size(), SER_DISK, CLIENT_VERSION);
+            //ssValue.Xor(*obfuscate_key);
+            ssValue >> value;
+        } catch (const std::exception&) {
+            return false;
+        }
+        return true;
+    }
+
+    unsigned int GetValueSize() {
+        return piter->value().size();
+    }
+
+};
+
 class CLevelDBWrapper
 {
 private:
@@ -85,8 +150,19 @@ private:
     //! the database itself
     leveldb::DB* pdb;
 
+    ////! a key used for optional XOR-obfuscation of the database
+    std::vector<unsigned char> obfuscate_key;
+
+    //! the key under which the obfuscation key is stored
+    static const std::string OBFUSCATE_KEY_KEY;
+
+    //! the length of the obfuscate key in number of bytes
+    static const unsigned int OBFUSCATE_KEY_NUM_BYTES;
+
+    std::vector<unsigned char> CreateObfuscateKey() const;
+
 public:
-    CLevelDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory = false, bool fWipe = false);
+    CLevelDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory = false, bool fWipe = false, bool obfuscate = false);
     ~CLevelDBWrapper();
 
     template <typename K, typename V>
@@ -168,6 +244,17 @@ public:
     {
         return pdb->NewIterator(iteroptions);
     }
+
+    bool IsEmpty();
+    /**
+     * Accessor for obfuscate_key.
+     */
+    const std::vector<unsigned char>& GetObfuscateKey() const;
+
+    /**
+     * Return the obfuscate_key as a hex-formatted string.
+     */
+    std::string GetObfuscateKeyHex() const;
 };
 
 #endif // BITCOIN_LEVELDBWRAPPER_H

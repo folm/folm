@@ -318,6 +318,13 @@ static const CRPCCommand vRPCCommands[] =
         {"rawtransactions", "sendrawtransaction", &sendrawtransaction, false, false, false},
         {"rawtransactions", "signrawtransaction", &signrawtransaction, false, false, false}, /* uses wallet if enabled */
 
+                /* Address index */
+        { "addressindex",       "getaddressmempool",      &getaddressmempool,      true  },
+        { "addressindex",       "getaddressutxos",        &getaddressutxos,        false },
+        { "addressindex",       "getaddressdeltas",       &getaddressdeltas,       false },
+        { "addressindex",       "getaddresstxids",        &getaddresstxids,        false },
+        { "addressindex",       "getaddressbalance",      &getaddressbalance,      false },
+
         /* Utility functions */
         {"util", "createmultisig", &createmultisig, true, true, false},
         {"util", "validateaddress", &validateaddress, true, false, false}, /* uses wallet if enabled */
