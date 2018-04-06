@@ -199,7 +199,7 @@ public:
     template <typename K, typename V>
     bool Write(const K& key, const V& value, bool fSync = false) throw(leveldb_error)
     {
-        CLevelDBBatch batch;
+        CLevelDBBatch batch(&obfuscate_key);
         batch.Write(key, value);
         return WriteBatch(batch, fSync);
     }
@@ -226,7 +226,7 @@ public:
     template <typename K>
     bool Erase(const K& key, bool fSync = false) throw(leveldb_error)
     {
-        CLevelDBBatch batch;
+        CLevelDBBatch batch(&obfuscate_key);
         batch.Erase(key);
         return WriteBatch(batch, fSync);
     }
@@ -241,14 +241,13 @@ public:
 
     bool Sync() throw(leveldb_error)
     {
-        CLevelDBBatch batch;
+        CLevelDBBatch batch(&obfuscate_key);
         return WriteBatch(batch, true);
     }
 
-    // not exactly clean encapsulation, but it's easiest for now
-    leveldb::Iterator* NewIterator()
+    CLevelDBIterator *NewIterator()
     {
-        return pdb->NewIterator(iteroptions);
+        return new CLevelDBIterator(pdb->NewIterator(iteroptions), &obfuscate_key);
     }
 
     bool IsEmpty();

@@ -66,7 +66,7 @@ uint256 CCoinsViewDB::GetBestBlock() const
 
 bool CCoinsViewDB::BatchWrite(CCoinsMap& mapCoins, const uint256& hashBlock)
 {
-    CLevelDBBatch batch;
+    CLevelDBBatch batch(&db.GetObfuscateKey());
     size_t count = 0;
     size_t changed = 0;
     for (CCoinsMap::iterator it = mapCoins.begin(); it != mapCoins.end();) {
@@ -133,7 +133,7 @@ bool CCoinsViewDB::GetStats(CCoinsStats& stats) const
     /* It seems that there are no "const iterators" for LevelDB.  Since we
        only need read operations on it, use a const-cast to get around
        that restriction.  */
-    boost::scoped_ptr<leveldb::Iterator> pcursor(const_cast<CLevelDBWrapper*>(&db)->NewIterator());
+    boost::scoped_ptr<CLevelDBIterator> pcursor(const_cast<CLevelDBWrapper*>(&db)->NewIterator());
     pcursor->SeekToFirst();
 
     CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
@@ -142,39 +142,29 @@ bool CCoinsViewDB::GetStats(CCoinsStats& stats) const
     CAmount nTotalAmount = 0;
     while (pcursor->Valid()) {
         boost::this_thread::interruption_point();
-        try {
-            leveldb::Slice slKey = pcursor->key();
-            CDataStream ssKey(slKey.data(), slKey.data() + slKey.size(), SER_DISK, CLIENT_VERSION);
-            char chType;
-            ssKey >> chType;
-            if (chType == 'c') {
-                leveldb::Slice slValue = pcursor->value();
-                CDataStream ssValue(slValue.data(), slValue.data() + slValue.size(), SER_DISK, CLIENT_VERSION);
-                CCoins coins;
-                ssValue >> coins;
-                uint256 txhash;
-                ssKey >> txhash;
-                ss << txhash;
-                ss << VARINT(coins.nVersion);
-                ss << (coins.fCoinBase ? 'c' : 'n');
-                ss << VARINT(coins.nHeight);
+        std::pair<char, uint256> key;
+        CCoins coins;
+        if (pcursor->GetKey(key) && key.first == DB_COINS) {
+            if (pcursor->GetValue(coins)) {
                 stats.nTransactions++;
-                for (unsigned int i = 0; i < coins.vout.size(); i++) {
-                    const CTxOut& out = coins.vout[i];
+                for (unsigned int i=0; i<coins.vout.size(); i++) {
+                    const CTxOut &out = coins.vout[i];
                     if (!out.IsNull()) {
                         stats.nTransactionOutputs++;
-                        ss << VARINT(i + 1);
+                        ss << VARINT(i+1);
                         ss << out;
                         nTotalAmount += out.nValue;
                     }
                 }
-                stats.nSerializedSize += 32 + slValue.size();
+                stats.nSerializedSize += 32 + pcursor->GetValueSize();
                 ss << VARINT(0);
+            } else {
+                return error("CCoinsViewDB::GetStats() : unable to read value");
             }
-            pcursor->Next();
-        } catch (std::exception& e) {
-            return error("%s : Deserialize or I/O error - %s", __func__, e.what());
+        } else {
+            break;
         }
+        pcursor->Next();
     }
     stats.nHeight = mapBlockIndex.find(GetBestBlock())->second->nHeight;
     stats.hashSerialized = ss.GetHash();
@@ -189,7 +179,7 @@ bool CBlockTreeDB::ReadTxIndex(const uint256& txid, CDiskTxPos& pos)
 
 bool CBlockTreeDB::WriteTxIndex(const std::vector<std::pair<uint256, CDiskTxPos> >& vect)
 {
-    CLevelDBBatch batch;
+    CLevelDBBatch batch(&GetObfuscateKey());
     for (std::vector<std::pair<uint256, CDiskTxPos> >::const_iterator it = vect.begin(); it != vect.end(); it++)
         batch.Write(make_pair('t', it->first), it->second);
     return WriteBatch(batch);
@@ -314,7 +304,7 @@ bool CBlockTreeDB::ReadFlag(const std::string& name, bool& fValue)
 
 bool CBlockTreeDB::LoadBlockIndexGuts()
 {
-    boost::scoped_ptr<leveldb::Iterator> pcursor(NewIterator());
+    boost::scoped_ptr<CLevelDBIterator> pcursor(NewIterator());
 
     CDataStream ssKeySet(SER_DISK, CLIENT_VERSION);
     ssKeySet << make_pair('b', uint256());
@@ -323,19 +313,13 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
     // Load mapBlockIndex
     while (pcursor->Valid()) {
         boost::this_thread::interruption_point();
-        try {
-            leveldb::Slice slKey = pcursor->key();
-            CDataStream ssKey(slKey.data(), slKey.data() + slKey.size(), SER_DISK, CLIENT_VERSION);
-            char chType;
-            ssKey >> chType;
-            if (chType == 'b') {
-                leveldb::Slice slValue = pcursor->value();
-                CDataStream ssValue(slValue.data(), slValue.data() + slValue.size(), SER_DISK, CLIENT_VERSION);
-                CDiskBlockIndex diskindex;
-                ssValue >> diskindex;
+        std::pair<char, uint256> key;
+        if (pcursor->GetKey(key) && key.first == DB_BLOCK_INDEX) {
+            CDiskBlockIndex diskindex;
+            if (pcursor->GetValue(diskindex)) {
 
                 // Construct block index object
-                CBlockIndex* pindexNew = InsertBlockIndex(diskindex.GetBlockHash());
+                CBlockIndex *pindexNew = InsertBlockIndex(diskindex.GetBlockHash());
                 pindexNew->pprev = InsertBlockIndex(diskindex.hashPrev);
                 pindexNew->pnext = InsertBlockIndex(diskindex.hashNext);
                 pindexNew->nHeight = diskindex.nHeight;
@@ -368,12 +352,13 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                     setStakeSeen.insert(make_pair(pindexNew->prevoutStake, pindexNew->nStakeTime));
 
                 pcursor->Next();
-            } else {
-                break; // if shutdown requested or finished loading block index
+            }else{
+                return error("LoadBlockIndex() : failed to read value");
             }
-        } catch (std::exception& e) {
-            return error("%s : Deserialize or I/O error - %s", __func__, e.what());
+        } else {
+            break; // if shutdown requested or finished loading block index
         }
+
     }
 
     return true;
