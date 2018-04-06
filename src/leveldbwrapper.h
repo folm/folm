@@ -32,8 +32,14 @@ class CLevelDBBatch
 
 private:
     leveldb::WriteBatch batch;
+    const std::vector<unsigned char> *obfuscate_key;
 
 public:
+    /**
+     * @param[in] obfuscate_key    If passed, XOR data with this key.
+     */
+    CLevelDBBatch(const std::vector<unsigned char> *obfuscate_key) : obfuscate_key(obfuscate_key) { };
+
     template <typename K, typename V>
     void Write(const K& key, const V& value)
     {
@@ -73,7 +79,7 @@ public:
 
     /**
      * @param[in] piterIn          The original leveldb iterator.
-     //* @param[in] obfuscate_key    If passed, XOR data with this key.
+     * @param[in] obfuscate_key    If passed, XOR data with this key.
      */
     CLevelDBIterator(leveldb::Iterator *piterIn, const std::vector<unsigned char>* obfuscate_key) :
             piter(piterIn), obfuscate_key(obfuscate_key) { };
@@ -112,7 +118,7 @@ public:
         leveldb::Slice slValue = piter->value();
         try {
             CDataStream ssValue(slValue.data(), slValue.data() + slValue.size(), SER_DISK, CLIENT_VERSION);
-            //ssValue.Xor(*obfuscate_key);
+            ssValue.Xor(*obfuscate_key);
             ssValue >> value;
         } catch (const std::exception&) {
             return false;
@@ -150,7 +156,7 @@ private:
     //! the database itself
     leveldb::DB* pdb;
 
-    ////! a key used for optional XOR-obfuscation of the database
+    //! a key used for optional XOR-obfuscation of the database
     std::vector<unsigned char> obfuscate_key;
 
     //! the key under which the obfuscation key is stored
