@@ -17,7 +17,6 @@
 #include "sync.h"
 #include "memusage.h"
 
-#undef foreach
 #include "boost/multi_index_container.hpp"
 #include "boost/multi_index/ordered_index.hpp"
 
