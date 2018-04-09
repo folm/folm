@@ -206,7 +206,16 @@ private:
     uint64_t totalTxSize; //! sum of all mempool tx' byte sizes
     uint64_t cachedInnerUsage; //! sum of dynamic memory usage of all the map elements (NOT the maps themselves)
 
+    CFeeRate minReasonableRelayFee;
+
+    mutable int64_t lastRollingFeeUpdate;
+    mutable bool blockSinceLastRollingFeeBump;
+    mutable double rollingMinimumFeeRate; //! minimum fee to get into the pool, decreases exponentially
+
 public:
+
+    static const int ROLLING_FEE_HALFLIFE = 60 * 60 * 12; // public only for testing
+
     typedef boost::multi_index_container<
         CTxMemPoolEntry,
         boost::multi_index::indexed_by<
@@ -279,6 +288,16 @@ public:
     void PrioritiseTransaction(const uint256 hash, const std::string strHash, double dPriorityDelta, const CAmount& nFeeDelta);
     void ApplyDeltas(const uint256 hash, double& dPriorityDelta, CAmount& nFeeDelta);
     void ClearPrioritisation(const uint256 hash);
+
+
+    /** The minimum fee to get into the mempool, which may itself not be enough
+     *  for larger-sized transactions.
+     *  The minReasonableRelayFee constructor arg is used to bound the time it
+     *  takes the fee rate to go back down all the way to 0. When the feerate
+     *  would otherwise be half of this, it is set to 0 instead.
+     */
+    CFeeRate GetMinFee(size_t sizelimit) const;
+
 
     unsigned long size()
     {

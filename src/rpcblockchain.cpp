@@ -20,6 +20,7 @@
 
 using namespace std;
 
+static const unsigned int DEFAULT_MAX_MEMPOOL_SIZE = 300;
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
 void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fIncludeHex);
 
@@ -899,4 +900,17 @@ UniValue reconsiderblock(const UniValue& params, bool fHelp)
     }
 
     return NullUniValue;
+}
+
+UniValue mempoolInfoToJSON()
+{
+    UniValue ret(UniValue::VOBJ);
+    ret.push_back(Pair("size", (int64_t) mempool.size()));
+    ret.push_back(Pair("bytes", (int64_t) mempool.GetTotalTxSize()));
+    ret.push_back(Pair("usage", (int64_t) mempool.DynamicMemoryUsage()));
+    size_t maxmempool = GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000;
+    ret.push_back(Pair("maxmempool", (int64_t) maxmempool));
+    ret.push_back(Pair("mempoolminfee", ValueFromAmount(mempool.GetMinFee(maxmempool).GetFeePerK())));
+
+    return ret;
 }

@@ -941,3 +941,28 @@ size_t CTxMemPool::DynamicMemoryUsage() const {
     // Estimate the overhead of mapTx to be 12 pointers + an allocation, as no exact formula for boost::multi_index_contained is implemented.
     return memusage::MallocUsage(sizeof(CTxMemPoolEntry) + 12 * sizeof(void*)) * mapTxNew.size() + memusage::DynamicUsage(mapNextTx) + memusage::DynamicUsage(mapDeltas) + memusage::DynamicUsage(mapLinks) + cachedInnerUsage;
 }
+
+
+CFeeRate CTxMemPool::GetMinFee(size_t sizelimit) const {
+    LOCK(cs);
+    if (!blockSinceLastRollingFeeBump || rollingMinimumFeeRate == 0)
+        return CFeeRate(rollingMinimumFeeRate);
+
+    int64_t time = GetTime();
+    if (time > lastRollingFeeUpdate + 10) {
+        double halflife = ROLLING_FEE_HALFLIFE;
+        if (DynamicMemoryUsage() < sizelimit / 4)
+            halflife /= 4;
+        else if (DynamicMemoryUsage() < sizelimit / 2)
+            halflife /= 2;
+
+        rollingMinimumFeeRate = rollingMinimumFeeRate / pow(2.0, (time - lastRollingFeeUpdate) / halflife);
+        lastRollingFeeUpdate = time;
+
+        if (rollingMinimumFeeRate < minReasonableRelayFee.GetFeePerK() / 2) {
+            rollingMinimumFeeRate = 0;
+            return CFeeRate(0);
+        }
+    }
+    return std::max(CFeeRate(rollingMinimumFeeRate), minReasonableRelayFee);
+}

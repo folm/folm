@@ -326,11 +326,11 @@ static const CRPCCommand vRPCCommands[] =
         {"rawtransactions", "fundrawtransaction", &fundrawtransaction, false, false, false },
 #endif
                 /* Address index */
-        {"addressindex",       "getaddressmempool",      &getaddressmempool,      true},
-        {"addressindex",       "getaddressutxos",        &getaddressutxos,        false},
-        {"addressindex",       "getaddressdeltas",       &getaddressdeltas,       false},
-        {"addressindex",       "getaddresstxids",        &getaddresstxids,        false},
-        {"addressindex",       "getaddressbalance",      &getaddressbalance,      false},
+        {"addressindex",       "getaddressmempool",      &getaddressmempool,      true, false, false},
+        {"addressindex",       "getaddressutxos",        &getaddressutxos,        false, false, false},
+        {"addressindex",       "getaddressdeltas",       &getaddressdeltas,       false, false, false},
+        {"addressindex",       "getaddresstxids",        &getaddresstxids,        false, false, false},
+        {"addressindex",       "getaddressbalance",      &getaddressbalance,      false, false, false},
 
         /* Utility functions */
         {"util", "createmultisig", &createmultisig, true, true, false},

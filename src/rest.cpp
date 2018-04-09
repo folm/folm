@@ -46,6 +46,7 @@ public:
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
 extern UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool txDetails = false);
 extern void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fIncludeHex);
+extern UniValue blockheaderToJSON(const CBlockIndex* blockindex);
 
 static RestErr RESTERR(enum HTTPStatusCode status, string message)
 {
