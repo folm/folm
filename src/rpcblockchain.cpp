@@ -90,19 +90,33 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
 }
 
 
-UniValue blockHeaderToJSON(const CBlock& block, const CBlockIndex* blockindex)
+
+UniValue blockheaderToJSON(const CBlockIndex* blockindex)
 {
     UniValue result(UniValue::VOBJ);
-    result.push_back(Pair("version", block.nVersion));
+    result.push_back(Pair("hash", blockindex->GetBlockHash().GetHex()));
+    int confirmations = -1;
+    // Only report confirmations if the block is on the main chain
+    if (chainActive.Contains(blockindex))
+        confirmations = chainActive.Height() - blockindex->nHeight + 1;
+    result.push_back(Pair("confirmations", confirmations));
+    result.push_back(Pair("height", blockindex->nHeight));
+    result.push_back(Pair("version", blockindex->nVersion));
+    result.push_back(Pair("merkleroot", blockindex->hashMerkleRoot.GetHex()));
+    result.push_back(Pair("time", (int64_t)blockindex->nTime));
+    result.push_back(Pair("mediantime", (int64_t)blockindex->GetMedianTimePast()));
+    result.push_back(Pair("nonce", (uint64_t)blockindex->nNonce));
+    result.push_back(Pair("bits", strprintf("%08x", blockindex->nBits)));
+    result.push_back(Pair("difficulty", GetDifficulty(blockindex)));
+    result.push_back(Pair("chainwork", blockindex->nChainWork.GetHex()));
+
     if (blockindex->pprev)
         result.push_back(Pair("previousblockhash", blockindex->pprev->GetBlockHash().GetHex()));
-    result.push_back(Pair("merkleroot", block.hashMerkleRoot.GetHex()));
-    result.push_back(Pair("time", block.GetBlockTime()));
-    result.push_back(Pair("bits", strprintf("%08x", block.nBits)));
-    result.push_back(Pair("nonce", (uint64_t)block.nNonce));
+    CBlockIndex *pnext = chainActive.Next(blockindex);
+    if (pnext)
+        result.push_back(Pair("nextblockhash", pnext->GetBlockHash().GetHex()));
     return result;
 }
-
 
 UniValue getblockcount(const UniValue& params, bool fHelp)
 {
@@ -228,6 +242,40 @@ UniValue getrawmempool(const UniValue& params, bool fHelp)
     }
 }
 
+UniValue getblockhashes(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 2)
+        throw runtime_error(
+                "getblockhashes timestamp\n"
+                        "\nReturns array of hashes of blocks within the timestamp range provided.\n"
+                        "\nArguments:\n"
+                        "1. high         (numeric, required) The newer block timestamp\n"
+                        "2. low          (numeric, required) The older block timestamp\n"
+                        "\nResult:\n"
+                        "[\n"
+                        "  \"hash\"         (string) The block hash\n"
+                        "]\n"
+                        "\nExamples:\n"
+                + HelpExampleCli("getblockhashes", "1231614698 1231024505")
+                + HelpExampleRpc("getblockhashes", "1231614698, 1231024505")
+        );
+
+    unsigned int high = params[0].get_int();
+    unsigned int low = params[1].get_int();
+    std::vector<uint256> blockHashes;
+
+    if (!GetTimestampIndex(high, low, blockHashes)) {
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "No information available for block hashes");
+    }
+
+    UniValue result(UniValue::VARR);
+    for (std::vector<uint256>::const_iterator it=blockHashes.begin(); it!=blockHashes.end(); it++) {
+        result.push_back(it->GetHex());
+    }
+
+    return result;
+}
+
 UniValue getblockhash(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
@@ -317,30 +365,39 @@ UniValue getblockheader(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "getblockheader \"hash\" ( verbose )\n"
-            "\nIf verbose is false, returns a string that is serialized, hex-encoded data for block 'hash' header.\n"
-            "If verbose is true, returns an Object with information about block <hash> header.\n"
-            "\nArguments:\n"
-            "1. \"hash\"          (string, required) The block hash\n"
-            "2. verbose           (boolean, optional, default=true) true for a json object, false for the hex encoded data\n"
-            "\nResult (for verbose = true):\n"
-            "{\n"
-            "  \"version\" : n,         (numeric) The block version\n"
-            "  \"previousblockhash\" : \"hash\",  (string) The hash of the previous block\n"
-            "  \"merkleroot\" : \"xxxx\", (string) The merkle root\n"
-            "  \"time\" : ttt,          (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)\n"
-            "  \"bits\" : \"1d00ffff\", (string) The bits\n"
-            "  \"nonce\" : n,           (numeric) The nonce\n"
-            "}\n"
-            "\nResult (for verbose=false):\n"
-            "\"data\"             (string) A string that is serialized, hex-encoded data for block 'hash' header.\n"
-            "\nExamples:\n" +
-            HelpExampleCli("getblockheader", "\"00000000000e23f2a74b8f2a228f4b0b0ee9a37c9a005448807088a7fa432b70\"") + HelpExampleRpc("getblockheader", "\"00000000000e23f2a74b8f2a228f4b0b0ee9a37c9a005448807088a7fa432b70\""));
+                "getblockheader \"hash\" ( verbose )\n"
+                        "\nIf verbose is false, returns a string that is serialized, hex-encoded data for blockheader 'hash'.\n"
+                        "If verbose is true, returns an Object with information about blockheader <hash>.\n"
+                        "\nArguments:\n"
+                        "1. \"hash\"          (string, required) The block hash\n"
+                        "2. verbose           (boolean, optional, default=true) true for a json object, false for the hex encoded data\n"
+                        "\nResult (for verbose = true):\n"
+                        "{\n"
+                        "  \"hash\" : \"hash\",     (string) the block hash (same as provided)\n"
+                        "  \"confirmations\" : n,   (numeric) The number of confirmations, or -1 if the block is not on the main chain\n"
+                        "  \"height\" : n,          (numeric) The block height or index\n"
+                        "  \"version\" : n,         (numeric) The block version\n"
+                        "  \"merkleroot\" : \"xxxx\", (string) The merkle root\n"
+                        "  \"time\" : ttt,          (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)\n"
+                        "  \"mediantime\" : ttt,    (numeric) The median block time in seconds since epoch (Jan 1 1970 GMT)\n"
+                        "  \"nonce\" : n,           (numeric) The nonce\n"
+                        "  \"bits\" : \"1d00ffff\", (string) The bits\n"
+                        "  \"difficulty\" : x.xxx,  (numeric) The difficulty\n"
+                        "  \"previousblockhash\" : \"hash\",  (string) The hash of the previous block\n"
+                        "  \"nextblockhash\" : \"hash\",      (string) The hash of the next block\n"
+                        "  \"chainwork\" : \"0000...1f3\"     (string) Expected number of hashes required to produce the current chain (in hex)\n"
+                        "}\n"
+                        "\nResult (for verbose=false):\n"
+                        "\"data\"             (string) A string that is serialized, hex-encoded data for block 'hash'.\n"
+                        "\nExamples:\n"
+                + HelpExampleCli("getblockheader", "\"00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09\"")
+                + HelpExampleRpc("getblockheader", "\"00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09\"")
+        );
 
     LOCK(cs_main);
 
     std::string strHash = params[0].get_str();
-    uint256 hash(strHash);
+    uint256 hash(uint256S(strHash));
 
     bool fVerbose = true;
     if (params.size() > 1)
@@ -349,20 +406,106 @@ UniValue getblockheader(const UniValue& params, bool fHelp)
     if (mapBlockIndex.count(hash) == 0)
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
 
-    CBlock block;
     CBlockIndex* pblockindex = mapBlockIndex[hash];
 
-    if (!ReadBlockFromDisk(block, pblockindex))
-        throw JSONRPCError(RPC_INTERNAL_ERROR, "Can't read block from disk");
-
-    if (!fVerbose) {
+    if (!fVerbose)
+    {
         CDataStream ssBlock(SER_NETWORK, PROTOCOL_VERSION);
-        ssBlock << block.GetBlockHeader();
+        ssBlock << pblockindex->GetBlockHeader();
         std::string strHex = HexStr(ssBlock.begin(), ssBlock.end());
         return strHex;
     }
 
-    return blockHeaderToJSON(block, pblockindex);
+    return blockheaderToJSON(pblockindex);
+}
+
+UniValue getblockheaders(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() < 1 || params.size() > 3)
+        throw runtime_error(
+                "getblockheaders \"hash\" ( count verbose )\n"
+                        "\nReturns an array of items with information about <count> blockheaders starting from <hash>.\n"
+                        "\nIf verbose is false, each item is a string that is serialized, hex-encoded data for a single blockheader.\n"
+                        "If verbose is true, each item is an Object with information about a single blockheader.\n"
+                        "\nArguments:\n"
+                        "1. \"hash\"          (string, required) The block hash\n"
+                        "2. count           (numeric, optional, default/max=" + strprintf("%s", MAX_HEADERS_RESULTS) +")\n"
+                        "3. verbose         (boolean, optional, default=true) true for a json object, false for the hex encoded data\n"
+                        "\nResult (for verbose = true):\n"
+                        "[ {\n"
+                        "  \"hash\" : \"hash\",               (string)  The block hash\n"
+                        "  \"confirmations\" : n,           (numeric) The number of confirmations, or -1 if the block is not on the main chain\n"
+                        "  \"height\" : n,                  (numeric) The block height or index\n"
+                        "  \"version\" : n,                 (numeric) The block version\n"
+                        "  \"merkleroot\" : \"xxxx\",         (string)  The merkle root\n"
+                        "  \"time\" : ttt,                  (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)\n"
+                        "  \"mediantime\" : ttt,            (numeric) The median block time in seconds since epoch (Jan 1 1970 GMT)\n"
+                        "  \"nonce\" : n,                   (numeric) The nonce\n"
+                        "  \"bits\" : \"1d00ffff\",           (string)  The bits\n"
+                        "  \"difficulty\" : x.xxx,          (numeric) The difficulty\n"
+                        "  \"previousblockhash\" : \"hash\",  (string)  The hash of the previous block\n"
+                        "  \"nextblockhash\" : \"hash\",      (string)  The hash of the next block\n"
+                        "  \"chainwork\" : \"0000...1f3\"     (string)  Expected number of hashes required to produce the current chain (in hex)\n"
+                        "}, {\n"
+                        "       ...\n"
+                        "   },\n"
+                        "...\n"
+                        "]\n"
+                        "\nResult (for verbose=false):\n"
+                        "[\n"
+                        "  \"data\",                        (string)  A string that is serialized, hex-encoded data for block header.\n"
+                        "  ...\n"
+                        "]\n"
+                        "\nExamples:\n"
+                + HelpExampleCli("getblockheaders", "\"00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09\" 2000")
+                + HelpExampleRpc("getblockheaders", "\"00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09\" 2000")
+        );
+
+    LOCK(cs_main);
+
+    std::string strHash = params[0].get_str();
+    uint256 hash(uint256S(strHash));
+
+    if (mapBlockIndex.count(hash) == 0)
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
+
+    int nCount = MAX_HEADERS_RESULTS;
+    if (params.size() > 1)
+        nCount = params[1].get_int();
+
+    if (nCount <= 0 || nCount > (int)MAX_HEADERS_RESULTS)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Count is out of range");
+
+    bool fVerbose = true;
+    if (params.size() > 2)
+        fVerbose = params[2].get_bool();
+
+    CBlockIndex* pblockindex = mapBlockIndex[hash];
+
+    UniValue arrHeaders(UniValue::VARR);
+
+    if (!fVerbose)
+    {
+        for (; pblockindex; pblockindex = chainActive.Next(pblockindex))
+        {
+            CDataStream ssBlock(SER_NETWORK, PROTOCOL_VERSION);
+            ssBlock << pblockindex->GetBlockHeader();
+            std::string strHex = HexStr(ssBlock.begin(), ssBlock.end());
+            arrHeaders.push_back(strHex);
+            if (--nCount <= 0)
+                break;
+        }
+        return arrHeaders;
+    }
+
+    for (; pblockindex; pblockindex = chainActive.Next(pblockindex))
+    {
+        arrHeaders.push_back(blockheaderToJSON(pblockindex));
+        if (--nCount <= 0)
+            break;
+    }
+
+    return arrHeaders;
 }
 
 UniValue gettxoutsetinfo(const UniValue& params, bool fHelp)

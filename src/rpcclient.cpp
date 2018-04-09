@@ -75,6 +75,8 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"listunspent", 2},
         {"getblock", 1},
         {"getblockheader", 1},
+        {"getblockheaders", 1},
+        {"getblockheaders", 2},
         {"gettransaction", 1},
         {"getrawtransaction", 1},
         {"createrawtransaction", 0},
@@ -108,9 +110,6 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"submitbudget", 3},
         {"submitbudget", 5},
         {"submitbudget", 7},
-        { "getblockhashes", 0 },
-        { "getblockhashes", 1 },
-        { "getblockhashes", 2 },
         // disabled until removal of the legacy 'masternode' command
         //{"startmasternode", 1},
         {"mnvoteraw", 1},
@@ -119,7 +118,16 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"reservebalance", 1},
         {"setstakesplitthreshold", 0},
         {"autocombinerewards", 0},
-        {"autocombinerewards", 1}};
+        {"autocombinerewards", 1},
+        {"getblockhashes", 0},
+        {"getblockhashes", 1},
+        {"getspentinfo", 0},
+        {"getaddresstxids", 0},
+        {"getaddressbalance", 0},
+        {"getaddressdeltas", 0},
+        {"getaddressutxos", 0},
+        {"getaddressmempool", 0}
+    };
 
 class CRPCConvertTable
 {

@@ -286,6 +286,7 @@ static const CRPCCommand vRPCCommands[] =
         {"blockchain", "getblockhash", &getblockhash, true, false, false},
         {"blockchain", "getblockhashes", &getblockhashes, true, false, false},
         {"blockchain", "getblockheader", &getblockheader, false, false, false},
+        {"blockchain", "getblockheaders", &getblockheaders, true , false, false },
         {"blockchain", "getchaintips", &getchaintips, true, false, false},
         {"blockchain", "getdifficulty", &getdifficulty, true, false, false},
         {"blockchain", "getmempoolinfo", &getmempoolinfo, true, true, false},
@@ -295,6 +296,7 @@ static const CRPCCommand vRPCCommands[] =
         {"blockchain", "verifychain", &verifychain, true, false, false},
         {"blockchain", "invalidateblock", &invalidateblock, true, true, false},
         {"blockchain", "reconsiderblock", &reconsiderblock, true, true, false},
+        {"blockchain", "getspentinfo",           &getspentinfo,           false },
 
         /* Mining */
         {"mining", "getblocktemplate", &getblocktemplate, true, false, false},
@@ -320,11 +322,11 @@ static const CRPCCommand vRPCCommands[] =
         {"rawtransactions", "signrawtransaction", &signrawtransaction, false, false, false}, /* uses wallet if enabled */
 
                 /* Address index */
-        { "addressindex",       "getaddressmempool",      &getaddressmempool,      true  },
-        { "addressindex",       "getaddressutxos",        &getaddressutxos,        false },
-        { "addressindex",       "getaddressdeltas",       &getaddressdeltas,       false },
-        { "addressindex",       "getaddresstxids",        &getaddresstxids,        false },
-        { "addressindex",       "getaddressbalance",      &getaddressbalance,      false },
+        {"addressindex",       "getaddressmempool",      &getaddressmempool,      true},
+        {"addressindex",       "getaddressutxos",        &getaddressutxos,        false},
+        {"addressindex",       "getaddressdeltas",       &getaddressdeltas,       false},
+        {"addressindex",       "getaddresstxids",        &getaddresstxids,        false},
+        {"addressindex",       "getaddressbalance",      &getaddressbalance,      false},
 
         /* Utility functions */
         {"util", "createmultisig", &createmultisig, true, true, false},
@@ -1041,12 +1043,12 @@ std::vector<std::string> CRPCTable::listCommands() const
     std::vector<std::string> commandList;
     typedef std::map<std::string, const CRPCCommand*> commandMap;
 
-     /*  TODO fix
-      * std::transform( mapCommands.begin(), mapCommands.end(),
-                   std::back_inserter(commandList),
-                  boost::bind(&commandMap::UniValue::VType::first,_1) ); */
+    std::transform( mapCommands.begin(), mapCommands.end(),
+                    std::back_inserter(commandList),
+                    boost::bind(&commandMap::value_type::first,_1) );
     return commandList;
 }
+
 
 std::string HelpExampleCli(const std::string& methodname, const std::string& args)
 {
