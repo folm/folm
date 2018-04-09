@@ -6,6 +6,8 @@
 
 #include "obfuscation.h"
 #include "coincontrol.h"
+#include "consensus/consensus.h"
+#include "consensus/validation.h"
 #include "init.h"
 #include "main.h"
 #include "masternodeman.h"

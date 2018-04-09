@@ -6,6 +6,8 @@
 #include "txmempool.h"
 
 #include "clientversion.h"
+#include "consensus/consensus.h"
+#include "consensus/validation.h"
 #include "main.h"
 #include "streams.h"
 #include "util.h"
@@ -147,6 +149,34 @@ public:
     }
 };
 
+void TxConfirmStats::removeTx(unsigned int entryHeight, unsigned int nBestSeenHeight, unsigned int bucketindex)
+{
+    //nBestSeenHeight is not updated yet for the new block
+    int blocksAgo = nBestSeenHeight - entryHeight;
+    if (nBestSeenHeight == 0)  // the BlockPolicyEstimator hasn't seen any blocks yet
+        blocksAgo = 0;
+    if (blocksAgo < 0) {
+        LogPrint("estimatefee", "Blockpolicy error, blocks ago is negative for mempool tx\n");
+        return;  //This can't happen because we call this with our best seen height, no entries can have higher
+    }
+
+    if (blocksAgo >= (int)unconfTxs.size()) {
+        if (oldUnconfTxs[bucketindex] > 0)
+            oldUnconfTxs[bucketindex]--;
+        else
+            LogPrint("estimatefee", "Blockpolicy error, mempool tx removed from >25 blocks,bucketIndex=%u already\n",
+                     bucketindex);
+    }
+    else {
+        unsigned int blockIndex = entryHeight % unconfTxs.size();
+        if (unconfTxs[blockIndex][bucketindex] > 0)
+            unconfTxs[blockIndex][bucketindex]--;
+        else
+            LogPrint("estimatefee", "Blockpolicy error, mempool tx removed from blockIndex=%u,bucketIndex=%u already\n",
+                     blockIndex, bucketindex);
+    }
+}
+
 class CMinerPolicyEstimator
 {
 private:
@@ -157,6 +187,17 @@ private:
     std::vector<CBlockAverage> history;
     std::vector<CFeeRate> sortedFeeSamples;
     std::vector<double> sortedPrioritySamples;
+
+    struct TxStatsInfo
+    {
+        TxConfirmStats *stats;
+        unsigned int blockHeight;
+        unsigned int bucketIndex;
+        TxStatsInfo() : stats(NULL), blockHeight(0), bucketIndex(0) {}
+    };
+
+    // map of txids to information about that transaction
+    std::map<uint256, TxStatsInfo> mapMemPoolTxs;
 
     int nBestSeenHeight;
 
@@ -190,9 +231,28 @@ private:
     }
 
 public:
+
+
+
     CMinerPolicyEstimator(int nEntries) : nBestSeenHeight(0)
     {
         history.resize(nEntries);
+    }
+
+    void removeTx(uint256 hash)
+    {
+        std::map<uint256, TxStatsInfo>::iterator pos = mapMemPoolTxs.find(hash);
+        if (pos == mapMemPoolTxs.end()) {
+            LogPrint("estimatefee", "Blockpolicy error mempool tx %s not found for removeTx\n", hash.ToString());
+            return;
+        }
+        TxConfirmStats *stats = pos->second.stats;
+        unsigned int entryHeight = pos->second.blockHeight;
+        unsigned int bucketIndex = pos->second.bucketIndex;
+
+        if (stats != NULL)
+            stats->removeTx(entryHeight, nBestSeenHeight, bucketIndex);
+        mapMemPoolTxs.erase(hash);
     }
 
     void seenBlock(const std::vector<CTxMemPoolEntry>& entries, int nBlockHeight, const CFeeRate minRelayFee)
@@ -418,6 +478,116 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry& entry)
     return true;
 }
 
+void CTxMemPool::addAddressIndex(const CTxMemPoolEntry &entry, const CCoinsViewCache &view)
+{
+    LOCK(cs);
+    const CTransaction& tx = entry.GetTx();
+    std::vector<CMempoolAddressDeltaKey> inserted;
+
+    uint256 txhash = tx.GetHash();
+    for (unsigned int j = 0; j < tx.vin.size(); j++) {
+        const CTxIn input = tx.vin[j];
+        const CTxOut &prevout = view.GetOutputFor(input);
+        if (prevout.scriptPubKey.IsPayToScriptHash()) {
+            vector<unsigned char> hashBytes(prevout.scriptPubKey.begin()+2, prevout.scriptPubKey.begin()+22);
+            CMempoolAddressDeltaKey key(2, uint160(hashBytes), txhash, j, 1);
+            CMempoolAddressDelta delta(entry.GetTime(), prevout.nValue * -1, input.prevout.hash, input.prevout.n);
+            mapAddress.insert(make_pair(key, delta));
+            inserted.push_back(key);
+        } else if (prevout.scriptPubKey.IsPayToPublicKeyHash()) {
+            vector<unsigned char> hashBytes(prevout.scriptPubKey.begin()+3, prevout.scriptPubKey.begin()+23);
+            CMempoolAddressDeltaKey key(1, uint160(hashBytes), txhash, j, 1);
+            CMempoolAddressDelta delta(entry.GetTime(), prevout.nValue * -1, input.prevout.hash, input.prevout.n);
+            mapAddress.insert(make_pair(key, delta));
+            inserted.push_back(key);
+        }
+    }
+
+    for (unsigned int k = 0; k < tx.vout.size(); k++) {
+        const CTxOut &out = tx.vout[k];
+        if (out.scriptPubKey.IsPayToScriptHash()) {
+            vector<unsigned char> hashBytes(out.scriptPubKey.begin()+2, out.scriptPubKey.begin()+22);
+            CMempoolAddressDeltaKey key(2, uint160(hashBytes), txhash, k, 0);
+            mapAddress.insert(make_pair(key, CMempoolAddressDelta(entry.GetTime(), out.nValue)));
+            inserted.push_back(key);
+        } else if (out.scriptPubKey.IsPayToPublicKeyHash()) {
+            vector<unsigned char> hashBytes(out.scriptPubKey.begin()+3, out.scriptPubKey.begin()+23);
+            std::pair<addressDeltaMap::iterator,bool> ret;
+            CMempoolAddressDeltaKey key(1, uint160(hashBytes), txhash, k, 0);
+            mapAddress.insert(make_pair(key, CMempoolAddressDelta(entry.GetTime(), out.nValue)));
+            inserted.push_back(key);
+        }
+    }
+
+    mapAddressInserted.insert(make_pair(txhash, inserted));
+}
+
+bool CTxMemPool::getAddressIndex(std::vector<std::pair<uint160, int> > &addresses,
+                                 std::vector<std::pair<CMempoolAddressDeltaKey, CMempoolAddressDelta> > &results)
+{
+    LOCK(cs);
+    for (std::vector<std::pair<uint160, int> >::iterator it = addresses.begin(); it != addresses.end(); it++) {
+        addressDeltaMap::iterator ait = mapAddress.lower_bound(CMempoolAddressDeltaKey((*it).second, (*it).first));
+        while (ait != mapAddress.end() && (*ait).first.addressBytes == (*it).first && (*ait).first.type == (*it).second) {
+            results.push_back(*ait);
+            ait++;
+        }
+    }
+    return true;
+}
+
+bool CTxMemPool::removeAddressIndex(const uint256 txhash)
+{
+    LOCK(cs);
+    addressDeltaMapInserted::iterator it = mapAddressInserted.find(txhash);
+
+    if (it != mapAddressInserted.end()) {
+        std::vector<CMempoolAddressDeltaKey> keys = (*it).second;
+        for (std::vector<CMempoolAddressDeltaKey>::iterator mit = keys.begin(); mit != keys.end(); mit++) {
+            mapAddress.erase(*mit);
+        }
+        mapAddressInserted.erase(it);
+    }
+
+    return true;
+}
+
+void CTxMemPool::addSpentIndex(const CTxMemPoolEntry &entry, const CCoinsViewCache &view)
+{
+    LOCK(cs);
+
+    const CTransaction& tx = entry.GetTx();
+    std::vector<CSpentIndexKey> inserted;
+
+    uint256 txhash = tx.GetHash();
+    for (unsigned int j = 0; j < tx.vin.size(); j++) {
+        const CTxIn input = tx.vin[j];
+        const CTxOut &prevout = view.GetOutputFor(input);
+        uint160 addressHash;
+        int addressType;
+
+        if (prevout.scriptPubKey.IsPayToScriptHash()) {
+            addressHash = uint160(vector<unsigned char> (prevout.scriptPubKey.begin()+2, prevout.scriptPubKey.begin()+22));
+            addressType = 2;
+        } else if (prevout.scriptPubKey.IsPayToPublicKeyHash()) {
+            addressHash = uint160(vector<unsigned char> (prevout.scriptPubKey.begin()+3, prevout.scriptPubKey.begin()+23));
+            addressType = 1;
+        } else {
+            addressHash.SetNull();
+            addressType = 0;
+        }
+
+        CSpentIndexKey key = CSpentIndexKey(input.prevout.hash, input.prevout.n);
+        CSpentIndexValue value = CSpentIndexValue(txhash, j, -1, prevout.nValue, addressType, addressHash);
+
+        mapSpent.insert(make_pair(key, value));
+        inserted.push_back(key);
+
+    }
+
+    mapSpentInserted.insert(make_pair(txhash, inserted));
+}
+
 bool CTxMemPool::getSpentIndex(CSpentIndexKey &key, CSpentIndexValue &value)
 {
     LOCK(cs);
@@ -430,6 +600,42 @@ bool CTxMemPool::getSpentIndex(CSpentIndexKey &key, CSpentIndexValue &value)
     }
     return false;
 }
+
+bool CTxMemPool::removeSpentIndex(const uint256 txhash)
+{
+    LOCK(cs);
+    mapSpentIndexInserted::iterator it = mapSpentInserted.find(txhash);
+
+    if (it != mapSpentInserted.end()) {
+        std::vector<CSpentIndexKey> keys = (*it).second;
+        for (std::vector<CSpentIndexKey>::iterator mit = keys.begin(); mit != keys.end(); mit++) {
+            mapSpent.erase(*mit);
+        }
+        mapSpentInserted.erase(it);
+    }
+
+    return true;
+}
+/*
+
+void CTxMemPool::removeUnchecked(txiter it)
+{
+    const uint256 hash = it->GetTx().GetHash();
+    BOOST_FOREACH(const CTxIn& txin, it->GetTx().vin)
+    mapNextTx.erase(txin.prevout);
+
+    totalTxSize -= it->GetTxSize();
+    cachedInnerUsage -= it->DynamicMemoryUsage();
+    cachedInnerUsage -= memusage::DynamicUsage(mapLinks[it].parents) + memusage::DynamicUsage(mapLinks[it].children);
+    mapLinks.erase(it);
+    mapTx.erase(it);
+    nTransactionsUpdated++;
+    minerPolicyEstimator->removeTx(hash);
+    removeAddressIndex(hash);
+    removeSpentIndex(hash);
+}
+*/
+
 
 void CTxMemPool::remove(const CTransaction& origTx, std::list<CTransaction>& removed, bool fRecursive)
 {
@@ -729,4 +935,34 @@ bool CCoinsViewMemPool::GetCoins(const uint256& txid, CCoins& coins) const
 bool CCoinsViewMemPool::HaveCoins(const uint256& txid) const
 {
     return mempool.exists(txid) || base->HaveCoins(txid);
+}
+
+size_t CTxMemPool::DynamicMemoryUsage() const {
+    // Estimate the overhead of mapTx to be 12 pointers + an allocation, as no exact formula for boost::multi_index_contained is implemented.
+    return memusage::MallocUsage(sizeof(CTxMemPoolEntry) + 12 * sizeof(void*)) * mapTxNew.size() + memusage::DynamicUsage(mapNextTx) + memusage::DynamicUsage(mapDeltas) + memusage::DynamicUsage(mapLinks) + cachedInnerUsage;
+}
+
+
+CFeeRate CTxMemPool::GetMinFee(size_t sizelimit) const {
+    LOCK(cs);
+    if (!blockSinceLastRollingFeeBump || rollingMinimumFeeRate == 0)
+        return CFeeRate(rollingMinimumFeeRate);
+
+    int64_t time = GetTime();
+    if (time > lastRollingFeeUpdate + 10) {
+        double halflife = ROLLING_FEE_HALFLIFE;
+        if (DynamicMemoryUsage() < sizelimit / 4)
+            halflife /= 4;
+        else if (DynamicMemoryUsage() < sizelimit / 2)
+            halflife /= 2;
+
+        rollingMinimumFeeRate = rollingMinimumFeeRate / pow(2.0, (time - lastRollingFeeUpdate) / halflife);
+        lastRollingFeeUpdate = time;
+
+        if (rollingMinimumFeeRate < minReasonableRelayFee.GetFeePerK() / 2) {
+            rollingMinimumFeeRate = 0;
+            return CFeeRate(0);
+        }
+    }
+    return std::max(CFeeRate(rollingMinimumFeeRate), minReasonableRelayFee);
 }

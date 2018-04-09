@@ -1,15 +1,16 @@
 
 
-
-#include "swifttx.h"
 #include "activemasternode.h"
 #include "base58.h"
+#include "consensus/consensus.h"
+#include "consensus/validation.h"
 #include "key.h"
 #include "masternodeman.h"
 #include "net.h"
 #include "obfuscation.h"
 #include "protocol.h"
 #include "spork.h"
+#include "swifttx.h"
 #include "sync.h"
 #include "util.h"
 #include <boost/lexical_cast.hpp>
