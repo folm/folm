@@ -37,6 +37,19 @@ std::string HelpRequiringPassphrase()
     return pwalletMain && pwalletMain->IsCrypted() ? "\nRequires wallet passphrase to be set with walletpassphrase call." : "";
 }
 
+bool EnsureWalletIsAvailable(bool avoidException)
+{
+    if (!pwalletMain)
+    {
+        if (!avoidException)
+            throw JSONRPCError(RPC_METHOD_NOT_FOUND, "Method not found (disabled)");
+        else
+            return false;
+    }
+    return true;
+}
+
+
 void EnsureWalletIsUnlocked()
 {
     if (pwalletMain->IsLocked() || pwalletMain->fWalletUnlockAnonymizeOnly)
@@ -2375,4 +2388,187 @@ UniValue multisend(const UniValue& params, bool fHelp)
         }
     }
     return printMultiSend();
+}
+
+
+UniValue listunspent(const UniValue& params, bool fHelp)
+{
+    if (!EnsureWalletIsAvailable(fHelp))
+        return NullUniValue;
+
+    if (fHelp || params.size() > 3)
+        throw runtime_error(
+                "listunspent ( minconf maxconf  [\"address\",...] )\n"
+                        "\nReturns array of unspent transaction outputs\n"
+                        "with between minconf and maxconf (inclusive) confirmations.\n"
+                        "Optionally filter to only include txouts paid to specified addresses.\n"
+                        "Results are an array of Objects, each of which has:\n"
+                        "{txid, vout, scriptPubKey, amount, confirmations}\n"
+                        "\nArguments:\n"
+                        "1. minconf          (numeric, optional, default=1) The minimum confirmations to filter\n"
+                        "2. maxconf          (numeric, optional, default=9999999) The maximum confirmations to filter\n"
+                        "3. \"addresses\"    (string) A json array of dash addresses to filter\n"
+                        "    [\n"
+                        "      \"address\"   (string) dash address\n"
+                        "      ,...\n"
+                        "    ]\n"
+                        "\nResult\n"
+                        "[                   (array of json object)\n"
+                        "  {\n"
+                        "    \"txid\" : \"txid\",        (string) the transaction id \n"
+                        "    \"vout\" : n,               (numeric) the vout value\n"
+                        "    \"address\" : \"address\",  (string) the dash address\n"
+                        "    \"account\" : \"account\",  (string) DEPRECATED. The associated account, or \"\" for the default account\n"
+                        "    \"scriptPubKey\" : \"key\", (string) the script key\n"
+                        "    \"amount\" : x.xxx,         (numeric) the transaction amount in FLM\n"
+                        "    \"confirmations\" : n       (numeric) The number of confirmations\n"
+                        "    \"ps_rounds\" : n           (numeric) The number of PS round\n"
+                        "    \"spendable\" : true|false  (boolean) True if spendable\n"
+                        "  }\n"
+                        "  ,...\n"
+                        "]\n"
+
+                        "\nExamples\n"
+                + HelpExampleCli("listunspent", "")
+                + HelpExampleCli("listunspent", "6 9999999 \"[\\\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\\\",\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\"]\"")
+                + HelpExampleRpc("listunspent", "6, 9999999 \"[\\\"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\\\",\\\"XuQQkwA4FYkq2XERzMY2CiAZhJTEDAbtcg\\\"]\"")
+        );
+
+    RPCTypeCheck(params, boost::assign::list_of(UniValue::VNUM)(UniValue::VNUM)(UniValue::VARR));
+
+    int nMinDepth = 1;
+    if (params.size() > 0)
+        nMinDepth = params[0].get_int();
+
+    int nMaxDepth = 9999999;
+    if (params.size() > 1)
+        nMaxDepth = params[1].get_int();
+
+    set<CBitcoinAddress> setAddress;
+    if (params.size() > 2) {
+        UniValue inputs = params[2].get_array();
+        for (unsigned int idx = 0; idx < inputs.size(); idx++) {
+            const UniValue& input = inputs[idx];
+            CBitcoinAddress address(input.get_str());
+            if (!address.IsValid())
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Dash address: ")+input.get_str());
+            if (setAddress.count(address))
+                throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+input.get_str());
+            setAddress.insert(address);
+        }
+    }
+
+    UniValue results(UniValue::VARR);
+    vector<COutput> vecOutputs;
+    assert(pwalletMain != NULL);
+    LOCK2(cs_main, pwalletMain->cs_wallet);
+    pwalletMain->AvailableCoins(vecOutputs, false, NULL, true);
+    BOOST_FOREACH(const COutput& out, vecOutputs) {
+        if (out.nDepth < nMinDepth || out.nDepth > nMaxDepth)
+            continue;
+
+        if (setAddress.size()) {
+            CTxDestination address;
+            if (!ExtractDestination(out.tx->vout[out.i].scriptPubKey, address))
+                continue;
+
+            if (!setAddress.count(address))
+                continue;
+        }
+
+        CAmount nValue = out.tx->vout[out.i].nValue;
+        const CScript& pk = out.tx->vout[out.i].scriptPubKey;
+        UniValue entry(UniValue::VOBJ);
+        entry.push_back(Pair("txid", out.tx->GetHash().GetHex()));
+        entry.push_back(Pair("vout", out.i));
+        CTxDestination address;
+        if (ExtractDestination(out.tx->vout[out.i].scriptPubKey, address)) {
+            entry.push_back(Pair("address", CBitcoinAddress(address).ToString()));
+            if (pwalletMain->mapAddressBook.count(address))
+                entry.push_back(Pair("account", pwalletMain->mapAddressBook[address].name));
+        }
+        entry.push_back(Pair("scriptPubKey", HexStr(pk.begin(), pk.end())));
+        if (pk.IsPayToScriptHash()) {
+            CTxDestination address;
+            if (ExtractDestination(pk, address)) {
+                const CScriptID& hash = boost::get<CScriptID>(address);
+                CScript redeemScript;
+                if (pwalletMain->GetCScript(hash, redeemScript))
+                    entry.push_back(Pair("redeemScript", HexStr(redeemScript.begin(), redeemScript.end())));
+            }
+        }
+        entry.push_back(Pair("amount",ValueFromAmount(nValue)));
+        entry.push_back(Pair("confirmations",out.nDepth));
+        entry.push_back(Pair("ps_rounds", pwalletMain->GetInputObfuscationRounds(CTxIn(out.tx->GetHash(), out.i))));
+        entry.push_back(Pair("spendable", out.fSpendable));
+        results.push_back(entry);
+    }
+
+    return results;
+}
+
+UniValue fundrawtransaction(const UniValue& params, bool fHelp)
+{
+    if (!EnsureWalletIsAvailable(fHelp))
+        return NullUniValue;
+
+    if (fHelp || params.size() < 1 || params.size() > 2)
+        throw runtime_error(
+                "fundrawtransaction \"hexstring\" includeWatching\n"
+                        "\nAdd inputs to a transaction until it has enough in value to meet its out value.\n"
+                        "This will not modify existing inputs, and will add one change output to the outputs.\n"
+                        "Note that inputs which were signed may need to be resigned after completion since in/outputs have been added.\n"
+                        "The inputs added will not be signed, use signrawtransaction for that.\n"
+                        "Note that all existing inputs must have their previous output transaction be in the wallet.\n"
+                        "Note that all inputs selected must be of standard form and P2SH scripts must be"
+                        "in the wallet using importaddress or addmultisigaddress (to calculate fees).\n"
+                        "Only pay-to-pubkey, multisig, and P2SH versions thereof are currently supported for watch-only\n"
+                        "\nArguments:\n"
+                        "1. \"hexstring\"     (string, required) The hex string of the raw transaction\n"
+                        "2. includeWatching (boolean, optional, default false) Also select inputs which are watch only\n"
+                        "\nResult:\n"
+                        "{\n"
+                        "  \"hex\":       \"value\", (string)  The resulting raw transaction (hex-encoded string)\n"
+                        "  \"fee\":       n,         (numeric) Fee the resulting transaction pays\n"
+                        "  \"changepos\": n          (numeric) The position of the added change output, or -1\n"
+                        "}\n"
+                        "\"hex\"             \n"
+                        "\nExamples:\n"
+                        "\nCreate a transaction with no inputs\n"
+                + HelpExampleCli("createrawtransaction", "\"[]\" \"{\\\"myaddress\\\":0.01}\"") +
+                "\nAdd sufficient unsigned inputs to meet the output value\n"
+                + HelpExampleCli("fundrawtransaction", "\"rawtransactionhex\"") +
+                "\nSign the transaction\n"
+                + HelpExampleCli("signrawtransaction", "\"fundedtransactionhex\"") +
+                "\nSend the transaction\n"
+                + HelpExampleCli("sendrawtransaction", "\"signedtransactionhex\"")
+        );
+
+    RPCTypeCheck(params, boost::assign::list_of(UniValue::VSTR)(UniValue::VBOOL));
+
+    // parse hex string from parameter
+    CTransaction origTx;
+    if (!DecodeHexTx(origTx, params[0].get_str()))
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
+
+    if (origTx.vout.size() == 0)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "TX must have at least one output");
+
+    bool includeWatching = false;
+    if (params.size() > 1)
+        includeWatching = params[1].get_bool();
+
+    CMutableTransaction tx(origTx);
+    CAmount nFee;
+    string strFailReason;
+    int nChangePos = -1;
+    if(!pwalletMain->FundTransaction(tx, nFee, nChangePos, strFailReason, includeWatching))
+        throw JSONRPCError(RPC_INTERNAL_ERROR, strFailReason);
+
+    UniValue result(UniValue::VOBJ);
+    result.push_back(Pair("hex", EncodeHexTx(tx)));
+    result.push_back(Pair("changepos", nChangePos));
+    result.push_back(Pair("fee", ValueFromAmount(nFee)));
+
+    return result;
 }

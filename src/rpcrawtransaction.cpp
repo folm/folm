@@ -13,6 +13,7 @@
 #include "init.h"
 #include "keystore.h"
 #include "main.h"
+#include "merkleblock.h"
 #include "net.h"
 #include "primitives/transaction.h"
 #include "rpcserver.h"
@@ -61,11 +62,13 @@ void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fInclud
 
 void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
 {
-    entry.push_back(Pair("txid", tx.GetHash().GetHex()));
+    uint256 txid = tx.GetHash();
+    entry.push_back(Pair("txid", txid.GetHex()));
+    entry.push_back(Pair("size", (int)::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION)));
     entry.push_back(Pair("version", tx.nVersion));
     entry.push_back(Pair("locktime", (int64_t)tx.nLockTime));
     UniValue vin(UniValue::VARR);
-    BOOST_FOREACH (const CTxIn& txin, tx.vin) {
+    BOOST_FOREACH(const CTxIn& txin, tx.vin) {
         UniValue in(UniValue::VOBJ);
         if (tx.IsCoinBase())
             in.push_back(Pair("coinbase", HexStr(txin.scriptSig.begin(), txin.scriptSig.end())));
@@ -73,9 +76,23 @@ void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
             in.push_back(Pair("txid", txin.prevout.hash.GetHex()));
             in.push_back(Pair("vout", (int64_t)txin.prevout.n));
             UniValue o(UniValue::VOBJ);
-            o.push_back(Pair("asm", txin.scriptSig.ToString()));
+            o.push_back(Pair("asm", ScriptToAsmStr(txin.scriptSig, true)));
             o.push_back(Pair("hex", HexStr(txin.scriptSig.begin(), txin.scriptSig.end())));
             in.push_back(Pair("scriptSig", o));
+
+            // Add address and value info if spentindex enabled
+            CSpentIndexValue spentInfo;
+            CSpentIndexKey spentKey(txin.prevout.hash, txin.prevout.n);
+            if (GetSpentIndex(spentKey, spentInfo)) {
+                in.push_back(Pair("value", ValueFromAmount(spentInfo.satoshis)));
+                in.push_back(Pair("valueSat", spentInfo.satoshis));
+                if (spentInfo.addressType == 1) {
+                    in.push_back(Pair("address", CBitcoinAddress(CKeyID(spentInfo.addressHash)).ToString()));
+                } else if (spentInfo.addressType == 2)  {
+                    in.push_back(Pair("address", CBitcoinAddress(CScriptID(spentInfo.addressHash)).ToString()));
+                }
+            }
+
         }
         in.push_back(Pair("sequence", (int64_t)txin.nSequence));
         vin.push_back(in);
@@ -86,10 +103,21 @@ void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
         const CTxOut& txout = tx.vout[i];
         UniValue out(UniValue::VOBJ);
         out.push_back(Pair("value", ValueFromAmount(txout.nValue)));
+        out.push_back(Pair("valueSat", txout.nValue));
         out.push_back(Pair("n", (int64_t)i));
         UniValue o(UniValue::VOBJ);
         ScriptPubKeyToJSON(txout.scriptPubKey, o, true);
         out.push_back(Pair("scriptPubKey", o));
+
+        // Add spent information if spentindex is enabled
+        CSpentIndexValue spentInfo;
+        CSpentIndexKey spentKey(txid, i);
+        if (GetSpentIndex(spentKey, spentInfo)) {
+            out.push_back(Pair("spentTxId", spentInfo.txid.GetHex()));
+            out.push_back(Pair("spentIndex", (int)spentInfo.inputIndex));
+            out.push_back(Pair("spentHeight", spentInfo.blockHeight));
+        }
+
         vout.push_back(out);
     }
     entry.push_back(Pair("vout", vout));
@@ -100,14 +128,18 @@ void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry)
         if (mi != mapBlockIndex.end() && (*mi).second) {
             CBlockIndex* pindex = (*mi).second;
             if (chainActive.Contains(pindex)) {
+                entry.push_back(Pair("height", pindex->nHeight));
                 entry.push_back(Pair("confirmations", 1 + chainActive.Height() - pindex->nHeight));
                 entry.push_back(Pair("time", pindex->GetBlockTime()));
                 entry.push_back(Pair("blocktime", pindex->GetBlockTime()));
-            } else
+            } else {
+                entry.push_back(Pair("height", -1));
                 entry.push_back(Pair("confirmations", 0));
+            }
         }
     }
 }
+
 
 UniValue getrawtransaction(const UniValue& params, bool fHelp)
 {
@@ -196,115 +228,120 @@ UniValue getrawtransaction(const UniValue& params, bool fHelp)
     return result;
 }
 
-#ifdef ENABLE_WALLET
-UniValue listunspent(const UniValue& params, bool fHelp)
+UniValue gettxoutproof(const UniValue& params, bool fHelp)
 {
-    if (fHelp || params.size() > 3)
+    if (fHelp || (params.size() != 1 && params.size() != 2))
         throw runtime_error(
-            "listunspent ( minconf maxconf  [\"address\",...] )\n"
-            "\nReturns array of unspent transaction outputs\n"
-            "with between minconf and maxconf (inclusive) confirmations.\n"
-            "Optionally filter to only include txouts paid to specified addresses.\n"
-            "Results are an array of Objects, each of which has:\n"
-            "{txid, vout, scriptPubKey, amount, confirmations}\n"
-            "\nArguments:\n"
-            "1. minconf          (numeric, optional, default=1) The minimum confirmations to filter\n"
-            "2. maxconf          (numeric, optional, default=9999999) The maximum confirmations to filter\n"
-            "3. \"addresses\"    (string) A json array of folm addresses to filter\n"
-            "    [\n"
-            "      \"address\"   (string) folm address\n"
-            "      ,...\n"
-            "    ]\n"
-            "\nResult\n"
-            "[                   (array of json object)\n"
-            "  {\n"
-            "    \"txid\" : \"txid\",        (string) the transaction id \n"
-            "    \"vout\" : n,               (numeric) the vout value\n"
-            "    \"address\" : \"address\",  (string) the folm address\n"
-            "    \"account\" : \"account\",  (string) The associated account, or \"\" for the default account\n"
-            "    \"scriptPubKey\" : \"key\", (string) the script key\n"
-            "    \"amount\" : x.xxx,         (numeric) the transaction amount in btc\n"
-            "    \"confirmations\" : n       (numeric) The number of confirmations\n"
-            "  }\n"
-            "  ,...\n"
-            "]\n"
+                "gettxoutproof [\"txid\",...] ( blockhash )\n"
+                        "\nReturns a hex-encoded proof that \"txid\" was included in a block.\n"
+                        "\nNOTE: By default this function only works sometimes. This is when there is an\n"
+                        "unspent output in the utxo for this transaction. To make it always work,\n"
+                        "you need to maintain a transaction index, using the -txindex command line option or\n"
+                        "specify the block in which the transaction is included in manually (by blockhash).\n"
+                        "\nReturn the raw transaction data.\n"
+                        "\nArguments:\n"
+                        "1. \"txids\"       (string) A json array of txids to filter\n"
+                        "    [\n"
+                        "      \"txid\"     (string) A transaction hash\n"
+                        "      ,...\n"
+                        "    ]\n"
+                        "2. \"block hash\"  (string, optional) If specified, looks for txid in the block with this hash\n"
+                        "\nResult:\n"
+                        "\"data\"           (string) A string that is a serialized, hex-encoded data for the proof.\n"
+        );
 
-            "\nExamples\n" +
-            HelpExampleCli("listunspent", "") + HelpExampleCli("listunspent", "6 9999999 \"[\\\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\\\",\\\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\\\"]\"") + HelpExampleRpc("listunspent", "6, 9999999 \"[\\\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\\\",\\\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\\\"]\""));
+    set<uint256> setTxids;
+    uint256 oneTxid;
+    UniValue txids = params[0].get_array();
+    for (unsigned int idx = 0; idx < txids.size(); idx++) {
+        const UniValue& txid = txids[idx];
+        if (txid.get_str().length() != 64 || !IsHex(txid.get_str()))
+            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid txid ")+txid.get_str());
+        uint256 hash(uint256S(txid.get_str()));
+        if (setTxids.count(hash))
+            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated txid: ")+txid.get_str());
+        setTxids.insert(hash);
+        oneTxid = hash;
+    }
 
-    RPCTypeCheck(params, list_of(UniValue::VNUM)(UniValue::VNUM)(UniValue::VARR));
+    LOCK(cs_main);
 
-    int nMinDepth = 1;
-    if (params.size() > 0)
-        nMinDepth = params[0].get_int();
+    CBlockIndex* pblockindex = NULL;
 
-    int nMaxDepth = 9999999;
+    uint256 hashBlock;
     if (params.size() > 1)
-        nMaxDepth = params[1].get_int();
-
-    set<CBitcoinAddress> setAddress;
-    if (params.size() > 2) {
-        UniValue inputs = params[2].get_array();
-         for (unsigned int i = 0; i < inputs.size(); i++) {
-
-            UniValue input = inputs[i];
-            CBitcoinAddress address(input.get_str());
-            if (!address.IsValid())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Folm address: ") + input.get_str());
-            if (setAddress.count(address))
-                throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ") + input.get_str());
-            setAddress.insert(address);
-        }
+    {
+        hashBlock = uint256S(params[1].get_str());
+        if (!mapBlockIndex.count(hashBlock))
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
+        pblockindex = mapBlockIndex[hashBlock];
+    } else {
+        CCoins coins;
+        if (pcoinsTip->GetCoins(oneTxid, coins) && coins.nHeight > 0 && coins.nHeight <= chainActive.Height())
+            pblockindex = chainActive[coins.nHeight];
     }
 
-    UniValue results(UniValue::VARR);
-    vector<COutput> vecOutputs;
-    assert(pwalletMain != NULL);
-    LOCK2(cs_main, pwalletMain->cs_wallet);
-    pwalletMain->AvailableCoins(vecOutputs, false);
-    BOOST_FOREACH (const COutput& out, vecOutputs) {
-        if (out.nDepth < nMinDepth || out.nDepth > nMaxDepth)
-            continue;
-
-        if (setAddress.size()) {
-            CTxDestination address;
-            if (!ExtractDestination(out.tx->vout[out.i].scriptPubKey, address))
-                continue;
-
-            if (!setAddress.count(address))
-                continue;
-        }
-
-        CAmount nValue = out.tx->vout[out.i].nValue;
-        const CScript& pk = out.tx->vout[out.i].scriptPubKey;
-        UniValue entry(UniValue::VOBJ);
-        entry.push_back(Pair("txid", out.tx->GetHash().GetHex()));
-        entry.push_back(Pair("vout", out.i));
-        CTxDestination address;
-        if (ExtractDestination(out.tx->vout[out.i].scriptPubKey, address)) {
-            entry.push_back(Pair("address", CBitcoinAddress(address).ToString()));
-            if (pwalletMain->mapAddressBook.count(address))
-                entry.push_back(Pair("account", pwalletMain->mapAddressBook[address].name));
-        }
-        entry.push_back(Pair("scriptPubKey", HexStr(pk.begin(), pk.end())));
-        if (pk.IsPayToScriptHash()) {
-            CTxDestination address;
-            if (ExtractDestination(pk, address)) {
-                const CScriptID& hash = boost::get<CScriptID>(address);
-                CScript redeemScript;
-                if (pwalletMain->GetCScript(hash, redeemScript))
-                    entry.push_back(Pair("redeemScript", HexStr(redeemScript.begin(), redeemScript.end())));
-            }
-        }
-        entry.push_back(Pair("amount", ValueFromAmount(nValue)));
-        entry.push_back(Pair("confirmations", out.nDepth));
-        entry.push_back(Pair("spendable", out.fSpendable));
-        results.push_back(entry);
+    if (pblockindex == NULL)
+    {
+        CTransaction tx;
+        if (!GetTransaction(oneTxid, tx, hashBlock, false) || hashBlock.IsNull())
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Transaction not yet in block");
+        if (!mapBlockIndex.count(hashBlock))
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "Transaction index corrupt");
+        pblockindex = mapBlockIndex[hashBlock];
     }
 
-    return results;
+    CBlock block;
+    if(!ReadBlockFromDisk(block, pblockindex))
+        throw JSONRPCError(RPC_INTERNAL_ERROR, "Can't read block from disk");
+
+    unsigned int ntxFound = 0;
+    BOOST_FOREACH(const CTransaction&tx, block.vtx)
+    if (setTxids.count(tx.GetHash()))
+        ntxFound++;
+    if (ntxFound != setTxids.size())
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "(Not all) transactions not found in specified block");
+
+    CDataStream ssMB(SER_NETWORK, PROTOCOL_VERSION);
+    CMerkleBlock mb(block, setTxids);
+    ssMB << mb;
+    std::string strHex = HexStr(ssMB.begin(), ssMB.end());
+    return strHex;
 }
-#endif
+
+UniValue verifytxoutproof(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+                "verifytxoutproof \"proof\"\n"
+                        "\nVerifies that a proof points to a transaction in a block, returning the transaction it commits to\n"
+                        "and throwing an RPC error if the block is not in our best chain\n"
+                        "\nArguments:\n"
+                        "1. \"proof\"    (string, required) The hex-encoded proof generated by gettxoutproof\n"
+                        "\nResult:\n"
+                        "[\"txid\"]      (array, strings) The txid(s) which the proof commits to, or empty array if the proof is invalid\n"
+        );
+
+    CDataStream ssMB(ParseHexV(params[0], "proof"), SER_NETWORK, PROTOCOL_VERSION);
+    CMerkleBlock merkleBlock;
+    ssMB >> merkleBlock;
+
+    UniValue res(UniValue::VARR);
+
+    vector<uint256> vMatch;
+    if (merkleBlock.txn.ExtractMatches(vMatch) != merkleBlock.header.hashMerkleRoot)
+        return res;
+
+    LOCK(cs_main);
+
+    if (!mapBlockIndex.count(merkleBlock.header.GetHash()) || !chainActive.Contains(mapBlockIndex[merkleBlock.header.GetHash()]))
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found in chain");
+
+    BOOST_FOREACH(const uint256& hash, vMatch)
+    res.push_back(hash.GetHex());
+    return res;
+}
+
 
 UniValue createrawtransaction(const UniValue& params, bool fHelp)
 {
