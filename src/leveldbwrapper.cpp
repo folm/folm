@@ -60,7 +60,8 @@ CLevelDBWrapper::CLevelDBWrapper(const boost::filesystem::path& path, size_t nCa
     } else {
         if (fWipe) {
             LogPrintf("Wiping LevelDB in %s\n", path.string());
-            leveldb::DestroyDB(path.string(), options);
+            leveldb::Status result = leveldb::DestroyDB(path.string(), options);
+            HandleError(result);
         }
         TryCreateDirectory(path);
         LogPrintf("Opening LevelDB in %s\n", path.string());
@@ -147,4 +148,6 @@ std::string CLevelDBWrapper::GetObfuscateKeyHex() const
 CLevelDBIterator::~CLevelDBIterator() { delete piter; }
 bool CLevelDBIterator::Valid() { return piter->Valid(); }
 void CLevelDBIterator::SeekToFirst() { piter->SeekToFirst(); }
+void CLevelDBIterator::SeekToLast() { piter->SeekToLast(); }
 void CLevelDBIterator::Next() { piter->Next(); }
+void CLevelDBIterator::Prev() { piter->Prev(); }

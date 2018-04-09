@@ -51,6 +51,7 @@ public:
         CDataStream ssValue(SER_DISK, CLIENT_VERSION);
         ssValue.reserve(ssValue.GetSerializeSize(value));
         ssValue << value;
+        ssValue.Xor(*obfuscate_key);
         leveldb::Slice slValue(&ssValue[0], ssValue.size());
 
         batch.Put(slKey, slValue);
@@ -88,6 +89,7 @@ public:
     bool Valid();
 
     void SeekToFirst();
+    void SeekToLast();
 
     template<typename K> void Seek(const K& key) {
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
@@ -98,6 +100,7 @@ public:
     }
 
     void Next();
+    void Prev();
 
     template<typename K> bool GetKey(K& key) {
         leveldb::Slice slKey = piter->key();
@@ -168,6 +171,14 @@ private:
     std::vector<unsigned char> CreateObfuscateKey() const;
 
 public:
+    /**
+     * @param[in] path        Location in the filesystem where leveldb data will be stored.
+     * @param[in] nCacheSize  Configures various leveldb cache settings.
+     * @param[in] fMemory     If true, use leveldb's memory environment.
+     * @param[in] fWipe       If true, remove all existing data.
+     * @param[in] obfuscate   If true, store data obfuscated via simple XOR. If false, XOR
+     *                        with a zero'd byte array.
+     */
     CLevelDBWrapper(const boost::filesystem::path& path, size_t nCacheSize, bool fMemory = false, bool fWipe = false, bool obfuscate = false);
     ~CLevelDBWrapper();
 
@@ -189,6 +200,7 @@ public:
         }
         try {
             CDataStream ssValue(strValue.data(), strValue.data() + strValue.size(), SER_DISK, CLIENT_VERSION);
+            ssValue.Xor(obfuscate_key);
             ssValue >> value;
         } catch (const std::exception&) {
             return false;

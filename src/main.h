@@ -53,6 +53,9 @@ class CValidationState;
 struct CBlockTemplate;
 struct CNodeStateStats;
 
+static const bool DEFAULT_ADDRESSINDEX = false;
+static const bool DEFAULT_TIMESTAMPINDEX = false;
+static const bool DEFAULT_SPENTINDEX = false;
 
 
 struct BlockHasher {
