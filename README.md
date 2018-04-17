@@ -7,6 +7,8 @@
 
 | [Website](https://folm.io) |[Block Explorer](https://explorer.folm.io/) |
 
+Version 3.3.0 is builded for insight api. After some tests it will be released for all operating systems.
+
 Features
 =============
 
