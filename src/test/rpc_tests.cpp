@@ -8,8 +8,6 @@
 #include "base58.h"
 #include "netbase.h"
 
-#include "test/test_bitcoin.h"
-
 #include <boost/algorithm/string.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -48,7 +46,7 @@ UniValue CallRPC(string args)
 }
 
 
-BOOST_FIXTURE_TEST_SUITE(rpc_tests, TestingSetup)
+BOOST_AUTO_TEST_SUITE(rpc_tests)
 
 BOOST_AUTO_TEST_CASE(rpc_rawparams)
         {
@@ -110,24 +108,6 @@ BOOST_AUTO_TEST_CASE(rpc_rawsign)
         BOOST_CHECK(find_value(r.get_obj(), "complete").get_bool() == true);
         }
 
-BOOST_AUTO_TEST_CASE(rpc_createraw_op_return)
-        {
-                BOOST_CHECK_NO_THROW(CallRPC("createrawtransaction [{\"txid\":\"a3b807410df0b60fcb9736768df5823938b2f838694939ba45f3c0a1bff150ed\",\"vout\":0}] {\"data\":\"68656c6c6f776f726c64\"}"));
-
-        // Allow more than one data transaction output
-        BOOST_CHECK_NO_THROW(CallRPC("createrawtransaction [{\"txid\":\"a3b807410df0b60fcb9736768df5823938b2f838694939ba45f3c0a1bff150ed\",\"vout\":0}] {\"data\":\"68656c6c6f776f726c64\",\"data\":\"68656c6c6f776f726c64\"}"));
-
-        // Key not "data" (bad address)
-        BOOST_CHECK_THROW(CallRPC("createrawtransaction [{\"txid\":\"a3b807410df0b60fcb9736768df5823938b2f838694939ba45f3c0a1bff150ed\",\"vout\":0}] {\"somedata\":\"68656c6c6f776f726c64\"}"), runtime_error);
-
-        // Bad hex encoding of data output
-        BOOST_CHECK_THROW(CallRPC("createrawtransaction [{\"txid\":\"a3b807410df0b60fcb9736768df5823938b2f838694939ba45f3c0a1bff150ed\",\"vout\":0}] {\"data\":\"12345\"}"), runtime_error);
-        BOOST_CHECK_THROW(CallRPC("createrawtransaction [{\"txid\":\"a3b807410df0b60fcb9736768df5823938b2f838694939ba45f3c0a1bff150ed\",\"vout\":0}] {\"data\":\"12345g\"}"), runtime_error);
-
-        // Data 81 bytes long
-        BOOST_CHECK_NO_THROW(CallRPC("createrawtransaction [{\"txid\":\"a3b807410df0b60fcb9736768df5823938b2f838694939ba45f3c0a1bff150ed\",\"vout\":0}] {\"data\":\"010203040506070809101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081\"}"));
-        }
-
 BOOST_AUTO_TEST_CASE(rpc_format_monetary_values)
         {
                 BOOST_CHECK(ValueFromAmount(0LL).write() == "0.00000000");
@@ -183,24 +163,6 @@ BOOST_AUTO_TEST_CASE(rpc_parse_monetary_values)
         BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("1.00000000")), 100000000LL);
         BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("20999999.9999999")), 2099999999999990LL);
         BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("20999999.99999999")), 2099999999999999LL);
-
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("1e-8")), COIN/100000000);
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("0.1e-7")), COIN/100000000);
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("0.01e-6")), COIN/100000000);
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("0.0000000000000000000000000000000000000000000000000000000000000000000000000001e+68")), COIN/100000000);
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("10000000000000000000000000000000000000000000000000000000000000000e-64")), COIN);
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("0.000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000e64")), COIN);
-
-        BOOST_CHECK_THROW(AmountFromValue(ValueFromString("1e-9")), UniValue); //should fail
-        BOOST_CHECK_THROW(AmountFromValue(ValueFromString("0.000000019")), UniValue); //should fail
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("0.00000001000000")), 1LL); //should pass, cut trailing 0
-        BOOST_CHECK_THROW(AmountFromValue(ValueFromString("19e-9")), UniValue); //should fail
-        BOOST_CHECK_EQUAL(AmountFromValue(ValueFromString("0.19e-6")), 19); //should pass, leading 0 is present
-
-        BOOST_CHECK_THROW(AmountFromValue(ValueFromString("92233720368.54775808")), UniValue); //overflow error
-        BOOST_CHECK_THROW(AmountFromValue(ValueFromString("1e+11")), UniValue); //overflow error
-        BOOST_CHECK_THROW(AmountFromValue(ValueFromString("1e11")), UniValue); //overflow error signless
-        BOOST_CHECK_THROW(AmountFromValue(ValueFromString("93e+9")), UniValue); //overflow error
         }
 
 BOOST_AUTO_TEST_CASE(json_parse_errors)
@@ -226,85 +188,17 @@ BOOST_AUTO_TEST_CASE(json_parse_errors)
 
 BOOST_AUTO_TEST_CASE(rpc_ban)
         {
-                BOOST_CHECK_NO_THROW(CallRPC(string("clearbanned")));
-
-        UniValue r;
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("setban 127.0.0.0 add")));
-        BOOST_CHECK_THROW(r = CallRPC(string("setban 127.0.0.0:53654")), runtime_error); //portnumber for setban not allowed
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        UniValue ar = r.get_array();
-        UniValue o1 = ar[0].get_obj();
-        UniValue adr = find_value(o1, "address");
-        BOOST_CHECK_EQUAL(adr.get_str(), "127.0.0.0/32");
-        BOOST_CHECK_NO_THROW(CallRPC(string("setban 127.0.0.0 remove")));;
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        BOOST_CHECK_EQUAL(ar.size(), 0);
-
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("setban 127.0.0.0/24 add 1607731200 true")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        o1 = ar[0].get_obj();
-        adr = find_value(o1, "address");
-        UniValue banned_until = find_value(o1, "banned_until");
-        BOOST_CHECK_EQUAL(adr.get_str(), "127.0.0.0/24");
-        BOOST_CHECK_EQUAL(banned_until.get_int64(), 1607731200); // absolute time check
-
-        BOOST_CHECK_NO_THROW(CallRPC(string("clearbanned")));
-
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("setban 127.0.0.0/24 add 200")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        o1 = ar[0].get_obj();
-        adr = find_value(o1, "address");
-        banned_until = find_value(o1, "banned_until");
-        BOOST_CHECK_EQUAL(adr.get_str(), "127.0.0.0/24");
-        int64_t now = GetTime();
-        BOOST_CHECK(banned_until.get_int64() > now);
-        BOOST_CHECK(banned_until.get_int64()-now <= 200);
-
-        // must throw an exception because 127.0.0.1 is in already banned suubnet range
-        BOOST_CHECK_THROW(r = CallRPC(string("setban 127.0.0.1 add")), runtime_error);
-
-        BOOST_CHECK_NO_THROW(CallRPC(string("setban 127.0.0.0/24 remove")));;
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        BOOST_CHECK_EQUAL(ar.size(), 0);
-
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("setban 127.0.0.0/255.255.0.0 add")));
-        BOOST_CHECK_THROW(r = CallRPC(string("setban 127.0.1.1 add")), runtime_error);
-
-        BOOST_CHECK_NO_THROW(CallRPC(string("clearbanned")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        BOOST_CHECK_EQUAL(ar.size(), 0);
-
-
-        BOOST_CHECK_THROW(r = CallRPC(string("setban test add")), runtime_error); //invalid IP
-
-        //IPv6 tests
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("setban FE80:0000:0000:0000:0202:B3FF:FE1E:8329 add")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        o1 = ar[0].get_obj();
-        adr = find_value(o1, "address");
-        BOOST_CHECK_EQUAL(adr.get_str(), "fe80::202:b3ff:fe1e:8329/128");
-
-        BOOST_CHECK_NO_THROW(CallRPC(string("clearbanned")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("setban 2001:db8::/ffff:fffc:0:0:0:0:0:0 add")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        o1 = ar[0].get_obj();
-        adr = find_value(o1, "address");
-        BOOST_CHECK_EQUAL(adr.get_str(), "2001:db8::/30");
-
-        BOOST_CHECK_NO_THROW(CallRPC(string("clearbanned")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("setban 2001:4d48:ac57:400:cacf:e9ff:fe1d:9c63/128 add")));
-        BOOST_CHECK_NO_THROW(r = CallRPC(string("listbanned")));
-        ar = r.get_array();
-        o1 = ar[0].get_obj();
-        adr = find_value(o1, "address");
-        BOOST_CHECK_EQUAL(adr.get_str(), "2001:4d48:ac57:400:cacf:e9ff:fe1d:9c63/128");
+                // Check IPv4 addresses
+                BOOST_CHECK_EQUAL(BoostAsioToCNetAddr(boost::asio::ip::address::from_string("1.2.3.4")).ToString(), "1.2.3.4");
+        BOOST_CHECK_EQUAL(BoostAsioToCNetAddr(boost::asio::ip::address::from_string("127.0.0.1")).ToString(), "127.0.0.1");
+        // Check IPv6 addresses
+        BOOST_CHECK_EQUAL(BoostAsioToCNetAddr(boost::asio::ip::address::from_string("::1")).ToString(), "::1");
+        BOOST_CHECK_EQUAL(BoostAsioToCNetAddr(boost::asio::ip::address::from_string("123:4567:89ab:cdef:123:4567:89ab:cdef")).ToString(),
+        "123:4567:89ab:cdef:123:4567:89ab:cdef");
+        // v4 compatible must be interpreted as IPv4
+        BOOST_CHECK_EQUAL(BoostAsioToCNetAddr(boost::asio::ip::address::from_string("::0:127.0.0.1")).ToString(), "127.0.0.1");
+        // v4 mapped must be interpreted as IPv4
+        BOOST_CHECK_EQUAL(BoostAsioToCNetAddr(boost::asio::ip::address::from_string("::ffff:127.0.0.1")).ToString(), "127.0.0.1");
         }
 
 BOOST_AUTO_TEST_SUITE_END()

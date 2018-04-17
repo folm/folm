@@ -8,12 +8,11 @@
 #include "core_io.h"
 #include "key.h"
 #include "keystore.h"
+#include "main.h"
 #include "script/script.h"
 #include "script/script_error.h"
 #include "script/sign.h"
 #include "util.h"
-#include "utilstrencodings.h"
-#include "test/test_bitcoin.h"
 
 #if defined(HAVE_CONSENSUS_LIB)
 #include "script/bitcoinconsensus.h"
@@ -24,6 +23,12 @@
 #include <string>
 #include <vector>
 
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
 
@@ -52,7 +57,7 @@ read_json(const std::string& jsondata)
     return v.get_array();
 }
 
-BOOST_FIXTURE_TEST_SUITE(script_tests, BasicTestingSetup)
+BOOST_AUTO_TEST_SUITE(script_tests)
 
 CMutableTransaction BuildCreditingTransaction(const CScript& scriptPubKey)
 {
@@ -106,6 +111,7 @@ void static NegateSignatureS(std::vector<unsigned char>& vchSig) {
     std::vector<unsigned char> r, s;
     r = std::vector<unsigned char>(vchSig.begin() + 4, vchSig.begin() + 4 + vchSig[3]);
     s = std::vector<unsigned char>(vchSig.begin() + 6 + vchSig[3], vchSig.begin() + 6 + vchSig[3] + vchSig[5 + vchSig[3]]);
+    unsigned char hashtype = vchSig.back();
 
     // Really ugly to implement mod-n negation here, but it would be feature creep to expose such functionality from libsecp256k1.
     static const unsigned char order[33] = {
@@ -139,6 +145,7 @@ void static NegateSignatureS(std::vector<unsigned char>& vchSig) {
     vchSig.push_back(0x02);
     vchSig.push_back(s.size());
     vchSig.insert(vchSig.end(), s.begin(), s.end());
+    vchSig.push_back(hashtype);
 }
 
 namespace
@@ -475,12 +482,6 @@ BOOST_AUTO_TEST_CASE(script_build)
                 good.push_back(TestBuilder(CScript() << OP_2 << ToByteVector(keys.pubkey1C) << ToByteVector(keys.pubkey2C) << OP_2 << OP_CHECKMULTISIG << OP_NOT,
                 "BIP66 example 12, with DERSIG", SCRIPT_VERIFY_DERSIG
                 ).Num(0).PushSig(keys.key1, SIGHASH_ALL, 33, 32).EditPush(1, "45022100", "440220").Num(0));
-                good.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey2C) << OP_CHECKSIG,
-                "P2PK with multi-byte hashtype, without DERSIG", 0
-                ).PushSig(keys.key2, SIGHASH_ALL).EditPush(70, "01", "0101"));
-                bad.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey2C) << OP_CHECKSIG,
-                "P2PK with multi-byte hashtype, with DERSIG", SCRIPT_VERIFY_DERSIG
-                ).PushSig(keys.key2, SIGHASH_ALL).EditPush(70, "01", "0101"));
 
                 good.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey2C) << OP_CHECKSIG,
                 "P2PK with high S but no LOW_S", 0
@@ -558,22 +559,6 @@ BOOST_AUTO_TEST_CASE(script_build)
                 good.push_back(TestBuilder(CScript() << OP_2 << ToByteVector(keys.pubkey1C) << ToByteVector(keys.pubkey1C) << OP_2 << OP_CHECKMULTISIG,
                 "2-of-2 with two identical keys and sigs pushed", SCRIPT_VERIFY_SIGPUSHONLY
                 ).Num(0).PushSig(keys.key1).PushSig(keys.key1));
-
-                good.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey0) << OP_CHECKSIG,
-                "P2PK with unnecessary input but no CLEANSTACK", SCRIPT_VERIFY_P2SH
-                ).Num(11).PushSig(keys.key0));
-                bad.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey0) << OP_CHECKSIG,
-                "P2PK with unnecessary input", SCRIPT_VERIFY_CLEANSTACK | SCRIPT_VERIFY_P2SH
-                ).Num(11).PushSig(keys.key0));
-                good.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey0) << OP_CHECKSIG,
-                "P2SH with unnecessary input but no CLEANSTACK", SCRIPT_VERIFY_P2SH, true
-                ).Num(11).PushSig(keys.key0).PushRedeem());
-                bad.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey0) << OP_CHECKSIG,
-                "P2SH with unnecessary input", SCRIPT_VERIFY_CLEANSTACK | SCRIPT_VERIFY_P2SH, true
-                ).Num(11).PushSig(keys.key0).PushRedeem());
-                good.push_back(TestBuilder(CScript() << ToByteVector(keys.pubkey0) << OP_CHECKSIG,
-                "P2SH with CLEANSTACK", SCRIPT_VERIFY_CLEANSTACK | SCRIPT_VERIFY_P2SH, true
-                ).PushSig(keys.key0).PushRedeem());
 
 
                 std::set<std::string> tests_good;
@@ -692,21 +677,21 @@ BOOST_AUTO_TEST_CASE(script_PushData)
 
                 ScriptError err;
                 vector<vector<unsigned char> > directStack;
-                BOOST_CHECK(EvalScript(directStack, CScript(&direct[0], &direct[sizeof(direct)]), SCRIPT_VERIFY_P2SH, BaseSignatureChecker(), &err));
+                BOOST_CHECK(EvalScript(directStack, CScript(&direct[0], &direct[sizeof(direct)]), true, BaseSignatureChecker(), &err));
                 BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_OK, ScriptErrorString(err));
 
                 vector<vector<unsigned char> > pushdata1Stack;
-                BOOST_CHECK(EvalScript(pushdata1Stack, CScript(&pushdata1[0], &pushdata1[sizeof(pushdata1)]), SCRIPT_VERIFY_P2SH, BaseSignatureChecker(), &err));
+                BOOST_CHECK(EvalScript(pushdata1Stack, CScript(&pushdata1[0], &pushdata1[sizeof(pushdata1)]), true, BaseSignatureChecker(), &err));
                 BOOST_CHECK(pushdata1Stack == directStack);
                 BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_OK, ScriptErrorString(err));
 
                 vector<vector<unsigned char> > pushdata2Stack;
-                BOOST_CHECK(EvalScript(pushdata2Stack, CScript(&pushdata2[0], &pushdata2[sizeof(pushdata2)]), SCRIPT_VERIFY_P2SH, BaseSignatureChecker(), &err));
+                BOOST_CHECK(EvalScript(pushdata2Stack, CScript(&pushdata2[0], &pushdata2[sizeof(pushdata2)]), true, BaseSignatureChecker(), &err));
                 BOOST_CHECK(pushdata2Stack == directStack);
                 BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_OK, ScriptErrorString(err));
 
                 vector<vector<unsigned char> > pushdata4Stack;
-                BOOST_CHECK(EvalScript(pushdata4Stack, CScript(&pushdata4[0], &pushdata4[sizeof(pushdata4)]), SCRIPT_VERIFY_P2SH, BaseSignatureChecker(), &err));
+                BOOST_CHECK(EvalScript(pushdata4Stack, CScript(&pushdata4[0], &pushdata4[sizeof(pushdata4)]), true, BaseSignatureChecker(), &err));
                 BOOST_CHECK(pushdata4Stack == directStack);
                 BOOST_CHECK_MESSAGE(err == SCRIPT_ERR_OK, ScriptErrorString(err));
         }
@@ -981,36 +966,6 @@ BOOST_AUTO_TEST_CASE(script_IsPushOnly_on_invalid_scripts)
                 // the invalid push. Still, it doesn't hurt to test it explicitly.
                 static const unsigned char direct[] = { 1 };
                 BOOST_CHECK(!CScript(direct, direct+sizeof(direct)).IsPushOnly());
-        }
-
-BOOST_AUTO_TEST_CASE(script_GetScriptAsm)
-        {
-                BOOST_CHECK_EQUAL("OP_NOP2", ScriptToAsmStr(CScript() << OP_NOP2, true));
-        BOOST_CHECK_EQUAL("OP_NOP2", ScriptToAsmStr(CScript() << OP_CHECKLOCKTIMEVERIFY, true));
-        BOOST_CHECK_EQUAL("OP_NOP2", ScriptToAsmStr(CScript() << OP_NOP2));
-        BOOST_CHECK_EQUAL("OP_NOP2", ScriptToAsmStr(CScript() << OP_CHECKLOCKTIMEVERIFY));
-
-        string derSig("304502207fa7a6d1e0ee81132a269ad84e68d695483745cde8b541e3bf630749894e342a022100c1f7ab20e13e22fb95281a870f3dcf38d782e53023ee313d741ad0cfbc0c5090");
-        string pubKey("03b0da749730dc9b4b1f4a14d6902877a92541f5368778853d9c4a0cb7802dcfb2");
-        vector<unsigned char> vchPubKey = ToByteVector(ParseHex(pubKey));
-
-        BOOST_CHECK_EQUAL(derSig + "00 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "00")) << vchPubKey, true));
-        BOOST_CHECK_EQUAL(derSig + "80 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "80")) << vchPubKey, true));
-        BOOST_CHECK_EQUAL(derSig + "[ALL] " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "01")) << vchPubKey, true));
-        BOOST_CHECK_EQUAL(derSig + "[NONE] " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "02")) << vchPubKey, true));
-        BOOST_CHECK_EQUAL(derSig + "[SINGLE] " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "03")) << vchPubKey, true));
-        BOOST_CHECK_EQUAL(derSig + "[ALL|ANYONECANPAY] " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "81")) << vchPubKey, true));
-        BOOST_CHECK_EQUAL(derSig + "[NONE|ANYONECANPAY] " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "82")) << vchPubKey, true));
-        BOOST_CHECK_EQUAL(derSig + "[SINGLE|ANYONECANPAY] " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "83")) << vchPubKey, true));
-
-        BOOST_CHECK_EQUAL(derSig + "00 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "00")) << vchPubKey));
-        BOOST_CHECK_EQUAL(derSig + "80 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "80")) << vchPubKey));
-        BOOST_CHECK_EQUAL(derSig + "01 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "01")) << vchPubKey));
-        BOOST_CHECK_EQUAL(derSig + "02 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "02")) << vchPubKey));
-        BOOST_CHECK_EQUAL(derSig + "03 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "03")) << vchPubKey));
-        BOOST_CHECK_EQUAL(derSig + "81 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "81")) << vchPubKey));
-        BOOST_CHECK_EQUAL(derSig + "82 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "82")) << vchPubKey));
-        BOOST_CHECK_EQUAL(derSig + "83 " + pubKey, ScriptToAsmStr(CScript() << ToByteVector(ParseHex(derSig + "83")) << vchPubKey));
         }
 
 BOOST_AUTO_TEST_SUITE_END()

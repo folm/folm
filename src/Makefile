@@ -1504,7 +1504,7 @@ LIBBITCOIN_UTIL = libbitcoin_util.a
 LIBBITCOIN_CRYPTO = crypto/libbitcoin_crypto.a
 LIBBITCOINQT = qt/libbitcoinqt.a
 LIBSECP256K1 = secp256k1/libsecp256k1.la
-LIBUNIVALUE = univalue/lib/libunivalue.la
+LIBUNIVALUE = univalue/libunivalue.la
 
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:

@@ -1,21 +1,19 @@
 // Copyright (c) 2011-2014 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
+// Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "data/tx_invalid.json.h"
 #include "data/tx_valid.json.h"
-#include "test/test_bitcoin.h"
 
 #include "clientversion.h"
 #include "consensus/validation.h"
 #include "core_io.h"
 #include "key.h"
 #include "keystore.h"
-#include "main.h" // For CheckTransaction
-#include "policy/policy.h"
+#include "main.h"
 #include "script/script.h"
 #include "script/script_error.h"
-#include "utilstrencodings.h"
+#include "core_io.h"
 
 #include <map>
 #include <string>
@@ -42,9 +40,7 @@ static std::map<string, unsigned int> mapFlagNames = boost::assign::map_list_of
         (string("SIGPUSHONLY"), (unsigned int)SCRIPT_VERIFY_SIGPUSHONLY)
         (string("MINIMALDATA"), (unsigned int)SCRIPT_VERIFY_MINIMALDATA)
         (string("NULLDUMMY"), (unsigned int)SCRIPT_VERIFY_NULLDUMMY)
-        (string("DISCOURAGE_UPGRADABLE_NOPS"), (unsigned int)SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS)
-        (string("CLEANSTACK"), (unsigned int)SCRIPT_VERIFY_CLEANSTACK)
-        (string("CHECKLOCKTIMEVERIFY"), (unsigned int)SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY);
+        (string("DISCOURAGE_UPGRADABLE_NOPS"), (unsigned int)SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_NOPS);
 
 unsigned int ParseScriptFlags(string strFlags)
 {
@@ -81,7 +77,7 @@ string FormatScriptFlags(unsigned int flags)
     return ret.substr(0, ret.size() - 1);
 }
 
-BOOST_FIXTURE_TEST_SUITE(transaction_tests, BasicTestingSetup)
+BOOST_AUTO_TEST_SUITE(transaction_tests)
 
 BOOST_AUTO_TEST_CASE(tx_valid)
         {
@@ -351,12 +347,12 @@ BOOST_AUTO_TEST_CASE(test_IsStandard)
         t.vout[0].scriptPubKey = CScript() << OP_1;
         BOOST_CHECK(!IsStandardTx(t, reason));
 
-        // 80-byte TX_NULL_DATA (standard)
-        t.vout[0].scriptPubKey = CScript() << OP_RETURN << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef3804678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38");
+        // 40-byte TX_NULL_DATA (standard)
+        t.vout[0].scriptPubKey = CScript() << OP_RETURN << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38");
         BOOST_CHECK(IsStandardTx(t, reason));
 
-        // 81-byte TX_NULL_DATA (non-standard)
-        t.vout[0].scriptPubKey = CScript() << OP_RETURN << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef3804678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef3800");
+        // 41-byte TX_NULL_DATA (non-standard)
+        t.vout[0].scriptPubKey = CScript() << OP_RETURN << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef3800");
         BOOST_CHECK(!IsStandardTx(t, reason));
 
         // TX_NULL_DATA w/o PUSHDATA

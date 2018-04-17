@@ -1,5 +1,5 @@
 // Copyright 2014 BitPay, Inc.
-// Distributed under the MIT software license, see the accompanying
+// Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <stdint.h>
@@ -7,13 +7,12 @@
 #include <string>
 #include <map>
 #include <univalue.h>
-#include "test/test_bitcoin.h"
 
 #include <boost/test/unit_test.hpp>
 
 using namespace std;
 
-BOOST_FIXTURE_TEST_SUITE(univalue_tests, BasicTestingSetup)
+BOOST_AUTO_TEST_SUITE(univalue_tests)
 
 BOOST_AUTO_TEST_CASE(univalue_constructor)
         {
@@ -61,48 +60,6 @@ BOOST_AUTO_TEST_CASE(univalue_constructor)
         UniValue v9(vcs);
         BOOST_CHECK(v9.isStr());
         BOOST_CHECK_EQUAL(v9.getValStr(), "zappa");
-        }
-
-BOOST_AUTO_TEST_CASE(univalue_typecheck)
-        {
-                UniValue v1;
-        BOOST_CHECK(v1.setNumStr("1"));
-        BOOST_CHECK(v1.isNum());
-        BOOST_CHECK_THROW(v1.get_bool(), runtime_error);
-
-        UniValue v2;
-        BOOST_CHECK(v2.setBool(true));
-        BOOST_CHECK_EQUAL(v2.get_bool(), true);
-        BOOST_CHECK_THROW(v2.get_int(), runtime_error);
-
-        UniValue v3;
-        BOOST_CHECK(v3.setNumStr("32482348723847471234"));
-        BOOST_CHECK_THROW(v3.get_int64(), runtime_error);
-        BOOST_CHECK(v3.setNumStr("1000"));
-        BOOST_CHECK_EQUAL(v3.get_int64(), 1000);
-
-        UniValue v4;
-        BOOST_CHECK(v4.setNumStr("2147483648"));
-        BOOST_CHECK_EQUAL(v4.get_int64(), 2147483648);
-        BOOST_CHECK_THROW(v4.get_int(), runtime_error);
-        BOOST_CHECK(v4.setNumStr("1000"));
-        BOOST_CHECK_EQUAL(v4.get_int(), 1000);
-        BOOST_CHECK_THROW(v4.get_str(), runtime_error);
-        BOOST_CHECK_EQUAL(v4.get_real(), 1000);
-        BOOST_CHECK_THROW(v4.get_array(), runtime_error);
-        BOOST_CHECK_THROW(v4.getKeys(), runtime_error);
-        BOOST_CHECK_THROW(v4.getValues(), runtime_error);
-        BOOST_CHECK_THROW(v4.get_obj(), runtime_error);
-
-        UniValue v5;
-        BOOST_CHECK(v5.read("[true, 10]"));
-        BOOST_CHECK_NO_THROW(v5.get_array());
-        std::vector<UniValue> vals = v5.getValues();
-        BOOST_CHECK_THROW(vals[0].get_int(), runtime_error);
-        BOOST_CHECK_EQUAL(vals[0].get_bool(), true);
-
-        BOOST_CHECK_EQUAL(vals[1].get_int(), 10);
-        BOOST_CHECK_THROW(vals[1].get_bool(), runtime_error);
         }
 
 BOOST_AUTO_TEST_CASE(univalue_set)
@@ -286,7 +243,7 @@ BOOST_AUTO_TEST_CASE(univalue_object)
         }
 
 static const char *json1 =
-        "[1.10000000,{\"key1\":\"str\\u0000\",\"key2\":800,\"key3\":{\"name\":\"martian http://test.com\"}}]";
+        "[1.1,{\"key1\":\"str\",\"key2\":800,\"key3\":{\"name\":\"martian\"}}]";
 
 BOOST_AUTO_TEST_CASE(univalue_readwrite)
         {
@@ -314,21 +271,6 @@ BOOST_AUTO_TEST_CASE(univalue_readwrite)
         BOOST_CHECK(obj["key3"].isObject());
 
         BOOST_CHECK_EQUAL(strJson1, v.write());
-
-        /* Check for (correctly reporting) a parsing error if the initial
-           JSON construct is followed by more stuff.  Note that whitespace
-           is, of course, exempt.  */
-
-        BOOST_CHECK(v.read("  {}\n  "));
-        BOOST_CHECK(v.isObject());
-        BOOST_CHECK(v.read("  []\n  "));
-        BOOST_CHECK(v.isArray());
-
-        BOOST_CHECK(!v.read("@{}"));
-        BOOST_CHECK(!v.read("{} garbage"));
-        BOOST_CHECK(!v.read("[]{}"));
-        BOOST_CHECK(!v.read("{}[]"));
-        BOOST_CHECK(!v.read("{} 42"));
         }
 
 BOOST_AUTO_TEST_SUITE_END()

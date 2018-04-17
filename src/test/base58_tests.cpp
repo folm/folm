@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2014 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
+// Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "base58.h"
@@ -13,22 +13,21 @@
 #include "uint256.h"
 #include "util.h"
 #include "utilstrencodings.h"
-#include "test/test_bitcoin.h"
 
 #include <boost/foreach.hpp>
 #include <boost/test/unit_test.hpp>
-
 #include <univalue.h>
 
 extern UniValue read_json(const std::string& jsondata);
 
-BOOST_FIXTURE_TEST_SUITE(base58_tests, BasicTestingSetup)
+BOOST_AUTO_TEST_SUITE(base58_tests)
 
 // Goal: test low-level base58 encoding functionality
 BOOST_AUTO_TEST_CASE(base58_EncodeBase58)
         {
                 UniValue tests = read_json(std::string(json_tests::base58_encode_decode, json_tests::base58_encode_decode + sizeof(json_tests::base58_encode_decode)));
-        for (unsigned int idx = 0; idx < tests.size(); idx++) {
+        for (unsigned int idx = 0; idx < tests.size(); idx++)
+        {
             UniValue test = tests[idx];
             std::string strTest = test.write();
             if (test.size() < 2) // Allow for extra stuff (useful for comments)
@@ -50,7 +49,8 @@ BOOST_AUTO_TEST_CASE(base58_DecodeBase58)
                 UniValue tests = read_json(std::string(json_tests::base58_encode_decode, json_tests::base58_encode_decode + sizeof(json_tests::base58_encode_decode)));
         std::vector<unsigned char> result;
 
-        for (unsigned int idx = 0; idx < tests.size(); idx++) {
+        for (unsigned int idx = 0; idx < tests.size(); idx++)
+        {
             UniValue test = tests[idx];
             std::string strTest = test.write();
             if (test.size() < 2) // Allow for extra stuff (useful for comments)
@@ -124,9 +124,9 @@ BOOST_AUTO_TEST_CASE(base58_keys_valid_parse)
         std::vector<unsigned char> result;
         CBitcoinSecret secret;
         CBitcoinAddress addr;
-        SelectParams(CBaseChainParams::MAIN);
 
-        for (unsigned int idx = 0; idx < tests.size(); idx++) {
+        for (unsigned int idx = 0; idx < tests.size(); idx++)
+        {
             UniValue test = tests[idx];
             std::string strTest = test.write();
             if (test.size() < 3) // Allow for extra stuff (useful for comments)
@@ -173,6 +173,7 @@ BOOST_AUTO_TEST_CASE(base58_keys_valid_parse)
                 BOOST_CHECK_MESSAGE(!secret.IsValid(), "IsValid pubkey as privkey:" + strTest);
             }
         }
+        SelectParams(CBaseChainParams::UNITTEST);
         }
 
 // Goal: check that generated keys match test vectors
@@ -180,8 +181,8 @@ BOOST_AUTO_TEST_CASE(base58_keys_valid_gen)
         {
                 UniValue tests = read_json(std::string(json_tests::base58_keys_valid, json_tests::base58_keys_valid + sizeof(json_tests::base58_keys_valid)));
         std::vector<unsigned char> result;
-
-        for (unsigned int idx = 0; idx < tests.size(); idx++) {
+        for (unsigned int idx = 0; idx < tests.size(); idx++)
+        {
             UniValue test = tests[idx];
             std::string strTest = test.write();
             if (test.size() < 3) // Allow for extra stuff (useful for comments)
@@ -240,7 +241,7 @@ BOOST_AUTO_TEST_CASE(base58_keys_valid_gen)
         CTxDestination nodest = CNoDestination();
         BOOST_CHECK(!dummyAddr.Set(nodest));
 
-        SelectParams(CBaseChainParams::MAIN);
+        SelectParams(CBaseChainParams::UNITTEST);
         }
 
 // Goal: check that base58 parsing code is robust against a variety of corrupted data
@@ -251,7 +252,8 @@ BOOST_AUTO_TEST_CASE(base58_keys_invalid)
         CBitcoinSecret secret;
         CBitcoinAddress addr;
 
-        for (unsigned int idx = 0; idx < tests.size(); idx++) {
+        for (unsigned int idx = 0; idx < tests.size(); idx++)
+        {
             UniValue test = tests[idx];
             std::string strTest = test.write();
             if (test.size() < 1) // Allow for extra stuff (useful for comments)

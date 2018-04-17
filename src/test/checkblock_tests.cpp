@@ -10,6 +10,7 @@
 
 #include "clientversion.h"
 #include "main.h"
+#include "primitives/block.h"
 #include "utiltime.h"
 
 #include <cstdio>
@@ -42,28 +43,6 @@ bool read_block(const std::string& filename, CBlock& block)
     filein >> block;
 
     return true;
-}
-
-BOOST_AUTO_TEST_CASE(May15)
-{
-    // Putting a 1MB binary file in the git repository is not a great
-    // idea, so this test is only run if you manually download
-    // test/data/Mar12Fork.dat from
-    // http://sourceforge.net/projects/bitcoin/files/Bitcoin/blockchain/Mar12Fork.dat/download
-    unsigned int tMay15 = 1368576000;
-    SetMockTime(tMay15); // Test as if it was right at May 15
-
-    CBlock forkingBlock;
-    if (read_block("Mar12Fork.dat", forkingBlock))
-    {
-        CValidationState state;
-
-        // After May 15'th, big blocks are OK:
-        forkingBlock.nTime = tMay15; // Invalidates PoW
-        BOOST_CHECK(CheckBlock(forkingBlock, state, false, false));
-    }
-
-    SetMockTime(0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

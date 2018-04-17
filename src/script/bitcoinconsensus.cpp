@@ -60,7 +60,14 @@ inline int set_error(bitcoinconsensus_error* ret, bitcoinconsensus_error serror)
     return 0;
 }
 
-} // anon namespace
+struct ECCryptoClosure
+{
+    ECCVerifyHandle handle;
+};
+
+ECCryptoClosure instance_of_eccryptoclosure;
+}
+
 
 int bitcoinconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
                                     const unsigned char *txTo        , unsigned int txToLen,
