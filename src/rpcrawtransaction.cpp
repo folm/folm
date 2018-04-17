@@ -21,7 +21,7 @@
 #include "script/sign.h"
 #include "script/standard.h"
 #include "uint256.h"
-#include "univalue/univalue.h"
+#include <univalue.h>
 
 #ifdef ENABLE_WALLET
 #include "wallet.h"

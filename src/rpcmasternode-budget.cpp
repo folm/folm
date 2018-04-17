@@ -17,7 +17,7 @@
 
 #include <fstream>
 
-#include "univalue/univalue.h"
+#include <univalue.h>
 using namespace std;
 
 void budgetToJSON(CBudgetProposal* pbudgetProposal, UniValue& bObj)

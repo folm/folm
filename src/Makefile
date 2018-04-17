@@ -112,29 +112,29 @@ am__append_11 = libbitcoin_wallet.a
 ##am__append_14 = compat/glibc_compat.cpp \
 ##	compat/glibcxx_compat.cpp
 ##am__append_15 = secp256k1/libsecp256k1.la
-#am__append_16 = test/test_folm test/bitcoin-util-test.py
-#am__append_17 = test/test_folm
-#am__append_18 = \
-#	test/bctest.py \
-#	test/bitcoin-util-test.py \
-#	test/data/bitcoin-util-test.json \
-#	test/data/blanktx.hex \
-#	test/data/tt-delin1-out.hex \
-#	test/data/tt-delout1-out.hex \
-#	test/data/tt-locktime317000-out.hex \
-#	test/data/tx394b54bb.hex \
-#	test/data/txcreate1.hex \
-#	test/data/txcreate2.hex \
-#	test/data/txcreatesign.hex
+am__append_16 = test/test_folm test/bitcoin-util-test.py
+am__append_17 = test/test_folm
+am__append_18 = \
+	test/bctest.py \
+	test/bitcoin-util-test.py \
+	test/data/bitcoin-util-test.json \
+	test/data/blanktx.hex \
+	test/data/tt-delin1-out.hex \
+	test/data/tt-delout1-out.hex \
+	test/data/tt-locktime317000-out.hex \
+	test/data/tx394b54bb.hex \
+	test/data/txcreate1.hex \
+	test/data/txcreate2.hex \
+	test/data/txcreatesign.hex
 
-#am__append_19 = \
-#  test/accounting_tests.cpp \
-#  test/wallet_tests.cpp \
-#  test/rpc_wallet_tests.cpp
+am__append_19 = \
+  test/accounting_tests.cpp \
+  test/wallet_tests.cpp \
+  test/rpc_wallet_tests.cpp
 
-#am__append_20 = $(LIBBITCOIN_WALLET)
-#am__append_21 = $(ZMQ_LIBS)
-#am__append_22 = $(CLEAN_BITCOIN_TEST)
+am__append_20 = $(LIBBITCOIN_WALLET)
+am__append_21 = $(ZMQ_LIBS)
+am__append_22 = $(CLEAN_BITCOIN_TEST)
 am__append_23 = qt/folm-qt
 am__append_24 = qt/libbitcoinqt.a
 am__append_25 = \
@@ -176,15 +176,15 @@ am__append_25 = \
 am__append_28 = $(LIBBITCOIN_WALLET)
 am__append_29 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 am__append_30 = $(CLEAN_QT)
-#am__append_31 = qt/test/test_folm-qt
-#am__append_32 = qt/test/test_folm-qt
-#am__append_33 = qt/test/moc_paymentservertests.cpp
-#am__append_34 = \
-#  qt/test/paymentservertests.cpp
+am__append_31 = qt/test/test_folm-qt
+am__append_32 = qt/test/test_folm-qt
+am__append_33 = qt/test/moc_paymentservertests.cpp
+am__append_34 = \
+  qt/test/paymentservertests.cpp
 
-#am__append_35 = $(LIBBITCOIN_WALLET)
-#am__append_36 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
-#am__append_37 = $(CLEAN_BITCOIN_QT_TEST)
+am__append_35 = $(LIBBITCOIN_WALLET)
+am__append_36 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+am__append_37 = $(CLEAN_BITCOIN_QT_TEST)
 subdir = src
 SUBDIRS =
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -630,13 +630,6 @@ nodist_qt_libbitcoinqt_a_OBJECTS = $(am__objects_5) \
 	$(am__objects_8)
 qt_libbitcoinqt_a_OBJECTS = $(am_qt_libbitcoinqt_a_OBJECTS) \
 	$(nodist_qt_libbitcoinqt_a_OBJECTS)
-univalue_libbitcoin_univalue_a_AR = $(AR) $(ARFLAGS)
-univalue_libbitcoin_univalue_a_LIBADD =
-am_univalue_libbitcoin_univalue_a_OBJECTS =  \
-	univalue/univalue.$(OBJEXT) univalue/univalue_read.$(OBJEXT) \
-	univalue/univalue_write.$(OBJEXT)
-univalue_libbitcoin_univalue_a_OBJECTS =  \
-	$(am_univalue_libbitcoin_univalue_a_OBJECTS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -715,15 +708,15 @@ libbitcoinconsensus_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 am__EXEEXT_1 = folmd$(EXEEXT)
 am__EXEEXT_2 = folm-cli$(EXEEXT) \
 	folm-tx$(EXEEXT)
-#am__EXEEXT_3 = test/test_folm$(EXEEXT)
+am__EXEEXT_3 = test/test_folm$(EXEEXT)
 am__EXEEXT_4 = qt/folm-qt$(EXEEXT)
-#am__EXEEXT_5 = qt/test/test_folm-qt$(EXEEXT)
+am__EXEEXT_5 = qt/test/test_folm-qt$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 am__folm_cli_SOURCES_DIST = folm-cli.cpp folm-cli-res.rc
 #am__objects_10 = folm-cli-res.$(OBJEXT)
 am_folm_cli_OBJECTS = folm_cli-folm-cli.$(OBJEXT) $(am__objects_10)
 folm_cli_OBJECTS = $(am_folm_cli_OBJECTS)
-folm_cli_DEPENDENCIES = $(LIBBITCOIN_CLI) $(LIBBITCOIN_UNIVALUE) \
+folm_cli_DEPENDENCIES = $(LIBBITCOIN_CLI) $(LIBUNIVALUE) \
 	$(LIBBITCOIN_UTIL) $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 folm_cli_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
@@ -731,7 +724,7 @@ folm_cli_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(CXXFLAGS) $(folm_cli_LDFLAGS) $(LDFLAGS) -o $@
 am_folm_tx_OBJECTS = folm_tx-folm-tx.$(OBJEXT)
 folm_tx_OBJECTS = $(am_folm_tx_OBJECTS)
-folm_tx_DEPENDENCIES = $(LIBBITCOIN_UNIVALUE) $(LIBBITCOIN_COMMON) \
+folm_tx_DEPENDENCIES = $(LIBUNIVALUE) $(LIBBITCOIN_COMMON) \
 	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBSECP256K1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 folm_tx_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
@@ -746,7 +739,7 @@ am__DEPENDENCIES_3 = $(am__append_3)
 am__DEPENDENCIES_4 = $(LIBBITCOIN_ZMQ) \
 	$(am__DEPENDENCIES_1)
 folmd_DEPENDENCIES = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
-	$(LIBBITCOIN_UNIVALUE) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
+	$(LIBUNIVALUE) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
 	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) $(LIBSECP256K1) \
 	$(am__DEPENDENCIES_4) $(am__append_11) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -775,7 +768,7 @@ qt_folm_qt_DEPENDENCIES = qt/libbitcoinqt.a \
 	$(LIBBITCOIN_SERVER) $(am__append_28) \
 	$(am__DEPENDENCIES_5) $(LIBBITCOIN_CLI) \
 	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
-	$(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UNIVALUE) \
+	$(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
 	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
@@ -790,40 +783,39 @@ am__qt_test_test_folm_qt_SOURCES_DIST = qt/test/test_main.cpp \
 	qt/test/uritests.cpp qt/test/uritests.h \
 	qt/test/paymentrequestdata.h qt/test/paymentservertests.h \
 	qt/test/paymentservertests.cpp
-#am__objects_16 = qt/test/qt_test_test_folm_qt-paymentservertests.$(OBJEXT)
-#am_qt_test_test_folm_qt_OBJECTS = qt/test/qt_test_test_folm_qt-test_main.$(OBJEXT) \
-#	qt/test/qt_test_test_folm_qt-uritests.$(OBJEXT) \
-#	$(am__objects_1) $(am__objects_16)
-#am__objects_17 = qt/test/qt_test_test_folm_qt-moc_paymentservertests.$(OBJEXT)
-#am__objects_18 = qt/test/qt_test_test_folm_qt-moc_uritests.$(OBJEXT) \
-#	$(am__objects_17)
-#nodist_qt_test_test_folm_qt_OBJECTS =  \
-#	$(am__objects_18)
+am__objects_16 = qt/test/qt_test_test_folm_qt-paymentservertests.$(OBJEXT)
+am_qt_test_test_folm_qt_OBJECTS = qt/test/qt_test_test_folm_qt-test_main.$(OBJEXT) \
+	qt/test/qt_test_test_folm_qt-uritests.$(OBJEXT) \
+	$(am__objects_1) $(am__objects_16)
+am__objects_17 = qt/test/qt_test_test_folm_qt-moc_paymentservertests.$(OBJEXT)
+am__objects_18 = qt/test/qt_test_test_folm_qt-moc_uritests.$(OBJEXT) \
+	$(am__objects_17)
+nodist_qt_test_test_folm_qt_OBJECTS =  \
+	$(am__objects_18)
 qt_test_test_folm_qt_OBJECTS = $(am_qt_test_test_folm_qt_OBJECTS) \
 	$(nodist_qt_test_test_folm_qt_OBJECTS)
-#am__DEPENDENCIES_6 =  \
-#	$(LIBBITCOIN_ZMQ) \
-#	$(am__DEPENDENCIES_1)
-#qt_test_test_folm_qt_DEPENDENCIES =  \
-#	$(LIBBITCOINQT) $(LIBBITCOIN_SERVER) \
-#	$(am__append_35) $(am__DEPENDENCIES_6) \
-#	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
-#	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
-#	$(LIBBITCOIN_UNIVALUE) \
-#	$(am__DEPENDENCIES_2) \
-#	$(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) $(LIBSECP256K1) \
-#	$(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1)
+am__DEPENDENCIES_6 =  \
+	$(LIBBITCOIN_ZMQ) \
+	$(am__DEPENDENCIES_1)
+qt_test_test_folm_qt_DEPENDENCIES =  \
+	$(LIBBITCOINQT) $(LIBBITCOIN_SERVER) \
+	$(am__append_35) $(am__DEPENDENCIES_6) \
+	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
+	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
+	$(LIBUNIVALUE) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_3) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(LIBSECP256K1) \
+	$(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 qt_test_test_folm_qt_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(qt_test_test_folm_qt_LDFLAGS) \
@@ -853,64 +845,64 @@ am__test_test_folm_SOURCES_DIST = test/bignum.h \
 	test/data/script_invalid.json test/data/tx_invalid.json \
 	test/data/tx_valid.json test/data/sighash.json \
 	test/data/alertTests.raw
-#am__objects_19 = test/test_test_folm-accounting_tests.$(OBJEXT) \
-#	test/test_test_folm-wallet_tests.$(OBJEXT) \
-#	test/test_test_folm-rpc_wallet_tests.$(OBJEXT)
-#am__objects_20 = test/test_test_folm-allocator_tests.$(OBJEXT) \
-#	test/test_test_folm-base32_tests.$(OBJEXT) \
-#	test/test_test_folm-base58_tests.$(OBJEXT) \
-#	test/test_test_folm-base64_tests.$(OBJEXT) \
-#	test/test_test_folm-checkblock_tests.$(OBJEXT) \
-#	test/test_test_folm-Checkpoints_tests.$(OBJEXT) \
-#	test/test_test_folm-coins_tests.$(OBJEXT) \
-#	test/test_test_folm-compress_tests.$(OBJEXT) \
-#	test/test_test_folm-crypto_tests.$(OBJEXT) \
-#	test/test_test_folm-DoS_tests.$(OBJEXT) \
-#	test/test_test_folm-getarg_tests.$(OBJEXT) \
-#	test/test_test_folm-hash_tests.$(OBJEXT) \
-#	test/test_test_folm-key_tests.$(OBJEXT) \
-#	test/test_test_folm-main_tests.$(OBJEXT) \
-#	test/test_test_folm-mempool_tests.$(OBJEXT) \
-#	test/test_test_folm-mruset_tests.$(OBJEXT) \
-#	test/test_test_folm-multisig_tests.$(OBJEXT) \
-#	test/test_test_folm-netbase_tests.$(OBJEXT) \
-#	test/test_test_folm-pmt_tests.$(OBJEXT) \
-#	test/test_test_folm-rpc_tests.$(OBJEXT) \
-#	test/test_test_folm-sanity_tests.$(OBJEXT) \
-#	test/test_test_folm-script_P2SH_tests.$(OBJEXT) \
-#	test/test_test_folm-script_tests.$(OBJEXT) \
-#	test/test_test_folm-scriptnum_tests.$(OBJEXT) \
-#	test/test_test_folm-serialize_tests.$(OBJEXT) \
-#	test/test_test_folm-sighash_tests.$(OBJEXT) \
-#	test/test_test_folm-sigopcount_tests.$(OBJEXT) \
-#	test/test_test_folm-skiplist_tests.$(OBJEXT) \
-#	test/test_test_folm-test_folm.$(OBJEXT) \
-#	test/test_test_folm-timedata_tests.$(OBJEXT) \
-#	test/test_test_folm-transaction_tests.$(OBJEXT) \
-#	test/test_test_folm-uint256_tests.$(OBJEXT) \
-#	test/test_test_folm-univalue_tests.$(OBJEXT) \
-#	test/test_test_folm-util_tests.$(OBJEXT) \
-#	$(am__objects_19)
-#am_test_test_folm_OBJECTS = $(am__objects_20) \
-#	$(am__objects_1) $(am__objects_1)
-#am__objects_21 = $(am__objects_1) $(am__objects_1)
-#nodist_test_test_folm_OBJECTS = $(am__objects_21)
+am__objects_19 = test/test_test_folm-accounting_tests.$(OBJEXT) \
+	test/test_test_folm-wallet_tests.$(OBJEXT) \
+	test/test_test_folm-rpc_wallet_tests.$(OBJEXT)
+am__objects_20 = test/test_test_folm-allocator_tests.$(OBJEXT) \
+	test/test_test_folm-base32_tests.$(OBJEXT) \
+	test/test_test_folm-base58_tests.$(OBJEXT) \
+	test/test_test_folm-base64_tests.$(OBJEXT) \
+	test/test_test_folm-checkblock_tests.$(OBJEXT) \
+	test/test_test_folm-Checkpoints_tests.$(OBJEXT) \
+	test/test_test_folm-coins_tests.$(OBJEXT) \
+	test/test_test_folm-compress_tests.$(OBJEXT) \
+	test/test_test_folm-crypto_tests.$(OBJEXT) \
+	test/test_test_folm-DoS_tests.$(OBJEXT) \
+	test/test_test_folm-getarg_tests.$(OBJEXT) \
+	test/test_test_folm-hash_tests.$(OBJEXT) \
+	test/test_test_folm-key_tests.$(OBJEXT) \
+	test/test_test_folm-main_tests.$(OBJEXT) \
+	test/test_test_folm-mempool_tests.$(OBJEXT) \
+	test/test_test_folm-mruset_tests.$(OBJEXT) \
+	test/test_test_folm-multisig_tests.$(OBJEXT) \
+	test/test_test_folm-netbase_tests.$(OBJEXT) \
+	test/test_test_folm-pmt_tests.$(OBJEXT) \
+	test/test_test_folm-rpc_tests.$(OBJEXT) \
+	test/test_test_folm-sanity_tests.$(OBJEXT) \
+	test/test_test_folm-script_P2SH_tests.$(OBJEXT) \
+	test/test_test_folm-script_tests.$(OBJEXT) \
+	test/test_test_folm-scriptnum_tests.$(OBJEXT) \
+	test/test_test_folm-serialize_tests.$(OBJEXT) \
+	test/test_test_folm-sighash_tests.$(OBJEXT) \
+	test/test_test_folm-sigopcount_tests.$(OBJEXT) \
+	test/test_test_folm-skiplist_tests.$(OBJEXT) \
+	test/test_test_folm-test_folm.$(OBJEXT) \
+	test/test_test_folm-timedata_tests.$(OBJEXT) \
+	test/test_test_folm-transaction_tests.$(OBJEXT) \
+	test/test_test_folm-uint256_tests.$(OBJEXT) \
+	test/test_test_folm-univalue_tests.$(OBJEXT) \
+	test/test_test_folm-util_tests.$(OBJEXT) \
+	$(am__objects_19)
+am_test_test_folm_OBJECTS = $(am__objects_20) \
+	$(am__objects_1) $(am__objects_1)
+am__objects_21 = $(am__objects_1) $(am__objects_1)
+nodist_test_test_folm_OBJECTS = $(am__objects_21)
 test_test_folm_OBJECTS = $(am_test_test_folm_OBJECTS) \
 	$(nodist_test_test_folm_OBJECTS)
 #am__DEPENDENCIES_7 = libbitcoinconsensus.la
-#am__DEPENDENCIES_8 =  \
-#	$(am__DEPENDENCIES_1)
-#test_test_folm_DEPENDENCIES = $(LIBBITCOIN_SERVER) \
-#	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
-#	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
-#	$(LIBBITCOIN_UNIVALUE) \
-#	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_3) \
-#	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-#	$(LIBSECP256K1) $(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) $(am__append_20) \
-#	$(am__DEPENDENCIES_7) $(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-#	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_8)
+am__DEPENDENCIES_8 =  \
+	$(am__DEPENDENCIES_1)
+test_test_folm_DEPENDENCIES = $(LIBBITCOIN_SERVER) \
+	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
+	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
+	$(LIBUNIVALUE) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_3) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(LIBSECP256K1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__append_20) $(am__DEPENDENCIES_7) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_8)
 test_test_folm_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(test_test_folm_LDFLAGS) \
@@ -992,7 +984,6 @@ SOURCES = $(crypto_libbitcoin_crypto_a_SOURCES) \
 	$(libbitcoin_wallet_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) \
 	$(qt_libbitcoinqt_a_SOURCES) \
 	$(nodist_qt_libbitcoinqt_a_SOURCES) \
-	$(univalue_libbitcoin_univalue_a_SOURCES) \
 	$(libbitcoinconsensus_la_SOURCES) $(folm_cli_SOURCES) \
 	$(folm_tx_SOURCES) $(folmd_SOURCES) $(qt_folm_qt_SOURCES) \
 	$(qt_test_test_folm_qt_SOURCES) \
@@ -1005,7 +996,6 @@ DIST_SOURCES = $(crypto_libbitcoin_crypto_a_SOURCES) \
 	$(libbitcoin_wallet_a_SOURCES) \
 	$(am__libbitcoin_zmq_a_SOURCES_DIST) \
 	$(am__qt_libbitcoinqt_a_SOURCES_DIST) \
-	$(univalue_libbitcoin_univalue_a_SOURCES) \
 	$(am__libbitcoinconsensus_la_SOURCES_DIST) \
 	$(am__folm_cli_SOURCES_DIST) $(folm_tx_SOURCES) \
 	$(am__folmd_SOURCES_DIST) $(am__qt_folm_qt_SOURCES_DIST) \
@@ -1209,8 +1199,8 @@ am__set_TESTS_bases = \
   bases=`for i in $$bases; do echo $$i; done | sed 's/\.log$$//'`; \
   bases=`echo $$bases`
 RECHECK_LOGS = $(TEST_LOGS)
-#am__EXEEXT_6 = test/test_folm$(EXEEXT) \
-#	test/bitcoin-util-test.py
+am__EXEEXT_6 = test/test_folm$(EXEEXT) \
+	test/bitcoin-util-test.py
 TEST_SUITE_LOG = test-suite.log
 TEST_EXTENSIONS =  .test
 LOG_DRIVER = $(SHELL) $(top_srcdir)/build-aux/test-driver
@@ -1284,11 +1274,11 @@ BOOST_LIBS = -L/usr/lib/x86_64-linux-gnu -lboost_system -lboost_filesystem -lboo
 BOOST_PROGRAM_OPTIONS_LIB = -lboost_program_options
 BOOST_SYSTEM_LIB = -lboost_system
 BOOST_THREAD_LIB = -lboost_thread
-BOOST_UNIT_TEST_FRAMEWORK_LIB = 
+BOOST_UNIT_TEST_FRAMEWORK_LIB = -lboost_unit_test_framework
 BREW = 
 BUILD_QT = qt
-BUILD_TEST = 
-BUILD_TEST_QT = 
+BUILD_TEST = test
+BUILD_TEST_QT = test
 CC = gcc
 CCACHE = 
 CCDEPMODE = depmode=gcc3
@@ -1429,7 +1419,7 @@ SHELL = /bin/bash
 SSL_CFLAGS = 
 SSL_LIBS = -lssl
 STRIP = /usr/bin/strip
-TESTDEFS = 
+TESTDEFS =  -DBOOST_TEST_DYN_LINK
 TIFFCP = 
 UIC = /usr/lib/x86_64-linux-gnu/qt5/bin/uic
 USE_QRCODE = 
@@ -1493,34 +1483,34 @@ runstatedir = ${localstatedir}/run
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
-subdirs =  src/secp256k1
+subdirs =  src/secp256k1 src/univalue
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-DIST_SUBDIRS = secp256k1
+DIST_SUBDIRS = secp256k1 univalue
 AM_LDFLAGS = $(PTHREAD_CFLAGS) $(LIBTOOL_LDFLAGS)
 BITCOIN_CONFIG_INCLUDES = -I$(builddir)/config
 BITCOIN_INCLUDES = -I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) \
 	$(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS) \
-	-I$(srcdir)/secp256k1/include $(am__append_4)
+	-I$(srcdir)/secp256k1/include -I$(srcdir)/univalue/include \
+	$(am__append_4)
 LIBBITCOIN_SERVER = libbitcoin_server.a
 LIBBITCOIN_WALLET = libbitcoin_wallet.a
 LIBBITCOIN_COMMON = libbitcoin_common.a
 LIBBITCOIN_CLI = libbitcoin_cli.a
 LIBBITCOIN_UTIL = libbitcoin_util.a
 LIBBITCOIN_CRYPTO = crypto/libbitcoin_crypto.a
-LIBBITCOIN_UNIVALUE = univalue/libbitcoin_univalue.a
 LIBBITCOINQT = qt/libbitcoinqt.a
 LIBSECP256K1 = secp256k1/libsecp256k1.la
+LIBUNIVALUE = univalue/lib/libunivalue.la
 
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES = crypto/libbitcoin_crypto.a libbitcoin_util.a \
-	libbitcoin_common.a univalue/libbitcoin_univalue.a \
-	libbitcoin_server.a libbitcoin_cli.a $(am__append_5) \
-	$(am__append_6) $(am__append_24)
+	libbitcoin_common.a libbitcoin_server.a libbitcoin_cli.a \
+	$(am__append_5) $(am__append_6) $(am__append_24)
 #lib_LTLIBRARIES = libbitcoinconsensus.la
 LIBBITCOIN_CONSENSUS = 
 #LIBBITCOIN_CONSENSUS = libbitcoinconsensus.la
@@ -1730,15 +1720,6 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_types.h
 
 
-# univalue JSON library
-univalue_libbitcoin_univalue_a_SOURCES = \
-  univalue/univalue.cpp \
-  univalue/univalue_read.cpp \
-  univalue/univalue_write.cpp \
-  univalue/univalue_escapes.h \
-  univalue/univalue.h
-
-
 # common: shared between folmd, and folm-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(BITCOIN_INCLUDES)
 libbitcoin_common_a_SOURCES = \
@@ -1791,12 +1772,11 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-folmd_LDADD = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
-	$(LIBBITCOIN_UNIVALUE) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
-	$(LIBLEVELDB) $(LIBMEMENV) $(LIBSECP256K1) $(am__append_10) \
-	$(am__append_11) $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) \
-	$(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) \
-	$(EVENT_LIBS)
+folmd_LDADD = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) $(LIBUNIVALUE) \
+	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBLEVELDB) \
+	$(LIBMEMENV) $(LIBSECP256K1) $(am__append_10) $(am__append_11) \
+	$(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) \
+	$(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 folmd_SOURCES = folmd.cpp $(am__append_12)
 folmd_CPPFLAGS = $(BITCOIN_INCLUDES)
 folmd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
@@ -1804,7 +1784,7 @@ folmd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 # folm-cli binary #
 folm_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
-  $(LIBBITCOIN_UNIVALUE) \
+  $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(BOOST_LIBS) \
   $(SSL_LIBS) \
@@ -1817,7 +1797,7 @@ folm_cli_CPPFLAGS = $(BITCOIN_INCLUDES)
 
 # folm-tx binary #
 folm_tx_LDADD = \
-  $(LIBBITCOIN_UNIVALUE) \
+  $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO) \
@@ -1856,66 +1836,66 @@ CLEANFILES = leveldb/libleveldb.a leveldb/libmemenv.a *.gcda *.gcno \
 	zmq/*.gcno $(am__append_22) $(am__append_30) $(am__append_37)
 DISTCLEANFILES = obj/build.h
 EXTRA_DIST = leveldb $(am__append_18)
-#TEST_SRCDIR = test
-#TEST_BINARY = test/test_folm$(EXEEXT)
-#JSON_TEST_FILES = \
-#  test/data/script_valid.json \
-#  test/data/base58_keys_valid.json \
-#  test/data/sig_canonical.json \
-#  test/data/sig_noncanonical.json \
-#  test/data/base58_encode_decode.json \
-#  test/data/base58_keys_invalid.json \
-#  test/data/script_invalid.json \
-#  test/data/tx_invalid.json \
-#  test/data/tx_valid.json \
-#  test/data/sighash.json
+TEST_SRCDIR = test
+TEST_BINARY = test/test_folm$(EXEEXT)
+JSON_TEST_FILES = \
+  test/data/script_valid.json \
+  test/data/base58_keys_valid.json \
+  test/data/sig_canonical.json \
+  test/data/sig_noncanonical.json \
+  test/data/base58_encode_decode.json \
+  test/data/base58_keys_invalid.json \
+  test/data/script_invalid.json \
+  test/data/tx_invalid.json \
+  test/data/tx_valid.json \
+  test/data/sighash.json
 
-#RAW_TEST_FILES = test/data/alertTests.raw
-#GENERATED_TEST_FILES = $(JSON_TEST_FILES:.json=.json.h) $(RAW_TEST_FILES:.raw=.raw.h)
-#BITCOIN_TESTS = test/bignum.h \
-#	test/allocator_tests.cpp \
-#	test/base32_tests.cpp test/base58_tests.cpp \
-#	test/base64_tests.cpp \
-#	test/checkblock_tests.cpp \
-#	test/Checkpoints_tests.cpp \
-#	test/coins_tests.cpp \
-#	test/compress_tests.cpp \
-#	test/crypto_tests.cpp test/DoS_tests.cpp \
-#	test/getarg_tests.cpp test/hash_tests.cpp \
-#	test/key_tests.cpp test/main_tests.cpp \
-#	test/mempool_tests.cpp \
-#	test/mruset_tests.cpp \
-#	test/multisig_tests.cpp \
-#	test/netbase_tests.cpp test/pmt_tests.cpp \
-#	test/rpc_tests.cpp test/sanity_tests.cpp \
-#	test/script_P2SH_tests.cpp \
-#	test/script_tests.cpp \
-#	test/scriptnum_tests.cpp \
-#	test/serialize_tests.cpp \
-#	test/sighash_tests.cpp \
-#	test/sigopcount_tests.cpp \
-#	test/skiplist_tests.cpp test/test_folm.cpp \
-#	test/timedata_tests.cpp \
-#	test/transaction_tests.cpp \
-#	test/uint256_tests.cpp \
-#	test/univalue_tests.cpp test/util_tests.cpp \
-#	$(am__append_19)
-#test_test_folm_SOURCES = $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
-#test_test_folm_CPPFLAGS = $(BITCOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS)
-#test_test_folm_LDADD = $(LIBBITCOIN_SERVER) \
-#	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
-#	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
-#	$(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) \
-#	$(LIBMEMENV) $(BOOST_LIBS) \
-#	$(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
-#	$(LIBSECP256K1) $(EVENT_LIBS) \
-#	$(EVENT_PTHREADS_LIBS) $(am__append_20) \
-#	$(LIBBITCOIN_CONSENSUS) $(BDB_LIBS) \
-#	$(SSL_LIBS) $(CRYPTO_LIBS) \
-#	$(MINIUPNPC_LIBS) $(am__append_21)
-#test_test_folm_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
-#nodist_test_test_folm_SOURCES = $(GENERATED_TEST_FILES)
-#CLEAN_BITCOIN_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
+RAW_TEST_FILES = test/data/alertTests.raw
+GENERATED_TEST_FILES = $(JSON_TEST_FILES:.json=.json.h) $(RAW_TEST_FILES:.raw=.raw.h)
+BITCOIN_TESTS = test/bignum.h \
+	test/allocator_tests.cpp \
+	test/base32_tests.cpp test/base58_tests.cpp \
+	test/base64_tests.cpp \
+	test/checkblock_tests.cpp \
+	test/Checkpoints_tests.cpp \
+	test/coins_tests.cpp \
+	test/compress_tests.cpp \
+	test/crypto_tests.cpp test/DoS_tests.cpp \
+	test/getarg_tests.cpp test/hash_tests.cpp \
+	test/key_tests.cpp test/main_tests.cpp \
+	test/mempool_tests.cpp \
+	test/mruset_tests.cpp \
+	test/multisig_tests.cpp \
+	test/netbase_tests.cpp test/pmt_tests.cpp \
+	test/rpc_tests.cpp test/sanity_tests.cpp \
+	test/script_P2SH_tests.cpp \
+	test/script_tests.cpp \
+	test/scriptnum_tests.cpp \
+	test/serialize_tests.cpp \
+	test/sighash_tests.cpp \
+	test/sigopcount_tests.cpp \
+	test/skiplist_tests.cpp test/test_folm.cpp \
+	test/timedata_tests.cpp \
+	test/transaction_tests.cpp \
+	test/uint256_tests.cpp \
+	test/univalue_tests.cpp test/util_tests.cpp \
+	$(am__append_19)
+test_test_folm_SOURCES = $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
+test_test_folm_CPPFLAGS = $(BITCOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS)
+test_test_folm_LDADD = $(LIBBITCOIN_SERVER) \
+	$(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) \
+	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
+	$(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+	$(BOOST_LIBS) \
+	$(BOOST_UNIT_TEST_FRAMEWORK_LIB) \
+	$(LIBSECP256K1) $(EVENT_LIBS) \
+	$(EVENT_PTHREADS_LIBS) $(am__append_20) \
+	$(LIBBITCOIN_CONSENSUS) $(BDB_LIBS) \
+	$(SSL_LIBS) $(CRYPTO_LIBS) \
+	$(MINIUPNPC_LIBS) $(am__append_21)
+test_test_folm_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
+nodist_test_test_folm_SOURCES = $(GENERATED_TEST_FILES)
+CLEAN_BITCOIN_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
 
 # folm qt core #
 QT_TS = \
@@ -2212,7 +2192,7 @@ qt_folm_qt_LDADD = qt/libbitcoinqt.a \
 	$(LIBBITCOIN_SERVER) $(am__append_28) \
 	$(am__append_29) $(LIBBITCOIN_CLI) \
 	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
-	$(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UNIVALUE) \
+	$(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
 	$(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) \
 	$(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) \
 	$(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) \
@@ -2225,35 +2205,34 @@ qt_folm_qt_LIBTOOLFLAGS = --tag CXX
 #locale/foo.ts -> locale/foo.qm
 QT_QM = $(QT_TS:.ts=.qm)
 CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
-#TEST_QT_MOC_CPP = qt/test/moc_uritests.cpp \
-#	$(am__append_33)
-#TEST_QT_H = \
-#  qt/test/uritests.h \
-#  qt/test/paymentrequestdata.h \
-#  qt/test/paymentservertests.h
+TEST_QT_MOC_CPP = qt/test/moc_uritests.cpp \
+	$(am__append_33)
+TEST_QT_H = \
+  qt/test/uritests.h \
+  qt/test/paymentrequestdata.h \
+  qt/test/paymentservertests.h
 
-#qt_test_test_folm_qt_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
-#  $(QT_INCLUDES) $(QT_TEST_INCLUDES) $(PROTOBUF_CFLAGS)
+qt_test_test_folm_qt_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_TEST_INCLUDES) $(PROTOBUF_CFLAGS)
 
-#qt_test_test_folm_qt_SOURCES =  \
-#	qt/test/test_main.cpp \
-#	qt/test/uritests.cpp $(TEST_QT_H) \
-#	$(am__append_34)
-#nodist_qt_test_test_folm_qt_SOURCES = $(TEST_QT_MOC_CPP)
-#qt_test_test_folm_qt_LDADD = $(LIBBITCOINQT) \
-#	$(LIBBITCOIN_SERVER) $(am__append_35) \
-#	$(am__append_36) $(LIBBITCOIN_CLI) \
-#	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
-#	$(LIBBITCOIN_CRYPTO) \
-#	$(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) \
-#	$(LIBMEMENV) $(BOOST_LIBS) \
-#	$(QT_DBUS_LIBS) $(QT_TEST_LIBS) \
-#	$(QT_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) \
-#	$(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) \
-#	$(MINIUPNPC_LIBS) $(LIBSECP256K1) \
-#	$(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
-#qt_test_test_folm_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-#CLEAN_BITCOIN_QT_TEST = $(TEST_QT_MOC_CPP) qt/test/*.gcda qt/test/*.gcno
+qt_test_test_folm_qt_SOURCES =  \
+	qt/test/test_main.cpp \
+	qt/test/uritests.cpp $(TEST_QT_H) \
+	$(am__append_34)
+nodist_qt_test_test_folm_qt_SOURCES = $(TEST_QT_MOC_CPP)
+qt_test_test_folm_qt_LDADD = $(LIBBITCOINQT) \
+	$(LIBBITCOIN_SERVER) $(am__append_35) \
+	$(am__append_36) $(LIBBITCOIN_CLI) \
+	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
+	$(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
+	$(LIBLEVELDB) $(LIBMEMENV) $(BOOST_LIBS) \
+	$(QT_DBUS_LIBS) $(QT_TEST_LIBS) \
+	$(QT_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) \
+	$(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) \
+	$(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+	$(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_test_test_folm_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+CLEAN_BITCOIN_QT_TEST = $(TEST_QT_MOC_CPP) qt/test/*.gcda qt/test/*.gcno
 all: all-recursive
 
 .SUFFIXES:
@@ -2644,23 +2623,6 @@ qt/libbitcoinqt.a: $(qt_libbitcoinqt_a_OBJECTS) $(qt_libbitcoinqt_a_DEPENDENCIES
 	$(AM_V_at)-rm -f qt/libbitcoinqt.a
 	$(AM_V_AR)$(qt_libbitcoinqt_a_AR) qt/libbitcoinqt.a $(qt_libbitcoinqt_a_OBJECTS) $(qt_libbitcoinqt_a_LIBADD)
 	$(AM_V_at)$(RANLIB) qt/libbitcoinqt.a
-univalue/$(am__dirstamp):
-	@$(MKDIR_P) univalue
-	@: > univalue/$(am__dirstamp)
-univalue/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) univalue/$(DEPDIR)
-	@: > univalue/$(DEPDIR)/$(am__dirstamp)
-univalue/univalue.$(OBJEXT): univalue/$(am__dirstamp) \
-	univalue/$(DEPDIR)/$(am__dirstamp)
-univalue/univalue_read.$(OBJEXT): univalue/$(am__dirstamp) \
-	univalue/$(DEPDIR)/$(am__dirstamp)
-univalue/univalue_write.$(OBJEXT): univalue/$(am__dirstamp) \
-	univalue/$(DEPDIR)/$(am__dirstamp)
-
-univalue/libbitcoin_univalue.a: $(univalue_libbitcoin_univalue_a_OBJECTS) $(univalue_libbitcoin_univalue_a_DEPENDENCIES) $(EXTRA_univalue_libbitcoin_univalue_a_DEPENDENCIES) univalue/$(am__dirstamp)
-	$(AM_V_at)-rm -f univalue/libbitcoin_univalue.a
-	$(AM_V_AR)$(univalue_libbitcoin_univalue_a_AR) univalue/libbitcoin_univalue.a $(univalue_libbitcoin_univalue_a_OBJECTS) $(univalue_libbitcoin_univalue_a_LIBADD)
-	$(AM_V_at)$(RANLIB) univalue/libbitcoin_univalue.a
 
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
@@ -2922,7 +2884,6 @@ mostlyclean-compile:
 	-rm -f script/*.$(OBJEXT)
 	-rm -f script/*.lo
 	-rm -f test/*.$(OBJEXT)
-	-rm -f univalue/*.$(OBJEXT)
 	-rm -f zmq/*.$(OBJEXT)
 
 distclean-compile:
@@ -3206,9 +3167,6 @@ include test/$(DEPDIR)/test_test_folm-uint256_tests.Po
 include test/$(DEPDIR)/test_test_folm-univalue_tests.Po
 include test/$(DEPDIR)/test_test_folm-util_tests.Po
 include test/$(DEPDIR)/test_test_folm-wallet_tests.Po
-include univalue/$(DEPDIR)/univalue.Po
-include univalue/$(DEPDIR)/univalue_read.Po
-include univalue/$(DEPDIR)/univalue_write.Po
 include zmq/$(DEPDIR)/libbitcoin_zmq_a-zmqabstractnotifier.Po
 include zmq/$(DEPDIR)/libbitcoin_zmq_a-zmqnotificationinterface.Po
 include zmq/$(DEPDIR)/libbitcoin_zmq_a-zmqpublishnotifier.Po
@@ -7467,7 +7425,7 @@ distdir: $(DISTFILES)
 	      || exit 1; \
 	  fi; \
 	done
-check-local:
+#check-local:
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS check-local
 check: check-recursive
@@ -7525,8 +7483,6 @@ distclean-generic:
 	-rm -f script/$(am__dirstamp)
 	-rm -f test/$(DEPDIR)/$(am__dirstamp)
 	-rm -f test/$(am__dirstamp)
-	-rm -f univalue/$(DEPDIR)/$(am__dirstamp)
-	-rm -f univalue/$(am__dirstamp)
 	-rm -f zmq/$(DEPDIR)/$(am__dirstamp)
 	-rm -f zmq/$(am__dirstamp)
 	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
@@ -7540,7 +7496,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 	clean-libtool clean-local mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf ./$(DEPDIR) compat/$(DEPDIR) crypto/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) test/$(DEPDIR) univalue/$(DEPDIR) zmq/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) compat/$(DEPDIR) crypto/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) test/$(DEPDIR) zmq/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -7586,7 +7542,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf ./$(DEPDIR) compat/$(DEPDIR) crypto/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) test/$(DEPDIR) univalue/$(DEPDIR) zmq/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) compat/$(DEPDIR) crypto/$(DEPDIR) primitives/$(DEPDIR) qt/$(DEPDIR) qt/test/$(DEPDIR) script/$(DEPDIR) test/$(DEPDIR) zmq/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -7640,6 +7596,9 @@ $(LIBLEVELDB) $(LIBMEMENV):
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
 
+$(LIBUNIVALUE): $(wildcard univalue/lib/*) $(wildcard univalue/include/*)
+	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
+
 .PHONY: FORCE
 
 obj/build.h: FORCE
@@ -7666,34 +7625,35 @@ clean-local:
 	@test -f $(PROTOC)
 	$(AM_V_GEN) $(PROTOC) --cpp_out=$(@D) --proto_path=$(abspath $(<D) $<)
 
-#$(BITCOIN_TESTS): $(GENERATED_TEST_FILES)
+$(BITCOIN_TESTS): $(GENERATED_TEST_FILES)
 
-#folm_test: $(TEST_BINARY)
+folm_test: $(TEST_BINARY)
 
-#folm_test_check: $(TEST_BINARY) FORCE
-#	$(MAKE) check-TESTS TESTS=$^
+folm_test_check: $(TEST_BINARY) FORCE
+	$(MAKE) check-TESTS TESTS=$^
 
-#folm_test_clean : FORCE
-#	rm -f $(CLEAN_BITCOIN_TEST) $(test_test_folm_OBJECTS) $(TEST_BINARY)
+folm_test_clean : FORCE
+	rm -f $(CLEAN_BITCOIN_TEST) $(test_test_folm_OBJECTS) $(TEST_BINARY)
 
-#check-local:
-#	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C secp256k1 check
+check-local:
+	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C secp256k1 check
+	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C univalue check
 
-#%.json.h: %.json
-#	@$(MKDIR_P) $(@D)
-#	@echo "namespace json_tests{" > $@
-#	@echo "static unsigned const char $(*F)[] = {" >> $@
-#	@$(HEXDUMP) -v -e '8/1 "0x%02x, "' -e '"\n"' $< | $(SED) -e 's/0x  ,//g' >> $@
-#	@echo "};};" >> $@
-#	@echo "Generated $@"
+%.json.h: %.json
+	@$(MKDIR_P) $(@D)
+	@echo "namespace json_tests{" > $@
+	@echo "static unsigned const char $(*F)[] = {" >> $@
+	@$(HEXDUMP) -v -e '8/1 "0x%02x, "' -e '"\n"' $< | $(SED) -e 's/0x  ,//g' >> $@
+	@echo "};};" >> $@
+	@echo "Generated $@"
 
-#%.raw.h: %.raw
-#	@$(MKDIR_P) $(@D)
-#	@echo "namespace alert_tests{" > $@
-#	@echo "static unsigned const char $(*F)[] = {" >> $@
-#	@$(HEXDUMP) -v -e '8/1 "0x%02x, "' -e '"\n"' $< | $(SED) -e 's/0x  ,//g' >> $@
-#	@echo "};};" >> $@
-#	@echo "Generated $@"
+%.raw.h: %.raw
+	@$(MKDIR_P) $(@D)
+	@echo "namespace alert_tests{" > $@
+	@echo "static unsigned const char $(*F)[] = {" >> $@
+	@$(HEXDUMP) -v -e '8/1 "0x%02x, "' -e '"\n"' $< | $(SED) -e 's/0x  ,//g' >> $@
+	@echo "};};" >> $@
+	@echo "Generated $@"
 
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
@@ -7749,13 +7709,13 @@ moc_%.cpp: %.h
 	@$(MKDIR_P) $(@D)
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@
 
-#test_folm_qt : qt/test/test_folm-qt$(EXEEXT)
+test_folm_qt : qt/test/test_folm-qt$(EXEEXT)
 
-#test_folm_qt_check : qt/test/test_folm-qt$(EXEEXT) FORCE
-#	$(MAKE) check-TESTS TESTS=$^
+test_folm_qt_check : qt/test/test_folm-qt$(EXEEXT) FORCE
+	$(MAKE) check-TESTS TESTS=$^
 
-#test_folm_qt_clean: FORCE
-#	rm -f $(CLEAN_BITCOIN_QT_TEST) $(qt_test_test_folm_qt_OBJECTS)
+test_folm_qt_clean: FORCE
+	rm -f $(CLEAN_BITCOIN_QT_TEST) $(qt_test_test_folm_qt_OBJECTS)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

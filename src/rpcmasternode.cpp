@@ -18,7 +18,7 @@
 
 #include <boost/tokenizer.hpp>
 
-#include "univalue/univalue.h"
+#include <univalue.h>
 
 #include <fstream>
 
