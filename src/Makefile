@@ -321,12 +321,13 @@ am__libbitcoin_util_a_SOURCES_DIST = allocators.cpp compat/strnlen.cpp \
 	chainparamsbase.cpp clientversion.cpp random.cpp \
 	rpcprotocol.cpp sync.cpp uint256.cpp util.cpp \
 	utilstrencodings.cpp utilmoneystr.cpp utiltime.cpp \
-	activemasternode.h addrman.h alert.h allocators.h amount.h \
-	base58.h bip38.h bloom.h chain.h chainparams.h \
-	chainparamsbase.h chainparamsseeds.h checkpoints.h \
-	checkqueue.h clientversion.h coincontrol.h coins.h compat.h \
-	compat/sanity.h compressor.h consensus/consensus.h \
-	consensus/params.h consensus/validation.h primitives/block.h \
+	activemasternode.h addressindex.h spentindex.h addrman.h \
+	alert.h allocators.h amount.h base58.h bip38.h bloom.h chain.h \
+	chainparams.h chainparamsbase.h chainparamsseeds.h \
+	checkpoints.h checkqueue.h clientversion.h coincontrol.h \
+	coins.h compat.h compat/sanity.h compressor.h \
+	consensus/consensus.h consensus/params.h \
+	consensus/validation.h primitives/block.h \
 	primitives/transaction.h core_io.h crypter.h obfuscation.h \
 	obfuscation-relay.h db.h eccryptoverify.h ecwrapper.h hash.h \
 	init.h kernel.h swifttx.h key.h keystore.h leveldbwrapper.h \
@@ -1517,6 +1518,8 @@ LIBBITCOIN_CONSENSUS =
 # folm core #
 BITCOIN_CORE_H = \
   activemasternode.h \
+  addressindex.h \
+  spentindex.h \
   addrman.h \
   alert.h \
   allocators.h \

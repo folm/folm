@@ -730,7 +730,7 @@ UniValue getaddressdeltas(const UniValue& params, bool fHelp)
     UniValue endValue = find_value(params[0].get_obj(), "end");
 
     int start = 0;
-    int end = 0;
+    int end = chainActive.Tip()->nHeight;
 
     if (startValue.isNum() && endValue.isNum()) {
         start = startValue.get_int();
@@ -870,7 +870,7 @@ UniValue getaddresstxids(const UniValue& params, bool fHelp)
     }
 
     int start = 0;
-    int end = 0;
+    int end = chainActive.Tip()->nHeight;
     if (params[0].isObject()) {
         UniValue startValue = find_value(params[0].get_obj(), "start");
         UniValue endValue = find_value(params[0].get_obj(), "end");

@@ -616,8 +616,8 @@ bool CTxMemPool::removeSpentIndex(const uint256 txhash)
 
     return true;
 }
-/*
 
+/*
 void CTxMemPool::removeUnchecked(txiter it)
 {
     const uint256 hash = it->GetTx().GetHash();

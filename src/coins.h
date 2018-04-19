@@ -7,6 +7,8 @@
 #define BITCOIN_COINS_H
 
 #include "compressor.h"
+#include "core_memusage.h"
+#include "memusage.h"
 #include "script/standard.h"
 #include "serialize.h"
 #include "uint256.h"
@@ -266,7 +268,7 @@ public:
     bool Spend(const COutPoint& out, CTxInUndo& undo);
 
     //! mark a vout spent
-    bool Spend(int nPos);
+    bool Spend(uint32_t nPos);
 
     //! check whether a particular output is still available
     bool IsAvailable(unsigned int nPos) const
@@ -282,6 +284,14 @@ public:
             if (!out.IsNull())
                 return false;
         return true;
+    }
+
+    size_t DynamicMemoryUsage() const {
+        size_t ret = memusage::DynamicUsage(vout);
+        BOOST_FOREACH(const CTxOut &out, vout) {
+            ret += RecursiveDynamicUsage(out.scriptPubKey);
+        }
+        return ret;
     }
 };
 
@@ -398,7 +408,8 @@ class CCoinsModifier
 private:
     CCoinsViewCache& cache;
     CCoinsMap::iterator it;
-    CCoinsModifier(CCoinsViewCache& cache_, CCoinsMap::iterator it_);
+    size_t cachedCoinUsage; // Cached memory usage of the CCoins object before modification
+    CCoinsModifier(CCoinsViewCache& cache_, CCoinsMap::iterator it_, size_t usage);
 
 public:
     CCoins* operator->() { return &it->second.coins; }
@@ -421,6 +432,8 @@ protected:
     mutable uint256 hashBlock;
     mutable CCoinsMap cacheCoins;
 
+    mutable size_t cachedCoinsUsage;
+
 public:
     CCoinsViewCache(CCoinsView* baseIn);
     ~CCoinsViewCache();
@@ -433,18 +446,35 @@ public:
     bool BatchWrite(CCoinsMap& mapCoins, const uint256& hashBlock);
 
     /**
+    * Check if we have the given tx already loaded in this cache.
+    * The semantics are the same as HaveCoins(), but no calls to
+    * the backing CCoinsView are made.
+    */
+    bool HaveCoinsInCache(const uint256 &txid) const;
+    /**
      * Return a pointer to CCoins in the cache, or NULL if not found. This is
      * more efficient than GetCoins. Modifications to other cache entries are
      * allowed while accessing the returned pointer.
      */
-    const CCoins* AccessCoins(const uint256& txid) const;
+    const CCoins* AccessCoins(const uint256 &txid) const;
 
     /**
      * Return a modifiable reference to a CCoins. If no entry with the given
      * txid exists, a new one is created. Simultaneous modifications are not
      * allowed.
      */
-    CCoinsModifier ModifyCoins(const uint256& txid);
+    CCoinsModifier ModifyCoins(const uint256 &txid);
+
+    /**
+      * Return a modifiable reference to a CCoins. Assumes that no entry with the given
+      * txid exists and creates a new one. This saves a database access in the case where
+      * the coins were to be wiped out by FromTx anyway.  This should not be called with
+      * the 2 historical coinbase duplicate pairs because the new coins are marked fresh, and
+      * in the event the duplicate coinbase was spent before a flush, the now pruned coins
+      * would not properly overwrite the first coinbase of the pair. Simultaneous modifications
+      * are not allowed.
+      */
+    CCoinsModifier ModifyNewCoins(const uint256 &txid);
 
     /**
      * Push the modifications applied to this cache to its base.
@@ -453,8 +483,17 @@ public:
      */
     bool Flush();
 
+    /**
+    * Removes the transaction with the given hash from the cache, if it is
+    * not modified.
+    */
+    void Uncache(const uint256 &txid);
+
     //! Calculate the size of the cache (in number of transactions)
     unsigned int GetCacheSize() const;
+
+    //! Calculate the size of the cache (in bytes)
+    size_t DynamicMemoryUsage() const;
 
     /** 
      * Amount of folm coming in to a transaction
@@ -470,7 +509,7 @@ public:
     bool HaveInputs(const CTransaction& tx) const;
 
     //! Return priority of tx at height nHeight
-    double GetPriority(const CTransaction& tx, int nHeight) const;
+    double GetPriority(const CTransaction &tx, int nHeight, CAmount &inChainInputValue) const;
 
     const CTxOut& GetOutputFor(const CTxIn& input) const;
 

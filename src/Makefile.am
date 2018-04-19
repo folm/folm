@@ -78,6 +78,8 @@ endif
 # folm core #
 BITCOIN_CORE_H = \
   activemasternode.h \
+  addressindex.h \
+  spentindex.h \
   addrman.h \
   alert.h \
   allocators.h \
