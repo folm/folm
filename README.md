@@ -1,6 +1,6 @@
-![Folm Logo](https://folm.io/images/logo_at_readme.png)
+![Folm Logo](https://github.com/folm/folm/raw/master/src/qt/res/images/splash.png)
 
-"Valuable secure Privacy cryptocurrency"
+# "NEW GENERATION CRYPTOCURRENCY & PAYMENT SOLUTION"
 
 <a href="https://discord.gg/uDmpSHx"><img src="https://discordapp.com/api/guilds/398369914760593419/embed.png" alt="Discord server" /></a>
 
