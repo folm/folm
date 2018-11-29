@@ -2410,7 +2410,8 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWa
     vector<CRecipient> vecSend;
     CRecipient recipient = {scriptPubKey, nValue, false};
     vecSend.push_back(recipient);
-    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl, coin_type, useIX, nFeePay);
+    int nChangePosRet = -1;
+    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet,nChangePosRet, strFailReason, coinControl, coin_type, useIX, nFeePay);
 }
 
 // ppcoin: create coin stake transaction
