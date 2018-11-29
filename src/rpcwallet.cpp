@@ -324,106 +324,6 @@ void SendMoney(const CTxDestination& address, CAmount nValue,bool fSubtractFeeFr
     if (!pwalletMain->CommitTransaction(wtxNew, reservekey, (!fUseIX ? "tx" : "ix")))
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.");
 }
-Value sendmany(const Array& params, bool fHelp)
-{
-    if (fHelp || params.size() < 2 || params.size() > 5)
-        throw runtime_error(
-                "sendmany \"fromaccount\" {\"address\":amount,...} ( minconf \"comment\" )\n"
-                        "\nSend multiple times. Amounts are double-precision floating point numbers." +
-                HelpRequiringPassphrase() + "\n"
-                        "\nArguments:\n"
-                        "1. \"fromaccount\"         (string, required) The account to send the funds from, can be \"\" for the default account\n"
-                        "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
-                        "    {\n"
-                        "      \"address\":amount   (numeric) The folm address is the key, the numeric amount in btc is the value\n"
-                        "      ,...\n"
-                        "    }\n"
-                        "3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.\n"
-                        "4. \"comment\"             (string, optional) A comment\n"
-                        "5. subtractfeefromamount   (string, optional) A json array with addresses.\n"
-                        "                           The fee will be equally deducted from the amount of each selected address.\n"
-                        "                           Those recipients will receive less folms than you enter in their corresponding amount field.\n"
-                        "                           If no addresses are specified here, the sender pays the fee.\n"
-                        "    [\n"
-                        "      \"address\"            (string) Subtract fee from this address\n"
-                        "      ,...\n"
-                        "    ]\n"
-                        "\nResult:\n"
-                        "\"transactionid\"          (string) The transaction id for the send. Only 1 transaction is created regardless of \n"
-                        "                                    the number of addresses.\n"
-                        "\nExamples:\n"
-                        "\nSend two amounts to two different addresses:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\"") +
-                "\nSend two amounts to two different addresses setting the confirmation and comment:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 6 \"testing\"") +
-                "\nSend two amounts to two different addresses, subtract fee from amount:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 1 \"\" \"[\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\",\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\"]\"") +
-                "\nAs a json rpc call\n"
-                + HelpExampleRpc("sendmany", "\"\", \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\", 6, \"testing\"")
-        );
-
-    string strAccount = AccountFromValue(params[0]);
-    Object sendTo = params[1].get_obj();
-    int nMinDepth = 1;
-    if (params.size() > 2)
-        nMinDepth = params[2].get_int();
-
-    CWalletTx wtx;
-    wtx.strFromAccount = strAccount;
-    if (params.size() > 3 && params[3].type() != null_type && !params[3].get_str().empty())
-        wtx.mapValue["comment"] = params[3].get_str();
-
-    Array subtractFeeFromAmount;
-    if (params.size() > 4)
-        subtractFeeFromAmount = params[4].get_array();
-
-    set<CBitcoinAddress> setAddress;
-    vector<CRecipient> vecSend;
-
-    CAmount totalAmount = 0;
-    BOOST_FOREACH (const Pair& s, sendTo) {
-        CBitcoinAddress address(s.name_);
-        if (!address.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Folm address: ") + s.name_);
-
-        if (setAddress.count(address))
-            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ") + s.name_);
-        setAddress.insert(address);
-
-        CScript scriptPubKey = GetScriptForDestination(address.Get());
-        CAmount nAmount = AmountFromValue(s.value_);
-        totalAmount += nAmount;
-
-        bool fSubtractFeeFromAmount = false;
-        BOOST_FOREACH(const Value& addr, subtractFeeFromAmount)
-        if (addr.get_str() == s.name_)
-            fSubtractFeeFromAmount = true;
-
-        CRecipient recipient = {scriptPubKey, nAmount, fSubtractFeeFromAmount};
-        vecSend.push_back(recipient);
-    }
-
-    EnsureWalletIsUnlocked();
-
-    // Check funds
-    CAmount nBalance = GetAccountBalance(strAccount, nMinDepth, ISMINE_SPENDABLE);
-    if (totalAmount > nBalance)
-        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Account has insufficient funds");
-
-    // Send
-    CReserveKey keyChange(pwalletMain);
-    CAmount nFeeRequired = 0;
-    string strFailReason;
-    int nChangePosRet = -1;
-    bool fCreated = pwalletMain->CreateTransaction(vecSend, wtx, keyChange, nFeeRequired, nChangePosRet, strFailReason);
-    if (!fCreated)
-        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, strFailReason);
-    if (!pwalletMain->CommitTransaction(wtx, keyChange))
-        throw JSONRPCError(RPC_WALLET_ERROR, "Transaction commit failed");
-
-    return wtx.GetHash().GetHex();
-}
-
 
 Value sendtoaddress(const Array& params, bool fHelp)
 {
@@ -919,6 +819,105 @@ Value sendfrom(const Array& params, bool fHelp)
     return wtx.GetHash().GetHex();
 }
 
+Value sendmany(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() < 2 || params.size() > 5)
+        throw runtime_error(
+                "sendmany \"fromaccount\" {\"address\":amount,...} ( minconf \"comment\" )\n"
+                        "\nSend multiple times. Amounts are double-precision floating point numbers." +
+                HelpRequiringPassphrase() + "\n"
+                        "\nArguments:\n"
+                        "1. \"fromaccount\"         (string, required) The account to send the funds from, can be \"\" for the default account\n"
+                        "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
+                        "    {\n"
+                        "      \"address\":amount   (numeric) The folm address is the key, the numeric amount in btc is the value\n"
+                        "      ,...\n"
+                        "    }\n"
+                        "3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.\n"
+                        "4. \"comment\"             (string, optional) A comment\n"
+                        "5. subtractfeefromamount   (string, optional) A json array with addresses.\n"
+                        "                           The fee will be equally deducted from the amount of each selected address.\n"
+                        "                           Those recipients will receive less folms than you enter in their corresponding amount field.\n"
+                        "                           If no addresses are specified here, the sender pays the fee.\n"
+                        "    [\n"
+                        "      \"address\"            (string) Subtract fee from this address\n"
+                        "      ,...\n"
+                        "    ]\n"
+                        "\nResult:\n"
+                        "\"transactionid\"          (string) The transaction id for the send. Only 1 transaction is created regardless of \n"
+                        "                                    the number of addresses.\n"
+                        "\nExamples:\n"
+                        "\nSend two amounts to two different addresses:\n"
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\"") +
+                "\nSend two amounts to two different addresses setting the confirmation and comment:\n"
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 6 \"testing\"") +
+                "\nSend two amounts to two different addresses, subtract fee from amount:\n"
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 1 \"\" \"[\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\",\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\"]\"") +
+                "\nAs a json rpc call\n"
+                + HelpExampleRpc("sendmany", "\"\", \"{\\\"FD1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\\\":0.01,\\\"F353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\", 6, \"testing\"")
+        );
+
+    string strAccount = AccountFromValue(params[0]);
+    Object sendTo = params[1].get_obj();
+    int nMinDepth = 1;
+    if (params.size() > 2)
+        nMinDepth = params[2].get_int();
+
+    CWalletTx wtx;
+    wtx.strFromAccount = strAccount;
+    if (params.size() > 3 && params[3].type() != null_type && !params[3].get_str().empty())
+        wtx.mapValue["comment"] = params[3].get_str();
+
+    Array subtractFeeFromAmount;
+    if (params.size() > 4)
+        subtractFeeFromAmount = params[4].get_array();
+
+    set<CBitcoinAddress> setAddress;
+    vector<CRecipient> vecSend;
+
+    CAmount totalAmount = 0;
+    BOOST_FOREACH (const Pair& s, sendTo) {
+        CBitcoinAddress address(s.name_);
+        if (!address.IsValid())
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Folm address: ") + s.name_);
+
+        if (setAddress.count(address))
+            throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ") + s.name_);
+        setAddress.insert(address);
+
+        CScript scriptPubKey = GetScriptForDestination(address.Get());
+        CAmount nAmount = AmountFromValue(s.value_);
+        totalAmount += nAmount;
+
+        bool fSubtractFeeFromAmount = false;
+        BOOST_FOREACH(const Value& addr, subtractFeeFromAmount)
+        if (addr.get_str() == s.name_)
+            fSubtractFeeFromAmount = true;
+
+        CRecipient recipient = {scriptPubKey, nAmount, fSubtractFeeFromAmount};
+        vecSend.push_back(recipient);
+    }
+
+    EnsureWalletIsUnlocked();
+
+    // Check funds
+    CAmount nBalance = GetAccountBalance(strAccount, nMinDepth, ISMINE_SPENDABLE);
+    if (totalAmount > nBalance)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Account has insufficient funds");
+
+    // Send
+    CReserveKey keyChange(pwalletMain);
+    CAmount nFeeRequired = 0;
+    string strFailReason;
+    int nChangePosRet = -1;
+    bool fCreated = pwalletMain->CreateTransaction(vecSend, wtx, keyChange, nFeeRequired, nChangePosRet, strFailReason);
+    if (!fCreated)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, strFailReason);
+    if (!pwalletMain->CommitTransaction(wtx, keyChange))
+        throw JSONRPCError(RPC_WALLET_ERROR, "Transaction commit failed");
+
+    return wtx.GetHash().GetHex();
+}
 
 // Defined in rpcmisc.cpp
 extern CScript _createmultisig_redeemScript(const Array& params);
