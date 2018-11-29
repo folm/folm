@@ -1684,11 +1684,12 @@ bool CObfuscationPool::SendRandomPaymentToSelf()
     CWalletTx wtx;
     CAmount nFeeRet = 0;
     std::string strFail = "";
-    vector<pair<CScript, CAmount> > vecSend;
+    vector<CRecipient> vecSend;
+
 
     // ****** Add fees ************ /
-    vecSend.push_back(make_pair(scriptChange, nPayment));
-
+    CRecipient recipient = {scriptPubKey, nPayment, false};
+    vecSend.push_back(recipient);
     CCoinControl* coinControl = NULL;
     bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekey, nFeeRet, strFail, coinControl, ONLY_DENOMINATED);
     if (!success) {
@@ -1709,7 +1710,7 @@ bool CObfuscationPool::MakeCollateralAmounts()
     CWalletTx wtx;
     CAmount nFeeRet = 0;
     std::string strFail = "";
-    vector<pair<CScript, CAmount> > vecSend;
+    vector<CRecipient> vecSend;
     CCoinControl coinControl;
     coinControl.fAllowOtherInputs = false;
     coinControl.fAllowWatchOnly = false;
@@ -1723,7 +1724,10 @@ bool CObfuscationPool::MakeCollateralAmounts()
     assert(reservekeyCollateral.GetReservedKey(vchPubKey)); // should never fail, as we just unlocked
     scriptCollateral = GetScriptForDestination(vchPubKey.GetID());
 
-    vecSend.push_back(make_pair(scriptCollateral, OBFUSCATION_COLLATERAL * 4));
+
+    // ****** Add fees ************ /
+    CRecipient recipient = {scriptCollateral, OBFUSCATION_COLLATERAL * 4, false};
+    vecSend.push_back(recipient);
 
     // try to use non-denominated and not mn-like funds
     bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekeyChange,
