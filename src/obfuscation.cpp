@@ -1688,10 +1688,11 @@ bool CObfuscationPool::SendRandomPaymentToSelf()
 
 
     // ****** Add fees ************ /
-    CRecipient recipient = {scriptPubKey, nPayment, false};
+    CRecipient recipient = {scriptChange, nPayment, false};
     vecSend.push_back(recipient);
     CCoinControl* coinControl = NULL;
-    bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekey, nFeeRet, strFail, coinControl, ONLY_DENOMINATED);
+    int nChangePosRet = -1;
+    bool success = pwalletMain->CreateTransaction(vecSend, wtx, reservekey, nFeeRet,nChangePosRet, strFail, coinControl, ONLY_DENOMINATED);
     if (!success) {
         LogPrintf("SendRandomPaymentToSelf: Error - %s\n", strFail);
         return false;
@@ -1802,8 +1803,8 @@ bool CObfuscationPool::CreateDenominated(CAmount nTotalValue)
             scriptDenom = GetScriptForDestination(vchPubKey.GetID());
             // TODO: do not keep reservekeyDenom here
             reservekeyDenom.KeepKey();
-
-            vecSend.push_back(make_pair(scriptDenom, v));
+            CRecipient recipient = {scriptDenom, v, false};
+            vecSend.push_back(recipient);
 
             //increment outputs and subtract denomination amount
             nOutputs++;
