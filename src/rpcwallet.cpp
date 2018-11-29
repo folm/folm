@@ -289,7 +289,7 @@ Value getaddressesbyaccount(const Array& params, bool fHelp)
     return ret;
 }
 
-void SendMoney(const CTxDestination& address, CAmount nValue,bool fSubtractFeeFromAmount = false, CWalletTx& wtxNew, bool fUseIX = false)
+void SendMoney(const CTxDestination& address, CAmount nValue,bool fSubtractFeeFromAmount, CWalletTx& wtxNew, bool fUseIX = false)
 {
     // Check amount
     if (nValue <= 0)
@@ -315,7 +315,7 @@ void SendMoney(const CTxDestination& address, CAmount nValue,bool fSubtractFeeFr
     int nChangePosRet = -1;
     CRecipient recipient = {scriptPubKey, nValue, fSubtractFeeFromAmount};
     vecSend.push_back(recipient);
-    if (!pwalletMain->CreateTransaction(vecSend, wtxNew, reservekey, nFeeRequired, strError, NULL, ALL_COINS, fUseIX, (CAmount)0)) {
+    if (!pwalletMain->CreateTransaction(vecSend, wtxNew, reservekey, nFeeRequired,nChangePosRet, strError, NULL, ALL_COINS, fUseIX, (CAmount)0)) {
         if (!fSubtractFeeFromAmount && nValue + nFeeRequired > pwalletMain->GetBalance())
             strError = strprintf("Error: This transaction requires a transaction fee of at least %s because of its amount, complexity, or use of recently received funds!", FormatMoney(nFeeRequired));
         LogPrintf("SendMoney() : %s\n", strError);
