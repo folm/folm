@@ -2104,8 +2104,9 @@ bool CWallet::GetBudgetSystemCollateralTX(CWalletTx& tx, uint256 hash, bool useI
 
     CAmount nFeeRet = 0;
     std::string strFail = "";
-    vector<pair<CScript, CAmount> > vecSend;
-    vecSend.push_back(make_pair(scriptChange, BUDGET_FEE_TX));
+    vector<CRecipient> vecSend;
+    CRecipient recipient = {scriptChange, BUDGET_FEE_TX, false};
+    vecSend.push_back(recipient);
 
     CCoinControl* coinControl = NULL;
     int nChangePosRet = -1;
@@ -2406,8 +2407,9 @@ bool CWallet::CreateTransaction(const vector<CRecipient>& vecSend,
 
 bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWalletTx& wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl, AvailableCoinsType coin_type, bool useIX, CAmount nFeePay)
 {
-    vector<pair<CScript, CAmount> > vecSend;
-    vecSend.push_back(make_pair(scriptPubKey, nValue));
+    vector<CRecipient> vecSend;
+    CRecipient recipient = {scriptPubKey, nValue, false};
+    vecSend.push_back(recipient);
     return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strFailReason, coinControl, coin_type, useIX, nFeePay);
 }
 
@@ -3551,7 +3553,7 @@ bool CWallet::MultiSend()
             CBitcoinAddress strAddSend(vMultiSend[i].first);
             CScript scriptPubKey;
             scriptPubKey = GetScriptForDestination(strAddSend.Get());
-            CRecipient recipient = {scriptPubKey, nAmount, fSubtractFeeFromAmount};
+            CRecipient recipient = {scriptPubKey, nAmount, false};
             vecSend.push_back(recipient);
         }
 
