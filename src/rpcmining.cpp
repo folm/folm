@@ -631,7 +631,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
     result.push_back(Pair("previousblockhash", pblock->hashPrevBlock.GetHex()));
     result.push_back(Pair("transactions", transactions));
     result.push_back(Pair("coinbaseaux", aux));
-    result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0].GetValueOut()));
+    result.push_back(Pair("coinbasevalue", (int64_t)GetBlockValue(pindexPrev->nHeight + 1)));
 	result.push_back(Pair("coinbasetxn", coinbasetxn[0]));
     result.push_back(Pair("longpollid", chainActive.Tip()->GetBlockHash().GetHex() + i64tostr(nTransactionsUpdatedLast)));
     result.push_back(Pair("target", hashTarget.GetHex()));
@@ -660,12 +660,19 @@ Value getblocktemplate(const Array& params, bool fHelp)
         result.push_back(Pair("payee", ""));
         result.push_back(Pair("payee_amount", ""));
     }
-
+    if (pblock->payee != CScript()) {
+        result.push_back(Pair("masternode_payments", pblock->nTime > Params().StartMasternodePayments()));
+        result.push_back(Pair("enforce_masternode_payments", true));
+        result.push_back(Pair("masternode_payments_started", true));
+        result.push_back(Pair("masternode_payments_enforced", true));
+    }else{
+        result.push_back(Pair("masternode_payments", false));
+        result.push_back(Pair("enforce_masternode_payments", false));
+        result.push_back(Pair("masternode_payments_started", false));
+        result.push_back(Pair("masternode_payments_enforced", false));
+    }
     result.push_back(Pair("masternode", aMasternode));
-    result.push_back(Pair("masternode_payments", pblock->nTime > Params().StartMasternodePayments()));
-    result.push_back(Pair("enforce_masternode_payments", true));
-    result.push_back(Pair("masternode_payments_started", true));
-    result.push_back(Pair("masternode_payments_enforced", true));
+
     result.push_back(Pair("superblock", superBlock));
     result.push_back(Pair("superblocks_started", false));
     result.push_back(Pair("superblocks_enabled", false));

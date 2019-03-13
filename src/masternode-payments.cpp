@@ -245,7 +245,7 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
         }
     }
 
-    if(nBlockHeight > 10799){
+    if(nBlockHeight > 10799 && nBlockHeight<262800){
         //check for masternode payee
         if (masternodePayments.IsTransactionValid(txNew, nBlockHeight))
             return true;
@@ -254,7 +254,15 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
         if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT))
             return false;
         LogPrintf("Masternode payment enforcement is disabled, accepting block\n");
-        }
+        }else if(nBlockHeight >=525600) {
+        if (masternodePayments.IsTransactionValid(txNew, nBlockHeight))
+            return true;
+        LogPrintf("Invalid mn payment detected %s\n", txNew.ToString().c_str());
+
+        if (IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT))
+            return false;
+        LogPrintf("Masternode payment enforcement is disabled, accepting block\n");
+    }
     return true;
 }
 
